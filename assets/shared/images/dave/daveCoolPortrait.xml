@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="daveCoolPortrait.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="3D Portrait 0000" x="0" y="0" width="996" height="580"/>
+	<SubTexture name="3D Portrait 0001" x="996" y="0" width="996" height="580"/>
+	<SubTexture name="3D Portrait 0002" x="0" y="580" width="996" height="580"/>
+	<SubTexture name="3D Portrait 0003" x="996" y="580" width="996" height="580"/>
+</TextureAtlas>
