@@ -1,62 +1,12 @@
+
+## Powered by a heavily modified version of Kade Engine!
 ![KadeEngineLogo](https://user-images.githubusercontent.com/26305836/110529589-4b4eb600-80ce-11eb-9c44-e899118b0bf0.png)
 
-**Download the latest release [here](https://github.com/KadeDev/Kade-Engine/releases/latest)**
+## Dave
+this is dave
+![Image](https://cdn.discordapp.com/attachments/831927910289244182/838139138213150810/dave.png)
 
-![image](https://user-images.githubusercontent.com/26305836/110532077-3c1d3780-80d1-11eb-8348-0e63d5c0f4f1.png)
-
-![image](https://user-images.githubusercontent.com/26305836/110532103-450e0900-80d1-11eb-857e-d8ea1a1b8d7e.png)
-
-![image](https://user-images.githubusercontent.com/26305836/110532136-51926180-80d1-11eb-838f-1b4a1e49e1bd.png)
-
-![image](https://user-images.githubusercontent.com/26305836/110532204-63740480-80d1-11eb-9641-bf5a641e6d77.png)
-
-
-# Friday Night Funkin Kade Engine
-
-This is the repository for Friday Night Funkin' Kade Engine, a game originally made for Ludum Dare 47 "Stuck In a Loop". And a completely reworked engine.
-
-Play the Ludum Dare prototype here: https://ninja-muffin24.itch.io/friday-night-funkin
-Play the Newgrounds one here: https://www.newgrounds.com/portal/view/770371
-Support the project on the itch.io page: https://ninja-muffin24.itch.io/funkin
-
-Mod Page: https://gamebanana.com/gamefiles/16761
-	
-## What is Kade Engine?
-
-Kade Engine is an engine rework of the OG games engine. Simply put, we give you some great new features while also giving you the latest GitHub features.
-
-## Features
-
-The features that Kade Engine implements are:
-- New Input System
-
-*Hate the old engine because your inputs are delayed? Are inputs being dropped? Well with this input system, inputs rarely get dropped! If you wanna see an example of what it feels like, play any 4k rhythm game like Quaver or Etterna!*
-
-- Accuracy Mod
-
-*We've modified the accuracy mod to create an amazing accuracy display, which shows your accuracy and misses. While giving you a basic ranking on how you are currently playing.*
-
-- FPS Increase
-
-*We always love more FPS, and this is what you'll get. We've increase the FPS cap to 120.*
-
-- DFJK Support
-
-*As standard 4k practice, the default keybinds for many rhythm games are DFJK. We've allowed you to swap from WASD to DFJK in the options menu now.*
-
-- Replays
-
-*Ever wanted to show your friend a crazy score? Well, the replay system lets you do that without recording videos!*
-
-**please note the replay system is in beta, and is not 100% accurate YET*
-
-- Offset
-
-*Do your headphones have an audio delay? Well, you can set a note offset in the options menu!*
-
-- Latest FNF Github Features
-
-*Have you ever seen a feature shown in the GitHub repo, and you don't know how to build the game? Well, features from there get ported into here, and then we can add them into this mod and build it for you!*
+say hi to dave
 
 **HUGE NOTICE**
 

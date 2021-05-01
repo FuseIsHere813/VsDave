@@ -1,2 +1,3 @@
-cd C:\Users\howla\Videos\VsDave
+cd ..
 lime test windows
+pause

@@ -1,3 +1,3 @@
-cd C:\Users\howla\Videos\VsDave
+cd ..
 lime build windows -release
 pause

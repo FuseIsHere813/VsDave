@@ -13,7 +13,18 @@ import flixel.util.FlxStringUtil;
  ben don't use any dave mod specific code here this needs to be generic so you can re-use it in your own mods
  shut up
  idiot
+ no u
  */
+ /**
+ hey you fun commiting people, 
+ i don't know about the rest of the mod but since this is basically 100% my code 
+ i do not give you guys permission to grab this specific file and re-use it in your own mods.
+ thanks,
+ actually i'd ask if you guys use none fo the character selection related code but if you do use this mod as a base you'll kind of have to take it with you
+ but just- don't include the character selector
+ thanks again
+ the secondary dev, ben
+*/
 class CharacterSelectState extends FlxState
 {
 	public var char:Boyfriend;

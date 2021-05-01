@@ -116,6 +116,12 @@ class Character extends FlxSprite
 				animation.addByIndices('danceLeft', 'GF IDLE', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 				animation.addByIndices('danceRight', 'GF IDLE', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 
+				if (!PlayState.curStage.startsWith('school'))
+				{
+					globaloffset[0] = -200;
+					globaloffset[1] = -175;
+				}
+				
 				addOffset('danceLeft', 0);
 				addOffset('danceRight', 0);
 
@@ -464,8 +470,11 @@ class Character extends FlxSprite
 				addOffset("singRIGHTmiss");
 				addOffset("singLEFTmiss");
 				addOffset("singDOWNmiss");
+				if (!PlayState.curStage.startsWith('school'))
+				{
 				globaloffset[0] = -200;
 				globaloffset[1] = -175;
+				}
 				setGraphicSize(Std.int(width * 6));
 				updateHitbox();
 
@@ -641,6 +650,16 @@ class Character extends FlxSprite
 
 	override function update(elapsed:Float)
 	{
+		if (animation == null)
+		{
+			super.update(elapsed);
+			return;
+		}
+		else if (animation.curAnim == null)
+		{
+			super.update(elapsed);
+			return;
+		}
 		if (!curCharacter.startsWith('bf') && !isPlayer)
 		{
 			if (animation.curAnim.name.startsWith('sing'))
@@ -713,6 +732,14 @@ class Character extends FlxSprite
 							playAnim('danceLeft');
 					}
 				case 'gf-pixel':
+					if (animation == null)
+						{
+							return;
+						}
+						else if (animation.curAnim == null)
+						{
+							return;
+						}
 					if (!animation.curAnim.name.startsWith('hair'))
 					{
 						danced = !danced;
@@ -738,6 +765,10 @@ class Character extends FlxSprite
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
 		{
+			if (animation.getByName(AnimName) == null)
+			{
+				return; //why wasn't this a thing in the first place
+			}
 			animation.play(AnimName, Force, Reversed, Frame);
 	
 			var daOffset = animOffsets.get(AnimName);
