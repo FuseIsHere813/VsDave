@@ -1,5 +1,6 @@
 package;
 
+import flixel.system.FlxSoundGroup;
 import flixel.ui.FlxBar;
 import flixel.system.FlxSound;
 import flash.text.TextField;
@@ -119,6 +120,9 @@ class MusicPlayerState extends MusicBeatState
 
         var upP = controls.UP_P;
 		var downP = controls.DOWN_P;
+
+        var leftP = controls.LEFT_P;
+		var rightP = controls.RIGHT_P;
 		var accepted = controls.ACCEPT;
 
 
@@ -146,6 +150,25 @@ class MusicPlayerState extends MusicBeatState
 		{
 			changeSelection(1);
 		}
+        if (currentlyplaying)
+        {
+            if (leftP)
+            {
+                if (CurVocals != null)
+                {
+                    CurVocals.time -= 5000;
+                }
+                FlxG.sound.music.time -= 5000;
+            }
+            if (rightP)
+            {
+                if (CurVocals != null)
+                {
+                    CurVocals.time += 5000;
+                }
+                FlxG.sound.music.time += 5000;
+            }
+        }
 
         barText.text = FlxStringUtil.formatTime(FlxG.sound.music.time / 1000) + " / " +FlxStringUtil.formatTime(FlxG.sound.music.length / 1000);
 
