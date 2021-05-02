@@ -95,6 +95,11 @@ class Paths
 		return 'songs:assets/songs/${song.toLowerCase()}/Inst.$SOUND_EXT';
 	}
 
+	inline static public function externmusic(song:String)
+	{
+		return 'songs:assets/songs/extern/${song.toLowerCase()}.$SOUND_EXT';
+	}
+
 	inline static public function image(key:String, ?library:String)
 	{
 		return getPath('images/$key.png', IMAGE, library);

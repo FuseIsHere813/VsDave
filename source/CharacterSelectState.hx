@@ -17,12 +17,8 @@ import flixel.util.FlxStringUtil;
  */
  /**
  hey you fun commiting people, 
- i don't know about the rest of the mod but since this is basically 100% my code 
- i do not give you guys permission to grab this specific file and re-use it in your own mods.
- thanks,
- actually i'd ask if you guys use none fo the character selection related code but if you do use this mod as a base you'll kind of have to take it with you
- but just- don't include the character selector
- thanks again
+ i don't know about the rest of the mod but since this is basically 99% my code 
+ i do not give you guys permission to grab this specific code and re-use it in your own mods without asking me first.
  the secondary dev, ben
 */
 class CharacterSelectState extends FlxState
