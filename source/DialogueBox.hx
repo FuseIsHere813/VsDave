@@ -415,17 +415,6 @@ else
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
 
-		if (!portraitLeft.visible) //fixed-ish
-		{
-			box.flipX = true;
-		}
-		else
-		{
-			box.flipX = false;
-		}
-
-		trace("hey this is being called ya shit");
-
 		switch (curCharacter) //the following code is shit
 		{
 			case 'dad': //keep this here for legacy purposes
@@ -459,6 +448,21 @@ else
 				portraitLeft.frames = Paths.getSparrowAtlas('dave/daveCoolPortrait');
 				portraitLeft.animation.addByPrefix('enter', '3D Portrait', 24, false);
 				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+				}
+			case 'bambi': //guys its the funny bambi character
+				if (portraitLeft != null)
+				{
+					portraitLeft.destroy();
+				}
+				portraitLeft = new FlxSprite(276.95, 170);
+				portraitLeft.frames = Paths.getSparrowAtlas('dave/bambiPortrait');
+				portraitLeft.animation.addByPrefix('enter', 'bambienter', 24, false);
 				portraitLeft.scrollFactor.set();
 				add(portraitLeft);
 				portraitRight.visible = false;
@@ -501,6 +505,23 @@ else
 				{
 					portraitRight.visible = true;
 				}
+			case 'gf': //create genderbent boyfriend
+				if (portraitRight != null)
+				{
+					portraitRight.destroy();
+				}
+				portraitRight = new FlxSprite(230, 170);
+				portraitRight.frames = Paths.getSparrowAtlas('dave/gfPortrait');
+				portraitRight.animation.addByPrefix('enter', 'GF Enter', 24, false);
+				portraitRight.setGraphicSize(Std.int(portraitRight.width / bfPortraitSizeMultiplier));
+				portraitRight.updateHitbox();
+				portraitRight.scrollFactor.set();
+				add(portraitRight);
+				portraitLeft.visible = false;
+				if (!portraitRight.visible)
+				{
+					portraitRight.visible = true;
+				}
 			
 			case 'generic': //generic, boring
 			{
@@ -512,9 +533,14 @@ else
 				}
 			}
 		}
-		if (portraitLeft.animation.getByName("enter") == null)
+
+		if (!portraitLeft.visible) //fixed
 		{
-			trace("why the FUCK is this null");
+			box.flipX = true;
+		}
+		else
+		{
+			box.flipX = false;
 		}
 		portraitLeft.x -= 150;
 		//portraitRight.x += 100;
