@@ -534,7 +534,7 @@ else
 			}
 		}
 
-		if (!portraitLeft.visible) //fixed
+		if (portraitLeft.visible) //fixed
 		{
 			box.flipX = true;
 		}
