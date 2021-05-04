@@ -275,6 +275,7 @@ class DialogueBox extends FlxSpriteGroup
 
 
 
+
 if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked')
 {
     dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
@@ -515,8 +516,11 @@ else
 		{
 			trace("why the FUCK is this null");
 		}
+		portraitLeft.x -= 150;
+		//portraitRight.x += 100;
 		portraitLeft.animation.play('enter',true);
 		portraitRight.animation.play('enter',true);
+		
 	}
 
 	function cleanDialog():Void
