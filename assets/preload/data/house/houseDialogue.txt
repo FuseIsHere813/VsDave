@@ -1,7 +1,13 @@
 :generic: test
-:dad:Hello there! Welcome to my backyard!
-:bf:Be bobo bopebo
-:dad:You want to battle?
-:bf:bep
-:bf:Beep bo bop
-:dad:Sure thing!
+:dad: this is the default shit going first
+:dave:hey
+:dave-3d: im 3d now for no fucking reason
+:bf: thats cool
+:dave-3d: i know right, unfortunately i can only keep it for
+:dave: 2 dialogue boxes
+:bf: hey does this still work
+:bf: does it?
+:dave: i certainly hope so
+:senpai: hey bitches
+:dave: AAAAAAAAAAAAAAAAAA
+:bf: AAAAAAAAAAAAAAAAAAAAAA

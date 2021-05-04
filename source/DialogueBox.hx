@@ -1,5 +1,6 @@
 package;
 
+import haxe.Log;
 import flixel.input.gamepad.lists.FlxBaseGamepadList;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -422,23 +423,85 @@ else
 			box.flipX = false;
 		}
 
-		switch (curCharacter)
+		trace("hey this is being called ya shit");
+
+		switch (curCharacter) //the following code is shit
 		{
-			case 'dad':
+			case 'dad': //keep this here for legacy purposes
 				portraitRight.visible = false;
 				if (!portraitLeft.visible)
 				{
 					portraitLeft.visible = true;
-					portraitLeft.animation.play('enter');
 				}
-			case 'bf':
+			case 'dave': //dave time
+				if (portraitLeft != null)
+				{
+					portraitLeft.destroy();
+				}
+				portraitLeft = new FlxSprite(276.95, 170);
+				portraitLeft.frames = Paths.getSparrowAtlas(retardedPath);
+				portraitLeft.animation.addByPrefix('enter', 'dave Portrait', 24, false);
+				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+				}
+			case 'dave-3d': //dave time
+				if (portraitLeft != null)
+				{
+					portraitLeft.destroy();
+				}
+				portraitLeft = new FlxSprite(276.95, 170);
+				portraitLeft.frames = Paths.getSparrowAtlas('dave/daveCoolPortrait');
+				portraitLeft.animation.addByPrefix('enter', '3D Portrait', 24, false);
+				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+				}
+			case 'senpai':
+				if (portraitLeft != null)
+				{
+					portraitLeft.destroy();
+				}
+				portraitLeft = new FlxSprite(-20, 70);
+				portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
+				portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
+				portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
+				portraitLeft.updateHitbox();
+				portraitLeft.scrollFactor.set();
+				add(portraitLeft);
+				portraitRight.visible = false;
+				if (!portraitLeft.visible)
+				{
+					portraitLeft.visible = true;
+				}
+
+			case 'bf': //create boyfriend
+				if (portraitRight != null)
+				{
+					portraitRight.destroy();
+				}
+				portraitRight = new FlxSprite(230, 170);
+				portraitRight.frames = Paths.getSparrowAtlas('dave/boyfriendPortrait');
+				portraitRight.animation.addByPrefix('enter', 'BF Enter', 24, false);
+				portraitRight.setGraphicSize(Std.int(portraitRight.width / bfPortraitSizeMultiplier));
+				portraitRight.updateHitbox();
+				portraitRight.scrollFactor.set();
+				add(portraitRight);
 				portraitLeft.visible = false;
 				if (!portraitRight.visible)
 				{
 					portraitRight.visible = true;
-					portraitRight.animation.play('enter');
 				}
-			case 'generic':
+			
+			case 'generic': //generic, boring
 			{
 				portraitLeft.visible = false;
 				portraitRight.visible = false;
@@ -448,6 +511,12 @@ else
 				}
 			}
 		}
+		if (portraitLeft.animation.getByName("enter") == null)
+		{
+			trace("why the FUCK is this null");
+		}
+		portraitLeft.animation.play('enter',true);
+		portraitRight.animation.play('enter',true);
 	}
 
 	function cleanDialog():Void
