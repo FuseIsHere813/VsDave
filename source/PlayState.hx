@@ -1,8 +1,11 @@
 package;
 
+import flixel.math.FlxRandom;
+import openfl.net.FileFilter;
+import openfl.filters.BitmapFilter;
+import Shaders.PulseEffect;
 import Section.SwagSection;
 import Song.SwagSong;
-import WiggleEffect.WiggleEffectType;
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -56,6 +59,13 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 	public static var curmult:Array<Float> = [1,1,1,1];
+	public var curbg:FlxSprite;
+	public var screenshader:Shaders.PulseEffect = new PulseEffect();
+	public var UsingNewCam:Bool = false;
+
+
+
+	public var elapsedtime:Float = 0;
 
 	public static var rep:Replay;
 	public static var loadRep:Bool = false;
@@ -156,6 +166,7 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
+
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		eyesoreson = FlxG.save.data.eyesores;
@@ -163,7 +174,6 @@ class PlayState extends MusicBeatState
 		bads = 0;
 		shits = 0;
 		goods = 0;
-
 
 		misses = 0;
 
@@ -179,12 +189,12 @@ class PlayState extends MusicBeatState
 		FlxG.cameras.add(camHUD);
 
 		FlxCamera.defaultCameras = [camGame];
-
 		persistentUpdate = true;
 		persistentDraw = true;
 
 		if (SONG == null)
 			SONG = Song.loadFromJson('tutorial');
+
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
@@ -572,6 +582,7 @@ class PlayState extends MusicBeatState
 				stageFront.scrollFactor.set(0.9, 0.9);
 				stageFront.active = false;
 				add(stageFront);
+				UsingNewCam = true;
 			}
 			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch' || SONG.song.toLowerCase() == 'blocked')
 				{
@@ -606,6 +617,7 @@ class PlayState extends MusicBeatState
 					stageFront.scrollFactor.set(0.9, 0.9);
 					stageFront.active = false;
 					add(stageFront);
+					UsingNewCam = true;
 				}
 				else if(SONG.song.toLowerCase() == 'furiosity')
 					{
@@ -614,8 +626,16 @@ class PlayState extends MusicBeatState
 						var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 						bg.antialiasing = true;
 						bg.scrollFactor.set(0.9, 0.9);
-						bg.active = false;
+						bg.active = true;
 						add(bg);
+						//below code assumes shaders are always enabled which is bad
+						var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
+						testshader.waveAmplitude = 0.1;
+						testshader.waveFrequency = 5;
+						testshader.waveSpeed = 2;
+						bg.shader = testshader.shader;
+						curbg = bg;
+						UsingNewCam = true;
 					}
 		else
 		{
@@ -647,6 +667,12 @@ class PlayState extends MusicBeatState
 
 		var gfVersion:String = 'gf';
 
+
+		screenshader.waveAmplitude = 1;
+		screenshader.waveFrequency = 2;
+		screenshader.waveSpeed = 1;
+		screenshader.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000,100000);
+		
 		switch (curStage)
 		{
 			case 'limo':
@@ -721,7 +747,8 @@ class PlayState extends MusicBeatState
 			}
 			case 'dave-angey':
 			{
-				dad.y -= 100;
+				dad.y -= 200;
+				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 			}
 			case 'bambi':
 			{
@@ -1483,10 +1510,35 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		elapsedtime += elapsed;
+		if (curbg != null)
+		{
+			if (curbg.active) //only the furiosity background is active
+			{
+			var shad = cast(curbg.shader,Shaders.GlitchShader);
+			shad.uTime.value[0] += elapsed;
+			}
+		}
+		if(SONG.song.toLowerCase() == 'furiosity')
+		{
+			dad.y += (Math.sin(elapsedtime) * 0.2);
+		}
+		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); //this is very stupid but doesn't effect memory all that much so
 		if(shakeCam && eyesoreson)
 		{
-			FlxG.camera.shake(0.03, 0.03);
+			//var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
+			FlxG.camera.shake(0.015, 0.015);
 		}
+		screenshader.shader.uTime.value[0] += elapsed;
+		if(shakeCam && eyesoreson)
+		{
+			screenshader.shader.uampmul.value[0] = 1;
+		}
+		else
+		{
+			screenshader.shader.uampmul.value[0] -= (elapsed / 2);
+		}
+		screenshader.Enabled = shakeCam && eyesoreson;
 		#if !debug
 		perfectMode = false;
 		#end
@@ -1613,60 +1665,26 @@ class PlayState extends MusicBeatState
 			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
 
-		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
+
+
+
+		if (!UsingNewCam)
 		{
-			if (curBeat % 4 == 0)
+			if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
 			{
-				// trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
-			}
-
-			if (camFollow.x != dad.getMidpoint().x + 150 && !PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
-			{
-				camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
-
-				switch (dad.curCharacter)
+				if (curBeat % 4 == 0)
 				{
-					case 'mom':
-						camFollow.y = dad.getMidpoint().y;
-					case 'senpai':
-						camFollow.y = dad.getMidpoint().y - 430;
-						camFollow.x = dad.getMidpoint().x - 100;
-					case 'senpai-angry':
-						camFollow.y = dad.getMidpoint().y - 430;
-						camFollow.x = dad.getMidpoint().x - 100;
+					// trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
 				}
 
-				if (dad.curCharacter == 'mom')
-					vocals.volume = 1;
-
-				if (SONG.song.toLowerCase() == 'tutorial')
+				if (camFollow.x != dad.getMidpoint().x + 150 && !PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 				{
-					tweenCamIn();
-				}
-			}
-
-			if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camFollow.x != boyfriend.getMidpoint().x - 100)
-			{
-				camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-
-				switch (curStage)
-				{
-					case 'limo':
-						camFollow.x = boyfriend.getMidpoint().x - 300;
-					case 'mall':
-						camFollow.y = boyfriend.getMidpoint().y - 200;
-					case 'school':
-						camFollow.x = boyfriend.getMidpoint().x - 200;
-						camFollow.y = boyfriend.getMidpoint().y - 200;
-					case 'schoolEvil':
-						camFollow.x = boyfriend.getMidpoint().x - 200;
-						camFollow.y = boyfriend.getMidpoint().y - 200;
+					ZoomCam(true);
 				}
 
-				if (SONG.song.toLowerCase() == 'tutorial')
+				if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camFollow.x != boyfriend.getMidpoint().x - 100)
 				{
-					FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut});
+					ZoomCam(false);
 				}
 			}
 		}
@@ -1803,12 +1821,28 @@ class PlayState extends MusicBeatState
 						{
 							case 2:
 								dad.playAnim('singUP' + altAnim, true);
+								if (UsingNewCam)
+								{
+									ZoomCam(true);
+								}
 							case 3:
 								dad.playAnim('singRIGHT' + altAnim, true);
+								if (UsingNewCam)
+								{
+									ZoomCam(true);
+								}
 							case 1:
 								dad.playAnim('singDOWN' + altAnim, true);
+								if (UsingNewCam)
+								{
+									ZoomCam(true);
+								}
 							case 0:
 								dad.playAnim('singLEFT' + altAnim, true);
+								if (UsingNewCam)
+								{
+									ZoomCam(true);
+								}
 						}
 						//health -= 0.02; //enable if you want them to fight back
 						//boyfriend.playAnim('hit',true);
@@ -1865,6 +1899,70 @@ class PlayState extends MusicBeatState
 			endSong();
 		#end
 	}
+
+
+	function ZoomCam(focusondad:Bool):Void
+	{
+		if (focusondad)
+		{
+			if (UsingNewCam && boyfriend.animation.curAnim.name != "idle")
+			{
+				return;
+			}
+		}
+		if (camFollow.x != dad.getMidpoint().x + 150 && focusondad)
+			{
+				camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
+				// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
+
+				switch (dad.curCharacter)
+				{
+					case 'mom':
+						camFollow.y = dad.getMidpoint().y;
+					case 'senpai':
+						camFollow.y = dad.getMidpoint().y - 430;
+						camFollow.x = dad.getMidpoint().x - 100;
+					case 'senpai-angry':
+						camFollow.y = dad.getMidpoint().y - 430;
+						camFollow.x = dad.getMidpoint().x - 100;
+					case 'dave-angey':
+						camFollow.y = dad.getMidpoint().y;
+				}
+
+				if (dad.curCharacter == 'mom')
+					vocals.volume = 1;
+
+				if (SONG.song.toLowerCase() == 'tutorial')
+				{
+					tweenCamIn();
+				}
+			}
+
+			if (camFollow.x != boyfriend.getMidpoint().x - 100 && !focusondad)
+			{
+				camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
+
+				switch (curStage)
+				{
+					case 'limo':
+						camFollow.x = boyfriend.getMidpoint().x - 300;
+					case 'mall':
+						camFollow.y = boyfriend.getMidpoint().y - 200;
+					case 'school':
+						camFollow.x = boyfriend.getMidpoint().x - 200;
+						camFollow.y = boyfriend.getMidpoint().y - 200;
+					case 'schoolEvil':
+						camFollow.x = boyfriend.getMidpoint().x - 200;
+						camFollow.y = boyfriend.getMidpoint().y - 200;
+				}
+
+				if (SONG.song.toLowerCase() == 'tutorial')
+				{
+					FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut});
+				}
+			}
+	}
+
 
 	function NEVERMARCELLOAGAIN():Void
 	{
@@ -2665,12 +2763,28 @@ class PlayState extends MusicBeatState
 					{
 						case 2:
 							boyfriend.playAnim('singUP', true);
+							if (UsingNewCam)
+							{
+								ZoomCam(false);
+							}
 						case 3:
 							boyfriend.playAnim('singRIGHT', true);
+							if (UsingNewCam)
+							{
+								ZoomCam(false);
+							}
 						case 1:
 							boyfriend.playAnim('singDOWN', true);
+							if (UsingNewCam)
+							{
+								ZoomCam(false);
+							}
 						case 0:
 							boyfriend.playAnim('singLEFT', true);
+							if (UsingNewCam)
+							{
+								ZoomCam(false);
+							}
 					}
 		
 					playerStrums.forEach(function(spr:FlxSprite)
@@ -2815,6 +2929,17 @@ class PlayState extends MusicBeatState
 			{
 				boyfriend.playAnim('hey',true);
 				gf.playAnim('cheer',true);
+			}
+		}
+		if(SONG.song.toLowerCase() == 'glitch')
+		{
+			if(curStep == 480 || curStep == 681 || curStep == 1390 || curStep == 1445 || curStep == 1515 || curStep == 1542 || curStep == 1598 || curStep == 1655)
+			{
+				shakeCam = true;
+			}
+			if(curStep == 512 || curStep == 688 || curStep == 1420 || curStep == 1464 || curStep == 1540 || curStep == 1558 || curStep == 1608 || curStep == 1745)
+			{
+				shakeCam = false;
 			}
 		}
 	}

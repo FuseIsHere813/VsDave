@@ -159,10 +159,10 @@ class Character extends FlxSprite
 					animation.addByPrefix('singLEFT', 'Dave Sing Note LEFT', 24);
 	
 					addOffset('idle');
-					addOffset("singUP", -6, 40);
-					addOffset("singRIGHT", 0, 27);
-					addOffset("singLEFT", -10, 10);
-					addOffset("singDOWN", 0, -30);
+					addOffset("singUP", 0, -5);
+					addOffset("singRIGHT", 0, 0);
+					addOffset("singLEFT", -5, 0);
+					addOffset("singDOWN", -1, -3);
 
 					setGraphicSize(Std.int(width * 1.1));
 					updateHitbox();
@@ -179,10 +179,10 @@ class Character extends FlxSprite
 					animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24);
 		
 					addOffset('idle');
-					addOffset("singUP", -6, 50);
-					addOffset("singRIGHT", 0, 27);
-					addOffset("singLEFT", -10, 10);
-					addOffset("singDOWN", 0, -30);
+					addOffset("singUP", 0, 0);
+					addOffset("singRIGHT", 0, 0);
+					addOffset("singLEFT", 0, 0);
+					addOffset("singDOWN", 0, 0);
 					globaloffset[0] = 0;
 					globaloffset[1] = 450; //this is the y
 					setGraphicSize(Std.int(width / furiosityScale));
@@ -609,14 +609,14 @@ class Character extends FlxSprite
 					animation.addByPrefix('deathConfirm', "MARCELLO dead0", 24, false);
 	
 					addOffset('idle');
-					addOffset("singUP", -6, 50);
-					addOffset("singRIGHT", 0, 27);
-					addOffset("singLEFT", -10, 10);
-					addOffset("singDOWN", 0, -30);
-					addOffset("singUPmiss", -6, 50);
-					addOffset("singRIGHTmiss", 0, 27);
-					addOffset("singLEFTmiss", -10, 10);
-					addOffset("singDOWNmiss", 0, -30);
+					addOffset("singUP", -6, 3);
+					addOffset("singRIGHT", 0, -4);
+					addOffset("singLEFT", -10, -2);
+					addOffset("singDOWN", 0, -17);
+					addOffset("singUPmiss", -6, 4);
+					addOffset("singRIGHTmiss", 0, -4);
+					addOffset("singLEFTmiss", -10, -2);
+					addOffset("singDOWNmiss", -7, -14);
 
 					playAnim('idle');
 	
