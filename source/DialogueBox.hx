@@ -41,7 +41,7 @@ class DialogueBox extends FlxSpriteGroup
 
 	var debug:Bool = false;
 
-	var randomNumber:Int;
+	public static var randomNumber:Int;
 
 	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
 	{
@@ -274,7 +274,7 @@ class DialogueBox extends FlxSpriteGroup
 
 
 
-if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch')
+if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked')
 {
     dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Comic Sans MS Bold';
@@ -438,6 +438,15 @@ else
 					portraitRight.visible = true;
 					portraitRight.animation.play('enter');
 				}
+			case 'generic':
+			{
+				portraitLeft.visible = false;
+				portraitRight.visible = false;
+				if(portraitRight.visible || portraitLeft.visible)
+				{
+					
+				}
+			}
 		}
 	}
 

@@ -119,16 +119,16 @@ class StoryMenuState extends MusicBeatState
 
 		for (i in 0...weekData.length)
 		{
-			var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, i);
-			weekThing.y += ((weekThing.height + 20) * i);
-			weekThing.targetY = i;
-			grpWeekText.add(weekThing);
-
-			weekThing.screenCenter(X);
-			weekThing.antialiasing = true;
-			// weekThing.updateHitbox();
-
-			// Needs an offset thingie
+				var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, i);
+				weekThing.y += ((weekThing.height + 20) * i);
+				weekThing.targetY = i;
+				grpWeekText.add(weekThing);
+	
+				weekThing.screenCenter(X);
+				weekThing.antialiasing = true;
+				// weekThing.updateHitbox();
+	
+				// Needs an offset thingie
 			if (!weekUnlocked[i])
 			{
 				var lock:FlxSprite = new FlxSprite(weekThing.width + 10 + weekThing.x);
@@ -148,6 +148,9 @@ class StoryMenuState extends MusicBeatState
 			var weekCharacterThing:MenuCharacter = new MenuCharacter((FlxG.width * 0.25) * (1 + char) - 150, weekCharacters[curWeek][char]);
 			weekCharacterThing.y += 70;
 			weekCharacterThing.antialiasing = true;
+
+			var daveSpr:FlxSprite = new FlxSprite(230, 170).loadGraphic(Paths.image('dave/storyModeBGDave'));
+
 			switch (weekCharacterThing.character)
 			{
 				case 'dad':
@@ -168,7 +171,15 @@ class StoryMenuState extends MusicBeatState
 					weekCharacterThing.updateHitbox();
 			}
 
-			grpWeekCharacters.add(weekCharacterThing);
+			if(weekCharacterThing.character == 'dave')
+			{
+				grpWeekCharacters.destroy();
+                add(daveSpr);
+			}
+			else
+			{
+				grpWeekCharacters.add(weekCharacterThing);
+			}
 		}
 		//daveimage = new FlxSprite(0,56).loadGraphic(Paths.image("dave/storyModeBGDave"));
 

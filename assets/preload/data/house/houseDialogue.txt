@@ -1,3 +1,4 @@
+:generic: test
 :dad:Hello there! Welcome to my backyard!
 :bf:Be bobo bopebo
 :dad:You want to battle?
