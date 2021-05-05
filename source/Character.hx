@@ -163,6 +163,7 @@ class Character extends FlxSprite
 					addOffset("singRIGHT", 0, 0);
 					addOffset("singLEFT", -5, 0);
 					addOffset("singDOWN", -1, -3);
+					globaloffset[1] = 100;
 
 					setGraphicSize(Std.int(width * 1.1));
 					updateHitbox();
@@ -183,7 +184,7 @@ class Character extends FlxSprite
 					addOffset("singRIGHT", 0, 0);
 					addOffset("singLEFT", 0, 0);
 					addOffset("singDOWN", 0, 0);
-					globaloffset[0] = 0;
+					globaloffset[0] = 150;
 					globaloffset[1] = 450; //this is the y
 					setGraphicSize(Std.int(width / furiosityScale));
 				    updateHitbox();

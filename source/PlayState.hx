@@ -757,6 +757,9 @@ class PlayState extends MusicBeatState
 		}
 
 
+		ZoomCam(true);
+
+
 		if (characteroverride == "none" || characteroverride == "bf")
 		{
 			boyfriend = new Boyfriend(770, 450, SONG.player1);

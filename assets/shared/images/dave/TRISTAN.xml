@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="BOYFRIEND3.png">
+<TextureAtlas imagePath="TRISTAN.png">
 	<!-- Created with Adobe Animate version 20.0.3.25487 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="BF Dead Loop0000" x="0" y="0" width="374" height="462" pivotX="-35.5" pivotY="-971.2"/>
@@ -409,25 +409,25 @@
 	<SubTexture name="BF dies0055" x="1496" y="1867" width="374" height="462" frameX="0" frameY="0" frameWidth="429" frameHeight="466"/>
 	<SubTexture name="BF dies0056" x="1870" y="1867" width="374" height="462" frameX="0" frameY="0" frameWidth="429" frameHeight="466"/>
 	<SubTexture name="BF dies0057" x="2244" y="1867" width="374" height="462" frameX="0" frameY="0" frameWidth="429" frameHeight="466"/>
-	<SubTexture name="BF hit0000" x="2618" y="1867" width="429" height="425" pivotX="-213.3" pivotY="101.5" frameX="0" frameY="-16" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0001" x="3047" y="1867" width="418" height="414" frameX="-4" frameY="0" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0002" x="3465" y="1867" width="352" height="366" frameX="-53" frameY="-22" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0003" x="3817" y="1867" width="352" height="366" frameX="-53" frameY="-22" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0004" x="4169" y="1867" width="344" height="366" frameX="-51" frameY="-22" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0005" x="4513" y="1867" width="344" height="366" frameX="-51" frameY="-22" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0006" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0007" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0008" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0009" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0010" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0011" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0012" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0013" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0014" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0015" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0016" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0017" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
-	<SubTexture name="BF hit0018" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="441"/>
+	<SubTexture name="BF hit0000" x="2618" y="1867" width="429" height="398" pivotX="-213.3" pivotY="101.5" frameX="0" frameY="-16" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0001" x="3047" y="1867" width="418" height="414" frameX="-4" frameY="0" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0002" x="3465" y="1867" width="352" height="366" frameX="-53" frameY="-22" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0003" x="3817" y="1867" width="352" height="366" frameX="-53" frameY="-22" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0004" x="4169" y="1867" width="344" height="366" frameX="-51" frameY="-22" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0005" x="4513" y="1867" width="344" height="366" frameX="-51" frameY="-22" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0006" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0007" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0008" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0009" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0010" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0011" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0012" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0013" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0014" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0015" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0016" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0017" x="5208" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
+	<SubTexture name="BF hit0018" x="4857" y="1867" width="351" height="364" frameX="-35" frameY="-24" frameWidth="429" frameHeight="414"/>
 	<SubTexture name="BF idle dance0000" x="5559" y="1867" width="321" height="371" pivotX="-299.8" pivotY="227.45" frameX="-1" frameY="-25" frameWidth="322" frameHeight="396"/>
 	<SubTexture name="BF idle dance0001" x="5559" y="1867" width="321" height="371" frameX="-1" frameY="-25" frameWidth="322" frameHeight="396"/>
 	<SubTexture name="BF idle dance0002" x="5880" y="1867" width="321" height="371" frameX="0" frameY="-24" frameWidth="322" frameHeight="396"/>

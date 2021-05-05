@@ -19,6 +19,7 @@ class DialogueBox extends FlxSpriteGroup
 	var box:FlxSprite;
 
 	var curCharacter:String = '';
+	var curMod:String = '';
 
 	var dialogue:Alphabet;
 	var dialogueList:Array<String> = [];
@@ -41,6 +42,8 @@ class DialogueBox extends FlxSpriteGroup
 	var bgFade:FlxSprite;
 
 	var debug:Bool = false;
+
+	var curshader:Dynamic;
 
 	public static var randomNumber:Int;
 
@@ -326,6 +329,10 @@ else
 
 	override function update(elapsed:Float)
 	{
+		if (curshader != null)
+		{
+			curshader.shader.uTime.value[0] += elapsed;
+		}
 		// HARD CODING CUZ IM STUPDI
 		if (PlayState.SONG.song.toLowerCase() == 'roses')
 			portraitLeft.visible = false;
@@ -414,7 +421,7 @@ else
 		// swagDialogue.text = ;
 		swagDialogue.resetText(dialogueList[0]);
 		swagDialogue.start(0.04, true);
-
+		curshader = null;
 		switch (curCharacter) //the following code is shit
 		{
 			case 'dad': //keep this here for legacy purposes
@@ -546,6 +553,40 @@ else
 		//portraitRight.x += 100;
 		portraitLeft.animation.play('enter',true);
 		portraitRight.animation.play('enter',true);
+		if (curMod == "distort")
+		{
+			var shad:Shaders.PulseEffect = new Shaders.PulseEffect();
+			curshader = shad;
+			shad.waveAmplitude = 1;
+			shad.waveFrequency = 2;
+			shad.waveSpeed = 1;
+			shad.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000,100000);
+			shad.shader.uampmul.value[0] = 1;
+			portraitLeft.shader = shad.shader;
+			portraitRight.shader = shad.shader;
+		}
+		if (curMod == "distortbg")
+		{
+			var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
+			curshader = shad;
+			shad.waveAmplitude = 0.1;
+			shad.waveFrequency = 5;
+			shad.waveSpeed = 2;
+			portraitLeft.shader = shad.shader;
+			portraitRight.shader = shad.shader;
+		}
+
+		if (curMod == "setfont_normal")
+		{
+			dropText.font = 'Comic Sans MS Bold';
+			swagDialogue.font = 'Comic Sans MS Bold';
+		}
+
+		if (curMod == "setfont_code")
+		{
+			dropText.font = Paths.font("barcode.ttf");
+			swagDialogue.font = Paths.font("barcode.ttf");
+		}
 		
 	}
 
@@ -553,6 +594,7 @@ else
 	{
 		var splitName:Array<String> = dialogueList[0].split(":");
 		curCharacter = splitName[1];
-		dialogueList[0] = dialogueList[0].substr(splitName[1].length + 2).trim();
+		curMod = splitName[0];
+		dialogueList[0] = dialogueList[0].substr(splitName[1].length + splitName[0].length + 2).trim();
 	}
 }
