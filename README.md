@@ -8,6 +8,8 @@ this is dave
 
 say hi to dave
 
+please say hi to him
+
 **HUGE NOTICE**
 
 This is a **MOD**. This is not Vanilla and should be treated as a **MODIFICATION**. This will probably never be official, so don't get confused.
