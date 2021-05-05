@@ -757,8 +757,6 @@ class PlayState extends MusicBeatState
 		}
 
 
-		ZoomCam(true);
-
 
 		if (characteroverride == "none" || characteroverride == "bf")
 		{
