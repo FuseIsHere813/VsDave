@@ -584,7 +584,7 @@ class PlayState extends MusicBeatState
 				add(stageFront);
 				UsingNewCam = true;
 			}
-			else if(SONG.song.toLowerCase() == 'supernovae' || SONG.song.toLowerCase() == 'corntheft')
+			else if(SONG.song.toLowerCase() == 'supernovae' || SONG.song.toLowerCase() == 'corn-theft')
 			{
 				defaultCamZoom = 0.9;
 				curStage = 'bambiFarm';
