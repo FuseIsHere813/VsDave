@@ -549,7 +549,7 @@ class PlayState extends MusicBeatState
 				add(waveSpriteFG);
 			 */
 		}
-		else if(SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity' || SONG.song.toLowerCase() == 'supernovae')
+		else if(SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity')
 			{
 				defaultCamZoom = 0.9;
 				curStage = 'daveHouse';
@@ -583,6 +583,43 @@ class PlayState extends MusicBeatState
 				stageFront.active = false;
 				add(stageFront);
 				UsingNewCam = true;
+			}
+			else if(SONG.song.toLowerCase() == 'supernovae' || SONG.song.toLowerCase() == 'corntheft')
+			{
+				defaultCamZoom = 0.9;
+				curStage = 'bambiFarm';
+
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+
+				var sun:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/sun'));
+				sun.antialiasing = true;
+				sun.scrollFactor.set(0, 0);
+				sun.active = false;
+				add(sun);
+
+				var corn:FlxSprite = new FlxSprite(-600, -50).loadGraphic(Paths.image('bambi/background'));
+				corn.setGraphicSize(Std.int(corn.width / 1.3));
+				corn.updateHitbox();
+				corn.antialiasing = true;
+				corn.scrollFactor.set(0.7, 0.7);
+				corn.active = false;
+				add(corn);
+
+				var farm:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/farm'));
+				farm.antialiasing = true;
+				farm.scrollFactor.set(0.9, 0.9);
+				farm.active = false;
+				add(farm);
+
+				var foreground:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/foreground'));
+				foreground.antialiasing = true;
+				foreground.scrollFactor.set(1, 1);
+				foreground.active = false;
+				add(foreground);
 			}
 			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch' || SONG.song.toLowerCase() == 'blocked')
 				{
