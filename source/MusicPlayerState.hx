@@ -56,7 +56,7 @@ class MusicPlayerState extends MusicBeatState
         }
 
         bg = new FlxSprite().loadGraphic(Paths.image('backgrounds/morie'));
-        var randomNum:Int = FlxG.random.int(0, 5);
+        var randomNum:Int = FlxG.random.int(0, 6);
 		switch(randomNum)
 		{
 			case 0:
@@ -71,6 +71,8 @@ class MusicPlayerState extends MusicBeatState
 				bg.loadGraphic(Paths.image('backgrounds/mantis'));
             case 5:
                 bg.loadGraphic(Paths.image('backgrounds/mamakotomi'));
+            case 6:
+                bg.loadGraphic(Paths.image('backgrounds/T5mpler'));
 		}
         bg.color = 0xFFFD719B;
 		add(bg);

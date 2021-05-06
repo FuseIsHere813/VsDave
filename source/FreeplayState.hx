@@ -77,7 +77,7 @@ class FreeplayState extends MusicBeatState
 		// LOAD CHARACTERS
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
-		var randomNum:Int = FlxG.random.int(0, 5);
+		var randomNum:Int = FlxG.random.int(0, 6);
 		switch(randomNum)
 		{
 			case 0:
@@ -92,6 +92,8 @@ class FreeplayState extends MusicBeatState
 				bg.loadGraphic(Paths.image('backgrounds/mantis'));
 			case 5:
 				bg.loadGraphic(Paths.image('backgrounds/mamakotomi'));
+			case 6:
+				bg.loadGraphic(Paths.image('backgrounds/T5mpler'));
 		}
 		bg.color = 0xFF9271FD;
 		add(bg);

@@ -47,7 +47,7 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var randomNum:Int = FlxG.random.int(0, 5);
+		var randomNum:Int = FlxG.random.int(0, 6);
 
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
 		bg.scrollFactor.x = 0;
@@ -70,6 +70,8 @@ class MainMenuState extends MusicBeatState
 				bg.loadGraphic(Paths.image('backgrounds/mantis'));
 			case 5:
 				bg.loadGraphic(Paths.image('backgrounds/mamakotomi'));
+			case 6:
+				bg.loadGraphic(Paths.image('backgrounds/T5mpler'));
 		}
 		bg.color = 0xFFFDE871;
 		add(bg);

@@ -34,7 +34,7 @@ class OptionsMenu extends MusicBeatState
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
 		menuBG.antialiasing = true;
-		var randomNum:Int = FlxG.random.int(0, 5);
+		var randomNum:Int = FlxG.random.int(0, 6);
 		switch(randomNum)
 		{
 			case 0:
@@ -47,8 +47,10 @@ class OptionsMenu extends MusicBeatState
 				menuBG.loadGraphic(Paths.image('backgrounds/morie'));
 			case 4:
 				menuBG.loadGraphic(Paths.image('backgrounds/mantis'));
-			case 4:
+			case 5:
 				menuBG.loadGraphic(Paths.image('backgrounds/mamakotomi'));
+			case 6:
+				menuBG.loadGraphic(Paths.image('backgrounds/T5mpler'));
 		}
 		add(menuBG);
 
