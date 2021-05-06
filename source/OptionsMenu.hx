@@ -24,7 +24,7 @@ class OptionsMenu extends MusicBeatState
 	var versionShit:FlxText;
 	override function create()
 	{
-		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
 		controlsStrings = CoolUtil.coolStringFile((FlxG.save.data.dfjk ? 'DFJK' : 'WASD') + "\n" + (FlxG.save.data.newInput ? "New input" : "Old Input") + "\n" + (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll') + "\nAccuracy " + (FlxG.save.data.accuracyDisplay ? "off" : "on") + "\n" + (FlxG.save.data.eyesores ? 'Eyesores Enabled' : 'Eyesores Disabled'));
 		
 		trace(controlsStrings);
@@ -34,6 +34,22 @@ class OptionsMenu extends MusicBeatState
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
 		menuBG.antialiasing = true;
+		var randomNum:Int = FlxG.random.int(0, 5);
+		switch(randomNum)
+		{
+			case 0:
+				menuBG.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+			case 1:
+				menuBG.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
+			case 2:
+				menuBG.loadGraphic(Paths.image('backgrounds/Olyantwo'));
+			case 3:
+				menuBG.loadGraphic(Paths.image('backgrounds/morie'));
+			case 4:
+				menuBG.loadGraphic(Paths.image('backgrounds/mantis'));
+			case 4:
+				menuBG.loadGraphic(Paths.image('backgrounds/mamakotomi'));
+		}
 		add(menuBG);
 
 		grpControls = new FlxTypedGroup<Alphabet>();

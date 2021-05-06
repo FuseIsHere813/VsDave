@@ -76,7 +76,24 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+		var randomNum:Int = FlxG.random.int(0, 5);
+		switch(randomNum)
+		{
+			case 0:
+				bg.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+			case 1:
+				bg.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
+			case 2:
+				bg.loadGraphic(Paths.image('backgrounds/Olyantwo'));
+			case 3:
+				bg.loadGraphic(Paths.image('backgrounds/morie'));
+			case 4:
+				bg.loadGraphic(Paths.image('backgrounds/mantis'));
+			case 5:
+				bg.loadGraphic(Paths.image('backgrounds/mamakotomi'));
+		}
+		bg.color = 0xFF9271FD;
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
