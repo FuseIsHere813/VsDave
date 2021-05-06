@@ -101,6 +101,8 @@ class MainMenuState extends MusicBeatState
 				magenta.loadGraphic(Paths.image('backgrounds/mantis'));
 			case 5:
 				magenta.loadGraphic(Paths.image('backgrounds/mamakotomi'));
+			case 6:
+				magenta.loadGraphic(Paths.image('backgrounds/T5mpler'));
 		}
 		magenta.color = 0xFFfd719b;
 		add(magenta);

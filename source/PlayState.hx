@@ -597,7 +597,7 @@ class PlayState extends MusicBeatState
 
 				var sun:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/sun'));
 				sun.antialiasing = true;
-				sun.scrollFactor.set(0, 0);
+				sun.scrollFactor.set(1, 1);
 				sun.active = false;
 				add(sun);
 
@@ -620,6 +620,8 @@ class PlayState extends MusicBeatState
 				foreground.scrollFactor.set(1, 1);
 				foreground.active = false;
 				add(foreground);
+
+				UsingNewCam = true;
 			}
 			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch' || SONG.song.toLowerCase() == 'blocked')
 				{
