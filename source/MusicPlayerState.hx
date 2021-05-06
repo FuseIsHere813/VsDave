@@ -55,7 +55,22 @@ class MusicPlayerState extends MusicBeatState
             }
         }
 
-        bg = new FlxSprite().loadGraphic(Paths.image('menuBGMagenta'));
+        bg = new FlxSprite().loadGraphic(Paths.image('backgrounds/morie'));
+        var randomNum:Int = FlxG.random.int(0, 4);
+		switch(randomNum)
+		{
+			case 0:
+				bg.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+			case 1:
+				bg.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
+			case 2:
+				bg.loadGraphic(Paths.image('backgrounds/Olyantwo'));
+			case 3:
+				bg.loadGraphic(Paths.image('backgrounds/morie'));
+			case 4:
+				bg.loadGraphic(Paths.image('backgrounds/mantis'));
+		}
+        bg.color = 0xFFFD719B;
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();

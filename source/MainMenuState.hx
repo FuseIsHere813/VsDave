@@ -47,19 +47,35 @@ class MainMenuState extends MusicBeatState
 
 		persistentUpdate = persistentDraw = true;
 
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		var randomNum:Int = FlxG.random.int(0, 4);
+
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.18;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
+		switch(randomNum)
+		{
+			case 0:
+				bg.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+			case 1:
+				bg.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
+			case 2:
+				bg.loadGraphic(Paths.image('backgrounds/Olyantwo'));
+			case 3:
+				bg.loadGraphic(Paths.image('backgrounds/morie'));
+			case 4:
+				bg.loadGraphic(Paths.image('backgrounds/mantis'));
+		}
+		bg.color = 0xFFFDE871;
 		add(bg);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
+		magenta = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
 		magenta.scrollFactor.x = 0;
 		magenta.scrollFactor.y = 0.18;
 		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
@@ -67,6 +83,19 @@ class MainMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = true;
+		switch(randomNum)
+		{
+			case 0:
+				magenta.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+			case 1:
+				magenta.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
+			case 2:
+				magenta.loadGraphic(Paths.image('backgrounds/Olyantwo'));
+			case 3:
+				magenta.loadGraphic(Paths.image('backgrounds/morie'));
+			case 4:
+				magenta.loadGraphic(Paths.image('backgrounds/mantis'));
+		}
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		// magenta.scrollFactor.set();
