@@ -727,12 +727,17 @@ class PlayState extends MusicBeatState
 		if (curStage == 'limo')
 			gfVersion = 'gf-car';
 
+
+		var charoffsetx:Float = 0;
+		var charoffsety:Float = 0;
 		if (characteroverride == "bf-pixel" && SONG.song != "Tutorial")
 		{
 			gfVersion = 'gf-pixel';
+			charoffsetx += 150;
+			charoffsety += 100;
+
 		}
-		
-		gf = new Character(400, 130, gfVersion);
+		gf = new Character(400 + charoffsetx, 130 + charoffsety, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
 
 		if (!(characteroverride == "bf" || characteroverride == "none" || characteroverride == "bf-pixel") && SONG.song != "Tutorial")
