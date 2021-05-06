@@ -5,6 +5,7 @@ external,im-angey,dave-angey,bad
 internal,furiosity,dave-angey,good
 internal,bonus-song,dave,good
 internal,blocked,bambi,good
+internal,corn-theft,bambi,good
 external,a-new-day,dave,good
 external,bambi-speak,bambi,bad
 external,good-ending,bf-old,good
