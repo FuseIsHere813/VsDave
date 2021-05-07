@@ -586,7 +586,7 @@ class PlayState extends MusicBeatState
 				add(stageFront);
 				UsingNewCam = true;
 			}
-			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft')
+			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze')
 			{
 				defaultCamZoom = 0.9;
 				curStage = 'bambiFarm';
@@ -622,8 +622,10 @@ class PlayState extends MusicBeatState
 				foreground.scrollFactor.set(1, 1);
 				foreground.active = false;
 				add(foreground);
-
-				UsingNewCam = true;
+				if (SONG.song.toLowerCase() != 'maze')
+				{
+					UsingNewCam = true;
+				}
 			}
 			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch')
 				{
@@ -2017,7 +2019,7 @@ class PlayState extends MusicBeatState
 	{
 		if (isStoryMode)
 		{
-			if(curSong.toLowerCase() == 'glitch')
+			if(curSong.toLowerCase() == 'corn-theft')
 			{
 				canPause = false;
 				FlxG.sound.music.volume = 0;
@@ -2033,6 +2035,16 @@ class PlayState extends MusicBeatState
 				boyfriend.playAnim('singDOWNmiss',true);
 				STUPDVARIABLETHATSHOULDNTBENEEDED = marcello;
 				new FlxTimer().start(5.5, THROWPHONEMARCELLO);
+			}
+			else if (curSong.toLowerCase() == 'maze')
+			{
+				canPause = false;
+				FlxG.sound.music.volume = 0;
+				vocals.volume = 0;
+				var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('maze/endDialogue')));
+				doof.scrollFactor.set();
+				doof.finishThing = endSong;
+				schoolIntro(doof);
 			}
 			else
 			{

@@ -317,7 +317,7 @@ class DialogueBox extends FlxSpriteGroup
 
 
 
-if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked')
+if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked' || PlayState.SONG.song.toLowerCase()=='maze' || PlayState.SONG.song.toLowerCase()=='corn-theft')
 {
     dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Comic Sans MS Bold';
