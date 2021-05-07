@@ -2071,7 +2071,7 @@ class PlayState extends MusicBeatState
 	{
 		if (!loadRep)
 			rep.SaveReplay();
-
+		inCutscene = false;
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
