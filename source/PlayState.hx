@@ -238,6 +238,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('blocked/retardedDialogue'));
 			case 'corn-theft':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('corn-theft/cornDialogue'));
+			case 'maze':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('maze/mazeDialogue'));
 		}
 
 		if (SONG.song.toLowerCase() == 'spookeez' || SONG.song.toLowerCase() == 'monster' || SONG.song.toLowerCase() == 'south')
@@ -802,6 +804,10 @@ class PlayState extends MusicBeatState
 			{
 				dad.y += 400;
 			}
+			case 'bambi-new':
+			{
+				dad.y += 400;
+			}
 		}
 
 
@@ -1019,6 +1025,8 @@ class PlayState extends MusicBeatState
 				case 'blocked':
 					schoolIntro(doof);
 				case 'corn-theft':
+					schoolIntro(doof);
+				case 'maze':
 					schoolIntro(doof);
 				default:
 					startCountdown();

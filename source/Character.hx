@@ -622,6 +622,21 @@ class Character extends FlxSprite
 					playAnim('idle');
 	
 					flipX = true;
+			case 'bambi-new':
+			        frames = Paths.getSparrowAtlas('bambi/bambiRemake');
+					animation.addByPrefix('idle', 'idle', 24, false);
+					animation.addByPrefix('singDOWN', 'down', 24, false);
+					animation.addByPrefix('singUP', 'up', 24, false);
+					animation.addByPrefix('singLEFT', 'left', 24, false);
+					animation.addByPrefix('singRIGHT', 'right', 24, false);
+
+					addOffset('idle');
+					addOffset("singUP", -6, 53);
+					addOffset("singRIGHT", 0, 20);
+					addOffset("singLEFT", -10, -2);
+					addOffset("singDOWN", 0, -17);
+
+					playAnim('idle');
 	
 		}
 
