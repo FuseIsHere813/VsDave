@@ -28,7 +28,7 @@ class StoryMenuState extends MusicBeatState
 		['Cocoa', 'Eggnog', 'Winter-Horrorland'],
 		['Senpai', 'Roses', 'Thorns'],
 		['House', 'Insanity', 'Furiosity'],
-		['Supernovae', 'Glitch', 'Blocked']
+		['Blocked', 'Corn-Theft']
 	];
 	var curDifficulty:Int = 1;
 
@@ -55,7 +55,7 @@ class StoryMenuState extends MusicBeatState
 		"RED SNOW",
 		"hating simulator ft. moawling",
 		"Dave's Fun Rapping Battle!",
-		"Mr. Bambi's Masters Week!"
+		"Mr. Bambi's Corn Maze"
 	];
 
 	var txtWeekTitle:FlxText;

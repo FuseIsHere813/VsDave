@@ -236,6 +236,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('glitch/glitchDialogue'));
 			case 'blocked':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('blocked/retardedDialogue'));
+			case 'corn-theft':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('corn-theft/cornDialogue'));
 		}
 
 		if (SONG.song.toLowerCase() == 'spookeez' || SONG.song.toLowerCase() == 'monster' || SONG.song.toLowerCase() == 'south')
@@ -549,7 +551,7 @@ class PlayState extends MusicBeatState
 				add(waveSpriteFG);
 			 */
 		}
-		else if(SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity')
+		else if(SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity' || SONG.song.toLowerCase() == 'supernovae')
 			{
 				defaultCamZoom = 0.9;
 				curStage = 'daveHouse';
@@ -584,7 +586,7 @@ class PlayState extends MusicBeatState
 				add(stageFront);
 				UsingNewCam = true;
 			}
-			else if(SONG.song.toLowerCase() == 'supernovae' || SONG.song.toLowerCase() == 'corn-theft')
+			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft')
 			{
 				defaultCamZoom = 0.9;
 				curStage = 'bambiFarm';
@@ -623,7 +625,7 @@ class PlayState extends MusicBeatState
 
 				UsingNewCam = true;
 			}
-			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch' || SONG.song.toLowerCase() == 'blocked')
+			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch')
 				{
 					defaultCamZoom = 0.9;
 					curStage = 'daveHouse_night';
@@ -1013,6 +1015,8 @@ class PlayState extends MusicBeatState
 				case 'glitch':
 					schoolIntro(doof);
 				case 'blocked':
+					schoolIntro(doof);
+				case 'corn-theft':
 					schoolIntro(doof);
 				default:
 					startCountdown();
