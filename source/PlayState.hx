@@ -2049,6 +2049,8 @@ class PlayState extends MusicBeatState
 				canPause = false;
 				FlxG.sound.music.volume = 0;
 				vocals.volume = 0;
+				generatedMusic = false; //stop the game from trying to generate anymore music and to just cease attempting to play the music in general
+				boyfriend.stunned = true;
 				var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('maze/endDialogue')));
 				doof.scrollFactor.set();
 				doof.finishThing = endSong;
