@@ -77,6 +77,8 @@ class TitleState extends MusicBeatState
 			FlxG.save.data.accuracyDisplay = true;
 		if (FlxG.save.data.eyesores == null)
 			FlxG.save.data.eyesores = true;
+		if (FlxG.save.data.donoteclick == null)
+			FlxG.save.data.donoteclick = false;
 			
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 

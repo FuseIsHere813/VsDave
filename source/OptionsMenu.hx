@@ -25,7 +25,7 @@ class OptionsMenu extends MusicBeatState
 	override function create()
 	{
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
-		controlsStrings = CoolUtil.coolStringFile((FlxG.save.data.dfjk ? 'DFJK' : 'WASD') + "\n" + (FlxG.save.data.newInput ? "New input" : "Old Input") + "\n" + (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll') + "\nAccuracy " + (FlxG.save.data.accuracyDisplay ? "off" : "on") + "\n" + (FlxG.save.data.eyesores ? 'Eyesores Enabled' : 'Eyesores Disabled'));
+		controlsStrings = CoolUtil.coolStringFile((FlxG.save.data.dfjk ? 'DFJK' : 'WASD') + "\n" + (FlxG.save.data.newInput ? "New input" : "Old Input") + "\n" + (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll') + "\nAccuracy " + (FlxG.save.data.accuracyDisplay ? "off" : "on") + "\n" + (FlxG.save.data.eyesores ? 'Eyesores Enabled' : 'Eyesores Disabled') + "\n" + (FlxG.save.data.donoteclick ? "Sound Feedback On" : "Sound Feedback Off"));
 		
 		trace(controlsStrings);
 
@@ -101,8 +101,7 @@ class OptionsMenu extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (curSelected != 5)
-					grpControls.remove(grpControls.members[curSelected]);
+				grpControls.remove(grpControls.members[curSelected]);
 				switch(curSelected)
 				{
 					case 0:
@@ -141,8 +140,11 @@ class OptionsMenu extends MusicBeatState
 						ctrl.targetY = curSelected - 4;
 						grpControls.add(ctrl);
 					case 5:
-						trace('switch');
-						FlxG.switchState(new LoadReplayState());
+						FlxG.save.data.donoteclick = !FlxG.save.data.donoteclick;
+						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.donoteclick ? "Sound Feedback On" : "Sound Feedback Off"), true, false);
+						ctrl.isMenuItem = true;
+						ctrl.targetY = curSelected - 5;
+						grpControls.add(ctrl);
 				}
 			}
 	}

@@ -2819,6 +2819,10 @@ class PlayState extends MusicBeatState
 					if (!note.isSustainNote)
 					{
 						popUpScore(note.strumTime,note.noteData);
+						if (FlxG.save.data.donoteclick)
+						{
+						FlxG.sound.play(Paths.sound('note_click'));
+						}
 						combo += 1;
 					}
 					else

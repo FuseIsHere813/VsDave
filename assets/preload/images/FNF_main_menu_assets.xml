@@ -3,6 +3,8 @@
 	<!-- Created with Adobe Animate version 20.0.0.17400 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="donate basic0000" x="0" y="0" width="444" height="117"/>
+	<SubTexture name="ost basic0000" x="0" y="1860" width="341" height="188"/>
+	<SubTexture name="ost white0000" x="0" y="1672" width="341" height="188"/>
 	<SubTexture name="donate basic0001" x="0" y="0" width="444" height="117"/>
 	<SubTexture name="donate basic0002" x="0" y="0" width="444" height="117"/>
 	<SubTexture name="donate basic0003" x="454" y="0" width="444" height="117"/>

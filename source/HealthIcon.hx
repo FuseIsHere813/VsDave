@@ -35,6 +35,8 @@ class HealthIcon extends FlxSprite
 		animation.add('dave-angey', [26, 27], 0, false, isPlayer);
 		animation.add('bambi', [28, 29], 0, false, isPlayer);
 		animation.add('bambi-new', [28, 29], 0, false, isPlayer);
+		animation.add('the-duo', [32, 33], 0, false, isPlayer);
+		animation.add('bambi-stupid', [34, 35], 0, false, isPlayer);
 		animation.add('parents-christmas', [17], 0, false, isPlayer);
 		animation.add('monster', [19, 20], 0, false, isPlayer);
 		animation.add('monster-christmas', [19, 20], 0, false, isPlayer);
