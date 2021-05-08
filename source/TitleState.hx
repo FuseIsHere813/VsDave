@@ -144,7 +144,7 @@ class TitleState extends MusicBeatState
 			FlxG.sound.music.fadeIn(4, 0, 0.7);
 		}
 
-		Conductor.changeBPM(102);
+		Conductor.changeBPM(150);
 		persistentUpdate = true;
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
@@ -363,53 +363,51 @@ class TitleState extends MusicBeatState
 			case 2:
 				addMoreText('Rapparep');
 			case 3:
-				addMoreText('Krisspo');
-			case 4:
-				addMoreText('TheBuilderXD');
-			case 5:
 				addMoreText('MissingTextureMan101');
-			case 6:
+			case 4:
 				addMoreText('present');
 			// credTextShit.text += '\npresent...';
 			// credTextShit.addText();
-			case 8:
+			case 5:
 				deleteCoolText();
 			// credTextShit.visible = false;
 			// credTextShit.text = 'In association \nwith';
 			// credTextShit.screenCenter();
-			case 10:
+			case 6:
 				createCoolText(['Supernovae', 'by']);
-			case 11:
+			case 7:
 				addMoreText('ArchWk');
 			// credTextShit.text += '\nNewgrounds';
-			case 13:
+			case 8:
 				deleteCoolText();
 				ngSpr.visible = false;
 			// credTextShit.visible = false;
 
 			// credTextShit.text = 'Shoutouts Tom Fulp';
 			// credTextShit.screenCenter();
-			case 14:
+			case 9:
 				createCoolText([curWacky[0]]);
 			// credTextShit.visible = true;
-			case 15:
+			case 10:
 				addMoreText(curWacky[1]);
 			// credTextShit.text += '\nlmao';
-			case 17:
+			case 11:
 				deleteCoolText();
 			// credTextShit.visible = false;
 			// credTextShit.text = "Friday";
 			// credTextShit.screenCenter();
-			case 18:
+			case 12:
 				addMoreText('VS');
 			// credTextShit.visible = true;
-			case 19:
+			case 13:
 				addMoreText('Dave');
 			// credTextShit.text += '\nNight';
-			case 20:
+			case 14:
 				addMoreText('Mod'); // credTextShit.text += '\nFunkin';
+			case 15:
+				deleteCoolText();
 
-			case 21:
+			case 16:
 				skipIntro();
 		}
 	}
