@@ -30,6 +30,8 @@ class CharacterSelectState extends FlxState
 
 	public var isDebug:Bool = false;
 
+	public var PressedTheFunny:Bool = false;
+
 
 	public static var CharactersList:Array<String> = ["bf","bf-pixel","tristan","dave","bambi","dave-angey"];
 	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25]];
@@ -104,8 +106,9 @@ class CharacterSelectState extends FlxState
 		notemodtext.scrollFactor.set();
 		add(notemodtext);
 
-		characterText = new FlxText(400, -140, 500, "Boyfriend");
+		characterText = new FlxText(FlxG.width / 3, -140, FlxG.width, "Boyfriend");
 		characterText.size = 100;
+		characterText.autoSize = false;
 		characterText.fieldWidth = 0;
 		characterText.alignment = FlxTextAlign.CENTER;
 		add(characterText);
@@ -178,6 +181,14 @@ class CharacterSelectState extends FlxState
 			{
 				FlxG.sound.play(Paths.sound('badnoise1'), 0.9);
 				return;
+			}
+			if (PressedTheFunny)
+			{
+				return;
+			}
+			else
+			{
+				PressedTheFunny = true;
 			}
 			if (char.animation.getByName("hey") != null)
 			{

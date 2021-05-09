@@ -79,6 +79,10 @@ class TitleState extends MusicBeatState
 			FlxG.save.data.eyesores = true;
 		if (FlxG.save.data.donoteclick == null)
 			FlxG.save.data.donoteclick = false;
+		if (FlxG.save.data.newInput != null && FlxG.save.data.lastversion == null)
+			FlxG.save.data.lastversion = "pre-beta2";
+		if (FlxG.save.data.newInput == null && FlxG.save.data.lastversion == null)
+			FlxG.save.data.lastversion = "beta2";
 			
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
