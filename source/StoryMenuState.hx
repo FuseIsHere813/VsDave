@@ -42,8 +42,8 @@ class StoryMenuState extends MusicBeatState
 		['mom', 'bf', 'gf'],
 		['parents-christmas', 'bf', 'gf'],
 		['senpai', 'bf', 'gf'],
-		['dave', 'bf', 'gf'],
-		['bambi', 'bf', 'gf']
+		['empty', 'empty', 'empty'],
+		['empty', 'empty', 'empty']
 	];
 
 	var weekNames:Array<String> = [
@@ -58,9 +58,26 @@ class StoryMenuState extends MusicBeatState
 		"Mr. Bambi's Fun Corn Maze!"
 	];
 
+	var weekColors:Array<FlxColor> = [
+        0xFFca1f6f, // GF
+        0xFFc885e5, // DAD
+        0xFFf9a326, // SPOOKY
+        0xFFceec75, // PICO
+        0xFFec7aac, // MOM
+        0xFFffffff, // PARENTS-CHRISTMAS
+        0xFFffaa6f, // SENPAI
+		0xFF4965FF, // DAVVE
+		0xFF00B515 // MISTER BAMBI RETARD
+
+
+    ];
+
 	var txtWeekTitle:FlxText;
 
 	var curWeek:Int = 0;
+
+	var imageBG:FlxSprite;
+	var yellowBG:FlxSprite;
 
 	var txtTracklist:FlxText;
 
@@ -73,7 +90,6 @@ class StoryMenuState extends MusicBeatState
 	var sprDifficulty:FlxSprite;
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
-	var daveimage:FlxSprite;
 
 	override function create()
 	{
@@ -102,7 +118,13 @@ class StoryMenuState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
-		var yellowBG:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFF0094FF);
+		yellowBG = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFF0094FF);
+
+		imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
+		imageBG.antialiasing = true;
+		imageBG.screenCenter(X);
+		imageBG.active = false;
+		add(imageBG);
 
 		grpWeekText = new FlxTypedGroup<MenuItem>();
 		add(grpWeekText);
@@ -145,41 +167,31 @@ class StoryMenuState extends MusicBeatState
 
 		for (char in 0...3)
 		{
-			var weekCharacterThing:MenuCharacter = new MenuCharacter((FlxG.width * 0.25) * (1 + char) - 150, weekCharacters[curWeek][char]);
-			weekCharacterThing.y += 70;
-			weekCharacterThing.antialiasing = true;
+				var weekCharacterThing:MenuCharacter = new MenuCharacter((FlxG.width * 0.25) * (1 + char) - 150, weekCharacters[curWeek][char]);
+				weekCharacterThing.y += 70;
+				weekCharacterThing.antialiasing = true;
+	
+				switch (weekCharacterThing.character)
+				{
+					case 'dad':
+						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.5));
+						weekCharacterThing.updateHitbox();
+	
+					case 'bf':
+						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.9));
+						weekCharacterThing.updateHitbox();
+						weekCharacterThing.x -= 80;
+					case 'gf':
+						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.5));
+						weekCharacterThing.updateHitbox();
+					case 'pico':
+						weekCharacterThing.flipX = true;
+					case 'parents-christmas':
+						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.9));
+						weekCharacterThing.updateHitbox();
+				}
 
-			var daveSpr:FlxSprite = new FlxSprite(230, 170).loadGraphic(Paths.image('dave/storyModeBGDave'));
-
-			switch (weekCharacterThing.character)
-			{
-				case 'dad':
-					weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.5));
-					weekCharacterThing.updateHitbox();
-
-				case 'bf':
-					weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.9));
-					weekCharacterThing.updateHitbox();
-					weekCharacterThing.x -= 80;
-				case 'gf':
-					weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.5));
-					weekCharacterThing.updateHitbox();
-				case 'pico':
-					weekCharacterThing.flipX = true;
-				case 'parents-christmas':
-					weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.9));
-					weekCharacterThing.updateHitbox();
-			}
-
-			if(weekCharacterThing.character == 'dave')
-			{
-				grpWeekCharacters.destroy();
-                add(daveSpr);
-			}
-			else
-			{
 				grpWeekCharacters.add(weekCharacterThing);
-			}
 		}
 		//daveimage = new FlxSprite(0,56).loadGraphic(Paths.image("dave/storyModeBGDave"));
 
@@ -452,6 +464,28 @@ class StoryMenuState extends MusicBeatState
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 
 		updateText();
+
+		if(curWeek == 7 || curWeek == 8)
+			{
+				trace("this is week 7");
+				imageBG.destroy();
+				imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("dave/placeholderStory", "shared"));
+		imageBG.antialiasing = true;
+		imageBG.screenCenter(X);
+		imageBG.active = false;
+		add(imageBG);
+			}
+			else
+			{
+				trace("this is not week 7");
+				imageBG.destroy();
+				imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
+		imageBG.antialiasing = true;
+		imageBG.screenCenter(X);
+		imageBG.active = false;
+		add(imageBG);
+			}
+			FlxTween.color(yellowBG, 0.1, yellowBG.color, weekColors[curWeek]);
 	}
 
 	function updateText()

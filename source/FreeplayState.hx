@@ -8,6 +8,7 @@ import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import flixel.tweens.FlxTween;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
 
@@ -21,6 +22,8 @@ class FreeplayState extends MusicBeatState
 	var curSelected:Int = 0;
 	var curDifficulty:Int = 1;
 
+	var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+
 	var scoreText:FlxText;
 	var diffText:FlxText;
 	var lerpScore:Int = 0;
@@ -29,6 +32,20 @@ class FreeplayState extends MusicBeatState
 	private var grpSongs:FlxTypedGroup<Alphabet>;
 	private var curPlaying:Bool = false;
 	private var curChar:String = "unknown";
+
+	var songColors:Array<FlxColor> = [
+        0xFFca1f6f, // GF
+        0xFFc885e5, // DAD
+        0xFFf9a326, // SPOOKY
+        0xFFceec75, // PICO
+        0xFFec7aac, // MOM
+        0xFFffffff, // PARENTS-CHRISTMAS
+        0xFFffaa6f, // SENPAI
+		0xFF4965FF, // DAVVE
+		0xFF00B515 // MISTER BAMBI RETARD
+
+
+    ];
 
 	private var iconArray:Array<HealthIcon> = [];
 
@@ -76,7 +93,6 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
 		var randomNum:Int = FlxG.random.int(0, 6);
 		switch(randomNum)
 		{
@@ -95,7 +111,7 @@ class FreeplayState extends MusicBeatState
 			case 6:
 				bg.loadGraphic(Paths.image('backgrounds/T5mpler'));
 		}
-		bg.color = 0xFF9271FD;
+		bg.color = songColors[songs[curSelected].week];
 		add(bg);
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
@@ -339,6 +355,7 @@ class FreeplayState extends MusicBeatState
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
+		FlxTween.color(bg, 0.1, bg.color, songColors[songs[curSelected].week]);
 	}
 }
 
