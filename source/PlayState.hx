@@ -199,6 +199,20 @@ class PlayState extends MusicBeatState
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
 
+		var crazyNumber:Int;
+		crazyNumber = FlxG.random.int(0, 3);
+		switch(crazyNumber)
+	    {
+			case 0:
+				trace("secret dick message ???");
+			case 1:
+				trace("welcome baldis basics crap");
+			case 2:
+				trace("Hi, song genie here. You're playing " + SONG.song + ", right?");
+			case 3:
+				eatShit("this song doesnt have dialogue idiot. if you want this retarded trace function to call itself then why dont you play a song with ACTUAL dialogue? jesus fuck");
+		}
+
 		switch (SONG.song.toLowerCase())
 		{
 			case 'tutorial':
@@ -3180,6 +3194,17 @@ class PlayState extends MusicBeatState
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
 		{
 			lightningStrikeShit();
+		}
+	}
+	function eatShit(ass:String):Void
+	{
+        if(dialogue[0] == null)
+		{
+			trace(ass);
+		}
+		else
+		{
+            trace(dialogue[0]);
 		}
 	}
 
