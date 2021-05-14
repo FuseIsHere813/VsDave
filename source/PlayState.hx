@@ -41,6 +41,7 @@ import lime.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
+import flash.system.System;
 
 using StringTools;
 
@@ -1857,6 +1858,7 @@ class PlayState extends MusicBeatState
 
 			vocals.stop();
 			FlxG.sound.music.stop();
+
 			if (!shakeCam)
 			{
 			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y,characteroverride));
@@ -1865,7 +1867,15 @@ class PlayState extends MusicBeatState
 			{
 				if (isStoryMode)
 				{
-				FlxG.switchState(new EndingState('rtxx_ending','badEnding'));
+					if(SONG.song.toLowerCase() == "blocked" || SONG.song.toLowerCase() == "corn-theft" || SONG.song.toLowerCase() == "maze")
+						{
+							FlxG.openURL("https://www.youtube.com/watch?v=eTJOdgDzD64");
+							System.exit(0);
+						}
+					else
+					{
+						FlxG.switchState(new EndingState('rtxx_ending','badEnding'));
+					}
 				}
 				else
 				{
@@ -2180,6 +2190,7 @@ class PlayState extends MusicBeatState
 
 
 
+
 			if (storyPlaylist.length <= 0)
 			{
 				if(curSong.toLowerCase() == 'furiosity')
@@ -2195,7 +2206,7 @@ class PlayState extends MusicBeatState
 						}
 						else
 						{
-							if (health < 30)
+							if (health < 15)
 							{
 								FlxG.save.data.unlockedcharacters[4] = true;
 								FlxG.switchState(new EndingState('vomit_ending','badEnding'));
@@ -3186,7 +3197,7 @@ class PlayState extends MusicBeatState
 			dad.playAnim('cheer', true);
 			boyfriend.playAnim('hey', true);
 		}
-
+// yeah ninjamuffin what the ass
 
 		switch (curStage)
 		{
