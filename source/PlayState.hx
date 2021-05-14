@@ -604,7 +604,7 @@ class PlayState extends MusicBeatState
 				stageFront.scrollFactor.set(0.9, 0.9);
 				stageFront.active = false;
 				add(stageFront);
-				UsingNewCam = true;
+				//UsingNewCam = true;
 			}
 			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze')
 			{
@@ -666,7 +666,7 @@ class PlayState extends MusicBeatState
 				add(foreground);
 				if (SONG.song.toLowerCase() != 'maze')
 				{
-					UsingNewCam = true;
+					//UsingNewCam = true;
 				}
 			}
 			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch')
@@ -702,7 +702,7 @@ class PlayState extends MusicBeatState
 					stageFront.scrollFactor.set(0.9, 0.9);
 					stageFront.active = false;
 					add(stageFront);
-					UsingNewCam = true;
+					//UsingNewCam = true;
 				}
 				else if(SONG.song.toLowerCase() == 'furiosity')
 					{
@@ -720,7 +720,7 @@ class PlayState extends MusicBeatState
 						testshader.waveSpeed = 2;
 						bg.shader = testshader.shader;
 						curbg = bg;
-						UsingNewCam = true;
+						//UsingNewCam = true;
 					}
 		else
 		{
