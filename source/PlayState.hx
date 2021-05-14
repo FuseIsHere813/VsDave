@@ -58,6 +58,9 @@ class PlayState extends MusicBeatState
 	public static var bads:Int = 0;
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
+	public var stupidx:Float = 0;
+	public var stupidy:Float = 0; //stupid velocities for cutscene
+	public var updatevels:Bool = false;
 	public static var curmult:Array<Float> = [1,1,1,1];
 	public var curbg:FlxSprite;
 	public var screenshader:Shaders.PulseEffect = new PulseEffect();
@@ -115,6 +118,7 @@ class PlayState extends MusicBeatState
 
 	private var iconP1:HealthIcon;
 	private var iconP2:HealthIcon;
+	private var BAMBICUTSCENEICONHURHURHUR:HealthIcon;
 	private var camHUD:FlxCamera;
 	private var camGame:FlxCamera;
 
@@ -1993,7 +1997,42 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.ONE)
 			endSong();
 		#end
+
+
+		#if debug
+		if (FlxG.keys.justPressed.TWO)
+		{
+			BAMBICUTSCENEICONHURHURHUR = new HealthIcon("bambi", false);
+			BAMBICUTSCENEICONHURHURHUR.y = healthBar.y - (BAMBICUTSCENEICONHURHURHUR.height / 2);
+			add(BAMBICUTSCENEICONHURHURHUR);
+			BAMBICUTSCENEICONHURHURHUR.cameras = [camHUD];
+			BAMBICUTSCENEICONHURHURHUR.x = -100;
+			FlxTween.linearMotion(BAMBICUTSCENEICONHURHURHUR,-100,BAMBICUTSCENEICONHURHURHUR.y,iconP2.x,BAMBICUTSCENEICONHURHURHUR.y,0.3);
+			new FlxTimer().start(0.3,FlingCharacterIconToOblivionAndBeyond);
+		}
+		if (updatevels)
+		{
+			stupidx *= 0.98;
+			stupidy += elapsed * 6;
+			if (BAMBICUTSCENEICONHURHURHUR != null)
+			{
+				BAMBICUTSCENEICONHURHURHUR.x += stupidx;
+				BAMBICUTSCENEICONHURHURHUR.y += stupidy;
+			}
+		}
+		#end
+
 	}
+
+	function FlingCharacterIconToOblivionAndBeyond(e:FlxTimer=null):Void
+	{
+		iconP2.animation.play("bambi",true);
+		BAMBICUTSCENEICONHURHURHUR.animation.play(SONG.player2,true,false,1);
+		stupidx = -5;
+		stupidy = -5;
+		updatevels = true;
+	}
+	
 
 
 	function ZoomCam(focusondad:Bool):Void
