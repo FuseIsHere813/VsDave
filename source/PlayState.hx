@@ -667,7 +667,7 @@ class PlayState extends MusicBeatState
 				add(foreground);
 				if (SONG.song.toLowerCase() != 'maze')
 				{
-					//UsingNewCam = true;
+					UsingNewCam = true;
 				}
 			}
 			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch')
