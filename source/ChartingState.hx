@@ -914,18 +914,26 @@ class ChartingState extends MusicBeatState
 	}
 
 	function deleteNote(note:Note):Void
-	{
-		for (i in _song.notes[curSection].sectionNotes)
 		{
-			if (i[0] == note.strumTime && i[1] % 4 == note.noteData)
+			trace(_song.notes[curSection].sectionNotes);
+			for (n in 0..._song.notes[curSection].sectionNotes.length)
 			{
-				FlxG.log.add('FOUND EVIL NUMBER');
-				_song.notes[curSection].sectionNotes.remove(i);
+				var i = _song.notes[curSection].sectionNotes[n];
+				if (i == null)
+					continue;
+				if ((i[0] == note.strumTime + (note.strumTime == 0 ? 0 : 1) 
+					? true : i[0] == note.strumTime) 
+					&& i[1] % 4 == note.noteData)
+					// Why does it do this?
+					// I DONT FUCKING KNOW!!!!!!!!!!!!!!
+				{
+					trace('GAMING');
+					_song.notes[curSection].sectionNotes.remove(i);
+				}
 			}
+	
+			updateGrid();
 		}
-
-		updateGrid();
-	}
 
 	function clearSection():Void
 	{
