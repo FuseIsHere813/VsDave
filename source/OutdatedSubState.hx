@@ -21,7 +21,7 @@ class OutdatedSubState extends MusicBeatState
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
 			"Hello! \nThis mod is a work in progress. \nSome things are unfinished. \nAlso, this mod may be triggering to some people \ndue to the shaking screens during the last song. \nPress Enter to continue.",
 			32);
-		txt.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
+		txt.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
 		txt.screenCenter();
 		add(txt);
 	}

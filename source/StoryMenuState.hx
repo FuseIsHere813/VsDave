@@ -58,20 +58,6 @@ class StoryMenuState extends MusicBeatState
 		"Mr. Bambi's Fun Corn Maze!"
 	];
 
-	var weekColors:Array<FlxColor> = [
-        0xFFca1f6f, // GF
-        0xFFc885e5, // DAD
-        0xFFf9a326, // SPOOKY
-        0xFFceec75, // PICO
-        0xFFec7aac, // MOM
-        0xFFffffff, // PARENTS-CHRISTMAS
-        0xFFffaa6f, // SENPAI
-		0xFF4965FF, // DAVVE
-		0xFF00B515 // MISTER BAMBI RETARD
-
-
-    ];
-
 	var txtWeekTitle:FlxText;
 
 	var curWeek:Int = 0;
@@ -485,7 +471,6 @@ class StoryMenuState extends MusicBeatState
 		imageBG.active = false;
 		add(imageBG);
 			}
-			FlxTween.color(yellowBG, 0.1, yellowBG.color, weekColors[curWeek]);
 	}
 
 	function updateText()

@@ -40,6 +40,8 @@ class TitleState extends MusicBeatState
 
 	var wackyImage:FlxSprite;
 
+	var fun:Int;
+
 	override public function create():Void
 	{
 		#if polymod
@@ -50,6 +52,12 @@ class TitleState extends MusicBeatState
 		if (!sys.FileSystem.exists(Sys.getCwd() + "\\assets\\replays"))
 			sys.FileSystem.createDirectory(Sys.getCwd() + "\\assets\\replays");
 		#end
+
+		fun = FlxG.random.int(0, 10);
+		if(fun == 1)
+		{
+			LoadingState.loadAndSwitchState(new SusState());
+		}
 
 		PlayerSettings.init();
 
