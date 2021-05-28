@@ -42,7 +42,8 @@ class FreeplayState extends MusicBeatState
         0xFFffffff, // PARENTS-CHRISTMAS
         0xFFffaa6f, // SENPAI
 		0xFF4965FF, // DAVVE
-		0xFF00B515 // MISTER BAMBI RETARD
+		0xFF00B515, // MISTER BAMBI RETARD
+		0xFF00FFFF
 
 
     ];
@@ -88,6 +89,8 @@ class FreeplayState extends MusicBeatState
 				addWeek(['Blocked','Corn-Theft','Maze',], 8, ['bambi']);
 				addWeek(['Supernovae', 'Glitch'], 8, ['bambi-stupid']);
 			}	
+
+			addWeek(['Splitathon'],9,['the-duo']);
 
 		// LOAD MUSIC
 
