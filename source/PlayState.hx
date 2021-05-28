@@ -674,7 +674,7 @@ class PlayState extends MusicBeatState
 					UsingNewCam = true;
 				}
 			}
-			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch')
+			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch' || SONG.song.toLowerCase() == 'splitathon')
 				{
 					defaultCamZoom = 0.9;
 					curStage = 'daveHouse_night';

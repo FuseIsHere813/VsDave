@@ -28,7 +28,8 @@ class StoryMenuState extends MusicBeatState
 		['Cocoa', 'Eggnog', 'Winter-Horrorland'],
 		['Senpai', 'Roses', 'Thorns'],
 		['House', 'Insanity', 'Furiosity'],
-		['Blocked', 'Corn-Theft', 'Maze']
+		['Blocked', 'Corn-Theft', 'Maze'],
+		['Splitathon']
 	];
 	var curDifficulty:Int = 1;
 
@@ -43,6 +44,7 @@ class StoryMenuState extends MusicBeatState
 		['parents-christmas', 'bf', 'gf'],
 		['senpai', 'bf', 'gf'],
 		['empty', 'empty', 'empty'],
+		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty']
 	];
 
@@ -55,7 +57,8 @@ class StoryMenuState extends MusicBeatState
 		"RED SNOW",
 		"hating simulator ft. moawling",
 		"Dave's Fun Rapping Battle!",
-		"Mr. Bambi's Fun Corn Maze!"
+		"Mr. Bambi's Fun Corn Maze!",
+		"The Finale"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -310,7 +313,11 @@ class StoryMenuState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				grpWeekText.members[curWeek].startFlashing();
-				grpWeekCharacters.members[1].animation.play('bfConfirm');
+
+				if(curWeek != 7 && curWeek != 8 && curWeek != 9)
+				{
+					grpWeekCharacters.members[1].animation.play('bfConfirm');
+				}
 				stopspamming = true;
 			}
 
@@ -451,9 +458,9 @@ class StoryMenuState extends MusicBeatState
 
 		updateText();
 
-		if(curWeek == 7 || curWeek == 8)
+		if(curWeek == 7 || curWeek == 8 || curWeek == 9)
 			{
-				trace("this is week 7");
+				trace("this is a new week");
 				imageBG.destroy();
 				imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("dave/placeholderStory", "shared"));
 		imageBG.antialiasing = true;

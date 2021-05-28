@@ -53,7 +53,7 @@ class TitleState extends MusicBeatState
 			sys.FileSystem.createDirectory(Sys.getCwd() + "\\assets\\replays");
 		#end
 
-		fun = FlxG.random.int(0, 10);
+		fun = FlxG.random.int(0, 999);
 		if(fun == 1)
 		{
 			LoadingState.loadAndSwitchState(new SusState());

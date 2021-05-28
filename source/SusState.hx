@@ -27,13 +27,6 @@ class SusState extends FlxState
         add(sus);
         new FlxTimer().start(10, jumpscare);
     }
-    public override function update(elapsed:Float)
-    {
-        if(FlxG.keys.justPressed.ENTER)
-        {
-            jumpscare();
-        }
-    }
     public function jumpscare(bruh:FlxTimer = null)
     {
         sus.loadGraphic(Paths.image("dave/secret/scary", "shared"));
