@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="daveSplitathon.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="d 0000" x="363" y="0" width="363" height="522"/>
+	<SubTexture name="d 0001" x="726" y="0" width="363" height="522"/>
+	<SubTexture name="d 0002" x="1089" y="0" width="363" height="522"/>
+	<SubTexture name="i 0000" x="1452" y="0" width="363" height="522"/>
+	<SubTexture name="i 0001" x="1815" y="0" width="363" height="522"/>
+	<SubTexture name="i 0002" x="2178" y="0" width="363" height="522"/>
+	<SubTexture name="i 0003" x="2541" y="0" width="363" height="522"/>
+	<SubTexture name="i 0004" x="2904" y="0" width="363" height="522"/>
+	<SubTexture name="l 0000" x="726" y="522" width="363" height="522"/>
+	<SubTexture name="l 0001" x="1089" y="522" width="363" height="522"/>
+	<SubTexture name="l 0002" x="1452" y="522" width="363" height="522"/>
+	<SubTexture name="r 0000" x="1815" y="522" width="363" height="522"/>
+	<SubTexture name="r 0001" x="2178" y="522" width="363" height="522"/>
+	<SubTexture name="r 0002" x="2541" y="522" width="363" height="522"/>
+	<SubTexture name="u 0000" x="2904" y="522" width="363" height="522"/>
+	<SubTexture name="u 0001" x="3267" y="522" width="363" height="522"/>
+	<SubTexture name="u 0002" x="3630" y="522" width="363" height="522"/>
+</TextureAtlas>
