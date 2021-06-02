@@ -674,7 +674,7 @@ class PlayState extends MusicBeatState
 					UsingNewCam = true;
 				}
 			}
-			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch' || SONG.song.toLowerCase() == 'splitathon')
+			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch')
 				{
 					defaultCamZoom = 0.9;
 					curStage = 'daveHouse_night';
@@ -727,6 +727,65 @@ class PlayState extends MusicBeatState
 						curbg = bg;
 						//UsingNewCam = true;
 					}
+				else if(SONG.song.toLowerCase() == 'splitathon')
+				{
+					defaultCamZoom = 0.9;
+				curStage = 'bambiFarmNight';
+
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				add(bg);
+
+				var flatgrass:FlxSprite = new FlxSprite(-600, -100).loadGraphic(Paths.image('bambi/gm_flatgrass'));
+				flatgrass.setGraphicSize(Std.int(flatgrass.width * 0.85));
+				flatgrass.updateHitbox();
+				flatgrass.antialiasing = true;
+				flatgrass.scrollFactor.set(0.7, 0.7);
+				flatgrass.active = false;
+				flatgrass.color = 0xFF878787;
+				add(flatgrass);
+
+				var hills:FlxSprite = new FlxSprite(-600, -75).loadGraphic(Paths.image('bambi/background'));
+				hills.setGraphicSize(Std.int(hills.width / 1.2));
+				hills.updateHitbox();
+				hills.antialiasing = true;
+				hills.scrollFactor.set(0.7, 0.7);
+				hills.active = false;
+				hills.color = 0xFF878787;
+				add(hills);
+
+				var farm:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/farm'));
+				farm.antialiasing = true;
+				farm.scrollFactor.set(0.9, 0.9);
+				farm.active = false;
+				farm.color = 0xFF878787;
+				add(farm);
+
+				var corn:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/corn'));
+				corn.setGraphicSize(Std.int(corn.width * 0.75));
+				corn.updateHitbox();
+				corn.antialiasing = true;
+				corn.scrollFactor.set(0.9, 0.9);
+				corn.active = false;
+				corn.color = 0xFF878787;
+				add(corn);
+
+				var sign:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/sign'));
+				sign.antialiasing = true;
+				sign.scrollFactor.set(0.9, 0.9);
+				sign.active = false;
+				sign.color = 0xFF878787;
+				add(sign);
+
+				var foreground:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/foreground'));
+				foreground.antialiasing = true;
+				foreground.scrollFactor.set(1, 1);
+				foreground.active = false;
+				foreground.color = 0xFF878787;
+				add(foreground);
+				}
 		else
 		{
 			defaultCamZoom = 0.9;
@@ -853,6 +912,14 @@ class PlayState extends MusicBeatState
 			{
 				dad.y += 400;
 			}
+			case 'dave-splitathon':
+			{
+				dad.y += 250;
+			}
+			case 'bambi-splitathon':
+			{
+				dad.y += 300;
+			}
 		}
 
 
@@ -900,6 +967,12 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
+			case 'bambiFarmNight':
+		    {
+				dad.color = 0xFF878787;
+				gf.color = 0xFF878787;
+				boyfriend.color = 0xFF878787;
+			}
 		}
 
 		add(gf);
@@ -1654,6 +1727,10 @@ class PlayState extends MusicBeatState
 				iconP1.animation.play(SONG.player1);
 			else
 				iconP1.animation.play('bf-old');
+		}
+		if(curStep == 4800 && SONG.song.toLowerCase() == "splitathon")
+		{
+			SONG.player2 = "bambi-splitathon";
 		}
 
 		switch (curStage)
@@ -2826,7 +2903,7 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				boyfriend.color = FlxColor.BLUE;
+				boyfriend.color = 0xFF000084;
 				switch (direction)
 					{
 						case 2:
@@ -2924,7 +3001,14 @@ class PlayState extends MusicBeatState
 					else
 						health += 0.004;
 
-					boyfriend.color = FlxColor.WHITE;
+					if(curStage != "bambiFarmNight")
+					{
+						boyfriend.color = FlxColor.WHITE;
+					}
+					else
+					{
+						boyfriend.color = 0xFF878787;
+					}
 					switch (note.noteData)
 					{
 						case 2:
@@ -3189,7 +3273,14 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
 		{
 			boyfriend.playAnim('idle');
-			boyfriend.color = FlxColor.WHITE;
+			if(curStage == "bambiFarmNight")
+				{
+				boyfriend.color = 0xFF878787;
+				}
+				else
+				{
+				boyfriend.color = FlxColor.WHITE;
+				}
 		}
 
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')

@@ -19,3 +19,5 @@ senpai
 senpai-angry
 spirit
 bambi-new
+dave-splitathon
+bambi-splitathon

@@ -106,8 +106,8 @@ class CharacterSelectState extends FlxState
 		notemodtext.scrollFactor.set();
 		add(notemodtext);
 
-		characterText = new FlxText(FlxG.width / 3, -140, FlxG.width, "Boyfriend");
-		characterText.size = 100;
+		characterText = new FlxText(FlxG.width / 3.5, -132, FlxG.width, "Boyfriend");
+		characterText.size = 90;
 		characterText.autoSize = false;
 		characterText.fieldWidth = 0;
 		characterText.alignment = FlxTextAlign.CENTER;

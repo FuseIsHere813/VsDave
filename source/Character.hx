@@ -637,6 +637,36 @@ class Character extends FlxSprite
 					addOffset("singDOWN", 0, -17);
 
 					playAnim('idle');
+			case 'dave-splitathon':
+			    frames = Paths.getSparrowAtlas('splitathon/daveSplitathon');
+				animation.addByPrefix('idle', 'i', 24, false);
+				animation.addByPrefix('singDOWN', 'd', 24, false);
+				animation.addByPrefix('singUP', 'u', 24, false);
+				animation.addByPrefix('singLEFT', 'l', 24, false);
+				animation.addByPrefix('singRIGHT', 'r', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP", 0, 0);
+				addOffset("singRIGHT", 0, 0);
+				addOffset("singLEFT", 0, 0);
+				addOffset("singDOWN", 0, 0);
+
+				playAnim('idle');
+			case 'bambi-splitathon':
+				frames = Paths.getSparrowAtlas('splitathon/bambiSplitathon');
+				animation.addByPrefix('idle', 'i', 24, false);
+				animation.addByPrefix('singDOWN', 'd', 24, false);
+				animation.addByPrefix('singUP', 'u', 24, false);
+				animation.addByPrefix('singLEFT', 'l', 24, false);
+				animation.addByPrefix('singRIGHT', 'r', 24, false);
+							
+				addOffset('idle');
+				addOffset("singUP", 0, 0);
+				addOffset("singRIGHT", 0, 0);
+				addOffset("singLEFT", 0, 0);
+				addOffset("singDOWN", 0, 0);
+		
+				playAnim('idle');
 	
 		}
 
