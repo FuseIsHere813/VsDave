@@ -117,6 +117,7 @@ class PlayState extends MusicBeatState
 	private var generatedMusic:Bool = false;
 	private var shakeCam:Bool = false;
 	private var startingSong:Bool = false;
+	public 	var TwentySixKey:Bool = false;
 
 	private var iconP1:HealthIcon;
 	private var iconP2:HealthIcon;
@@ -125,6 +126,8 @@ class PlayState extends MusicBeatState
 	private var camGame:FlxCamera;
 
 	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
+
+	var notestuffs:Array<String> = ['LEFT', 'DOWN', 'UP', 'RIGHT'];
 
 	var halloweenBG:FlxSprite;
 	var isHalloween:Bool = false;
@@ -2007,34 +2010,12 @@ class PlayState extends MusicBeatState
 							if (SONG.notes[Math.floor(curStep / 16)].altAnim)
 								altAnim = '-alt';
 						}
-	
-						switch (Math.abs(daNote.noteData))
+						dad.playAnim('sing' + notestuffs[Math.round(Math.abs(daNote.noteData)) % 4] + altAnim, true);
+						if (UsingNewCam)
 						{
-							case 2:
-								dad.playAnim('singUP' + altAnim, true);
-								if (UsingNewCam)
-								{
-									ZoomCam(true);
-								}
-							case 3:
-								dad.playAnim('singRIGHT' + altAnim, true);
-								if (UsingNewCam)
-								{
-									ZoomCam(true);
-								}
-							case 1:
-								dad.playAnim('singDOWN' + altAnim, true);
-								if (UsingNewCam)
-								{
-									ZoomCam(true);
-								}
-							case 0:
-								dad.playAnim('singLEFT' + altAnim, true);
-								if (UsingNewCam)
-								{
-									ZoomCam(true);
-								}
+							ZoomCam(true);
 						}
+							
 						//health -= 0.02; //enable if you want them to fight back
 						//boyfriend.playAnim('hit',true);
 						dad.holdTimer = 0;
@@ -2696,7 +2677,7 @@ class PlayState extends MusicBeatState
 											inIgnoreList = true;
 									}
 									if (!inIgnoreList && !theFunne)
-										badNoteCheck();
+										badNoteCheck(coolNote);
 								}
 							}
 						}
@@ -2780,7 +2761,7 @@ class PlayState extends MusicBeatState
 				}
 				else if (!theFunne)
 				{
-					badNoteCheck();
+					badNoteCheck(null);
 				}
 			}
 	
@@ -2889,42 +2870,27 @@ class PlayState extends MusicBeatState
 			// FlxG.log.add('played imss note');
 			if (boyfriend.animation.getByName("singLEFTmiss") != null)
 			{
-				switch (direction)
-				{
-					case 0:
-						boyfriend.playAnim('singLEFTmiss', true);
-					case 1:
-						boyfriend.playAnim('singDOWNmiss', true);
-					case 2:
-						boyfriend.playAnim('singUPmiss', true);
-					case 3:
-						boyfriend.playAnim('singRIGHTmiss', true);
-				}
+				boyfriend.playAnim('sing' + notestuffs[Math.round(Math.abs(direction)) % 4] + "miss", true);
 			}
 			else
 			{
 				boyfriend.color = 0xFF000084;
-				switch (direction)
-					{
-						case 2:
-							boyfriend.playAnim('singUP', true);
-						case 3:
-							boyfriend.playAnim('singRIGHT', true);
-						case 1:
-							boyfriend.playAnim('singDOWN', true);
-						case 0:
-							boyfriend.playAnim('singLEFT', true);
-					}
+				boyfriend.playAnim('sing' + notestuffs[Math.round(Math.abs(direction)) % 4], true);
 			}
 
 			updateAccuracy();
 		}
 	}
 
-	function badNoteCheck()
+	function badNoteCheck(note:Note)
 		{
 			// just double pasting this shit cuz fuk u
 			// REDO THIS SYSTEM!
+			if (note != null)
+			{
+				noteMiss(note.noteData);
+				return;
+			}
 			var upP = controls.UP_P;
 			var rightP = controls.RIGHT_P;
 			var downP = controls.DOWN_P;
@@ -2959,7 +2925,7 @@ class PlayState extends MusicBeatState
 				if (keyP)
 					goodNoteHit(note);
 				else if (!theFunne) 
-					badNoteCheck();
+					badNoteCheck(note);
 				else if (rep.replay.keyPresses.length > repPresses && !keyP)
 				{
 					if (NearlyEquals(note.strumTime,rep.replay.keyPresses[repPresses].time, 4))
@@ -2967,7 +2933,7 @@ class PlayState extends MusicBeatState
 						goodNoteHit(note);
 					}
 					else if (!theFunne) 
-						badNoteCheck();
+						badNoteCheck(note);
 				}
 			}
 			else if (keyP)
@@ -2976,7 +2942,7 @@ class PlayState extends MusicBeatState
 				}
 			else if (!theFunne)
 			{
-				badNoteCheck();
+				badNoteCheck(note);
 			}
 		}
 
@@ -3009,32 +2975,11 @@ class PlayState extends MusicBeatState
 					{
 						boyfriend.color = 0xFF878787;
 					}
-					switch (note.noteData)
+
+					boyfriend.playAnim('sing' + notestuffs[Math.round(Math.abs(note.noteData)) % 4], true);
+					if (UsingNewCam)
 					{
-						case 2:
-							boyfriend.playAnim('singUP', true);
-							if (UsingNewCam)
-							{
-								ZoomCam(false);
-							}
-						case 3:
-							boyfriend.playAnim('singRIGHT', true);
-							if (UsingNewCam)
-							{
-								ZoomCam(false);
-							}
-						case 1:
-							boyfriend.playAnim('singDOWN', true);
-							if (UsingNewCam)
-							{
-								ZoomCam(false);
-							}
-						case 0:
-							boyfriend.playAnim('singLEFT', true);
-							if (UsingNewCam)
-							{
-								ZoomCam(false);
-							}
+						ZoomCam(false);
 					}
 		
 					playerStrums.forEach(function(spr:FlxSprite)
