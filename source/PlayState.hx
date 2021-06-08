@@ -1733,7 +1733,7 @@ class PlayState extends MusicBeatState
 		}
 		if(curStep == 4800 && SONG.song.toLowerCase() == "splitathon")
 		{
-			SONG.player2 = "bambi-splitathon";
+			dad = new Character(100, 100, "bambi-splitathon");
 		}
 
 		switch (curStage)
@@ -2269,7 +2269,7 @@ class PlayState extends MusicBeatState
 						}
 						else
 						{
-							if (health < 15)
+							if (health < 10)
 							{
 								FlxG.save.data.unlockedcharacters[4] = true;
 								FlxG.switchState(new EndingState('vomit_ending','badEnding'));
