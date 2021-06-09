@@ -1733,7 +1733,10 @@ class PlayState extends MusicBeatState
 		}
 		if(curStep == 4800 && SONG.song.toLowerCase() == "splitathon")
 		{
+			remove(dad);
 			dad = new Character(100, 100, "bambi-splitathon");
+			add(dad);
+			dad.color = 0xFF878787;
 		}
 
 		switch (curStage)
