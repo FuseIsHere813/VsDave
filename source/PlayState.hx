@@ -2261,7 +2261,7 @@ class PlayState extends MusicBeatState
 			{
 				if(curSong.toLowerCase() == 'furiosity')
 				{
-					if (health >= 0.1)
+					if (health >= 30)
 						{
 							FlxG.save.data.unlockedcharacters[2] = true;
 							if (storyDifficulty == 3)
@@ -2270,15 +2270,18 @@ class PlayState extends MusicBeatState
 							}
 							FlxG.switchState(new EndingState('goodEnding','goodEnding'));
 						}
-						else if(health < 0.1)
-						{
-							FlxG.save.data.unlockedcharacters[4] = true;
-								FlxG.switchState(new EndingState('vomit_ending','badEnding'));
-						}
 						else
+						{
+							if (health < 10)
+							{
+								FlxG.save.data.unlockedcharacters[4] = true;
+								FlxG.switchState(new EndingState('vomit_ending','badEnding'));
+							}
+							else
 							{
 								FlxG.switchState(new EndingState('badEnding','badEnding'));
 							}
+						}
 				}
 			    else
 				{
