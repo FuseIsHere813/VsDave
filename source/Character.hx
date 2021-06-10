@@ -609,15 +609,18 @@ class Character extends FlxSprite
 					animation.addByPrefix('deathLoop', "MARCELLO dead0", 24, true);
 					animation.addByPrefix('deathConfirm', "MARCELLO dead0", 24, false);
 	
-					addOffset('idle');
-					addOffset("singUP", -6, 3);
-					addOffset("singRIGHT", 0, -4);
-					addOffset("singLEFT", -10, -2);
-					addOffset("singDOWN", 0, -17);
-					addOffset("singUPmiss", -6, 4);
-					addOffset("singRIGHTmiss", 0, -4);
-					addOffset("singLEFTmiss", -10, -2);
-					addOffset("singDOWNmiss", -7, -14);
+					addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+				addOffset("singUPmiss", -29, 27);
+				addOffset("singRIGHTmiss", -30, 21);
+				addOffset("singLEFTmiss", 12, 24);
+				addOffset("singDOWNmiss", -11, -19);
+				addOffset('firstDeath', 37, 11);
+				addOffset('deathLoop', 37, 5);
+				addOffset('deathConfirm', 37, 69);
 
 					playAnim('idle');
 	
