@@ -200,7 +200,7 @@ class CharacterSelectState extends FlxState
 			}
 			FlxG.sound.music.stop();
 			FlxG.sound.play(Paths.music('gameOverEnd'));
-			new FlxTimer().start(1, endIt);
+			new FlxTimer().start(1.5, endIt);
 		}
 
 
