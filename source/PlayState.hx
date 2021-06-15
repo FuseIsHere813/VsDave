@@ -1797,7 +1797,14 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.SEVEN)
 		{
-			FlxG.switchState(new ChartingState());
+			if(curSong.toLowerCase() == 'supernovae' || curSong.toLowerCase() == 'glitch')
+			{
+				FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState()));
+			}
+			else
+			{
+				FlxG.switchState(new ChartingState());
+			}
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
