@@ -118,6 +118,7 @@ class PlayState extends MusicBeatState
 	private var shakeCam:Bool = false;
 	private var startingSong:Bool = false;
 	public 	var TwentySixKey:Bool = false;
+	public static var amogus:Int = 0;
 
 	private var iconP1:HealthIcon;
 	private var iconP2:HealthIcon;
@@ -223,7 +224,7 @@ class PlayState extends MusicBeatState
 				trace("Hi, song genie here. You're playing " + SONG.song + ", right?");
 			case 3:
 				eatShit("this song doesnt have dialogue idiot. if you want this retarded trace function to call itself then why dont you play a song with ACTUAL dialogue? jesus fuck");
-		}
+		}	
 
 		switch (SONG.song.toLowerCase())
 		{
@@ -1194,6 +1195,19 @@ class PlayState extends MusicBeatState
 				add(red);
 			}
 		}
+		else if(SONG.song.toLowerCase() == 'maze')
+			{
+				amogus = 0;
+				if(amogus == 0)
+				{
+					FlxG.switchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()));
+				}
+				amogus++;
+				if(amogus == 1)
+				{
+					add(dialogueBox);
+				}
+			}
 
 		new FlxTimer().start(0.3, function(tmr:FlxTimer)
 		{
@@ -1245,8 +1259,9 @@ class PlayState extends MusicBeatState
 					}
 				}
 				else
-					startCountdown();
-
+				{
+						startCountdown();
+				}
 				remove(black);
 			}
 		});
@@ -1380,7 +1395,6 @@ class PlayState extends MusicBeatState
 
 		if (!paused)
 			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
-		FlxG.sound.music.onComplete = NEVERMARCELLOAGAIN;
 		vocals.play();
 	}
 
@@ -2253,9 +2267,6 @@ class PlayState extends MusicBeatState
 			campaignScore += songScore;
 
 			storyPlaylist.remove(storyPlaylist[0]);
-
-
-
 
 			if (storyPlaylist.length <= 0)
 			{
