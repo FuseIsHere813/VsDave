@@ -1195,19 +1195,6 @@ class PlayState extends MusicBeatState
 				add(red);
 			}
 		}
-		else if(SONG.song.toLowerCase() == 'maze')
-			{
-				amogus = 0;
-				if(amogus == 0)
-				{
-					FlxG.switchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()));
-				}
-				amogus++;
-				if(amogus == 1)
-				{
-					add(dialogueBox);
-				}
-			}
 
 		new FlxTimer().start(0.3, function(tmr:FlxTimer)
 		{
@@ -1253,6 +1240,19 @@ class PlayState extends MusicBeatState
 							}
 						});
 					}
+					else if(SONG.song.toLowerCase() == 'maze')
+						{
+							amogus = 0;
+							if(amogus == 0)
+							{
+								FlxG.switchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()));
+							}
+							amogus++;
+							if(amogus == 1)
+							{
+								add(dialogueBox);
+							}
+						}
 					else
 					{
 						add(dialogueBox);

@@ -19,7 +19,7 @@ class OutdatedSubState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 		var txt:FlxText = new FlxText(0, 0, FlxG.width,
-			"Hello! \nThis mod is a work in progress. \nSome things are unfinished. \nAlso, this mod may be triggering to some people \ndue to the shaking screens during the last song. \nPress Enter to continue.",
+			"Hello! \nThis mod utilizes shaders that may be of disturbance to some. \nIf you wish to disable these, \nturn of the Eyesores option in the options menu. \nPress Enter to continue.",
 			32);
 		txt.setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER);
 		txt.screenCenter();
