@@ -1149,7 +1149,7 @@ class PlayState extends MusicBeatState
 				case 'corn-theft':
 					schoolIntro(doof);
 				case 'maze':
-					schoolIntro(doof);
+					bambiCutscene(doof);
 				default:
 					startCountdown();
 			}
@@ -1240,19 +1240,6 @@ class PlayState extends MusicBeatState
 							}
 						});
 					}
-					else if(SONG.song.toLowerCase() == 'maze')
-						{
-							amogus = 0;
-							if(amogus == 0)
-							{
-								FlxG.switchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()));
-							}
-							amogus++;
-							if(amogus == 1)
-							{
-								add(dialogueBox);
-							}
-						}
 					else
 					{
 						add(dialogueBox);
@@ -3314,6 +3301,20 @@ class PlayState extends MusicBeatState
 		else
 		{
             trace(dialogue[0]);
+		}
+	}
+	public function bambiCutscene(?fuck:DialogueBox):Void
+	{
+		trace(amogus);
+		if(amogus == 0)
+		{
+			FlxG.switchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()));
+		}
+		amogus = amogus + 1;
+		trace(amogus);
+		if(amogus == 1)
+		{
+			schoolIntro(fuck);
 		}
 	}
 
