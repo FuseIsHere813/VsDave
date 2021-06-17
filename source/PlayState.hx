@@ -3314,10 +3314,11 @@ class PlayState extends MusicBeatState
 		{
 			FlxG.switchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()));
 		}
-		amogus = amogus + 1;
+		amogus++;
 		trace(amogus);
 		if(amogus == 1)
 		{
+			fuck.finishThing = endSong;
 			schoolIntro(fuck);
 		}
 	}
