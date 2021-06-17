@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bambiSheet.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="MARCELLO NOTE DOWN0000" x="0" y="0" width="335" height="410"/>
+	<SubTexture name="MARCELLO NOTE DOWN0001" x="335" y="0" width="335" height="410"/>
+	<SubTexture name="MARCELLO idle dance0000" x="670" y="0" width="335" height="410"/>
+	<SubTexture name="MARCELLO idle dance0001" x="1005" y="0" width="335" height="410"/>
+	<SubTexture name="MARCELLO idle dance0002" x="1340" y="0" width="335" height="410"/>
+	<SubTexture name="MARCELLO idle dance0003" x="1675" y="0" width="335" height="410"/>
+	<SubTexture name="MARCELLO NOTE LEFT0000" x="0" y="410" width="335" height="410"/>
+	<SubTexture name="MARCELLO NOTE LEFT0001" x="335" y="410" width="335" height="410"/>
+	<SubTexture name="MARCELLO NOTE RIGHT0001" x="670" y="410" width="335" height="410"/>
+	<SubTexture name="MARCELLO NOTE RIGHT0002" x="1005" y="410" width="335" height="410"/>
+	<SubTexture name="MARCELLO NOTE UP0000" x="1340" y="410" width="335" height="410"/>
+	<SubTexture name="MARCELLO NOTE UP0001" x="1675" y="410" width="335" height="410"/>
+	<SubTexture name="MARCELLO MISS DOWN0000" x="0" y="1024" width="335" height="410"/>
+	<SubTexture name="MARCELLO MISS DOWN0001" x="335" y="1024" width="335" height="410"/>
+	<SubTexture name="MARCELLO dead0000" x="670" y="1024" width="335" height="410"/>
+	<SubTexture name="MARCELLO MISS LEFT0000" x="0" y="1434" width="335" height="410"/>
+	<SubTexture name="MARCELLO MISS LEFT0001" x="335" y="1434" width="335" height="410"/>
+	<SubTexture name="MARCELLO MISS RIGHT0001" x="670" y="1434" width="335" height="410"/>
+	<SubTexture name="MARCELLO MISS RIGHT0002" x="1005" y="1434" width="335" height="410"/>
+	<SubTexture name="MARCELLO MISS UP0000" x="1340" y="1434" width="335" height="410"/>
+	<SubTexture name="MARCELLO MISS UP0001" x="1675" y="1434" width="335" height="410"/>
+</TextureAtlas>

@@ -621,10 +621,42 @@ class Character extends FlxSprite
 				addOffset('firstDeath', 37, 11);
 				addOffset('deathLoop', 37, 5);
 				addOffset('deathConfirm', 37, 69);
+				playAnim('idle');
+				flipX = true;
+
+
+				case 'bambi-old':
+					var tex = Paths.getSparrowAtlas('dave/bambi-old');
+					frames = tex;
+					animation.addByPrefix('idle', 'MARCELLO idle dance', 24, false);
+					animation.addByPrefix('singUP', 'MARCELLO NOTE UP0', 24, false);
+					animation.addByPrefix('singLEFT', 'MARCELLO NOTE LEFT0', 24, false);
+					animation.addByPrefix('singRIGHT', 'MARCELLO NOTE RIGHT0', 24, false);
+					animation.addByPrefix('singDOWN', 'MARCELLO NOTE DOWN0', 24, false);
+					animation.addByPrefix('idle', 'MARCELLO idle dance', 24, false);
+					animation.addByPrefix('singUPmiss', 'MARCELLO MISS UP0', 24, false);
+					animation.addByPrefix('singLEFTmiss', 'MARCELLO MISS LEFT0', 24, false);
+					animation.addByPrefix('singRIGHTmiss', 'MARCELLO MISS RIGHT0', 24, false);
+					animation.addByPrefix('singDOWNmiss', 'MARCELLO MISS DOWN0', 24, false);
+
+					animation.addByPrefix('firstDeath', "MARCELLO dead0", 24, false);
+					animation.addByPrefix('deathLoop', "MARCELLO dead0", 24, true);
+					animation.addByPrefix('deathConfirm', "MARCELLO dead0", 24, false);
+	
+					addOffset('idle');
+					addOffset("singUP", -6, 3);
+					addOffset("singRIGHT", 0, -4);
+					addOffset("singLEFT", -10, -2);
+					addOffset("singDOWN", 0, -17);
+					addOffset("singUPmiss", -6, 4);
+					addOffset("singRIGHTmiss", 0, -4);
+					addOffset("singLEFTmiss", -10, -2);
+					addOffset("singDOWNmiss", -7, -14);
 
 					playAnim('idle');
 	
 					flipX = true;
+				
 			case 'bambi-new':
 			        frames = Paths.getSparrowAtlas('bambi/bambiRemake');
 					animation.addByPrefix('idle', 'idle', 24, false);

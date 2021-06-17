@@ -912,6 +912,10 @@ class PlayState extends MusicBeatState
 			{
 				dad.y += 400;
 			}
+			case 'bambi-old':
+			{
+				dad.y += 400;
+			}
 			case 'bambi-new':
 			{
 				dad.y += 400;
