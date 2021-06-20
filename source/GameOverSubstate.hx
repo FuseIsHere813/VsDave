@@ -25,12 +25,16 @@ class GameOverSubstate extends MusicBeatSubstate
 			default:
 				daBf = 'bf';
 		}
+		if (char == "bf-pixel")
+		{
+			char = "bf-pixel-dead";
+		}
 
 		super();
 
 		Conductor.songPosition = 0;
 
-		bf = new Boyfriend(x, y, 'bf');
+		bf = new Boyfriend(x, y, char);
 		add(bf);
 
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);

@@ -12,13 +12,15 @@ class GameOverState extends FlxTransitionableState
 {
 	var bfX:Float = 0;
 	var bfY:Float = 0;
+	var charr:String = "bf";
 
-	public function new(x:Float, y:Float)
+	public function new(x:Float, y:Float, char:String)
 	{
 		super();
 
 		bfX = x;
 		bfY = y;
+		charr = char;
 	}
 
 	override function create()
@@ -30,7 +32,7 @@ class GameOverState extends FlxTransitionableState
 			loser.animation.play('lose');
 			// add(loser); */
 
-		var bf:Boyfriend = new Boyfriend(bfX, bfY);
+		var bf:Boyfriend = new Boyfriend(bfX, bfY,charr);
 		// bf.scrollFactor.set();
 		add(bf);
 		bf.playAnim('firstDeath');

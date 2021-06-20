@@ -1961,7 +1961,7 @@ class PlayState extends MusicBeatState
 
 			if (!shakeCam)
 			{
-			openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y,characteroverride));
+				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y,characteroverride == "bf" || characteroverride == "none" ? SONG.player1 : characteroverride));
 			}
 			else
 			{
@@ -1979,7 +1979,7 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y,characteroverride));
+					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y,characteroverride == "bf" || characteroverride == "none" ? SONG.player1 : characteroverride));
 				}
 			}
 
