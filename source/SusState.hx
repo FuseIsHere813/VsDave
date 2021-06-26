@@ -1,18 +1,12 @@
-import Shaders.PulseEffect;
 import flixel.FlxSprite;
 import flixel.FlxState;
 import flixel.*;
-import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import flixel.tweens.FlxTween;
-import openfl.filters.ShaderFilter;
-import Shaders.PulseEffect;
 import flash.system.System;
 
 class SusState extends FlxState
 {
     var sus:FlxSprite;
-    public var screenshader:PulseEffect = new PulseEffect();
 
     public function new()
     {

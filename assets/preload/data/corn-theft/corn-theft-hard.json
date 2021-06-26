@@ -8859,7 +8859,7 @@
     ],
     "bpm": 130,
     "sections": 1,
-    "needsVoices": false,
+    "needsVoices": true,
     "player1": "bf",
     "player2": "bambi-new",
     "speed": 3.1,
