@@ -3251,6 +3251,9 @@ class PlayState extends MusicBeatState
 		}
 // yeah ninjamuffin what the ass
 
+
+// moldy be like
+
 		switch (curStage)
 		{
 			case 'school':
