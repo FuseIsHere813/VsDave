@@ -1387,6 +1387,8 @@ class PlayState extends MusicBeatState
 		if (!paused)
 			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		vocals.play();
+
+		FlxG.sound.music.onComplete = endSong;
 	}
 
 	var debugNum:Int = 0;
