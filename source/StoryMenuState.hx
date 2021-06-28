@@ -43,9 +43,9 @@ class StoryMenuState extends MusicBeatState
 		['mom', 'bf', 'gf'],
 		['parents-christmas', 'bf', 'gf'],
 		['senpai', 'bf', 'gf'],
-		['dave', 'bf', 'gf'],
-		['dave', 'bf', 'gf'],
-		['dave', 'bf', 'gf']
+		['empty', 'empty', 'empty'],
+		['empty', 'empty', 'empty'],
+		['empty', 'empty', 'empty']
 	];
 
 	var weekNames:Array<String> = [
@@ -109,7 +109,7 @@ class StoryMenuState extends MusicBeatState
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 		yellowBG = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFF0094FF);
 
-		imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
+		imageBG = new FlxSprite(600, 1000).loadGraphic(Paths.image("blank", "shared"));
 		imageBG.antialiasing = true;
 		imageBG.screenCenter(X);
 		imageBG.active = false;
@@ -461,16 +461,36 @@ class StoryMenuState extends MusicBeatState
 
 		updateText();
 
-		if(curWeek == 7 || curWeek == 8 || curWeek == 9)
+		if(curWeek == 7)
 			{
 				trace("this is a new week");
 				imageBG.destroy();
-				imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("dave/placeholderStory", "shared"));
+				imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/DaveHouse", "shared"));
 		imageBG.antialiasing = true;
 		imageBG.screenCenter(X);
 		imageBG.active = false;
 		add(imageBG);
 			}
+		else if(curWeek == 8)
+		{
+			trace("this is a new week");
+			imageBG.destroy();
+			imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/bamboi", "shared"));
+	imageBG.antialiasing = true;
+	imageBG.screenCenter(X);
+	imageBG.active = false;
+	add(imageBG);
+		}
+		else if(curWeek == 9)
+		{
+			trace("this is a new week");
+			imageBG.destroy();
+			imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/splitathon", "shared"));
+	imageBG.antialiasing = true;
+	imageBG.screenCenter(X);
+	imageBG.active = false;
+	add(imageBG);
+		}
 			else
 			{
 				trace("this is not week 7");
