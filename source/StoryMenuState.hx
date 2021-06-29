@@ -281,10 +281,19 @@ class StoryMenuState extends MusicBeatState
 				else
 					leftArrow.animation.play('idle');
 
-				if (controls.RIGHT_P)
-					changeDifficulty(1);
-				if (controls.LEFT_P)
-					changeDifficulty(-1);
+				if(curWeek != 9)
+				{
+					if (controls.RIGHT_P)
+						changeDifficulty(1);
+					if (controls.LEFT_P)
+						changeDifficulty(-1);
+				}
+				else
+				{
+					curDifficulty = 1;
+					sprDifficulty.animation.play('normal');
+				    sprDifficulty.offset.x = 70;
+				}
 			}
 
 			if (controls.ACCEPT)
