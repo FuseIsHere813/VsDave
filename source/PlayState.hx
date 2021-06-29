@@ -176,6 +176,8 @@ class PlayState extends MusicBeatState
 	public static var timeCurrently:Float = 0;
 	public static var timeCurrentlyR:Float = 0;
 
+	public static var warningNeverDone:Bool = false;
+
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
@@ -211,6 +213,11 @@ class PlayState extends MusicBeatState
 
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
+
+		if(SONG.song.toLowerCase() == "supernovae" || SONG.song.toLowerCase() == "glitch" && !warningNeverDone)
+		{
+			FlxG.switchState(new WarningState());
+		}
 
 		var crazyNumber:Int;
 		crazyNumber = FlxG.random.int(0, 3);
