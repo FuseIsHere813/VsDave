@@ -178,6 +178,8 @@ class PlayState extends MusicBeatState
 
 	public static var warningNeverDone:Bool = false;
 
+	public var thing:FlxSprite = new FlxSprite(0, 250);
+
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
@@ -1149,9 +1151,17 @@ class PlayState extends MusicBeatState
 				case 'blocked':
 					schoolIntro(doof);
 				case 'corn-theft':
-					schoolIntro(doof);
+				    schoolIntro(doof);
 				case 'maze':
-					bambiCutscene(doof);
+					if(amogus == 0)
+						{
+							bambiCutscene(doof);
+						}
+						else
+						{
+							schoolIntro(doof);
+							amogus = 0;
+						}
 				default:
 					startCountdown();
 			}
@@ -1173,6 +1183,7 @@ class PlayState extends MusicBeatState
 
 	function schoolIntro(?dialogueBox:DialogueBox):Void
 	{
+		camFollow.setPosition(boyfriend.getGraphicMidpoint().x - 200, dad.getGraphicMidpoint().y - 10);
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
 		add(black);
@@ -1736,12 +1747,30 @@ class PlayState extends MusicBeatState
 			else
 				iconP1.animation.play('bf-old');
 		}
-		if(curStep == 4800 && SONG.song.toLowerCase() == "splitathon")
+		if(SONG.song.toLowerCase() == "splitathon")
 		{
-			remove(dad);
-			dad = new Character(100, 100, "bambi-splitathon");
-			add(dad);
-			dad.color = 0xFF878787;
+			switch(curStep)
+			{
+				case 4736:
+					daveCutscene('lookup', false, 125, 360);
+				case 4800:
+					FlxG.camera.flash(FlxColor.WHITE, 1);
+					daveCutscene('backup', true, -300, 360);
+					daveCutscene('backup', false, -300, 360);
+					addSplitathonChar("bambi-splitathon");
+				case 5824:
+					FlxG.camera.flash(FlxColor.WHITE, 1);
+					daveCutscene('backup', true, -300, 360);
+					addSplitathonChar("dave-splitathon");
+				case 6080:
+					FlxG.camera.flash(FlxColor.WHITE, 1);
+					daveCutscene('end', false, -300, 360);
+					addSplitathonChar("bambi-splitathon");
+				case 8384:
+					FlxG.camera.flash(FlxColor.WHITE, 1);
+					daveCutscene('backup', true, -300, 360);
+					addSplitathonChar("dave-splitathon");
+			}
 		}
 
 		switch (curStage)
@@ -3319,10 +3348,56 @@ class PlayState extends MusicBeatState
 		}
 		amogus++;
 		trace(amogus);
-		if(amogus == 1)
+	}
+	public function addSplitathonChar(char:String):Void
+	{
+		remove(dad);
+			dad = new Character(100, 100, char);
+			add(dad);
+			dad.color = 0xFF878787;
+		switch(dad.curCharacter)
+	    {
+			case 'dave-splitathon':
+			{
+				dad.y += 250;
+			}
+			case 'bambi-splitathon':
+			{
+				dad.y += 300;
+			}
+		}
+	}
+	public function daveCutscene(expression:String, delete:Bool, x:Float, y:Float):Void
+	{
+		if(SONG.song.toLowerCase() == 'splitathon')
 		{
-			fuck.finishThing = endSong;
-			schoolIntro(fuck);
+			camFollow.setPosition(dad.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
+			thing.color = 0xFF878787;
+			thing.x = x;
+			thing.y = y;
+			remove(dad);
+
+			// change expression based on string param expression
+			if(!delete)
+			{
+				switch(expression)
+				{
+					case 'lookup':
+						thing.loadGraphic(Paths.image('dave/lookup', 'shared'));
+						add(thing);
+					case 'backup':
+						thing.loadGraphic(Paths.image('dave/backup', 'shared'));
+						add(thing);
+					case 'end':
+						thing.loadGraphic(Paths.image('dave/end', 'shared'));
+						add(thing);
+				}
+			}
+			else
+			{
+				remove(thing);
+			}
+		
 		}
 	}
 
