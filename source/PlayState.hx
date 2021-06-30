@@ -42,7 +42,6 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import flash.system.System;
-import openfl.Lib;
 
 using StringTools;
 
@@ -1724,7 +1723,6 @@ class PlayState extends MusicBeatState
 		{
 			//var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
 			FlxG.camera.shake(0.015, 0.015);
-			Lib.application.window.move(Lib.application.window.x + Std.int(FlxG.random.int(-5, 5)), Lib.application.window.y + Std.int(FlxG.random.int(-5, 5)));
 		}
 		screenshader.shader.uTime.value[0] += elapsed;
 		if(shakeCam && eyesoreson)
