@@ -236,10 +236,18 @@ class FreeplayState extends MusicBeatState
 			changeSelection(1);
 		}
 
-		if (controls.LEFT_P)
-			changeDiff(-1);
-		if (controls.RIGHT_P)
-			changeDiff(1);
+		if(songs[curSelected].week != 9)
+		{
+			if (controls.LEFT_P)
+				changeDiff(-1);
+			if (controls.RIGHT_P)
+				changeDiff(1);
+		}
+		else
+		{
+			curDifficulty = 1;
+			diffText.text = 'FINALE' + " - " + curChar.toUpperCase();
+		}
 
 		if (controls.BACK)
 		{
