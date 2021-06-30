@@ -128,6 +128,9 @@ class DialogueBox extends FlxSpriteGroup
 					FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
 				}
+			case 'splitathon':
+				FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
 		}
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);
@@ -142,7 +145,7 @@ class DialogueBox extends FlxSpriteGroup
 				bgFade.alpha = 0.7;
 		}, 5);
 
-		if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='furiosity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked' || PlayState.SONG.song.toLowerCase()=='corn-theft' || PlayState.SONG.song.toLowerCase()=='maze')
+		if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='furiosity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked' || PlayState.SONG.song.toLowerCase()=='corn-theft' || PlayState.SONG.song.toLowerCase()=='maze' || PlayState.SONG.song.toLowerCase()=='splitathon')
 		{
 			box = new FlxSprite(-20, 400);
 		}
@@ -230,6 +233,13 @@ class DialogueBox extends FlxSpriteGroup
 				box.updateHitbox();
 				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
 				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+			case 'splitathon':
+				hasDialog = true;
+				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
+				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
+				box.updateHitbox();
+				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
+				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
 	
 			var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 			face.setGraphicSize(Std.int(face.width * 6));
@@ -281,7 +291,7 @@ class DialogueBox extends FlxSpriteGroup
 			add(portraitLeft);
 			portraitLeft.visible = false;
 		}
-		else if(PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked' || PlayState.SONG.song.toLowerCase()=='corn-theft' || PlayState.SONG.song.toLowerCase()=='maze')
+		else if(PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked' || PlayState.SONG.song.toLowerCase()=='corn-theft' || PlayState.SONG.song.toLowerCase()=='maze' || PlayState.SONG.song.toLowerCase()=='splitathon')
 		{
 			portraitLeft = new FlxSprite(276.95, 170);
 			portraitLeft.frames = Paths.getSparrowAtlas('dave/bambiPortrait');
@@ -317,7 +327,7 @@ class DialogueBox extends FlxSpriteGroup
 
 
 
-if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked' || PlayState.SONG.song.toLowerCase()=='maze' || PlayState.SONG.song.toLowerCase()=='corn-theft')
+if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked' || PlayState.SONG.song.toLowerCase()=='maze' || PlayState.SONG.song.toLowerCase()=='corn-theft' || PlayState.SONG.song.toLowerCase()=='splitathon')
 {
     dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 		dropText.font = 'Comic Sans MS Bold';

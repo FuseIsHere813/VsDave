@@ -270,6 +270,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('corn-theft/cornDialogue'));
 			case 'maze':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('maze/mazeDialogue'));
+			case 'splitathon':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('splitathon/splitathonDialogue'));
 		}
 
 		if (SONG.song.toLowerCase() == 'spookeez' || SONG.song.toLowerCase() == 'monster' || SONG.song.toLowerCase() == 'south')
@@ -1161,6 +1163,8 @@ class PlayState extends MusicBeatState
 							schoolIntro(doof);
 							amogus = 0;
 						}
+				case 'splitathon':
+					schoolIntro(doof);
 				default:
 					startCountdown();
 			}
