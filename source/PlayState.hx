@@ -1761,18 +1761,28 @@ class PlayState extends MusicBeatState
 					daveCutscene('backup', true, -300, 360);
 					daveCutscene('backup', false, -300, 360);
 					addSplitathonChar("bambi-splitathon");
+					BAMBICUTSCENEICONHURHURHUR = new HealthIcon("bambi", false);
+					BAMBICUTSCENEICONHURHURHUR.y = healthBar.y - (BAMBICUTSCENEICONHURHURHUR.height / 2);
+					add(BAMBICUTSCENEICONHURHURHUR);
+					BAMBICUTSCENEICONHURHURHUR.cameras = [camHUD];
+					BAMBICUTSCENEICONHURHURHUR.x = -100;
+					FlxTween.linearMotion(BAMBICUTSCENEICONHURHURHUR,-100,BAMBICUTSCENEICONHURHURHUR.y,iconP2.x,BAMBICUTSCENEICONHURHURHUR.y,0.3);
+					new FlxTimer().start(0.3,FlingCharacterIconToOblivionAndBeyond);
 				case 5824:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
 					daveCutscene('backup', true, -300, 360);
 					addSplitathonChar("dave-splitathon");
+					iconP2.animation.play("dave",true);
 				case 6080:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
 					daveCutscene('end', false, -300, 360);
 					addSplitathonChar("bambi-splitathon");
+					iconP2.animation.play("bambi",true);
 				case 8384:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
 					daveCutscene('backup', true, -300, 360);
 					addSplitathonChar("dave-splitathon");
+					iconP2.animation.play("dave",true);
 			}
 		}
 
@@ -2130,6 +2140,7 @@ class PlayState extends MusicBeatState
 			FlxTween.linearMotion(BAMBICUTSCENEICONHURHURHUR,-100,BAMBICUTSCENEICONHURHURHUR.y,iconP2.x,BAMBICUTSCENEICONHURHURHUR.y,0.3);
 			new FlxTimer().start(0.3,FlingCharacterIconToOblivionAndBeyond);
 		}
+		#end
 		if (updatevels)
 		{
 			stupidx *= 0.98;
@@ -2140,7 +2151,6 @@ class PlayState extends MusicBeatState
 				BAMBICUTSCENEICONHURHURHUR.y += stupidy;
 			}
 		}
-		#end
 
 	}
 
