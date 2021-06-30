@@ -618,7 +618,7 @@ class PlayState extends MusicBeatState
 				stageFront.scrollFactor.set(0.9, 0.9);
 				stageFront.active = false;
 				add(stageFront);
-				//UsingNewCam = true;
+				UsingNewCam = true;
 			}
 			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze')
 			{
@@ -678,6 +678,7 @@ class PlayState extends MusicBeatState
 				foreground.scrollFactor.set(1, 1);
 				foreground.active = false;
 				add(foreground);
+				UsingNewCam = true;
 			}
 			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch')
 				{
