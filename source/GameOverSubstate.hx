@@ -29,6 +29,10 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			char = "bf-pixel-dead";
 		}
+		if (char == "bf-car")
+		{
+			char = "bf";
+		}
 
 		super();
 

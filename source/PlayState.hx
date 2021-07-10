@@ -715,7 +715,7 @@ class PlayState extends MusicBeatState
 					add(stageFront);
 					//UsingNewCam = true;
 				}
-				else if(SONG.song.toLowerCase() == 'furiosity')
+				else if(SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating')
 					{
 						defaultCamZoom = 0.9;
 						curStage = 'daveEvilHouse';
@@ -1719,7 +1719,7 @@ class PlayState extends MusicBeatState
 			shad.uTime.value[0] += elapsed;
 			}
 		}
-		if(SONG.song.toLowerCase() == 'furiosity')
+		if(SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating')
 		{
 			dad.y += (Math.sin(elapsedtime) * 0.2);
 		}
@@ -2076,7 +2076,10 @@ class PlayState extends MusicBeatState
 							ZoomCam(true);
 						}
 							
-						//health -= 0.02; //enable if you want them to fight back
+						if (SONG.song.toLowerCase() == "cheating")
+						{
+							health -= 0.02; 
+						}
 						//boyfriend.playAnim('hit',true);
 						dad.holdTimer = 0;
 	
