@@ -46,6 +46,18 @@ class MainMenuState extends MusicBeatState
 		}
 
 		persistentUpdate = persistentDraw = true;
+		
+		if (FlxG.save.data.eyesores == null)
+		{
+			FlxG.save.data.eyesores = true;
+		}
+
+		
+
+		if (FlxG.save.data.unlockedcharacters == null)
+		{
+			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false];
+		}
 
 		var randomNum:Int = FlxG.random.int(0, 6);
 

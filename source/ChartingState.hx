@@ -1030,6 +1030,10 @@ class ChartingState extends MusicBeatState
 
 	function loadJson(song:String):Void
 	{
+		if (song.toLowerCase() == 'supernovae' || song.toLowerCase() == 'glitch')
+		{
+			FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState())); //YOU THINK YOU ARE SO CLEVER DON'T YOU? HAHA FUCK YOU
+		}
 		PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
 		FlxG.resetState();
 	}

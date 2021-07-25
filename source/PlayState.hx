@@ -1835,12 +1835,10 @@ class PlayState extends MusicBeatState
 		{
 			if(curSong.toLowerCase() == 'supernovae' || curSong.toLowerCase() == 'glitch')
 			{
-				FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState()));
+				PlayState.SONG = Song.loadFromJson("cheating", "cheating"); //you dun fucked up
+				//FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState()));
 			}
-			else
-			{
-				FlxG.switchState(new ChartingState());
-			}
+			FlxG.switchState(new ChartingState());
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
@@ -2064,11 +2062,19 @@ class PlayState extends MusicBeatState
 							camZooming = true;
 	
 						var altAnim:String = "";
-	
+						var healthtolower:Float = 0.02;
+
 						if (SONG.notes[Math.floor(curStep / 16)] != null)
 						{
 							if (SONG.notes[Math.floor(curStep / 16)].altAnim)
-								altAnim = '-alt';
+								if (SONG.song.toLowerCase() != "cheating")
+								{
+									altAnim = '-alt';
+								}
+								else
+								{
+									healthtolower = 0.005;
+								}
 						}
 						dad.playAnim('sing' + notestuffs[Math.round(Math.abs(daNote.noteData)) % 4] + altAnim, true);
 						if (UsingNewCam)
@@ -2078,7 +2084,7 @@ class PlayState extends MusicBeatState
 							
 						if (SONG.song.toLowerCase() == "cheating")
 						{
-							health -= 0.02; 
+							health -= healthtolower; 
 						}
 						//boyfriend.playAnim('hit',true);
 						dad.holdTimer = 0;
