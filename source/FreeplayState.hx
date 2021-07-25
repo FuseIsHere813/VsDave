@@ -56,7 +56,15 @@ class FreeplayState extends MusicBeatState
 
 		for (i in 0...initSonglist.length)
 		{
-			songs.push(new SongMetadata(initSonglist[i], 1, 'gf'));
+			if (initSonglist[i].toLowerCase() == 'cheating')
+			{
+				FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new EndingState("unfunnyEnding",'freakyMenu'))); //YOU THINK YOU ARE SO CLEVER DON'T YOU? HAHA FUCK YOU
+				songs.push(new SongMetadata("fuck you not really", 1, 'bambi-stupid'));
+			}
+			else
+			{
+				songs.push(new SongMetadata(initSonglist[i], 1, 'gf'));
+			}
 		}
 
 		/* 
