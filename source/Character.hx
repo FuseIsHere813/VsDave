@@ -169,6 +169,27 @@ class Character extends FlxSprite
 					updateHitbox();
 
 					playAnim('idle');
+			case 'dave-annoyed':
+				// DAVE SHITE ANIMATION LOADING CODE
+				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
+				frames = tex;
+				animation.addByPrefix('idle', 'Dave Idle', 12);
+				animation.addByPrefix('singUP', 'Dave Sing Up', 12);
+				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 12);
+				animation.addByPrefix('singDOWN', 'Dave Sing Down', 12);
+				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12);
+		
+				addOffset('idle');
+				addOffset("singUP", 7, 5);
+				addOffset("singRIGHT", -36, -1);
+				addOffset("singLEFT", 7, 4);
+				addOffset("singDOWN", -9, -33);
+				globaloffset[1] = 100;
+	
+				setGraphicSize(Std.int(width * 1.1));
+				updateHitbox();
+	
+				playAnim('idle');
 				case 'dave-angey':
 						// DAVE SHITE ANIMATION LOADING CODE
 					tex = Paths.getSparrowAtlas('dave/dave_angryboy');
