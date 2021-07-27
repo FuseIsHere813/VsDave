@@ -586,7 +586,7 @@ class PlayState extends MusicBeatState
 				add(waveSpriteFG);
 			 */
 		}
-		else if(SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity' || SONG.song.toLowerCase() == 'supernovae')
+		else if(SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity' || SONG.song.toLowerCase() == 'supernovae' || SONG.song.toLowerCase() == 'old-insanity')
 			{
 				defaultCamZoom = 0.9;
 				curStage = 'daveHouse';
@@ -895,6 +895,8 @@ class PlayState extends MusicBeatState
 				}
 
 			case "spooky":
+				dad.y += 200;
+			case "tristan":
 				dad.y += 200;
 			case "monster":
 				dad.y += 100;
@@ -2489,6 +2491,7 @@ class PlayState extends MusicBeatState
 		vocals.volume = 0;
 		if (SONG.validScore)
 		{
+			trace("score is valid");
 			#if !switch
 			Highscore.saveScore(SONG.song, songScore, storyDifficulty, characteroverride == "none" || characteroverride == "bf" ? "bf" : characteroverride);
 			#end

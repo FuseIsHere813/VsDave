@@ -16,7 +16,7 @@ class Highscore
 	public static function saveScore(song:String, score:Int = 0, ?diff:Int = 0, ?char:String = "bf"):Void
 	{
 		var daSong:String = formatSong(song, diff);
-
+		trace("saveScore" + daSong);
 
 		#if !switch
 		NGio.postScore(score, song);
@@ -56,6 +56,7 @@ class Highscore
 	 */
 	static function setScore(song:String, score:Int, char:String):Void
 	{
+		trace("setscore " + song);
 		// Reminder that I don't need to format this song, it should come formatted!
 		songScores.set(song, score);
 		songChars.set(song,char);
@@ -66,6 +67,7 @@ class Highscore
 
 	static function setChar(song:String, char:String):Void
 	{
+		trace("setchar " + song + ":" + char);
 		songChars.set(song,char);
 		FlxG.save.data.songNames = songChars;
 		FlxG.save.flush();

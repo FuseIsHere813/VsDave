@@ -37,7 +37,7 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var AllPossibleSongs:Array<String> = ["Dave","Base","Joke"];
+	private var AllPossibleSongs:Array<String> = ["Dave","Base","Joke","Extra"];
 
 	private var CurrentPack:Int = 0;
 
@@ -53,7 +53,8 @@ class FreeplayState extends MusicBeatState
         0xFFffaa6f, // SENPAI
 		0xFF4965FF, // DAVVE
 		0xFF00B515, // MISTER BAMBI RETARD
-		0xFF00FFFF
+		0xFF00FFFF,
+		0xFFFF1212 //tristan
 
 
     ];
@@ -148,6 +149,14 @@ class FreeplayState extends MusicBeatState
 			{
 				addWeek(['cheating'], 8, ['bambi-3d']);
 			}
+		}
+		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
+		{
+			Highscore.getWeekScore(10, 0);
+			Highscore.getWeekScore(10, 1);
+			Highscore.getWeekScore(10, 2);
+			addWeek(['vs-tristan'], 10, ['tristan']);
+			addWeek(['old-insanity'], 7, ['dave']);
 		}
 	}
 
