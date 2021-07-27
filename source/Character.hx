@@ -703,17 +703,17 @@ class Character extends FlxSprite
 				
 			case 'bambi-new':
 			        frames = Paths.getSparrowAtlas('bambi/bambiRemake');
-					animation.addByPrefix('idle', 'idle', 24, false);
+					animation.addByPrefix('idle', 'Idle', 24, false);
 					animation.addByPrefix('singDOWN', 'down', 24, false);
 					animation.addByPrefix('singUP', 'up', 24, false);
 					animation.addByPrefix('singLEFT', 'left', 24, false);
 					animation.addByPrefix('singRIGHT', 'right', 24, false);
 
 					addOffset('idle');
-					addOffset("singUP", -6, 53);
-					addOffset("singRIGHT", 0, 20);
-					addOffset("singLEFT", -10, -2);
-					addOffset("singDOWN", 0, -17);
+					addOffset("singUP", 44, 0);
+					addOffset("singRIGHT", -16, -3);
+					addOffset("singLEFT", -5, -8);
+					addOffset("singDOWN", -5, -48);
 
 					playAnim('idle');
 			case 'dave-splitathon':

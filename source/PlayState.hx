@@ -951,7 +951,8 @@ class PlayState extends MusicBeatState
 			}
 			case 'bambi-new':
 			{
-				dad.y += 400;
+				dad.y += 450;
+				dad.x += 200;
 			}
 			case 'dave-splitathon':
 			{

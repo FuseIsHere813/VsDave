@@ -114,6 +114,7 @@ class FreeplayState extends MusicBeatState
 
 		NameAlpha = new Alphabet(40,(FlxG.height / 2) - 282,AllPossibleSongs[CurrentPack],true,false);
 		NameAlpha.x = (FlxG.width / 2) - 162;
+		Highscore.load();
 		add(NameAlpha);
 
 		add(CurrentSongIcon);
