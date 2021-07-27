@@ -94,8 +94,8 @@ class PlayState extends MusicBeatState
 	private static var prevCamFollow:FlxObject;
 
 	private var strumLineNotes:FlxTypedGroup<FlxSprite>;
-	private var playerStrums:FlxTypedGroup<FlxSprite>;
-	private var dadStrums:FlxTypedGroup<FlxSprite>;
+	public var playerStrums:FlxTypedGroup<FlxSprite>;
+	public var dadStrums:FlxTypedGroup<FlxSprite>;
 
 	private var camZooming:Bool = false;
 	private var curSong:String = "";
@@ -184,7 +184,6 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
-
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		eyesoreson = FlxG.save.data.eyesores;
@@ -935,6 +934,11 @@ class PlayState extends MusicBeatState
 				dad.y -= 200;
 				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 			}
+			case 'bambi-3d':
+			{
+				dad.y -= 200;
+				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
+			}
 			case 'bambi':
 			{
 				dad.y += 400;
@@ -1551,7 +1555,7 @@ class PlayState extends MusicBeatState
 			// FlxG.log.add(i);
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
 			
-			if ((SONG.player2 == "dave-angey" && player == 0) || ((SONG.player1 == "dave-angey" || characteroverride == "dave-angey") && player == 1))
+			if (((SONG.player2 == "dave-angey" || SONG.player2 == "bambi-3d") && player == 0) || (((SONG.player1 == "dave-angey" || SONG.player1 == "bambi-3d") || characteroverride == "dave-angey") && player == 1))
 			{
 					babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets_3D');
 					babyArrow.animation.addByPrefix('green', 'arrowUP');
@@ -1765,6 +1769,21 @@ class PlayState extends MusicBeatState
 		{
 			dad.y += (Math.sin(elapsedtime) * 0.2);
 		}
+
+		if (SONG.song.toLowerCase() == 'cheating') //fuck you
+		{
+			playerStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.x += Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
+					spr.x -= Math.sin(elapsedtime) * 1.5;
+				});
+			dadStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.x -= Math.sin(elapsedtime) * ((spr.ID % 2) == 0 ? 1 : -1);
+					spr.x += Math.sin(elapsedtime) * 1.5;
+				});
+		}
+
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); //this is very stupid but doesn't effect memory all that much so
 		if(shakeCam && eyesoreson)
 		{
@@ -1911,7 +1930,15 @@ class PlayState extends MusicBeatState
 			if(curSong.toLowerCase() == 'supernovae' || curSong.toLowerCase() == 'glitch')
 			{
 				PlayState.SONG = Song.loadFromJson("cheating", "cheating"); //you dun fucked up
+				FlxG.save.data.cheatingFound = true;
+				FlxG.switchState(new PlayState());
+				return;
 				//FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState()));
+			}
+			if(curSong.toLowerCase() == 'cheating')
+			{
+				health = 0;
+				return;
 			}
 			FlxG.switchState(new ChartingState());
 		}
@@ -3398,9 +3425,9 @@ class PlayState extends MusicBeatState
 			{
 				dad.dance();
 				dadmirror.dance();
-				FlxG.log.add("dance!!");
 			}
 		}
+
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
 		wiggleShit.update(Conductor.crochet);
 

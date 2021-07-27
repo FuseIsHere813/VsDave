@@ -190,9 +190,32 @@ class Character extends FlxSprite
 				updateHitbox();
 	
 				playAnim('idle');
-				case 'dave-angey':
-						// DAVE SHITE ANIMATION LOADING CODE
-					tex = Paths.getSparrowAtlas('dave/dave_angryboy');
+			case 'dave-angey':
+					// DAVE SHITE ANIMATION LOADING CODE
+			tex = Paths.getSparrowAtlas('dave/dave_angryboy');
+			frames = tex;
+			animation.addByPrefix('idle', 'DaveAngry idle dance', 24);
+			animation.addByPrefix('singUP', 'DaveAngry Sing Note UP', 24);
+			animation.addByPrefix('singRIGHT', 'DaveAngry Sing Note RIGHT', 24);
+			animation.addByPrefix('singDOWN', 'DaveAngry Sing Note DOWN', 24);
+			animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24);
+		
+			addOffset('idle');
+			addOffset("singUP", 0, 0);
+			addOffset("singRIGHT", 0, 0);
+			addOffset("singLEFT", 0, 0);
+			addOffset("singDOWN", 0, 0);
+			globaloffset[0] = 150;
+			globaloffset[1] = 450; //this is the y
+			setGraphicSize(Std.int(width / furiosityScale));
+			updateHitbox();
+			antialiasing = false;
+		
+			playAnim('idle');
+			
+			case 'bambi-3d':
+					// BAMBI SHITE ANIMATION LOADING CODE
+					tex = Paths.getSparrowAtlas('dave/bambi_angryboy');
 					frames = tex;
 					animation.addByPrefix('idle', 'DaveAngry idle dance', 24);
 					animation.addByPrefix('singUP', 'DaveAngry Sing Note UP', 24);

@@ -144,6 +144,10 @@ class FreeplayState extends MusicBeatState
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'joke')
 		{
 			addWeek(['Supernovae', 'Glitch'], 8, ['bambi-stupid']);
+			if (FlxG.save.data.cheatingFound)
+			{
+				addWeek(['cheating'], 8, ['bambi-3d']);
+			}
 		}
 	}
 

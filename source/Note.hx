@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -33,6 +34,14 @@ class Note extends FlxSprite
 	public static var BLUE_NOTE:Int = 1;
 	public static var RED_NOTE:Int = 3;
 
+	private var notetolookfor = 0;
+
+	private var MyStrum:FlxSprite;
+
+	private var InPlayState:Bool = false;
+
+	private var CharactersWith3D:Array<String> = ["dave-angey","bambi-3d"];
+
 	public var rating:String = "shit";
 
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?musthit:Bool = true) //had to add a new variable to this because FNF dumb
@@ -56,7 +65,7 @@ class Note extends FlxSprite
 		this.noteData = noteData;
 
 		var daStage:String = PlayState.curStage;
-		if (((PlayState.SONG.player2 == "dave-angey" && !musthit) || ((PlayState.SONG.player1 == "dave-angey" || PlayState.characteroverride == "dave-angey") && musthit)) || ((PlayState.SONG.player2 == "dave-angey" || PlayState.SONG.player1 == "dave-angey") && ((this.strumTime / 50) % 20 > 10)))
+		if (((CharactersWith3D.contains(PlayState.SONG.player2) && !musthit) || ((CharactersWith3D.contains(PlayState.SONG.player1) || PlayState.characteroverride == "dave-angey") && musthit)) || ((CharactersWith3D.contains(PlayState.SONG.player2) || CharactersWith3D.contains(PlayState.SONG.player1)) && ((this.strumTime / 50) % 20 > 10)))
 		{
 				frames = Paths.getSparrowAtlas('NOTE_assets_3D');
 
@@ -139,14 +148,18 @@ class Note extends FlxSprite
 			{
 			case 0:
 				x += swagWidth * 3;
+				notetolookfor = 3;
 				animation.play('purpleScroll');
 			case 1:
 				x += swagWidth * 1;
+				notetolookfor = 1;
 				animation.play('blueScroll');
 			case 2:
 				x += swagWidth * 0;
+				notetolookfor = 0;
 				animation.play('greenScroll');
 			case 3:
+				notetolookfor = 2;
 				x += swagWidth * 2;
 				animation.play('redScroll');
 			}
@@ -159,16 +172,48 @@ class Note extends FlxSprite
 			{
 			case 0:
 				x += swagWidth * 0;
+				notetolookfor = 0;
 				animation.play('purpleScroll');
 			case 1:
+				notetolookfor = 1;
 				x += swagWidth * 1;
 				animation.play('blueScroll');
 			case 2:
+				notetolookfor = 2;
 				x += swagWidth * 2;
 				animation.play('greenScroll');
 			case 3:
+				notetolookfor = 3;
 				x += swagWidth * 3;
 				animation.play('redScroll');
+			}
+		}
+		
+		if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState"))
+		{
+			var state:PlayState = cast(FlxG.state,PlayState);
+			InPlayState = true;
+			if (musthit)
+			{
+				state.playerStrums.forEach(function(spr:FlxSprite)
+				{
+					if (spr.ID == notetolookfor)
+					{
+						x = spr.x;
+						MyStrum = spr;
+					}
+				});
+			}
+			else
+			{
+				state.dadStrums.forEach(function(spr:FlxSprite)
+					{
+						if (spr.ID == notetolookfor)
+						{
+							x = spr.x;
+							MyStrum = spr;
+						}
+					});
 			}
 		}
 		
@@ -232,6 +277,40 @@ class Note extends FlxSprite
 	{
 		super.update(elapsed);
 
+
+		if (MyStrum != null)
+		{
+			x = MyStrum.x + (isSustainNote ? width : 0);
+		}
+		else
+		{
+			if (InPlayState)
+			{
+				var state:PlayState = cast(FlxG.state,PlayState);
+				if (mustPress)
+					{
+						state.playerStrums.forEach(function(spr:FlxSprite)
+						{
+							if (spr.ID == notetolookfor)
+							{
+								x = spr.x;
+								MyStrum = spr;
+							}
+						});
+					}
+					else
+					{
+						state.dadStrums.forEach(function(spr:FlxSprite)
+							{
+								if (spr.ID == notetolookfor)
+								{
+									x = spr.x;
+									MyStrum = spr;
+								}
+							});
+					}
+			}
+		}
 		if (mustPress)
 		{
 			// The * 0.5 is so that it's easier to hit them too late, instead of too early
