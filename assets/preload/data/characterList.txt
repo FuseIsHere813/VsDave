@@ -22,3 +22,5 @@ bambi-new
 dave-splitathon
 bambi-splitathon
 dave-annoyed
+tristan
+bambi-3d
