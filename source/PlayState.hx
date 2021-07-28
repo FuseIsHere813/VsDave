@@ -649,21 +649,7 @@ class PlayState extends MusicBeatState
 				bg.active = false;
 				add(bg);
 
-				var sun:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/sun'));
-				sun.antialiasing = true;
-				sun.scrollFactor.set(1, 1);
-				sun.active = false;
-				add(sun);
-
-				var flatgrass:FlxSprite = new FlxSprite(-600, -100).loadGraphic(Paths.image('bambi/gm_flatgrass'));
-				flatgrass.setGraphicSize(Std.int(flatgrass.width * 0.85));
-				flatgrass.updateHitbox();
-				flatgrass.antialiasing = true;
-				flatgrass.scrollFactor.set(0.7, 0.7);
-				flatgrass.active = false;
-				add(flatgrass);
-
-				var hills:FlxSprite = new FlxSprite(-600, -75).loadGraphic(Paths.image('bambi/background'));
+				var hills:FlxSprite = new FlxSprite(-600, -75).loadGraphic(Paths.image('bambi/orangey hills'));
 				hills.setGraphicSize(Std.int(hills.width / 1.2));
 				hills.updateHitbox();
 				hills.antialiasing = true;
@@ -671,27 +657,31 @@ class PlayState extends MusicBeatState
 				hills.active = false;
 				add(hills);
 
-				var farm:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/farm'));
+				var farm:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/funfarmhouse.png'));
 				farm.antialiasing = true;
 				farm.scrollFactor.set(0.9, 0.9);
 				farm.active = false;
 				add(farm);
 
-				var corn:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/corn'));
-				corn.setGraphicSize(Std.int(corn.width * 0.75));
-				corn.updateHitbox();
+				var corn:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/Cornys'));
 				corn.antialiasing = true;
 				corn.scrollFactor.set(0.9, 0.9);
 				corn.active = false;
 				add(corn);
 
-				var sign:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/sign'));
+				var fence:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/crazy fences'));
+				fence.antialiasing = true;
+				fence.scrollFactor.set(0.9, 0.9);
+				fence.active = false;
+				add(fence);
+
+				var sign:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('bambi/sign'));
 				sign.antialiasing = true;
 				sign.scrollFactor.set(0.9, 0.9);
 				sign.active = false;
 				add(sign);
 
-				var foreground:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/foreground'));
+				var foreground:FlxSprite = new FlxSprite(-600, 100).loadGraphic(Paths.image('bambi/grass lands'));
 				foreground.antialiasing = true;
 				foreground.scrollFactor.set(1, 1);
 				foreground.active = false;
@@ -863,11 +853,11 @@ class PlayState extends MusicBeatState
 
 		var charoffsetx:Float = 0;
 		var charoffsety:Float = 0;
-		if (characteroverride == "bf-pixel" && SONG.song != "Tutorial")
+		if (characteroverride == "bf-pixel" && (SONG.song != "Tutorial" && SONG.song != "Roses" && SONG.song != "Thorns" && SONG.song != "Senpai"))
 		{
 			gfVersion = 'gf-pixel';
-			charoffsetx += 150;
-			charoffsety += 100;
+			charoffsetx += 300;
+			charoffsety += 300;
 
 		}
 		gf = new Character(400 + charoffsetx, 130 + charoffsety, gfVersion);

@@ -153,9 +153,6 @@ class FreeplayState extends MusicBeatState
 		}
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
 		{
-			Highscore.getWeekScore(10, 0);
-			Highscore.getWeekScore(10, 1);
-			Highscore.getWeekScore(10, 2);
 			addWeek(['vs-tristan'], 10, ['tristan']);
 			addWeek(['old-insanity'], 7, ['dave']);
 		}
