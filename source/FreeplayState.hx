@@ -152,10 +152,17 @@ class FreeplayState extends MusicBeatState
 			}
 		}
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
-		{
-			addWeek(['vs-tristan'], 10, ['tristan']);
-			addWeek(['old-insanity'], 7, ['dave']);
-		}
+			{
+				for (diff in 0...2)
+				{
+					if (!Highscore.songScores.exists(Highscore.formatSong('week10', diff)))
+					{
+						Highscore.setScore(Highscore.formatSong('week10', diff), 0, "bf");
+					}
+				}
+				addWeek(['Vs-Tristan'], 10, ['tristan']);
+				addWeek(['Old-Insanity'], 7, ['dave']);
+			}
 	}
 
 
