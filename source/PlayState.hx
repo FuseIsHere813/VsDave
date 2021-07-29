@@ -663,15 +663,21 @@ class PlayState extends MusicBeatState
 				farm.active = false;
 				add(farm);
 
-				var corn:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/Cornys'));
+				var foreground:FlxSprite = new FlxSprite(-550, 440).loadGraphic(Paths.image('bambi/grass lands'));
+				foreground.antialiasing = true;
+				foreground.scrollFactor.set(1, 1);
+				foreground.active = false;
+				add(foreground);
+
+				var corn:FlxSprite = new FlxSprite(-325, 150).loadGraphic(Paths.image('bambi/Cornys'));
 				corn.antialiasing = true;
-				corn.scrollFactor.set(0.9, 0.9);
+				corn.scrollFactor.set(1, 1);
 				corn.active = false;
 				add(corn);
 
-				var fence:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/crazy fences'));
+				var fence:FlxSprite = new FlxSprite(-325, 200).loadGraphic(Paths.image('bambi/crazy fences'));
 				fence.antialiasing = true;
-				fence.scrollFactor.set(0.9, 0.9);
+				fence.scrollFactor.set(0.98, 0.98);
 				fence.active = false;
 				add(fence);
 
@@ -681,11 +687,6 @@ class PlayState extends MusicBeatState
 				sign.active = false;
 				add(sign);
 
-				var foreground:FlxSprite = new FlxSprite(-600, 100).loadGraphic(Paths.image('bambi/grass lands'));
-				foreground.antialiasing = true;
-				foreground.scrollFactor.set(1, 1);
-				foreground.active = false;
-				add(foreground);
 				UsingNewCam = true;
 			}
 			else if(SONG.song.toLowerCase() == 'bonus-song' || SONG.song.toLowerCase() == 'glitch')
@@ -3414,12 +3415,12 @@ class PlayState extends MusicBeatState
 
 
 
-			// Dad doesnt interupt his own notes
-			if (dad.holdTimer <= 0)
-			{
-				dad.dance();
-				dadmirror.dance();
-			}
+		}
+
+		if (dad.holdTimer <= 0)
+		{
+			dad.dance();
+			dadmirror.dance();
 		}
 
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
