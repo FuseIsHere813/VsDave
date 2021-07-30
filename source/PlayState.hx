@@ -732,6 +732,14 @@ class PlayState extends MusicBeatState
 						bg.antialiasing = true;
 						bg.scrollFactor.set(0.9, 0.9);
 						bg.active = true;
+						
+						switch(SONG.song.toLowerCase())
+					    {
+							case 'cheating':
+								bg.loadGraphic(Paths.image('dave/cheater'));
+							default:
+								bg.loadGraphic(Paths.image('dave/redsky'));
+						}
 						add(bg);
 						//below code assumes shaders are always enabled which is bad
 						var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
