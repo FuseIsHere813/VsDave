@@ -681,7 +681,7 @@ class PlayState extends MusicBeatState
 				fence.active = false;
 				add(fence);
 
-				var sign:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('bambi/sign'));
+				var sign:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('bambi/sign', 'shared'));
 				sign.antialiasing = true;
 				sign.scrollFactor.set(0.9, 0.9);
 				sign.active = false;
@@ -755,13 +755,13 @@ class PlayState extends MusicBeatState
 					defaultCamZoom = 0.9;
 				curStage = 'bambiFarmNight';
 
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night', 'shared'));
 				bg.antialiasing = true;
 				bg.scrollFactor.set(0.9, 0.9);
 				bg.active = false;
 				add(bg);
 
-				var flatgrass:FlxSprite = new FlxSprite(-600, -100).loadGraphic(Paths.image('bambi/gm_flatgrass'));
+				var flatgrass:FlxSprite = new FlxSprite(-600, -100).loadGraphic(Paths.image('bambi/gm_flatgrass', 'shared'));
 				flatgrass.setGraphicSize(Std.int(flatgrass.width * 0.85));
 				flatgrass.updateHitbox();
 				flatgrass.antialiasing = true;
@@ -770,7 +770,7 @@ class PlayState extends MusicBeatState
 				flatgrass.color = 0xFF878787;
 				add(flatgrass);
 
-				var hills:FlxSprite = new FlxSprite(-600, -75).loadGraphic(Paths.image('bambi/background'));
+				var hills:FlxSprite = new FlxSprite(-600, -75).loadGraphic(Paths.image('bambi/background', 'shared'));
 				hills.setGraphicSize(Std.int(hills.width / 1.2));
 				hills.updateHitbox();
 				hills.antialiasing = true;
@@ -779,14 +779,14 @@ class PlayState extends MusicBeatState
 				hills.color = 0xFF878787;
 				add(hills);
 
-				var farm:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/farm'));
+				var farm:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/farm', 'shared'));
 				farm.antialiasing = true;
 				farm.scrollFactor.set(0.9, 0.9);
 				farm.active = false;
 				farm.color = 0xFF878787;
 				add(farm);
-
-				var corn:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/corn'));
+'shared'
+				var corn:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/corn', 'shared'));
 				corn.setGraphicSize(Std.int(corn.width * 0.75));
 				corn.updateHitbox();
 				corn.antialiasing = true;
@@ -795,14 +795,14 @@ class PlayState extends MusicBeatState
 				corn.color = 0xFF878787;
 				add(corn);
 
-				var sign:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/sign'));
+				var sign:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/sign', 'shared'));
 				sign.antialiasing = true;
 				sign.scrollFactor.set(0.9, 0.9);
 				sign.active = false;
 				sign.color = 0xFF878787;
 				add(sign);
 
-				var foreground:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/foreground'));
+				var foreground:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/foreground', 'shared'));
 				foreground.antialiasing = true;
 				foreground.scrollFactor.set(1, 1);
 				foreground.active = false;
@@ -2505,7 +2505,7 @@ class PlayState extends MusicBeatState
 		if (isStoryMode)
 		{
 			campaignScore += songScore;
-			
+
 			var completedSongs:Array<String> = [];
 			var mustCompleteSongs:Array<String> = ['House', 'Insanity', 'Furiosity', 'Blocked', 'Corn-Theft', 'Maze', 'Splitathon'];
 			var allSongsCompleted:Bool = true;
