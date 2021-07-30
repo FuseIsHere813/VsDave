@@ -33,9 +33,9 @@ class CharacterSelectState extends FlxState
 	public var PressedTheFunny:Bool = false;
 
 
-	public static var CharactersList:Array<String> = ["bf","bf-pixel","tristan","dave","bambi","dave-angey"];
-	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25]];
-	public var polishedCharacterList:Array<String> = ["Boyfriend","Pixel Boyfriend","Tristan","Dave","Mr. Bambi","3D Dave"];
+	public static var CharactersList:Array<String> = ["bf","bf-pixel","tristan","dave","bambi","dave-angey", "tristan-golden"];
+	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25], [0.5,2,2,2]];
+	public var polishedCharacterList:Array<String> = ["Boyfriend","Pixel Boyfriend","Tristan","Dave","Mr. Bambi","3D Dave","Golden Tristan"];
 	//it goes left,right,up,down
 
 	public function new() 
@@ -48,11 +48,11 @@ class CharacterSelectState extends FlxState
 		super.create();
 		if (FlxG.save.data.unlockedcharacters == null)
 		{
-			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false];
+			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false,false];
 		}
 		if(isDebug)	
 		{
-			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true]; //unlock everyone
+			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true]; //unlock everyone
 		}
 		var end:FlxSprite = new FlxSprite(0, 0);
 		FlxG.sound.playMusic(Paths.music("goodEnding"),1,true);

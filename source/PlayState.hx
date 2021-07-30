@@ -2505,6 +2505,30 @@ class PlayState extends MusicBeatState
 		if (isStoryMode)
 		{
 			campaignScore += songScore;
+			
+			var completedSongs:Array<String> = [];
+			var mustCompleteSongs:Array<String> = ['House', 'Insanity', 'Furiosity', 'Blocked', 'Corn-Theft', 'Maze', 'Splitathon'];
+			var allSongsCompleted:Bool = true;
+			if (FlxG.save.data.songsCompleted == null)
+			{
+				FlxG.save.data.songsCompleted = new Array<String>();
+			}
+			completedSongs = FlxG.save.data.songsCompleted;
+			completedSongs.push(storyPlaylist[0]);
+			for (i in 0...mustCompleteSongs.length)
+			{
+				if (!completedSongs.contains(mustCompleteSongs[i]))
+				{
+					allSongsCompleted = false;
+					break;
+				}
+			}
+			if (allSongsCompleted && !FlxG.save.data.unlockedcharacters[6])
+			{
+				FlxG.save.data.unlockedcharacters[6] = true;
+			}
+			FlxG.save.data.songsCompleted = completedSongs;
+			FlxG.save.flush();
 
 			storyPlaylist.remove(storyPlaylist[0]);
 
