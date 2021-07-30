@@ -1,0 +1,16 @@
+Furiosity is missing due to me losing it, sorry
+Blocked has missing samples I can't find so you'll have to deal with those
+For Bambi's vocals just open Slicex and add break_phone.ogg from the Dave files
+Bambi's samples for Splitathon are included in the Samples folder, simply open Fruity Slicer (not slicex) and drag them in
+
+Plugins required to load these songs properly:
+sforzando w/ this soundfont: https://gamebanana.com/tools/7009
+DirectWave w/ NyxTheShield BF Soundfont (dwb version)
+EZdrummer 2 (Used in Insanity and Splitathon, uses a whole gigabyte of memory so make sure your pc can handle that)
+Drumkit soundfont (Used in Corntheft for fills)
+Serum (Used in Corntheft for those heavy leads you hear)
+reFX Nexus (Used in Corntheft for basses and pads)
+
+Samples for songs will be included
+
+
