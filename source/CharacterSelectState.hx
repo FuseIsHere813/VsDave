@@ -34,7 +34,7 @@ class CharacterSelectState extends FlxState
 
 
 	public static var CharactersList:Array<String> = ["bf","bf-pixel","tristan","dave","bambi","dave-angey", "tristan-golden"];
-	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25], [0.5,2,2,2]];
+	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25], [0.25,0.25,0.25,2]];
 	public var polishedCharacterList:Array<String> = ["Boyfriend","Pixel Boyfriend","Tristan","Dave","Mr. Bambi","3D Dave","Golden Tristan"];
 	//it goes left,right,up,down
 
