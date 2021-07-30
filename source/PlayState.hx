@@ -785,7 +785,7 @@ class PlayState extends MusicBeatState
 				farm.active = false;
 				farm.color = 0xFF878787;
 				add(farm);
-'shared'
+
 				var corn:FlxSprite = new FlxSprite(-325, 40).loadGraphic(Paths.image('bambi/corn', 'shared'));
 				corn.setGraphicSize(Std.int(corn.width * 0.75));
 				corn.updateHitbox();
