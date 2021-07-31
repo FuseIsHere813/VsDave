@@ -234,7 +234,7 @@ class Character extends FlxSprite
 			   updateHitbox();
 			   antialiasing = false;
 		
-					playAnim('idle');
+				playAnim('idle');
 			case 'spooky':
 				tex = Paths.getSparrowAtlas('spooky_kids_assets');
 				frames = tex;
@@ -531,6 +531,7 @@ class Character extends FlxSprite
 				antialiasing = false;
 
 				flipX = true;
+				
 			case 'bf-pixel-dead':
 				frames = Paths.getSparrowAtlas('weeb/bfPixelsDEAD');
 				animation.addByPrefix('singUP', "BF Dies pixel", 24, false);

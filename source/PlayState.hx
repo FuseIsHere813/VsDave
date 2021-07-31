@@ -1763,8 +1763,8 @@ class PlayState extends MusicBeatState
 		{
 			if (curbg.active) //only the furiosity background is active
 			{
-			var shad = cast(curbg.shader,Shaders.GlitchShader);
-			shad.uTime.value[0] += elapsed;
+				var shad = cast(curbg.shader,Shaders.GlitchShader);
+				shad.uTime.value[0] += elapsed;
 			}
 		}
 		if(SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating')
@@ -2105,6 +2105,12 @@ class PlayState extends MusicBeatState
 
 			vocals.stop();
 			FlxG.sound.music.stop();
+
+			if (curSong.toLowerCase() == 'furiosity')
+			{
+				screenshader.shader.uampmul.value[0] = 0;
+				screenshader.Enabled = false;
+			}
 
 			if (!shakeCam)
 			{
