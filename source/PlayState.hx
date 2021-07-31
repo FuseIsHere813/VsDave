@@ -748,7 +748,10 @@ class PlayState extends MusicBeatState
 						testshader.waveSpeed = 2;
 						bg.shader = testshader.shader;
 						curbg = bg;
-						//UsingNewCam = true;
+						if (SONG.song.toLowerCase() == 'furiosity')
+						{
+							UsingNewCam = true;
+						}
 					}
 				else if(SONG.song.toLowerCase() == 'splitathon')
 				{
@@ -932,7 +935,8 @@ class PlayState extends MusicBeatState
 			}
 			case 'dave-angey':
 			{
-				dad.y -= 200;
+				dad.y += 0;
+				dad.x += 150;
 				camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 			}
 			case 'bambi-3d':
@@ -963,11 +967,8 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		dadmirror.x = dad.x;
-		dadmirror.y = dad.y;
-
-		dadmirror.y -= 350;
-		dadmirror.x -= 225;
+		dadmirror.y += 0;
+		dadmirror.x += 150;
 
 		dadmirror.visible = false;
 
@@ -1173,13 +1174,6 @@ class PlayState extends MusicBeatState
 							});
 						});
 					});
-				case 'senpai':
-					schoolIntro(doof);
-				case 'roses':
-					FlxG.sound.play(Paths.sound('ANGRY'));
-					schoolIntro(doof);
-				case 'thorns':
-					schoolIntro(doof);
 				case 'house':
 					schoolIntro(doof);
 				case 'insanity':
