@@ -16,7 +16,7 @@ class Character extends FlxSprite
 	public var curCharacter:String = 'bf';
 
 	public var holdTimer:Float = 0;
-	public var furiosityScale:Float = 1.5;
+	public var furiosityScale:Float = 1.02;
 
 	public var globaloffset:Array<Float> = [0,0];
 
@@ -200,14 +200,12 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'DOWN', 24);
 				animation.addByPrefix('singLEFT', 'LEFT', 24);
 		
-				addOffset('idle');
-				addOffset("singUP", 0, 0);
-				addOffset("singRIGHT", 0, 0);
-				addOffset("singLEFT", 0, 0);
-				addOffset("singDOWN", 0, 0);
-				globaloffset[0] = 150;
-				globaloffset[1] = 450; //this is the y
-				setGraphicSize(Std.int(width / furiosityScale));
+				addOffset('idle', 7, 0);
+				addOffset("singUP", -14, 16);
+				addOffset("singRIGHT", 13, 23);
+				addOffset("singLEFT", 49, -9);
+				addOffset("singDOWN", 0, -10);
+				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
 		
