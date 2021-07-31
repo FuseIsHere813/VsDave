@@ -191,7 +191,7 @@ class VideoState extends MusicBeatState
 			FlxG.sound.music.volume = fuckingVolume;
 			txt.text = pauseText;
 			FlxG.autoPause = true;
-			FlxG.switchState(transClass);
+			LoadingState.loadAndSwitchState(transClass);
 		}
 		
 		if (GlobalVideo.get().played || GlobalVideo.get().restarted)
