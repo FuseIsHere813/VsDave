@@ -358,7 +358,14 @@ class StoryMenuState extends MusicBeatState
 			{
 				PlayState.characteroverride = "none";
 				PlayState.curmult = [1,1,1,1];
-				LoadingState.loadAndSwitchState(new PlayState(), true);
+				switch (PlayState.storyWeek)
+				{
+					default:
+						LoadingState.loadAndSwitchState(new PlayState(), true);
+					case 7:
+						FlxG.switchState(new VideoState('assets/videos/daveCutscene.webm', new PlayState()));
+				}
+				
 			});
 			//new FlxTimer().start(1, function(tmr:FlxTimer)
 			//{
@@ -470,45 +477,45 @@ class StoryMenuState extends MusicBeatState
 
 		updateText();
 
-		if(curWeek == 7)
-			{
+		if (curWeek == 7)
+		{
 				trace("this is a new week");
 				imageBG.destroy();
 				imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/DaveHouse", "shared"));
-		imageBG.antialiasing = true;
-		imageBG.screenCenter(X);
-		imageBG.active = false;
-		add(imageBG);
-			}
-		else if(curWeek == 8)
+				imageBG.antialiasing = true;
+				imageBG.screenCenter(X);
+				imageBG.active = false;
+				add(imageBG);
+		}
+		else if (curWeek == 8)
 		{
 			trace("this is a new week");
 			imageBG.destroy();
 			imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/bamboi", "shared"));
-	imageBG.antialiasing = true;
-	imageBG.screenCenter(X);
-	imageBG.active = false;
-	add(imageBG);
+			imageBG.antialiasing = true;
+			imageBG.screenCenter(X);
+			imageBG.active = false;
+			add(imageBG);
 		}
 		else if(curWeek == 9)
 		{
 			trace("this is a new week");
 			imageBG.destroy();
 			imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/splitathon", "shared"));
-	imageBG.antialiasing = true;
-	imageBG.screenCenter(X);
-	imageBG.active = false;
-	add(imageBG);
+			imageBG.antialiasing = true;
+			imageBG.screenCenter(X);
+			imageBG.active = false;
+			add(imageBG);
 		}
 			else
 			{
 				trace("this is not week 7");
 				imageBG.destroy();
 				imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
-		imageBG.antialiasing = true;
-		imageBG.screenCenter(X);
-		imageBG.active = false;
-		add(imageBG);
+			imageBG.antialiasing = true;
+			imageBG.screenCenter(X);
+			imageBG.active = false;
+			add(imageBG);
 			}
 	}
 
