@@ -638,7 +638,7 @@ class PlayState extends MusicBeatState
 						curbg = bg;
 				}
 			}
-			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze')
+			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze')
 			{
 				defaultCamZoom = 0.9;
 				curStage = 'bambiFarm';
