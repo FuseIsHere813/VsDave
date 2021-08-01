@@ -452,8 +452,8 @@ class StoryMenuState extends MusicBeatState
 					default:
 						LoadingState.loadAndSwitchState(new PlayState(), true);
 					case 7:
-						FlxG.switchState(new VideoState('assets/videos/daveCutscene.webm', new PlayState()));
 						FlxG.sound.music.stop();
+						LoadingState.loadAndSwitchState(new VideoState('assets/videos/daveCutscene.webm', new PlayState()), true);
 				}
 				
 			});
