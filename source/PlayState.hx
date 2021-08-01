@@ -879,6 +879,10 @@ class PlayState extends MusicBeatState
 		{
 			gf.visible = false;
 		}
+		else if (FlxG.save.data.tristanProgress == "pending play" && isStoryMode)
+		{
+			gf.visible = false;
+		}
 
 		dad = new Character(100, 100, SONG.player2);
 		dadmirror = new Character(100, 100, "dave-angey");
@@ -1438,6 +1442,10 @@ class PlayState extends MusicBeatState
 		if (!paused)
 			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		vocals.play();
+		if (FlxG.save.data.tristanProgress == "pending play" && isStoryMode)
+		{
+			FlxG.sound.music.volume = 0;
+		}
 
 		FlxG.sound.music.onComplete = endSong;
 	}
@@ -2536,6 +2544,7 @@ class PlayState extends MusicBeatState
 			{
 				if(curSong.toLowerCase() == 'furiosity')
 				{
+					FlxG.save.data.tristanProgress = "unlocked";
 					if (health >= 0.1)
 						{
 							FlxG.save.data.unlockedcharacters[2] = true;
