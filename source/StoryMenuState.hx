@@ -305,7 +305,7 @@ class StoryMenuState extends MusicBeatState
 		lerpScore = Math.floor(FlxMath.lerp(lerpScore, intendedScore, 0.5));
 
 		#if debug
-		if (Keyboard.NUMBER_7)
+		if (FlxG.keys.justPressed.EIGHT)
 		{
 			FlxG.save.data.tristanProgress = null;
 			FlxG.switchState(new StoryMenuState());
@@ -404,7 +404,7 @@ class StoryMenuState extends MusicBeatState
 	{
 		if (weekUnlocked[curWeek])
 		{
-			if (FlxG.save.data.tristanProgress == "pending play" && (curWeek > 6 || curWeek == 0))
+			if (FlxG.save.data.tristanProgress == "pending play" && (curWeek > 6 || curWeek == 0 && curWeek != 10))
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				return;
