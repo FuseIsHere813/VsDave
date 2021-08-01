@@ -903,7 +903,8 @@ class PlayState extends MusicBeatState
 			case "spooky":
 				dad.y += 200;
 			case "tristan":
-				dad.y += 200;
+				dad.y += 325;
+				dad.x += 100;
 			case "monster":
 				dad.y += 100;
 			case 'monster-christmas':
@@ -1442,7 +1443,7 @@ class PlayState extends MusicBeatState
 		if (!paused)
 			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 		vocals.play();
-		if (FlxG.save.data.tristanProgress == "pending play" && isStoryMode)
+		if (FlxG.save.data.tristanProgress == "pending play" && isStoryMode && storyWeek != 10)
 		{
 			FlxG.sound.music.volume = 0;
 		}

@@ -404,7 +404,7 @@ class StoryMenuState extends MusicBeatState
 	{
 		if (weekUnlocked[curWeek])
 		{
-			if (FlxG.save.data.tristanProgress == "pending play" && (curWeek > 6 || curWeek == 0 && curWeek != 10))
+			if (FlxG.save.data.tristanProgress == "pending play" && (curWeek > 6 || curWeek == 0) && curWeek != 10)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				return;
