@@ -32,6 +32,7 @@ class CharacterSelectState extends FlxState
 
 	public var PressedTheFunny:Bool = false;
 
+	var selectedCharacter:Bool = false;
 
 	public static var CharactersList:Array<String> = ["bf","bf-pixel","tristan","dave","bambi","dave-angey", "tristan-golden"];
 	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25], [0.25,0.25,0.25,2]];
@@ -188,14 +189,9 @@ class CharacterSelectState extends FlxState
 			{
 				PressedTheFunny = true;
 			}
-			if (char.animation.getByName("hey") != null)
-			{
-				char.playAnim('hey',true);
-			}
-			else
-			{
-				char.playAnim('singUP',true);
-			}
+			selectedCharacter = true;
+			var heyAnimation:Bool = char.animation.getByName("hey") != null; 
+			char.playAnim(heyAnimation ? 'hey' : 'singUP', true);
 			FlxG.sound.music.stop();
 			FlxG.sound.play(Paths.music('gameOverEnd'));
 			new FlxTimer().start(1.5, endIt);
@@ -204,7 +200,7 @@ class CharacterSelectState extends FlxState
 
 		notemodtext.text = FlxStringUtil.formatMoney(CharacterNoteMs[current][0]) + "x       " + FlxStringUtil.formatMoney(CharacterNoteMs[current][3]) + "x        " + FlxStringUtil.formatMoney(CharacterNoteMs[current][2]) + "x       " + FlxStringUtil.formatMoney(CharacterNoteMs[current][1]) + "x";
 
-		if (FlxG.keys.justPressed.LEFT){
+		if (FlxG.keys.justPressed.LEFT && !selectedCharacter){
 			current--;
 			if (current < 0)
 			{
@@ -218,7 +214,7 @@ class CharacterSelectState extends FlxState
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
 
-		if (FlxG.keys.justPressed.RIGHT){
+		if (FlxG.keys.justPressed.RIGHT && !selectedCharacter){
 			current++;
 			if (current < 0)
 			{
