@@ -746,6 +746,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", 0, 0);
 		
 				playAnim('idle');
+				
 			case 'tristan-golden':
 				var tex = Paths.getSparrowAtlas('dave/tristan_golden');
 				frames = tex;
@@ -785,6 +786,22 @@ class Character extends FlxSprite
 				playAnim('idle');
 	
 				flipX = true;
+			case 'bambi-angey':
+				frames = Paths.getSparrowAtlas('bambi/marcello_but_now_he_is_REALLY_angry');
+				animation.addByPrefix('idle', 'bambi angry idle', 24, false);
+				animation.addByPrefix('singLEFT', 'bambi angry left', 24, false);
+				animation.addByPrefix('singDOWN', 'bambi angry down', 24, false);
+				animation.addByPrefix('singUP', 'bambi angry up', 24, false);
+				animation.addByPrefix('singRIGHT', 'bambi angry right', 24, false);
+
+				addOffset('idle');
+				addOffset('singLEFT', 25);
+				addOffset('singDOWN');
+				addOffset('singUP', 0, 54);
+				addOffset('singRIGHT');
+
+				playAnim('idle');
+				
 		}
 
 		dance();

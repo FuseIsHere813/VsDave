@@ -638,7 +638,7 @@ class PlayState extends MusicBeatState
 						curbg = bg;
 				}
 			}
-			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze')
+			else if(SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'screwed')
 			{
 				defaultCamZoom = 0.9;
 				curStage = 'bambiFarm';
@@ -681,7 +681,7 @@ class PlayState extends MusicBeatState
 				fence.active = false;
 				add(fence);
 
-				var sign:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('bambi/sign', 'shared'));
+				var sign:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('bambi/sign'));
 				sign.antialiasing = true;
 				sign.scrollFactor.set(0.9, 0.9);
 				sign.active = false;
@@ -970,6 +970,8 @@ class PlayState extends MusicBeatState
 			{
 				dad.y += 300;
 			}
+			case 'bambi-angey':
+				dad.y += 325;
 		}
 
 		dadmirror.y += 0;
