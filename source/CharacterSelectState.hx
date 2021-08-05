@@ -10,12 +10,6 @@ import flixel.math.FlxMath;
 import flixel.util.FlxStringUtil;
 
 /**
- ben don't use any dave mod specific code here this needs to be generic so you can re-use it in your own mods
- shut up
- idiot
- no u
- */
- /**
  hey you fun commiting people, 
  i don't know about the rest of the mod but since this is basically 99% my code 
  i do not give you guys permission to grab this specific code and re-use it in your own mods without asking me first.
@@ -34,10 +28,13 @@ class CharacterSelectState extends FlxState
 
 	var selectedCharacter:Bool = false;
 
-	public static var CharactersList:Array<String> = ["bf","bf-pixel","tristan","dave","bambi","dave-angey", "tristan-golden"];
-	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25], [0.25,0.25,0.25,2]];
-	public var polishedCharacterList:Array<String> = ["Boyfriend","Pixel Boyfriend","Tristan","Dave","Mr. Bambi","3D Dave","Golden Tristan"];
+	public static var CharactersList:Array<String> = ["bf","bf-christmas", "bf-pixel","tristan","dave","bambi","dave-angey", "tristan-golden"];
+	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25], [0.25,0.25,0.25,2]];
+	public var polishedCharacterList:Array<String> = ["Boyfriend","Christmas Boyfriend","Pixel Boyfriend","Tristan","Dave","Mr. Bambi","3D Dave","Golden Tristan"];
 	//it goes left,right,up,down
+
+	//THIS THING IS BASICALLY A CHECK FOR HOW MANY CHARACTERS THERE ARE, SO UNLOCK IDS DONT GET ASSIGNED TO THE WRONG CHARACTER WHEN AND IF WE ADD MORE!
+	public var saveReformattingShit:Array<Bool> = [true,true,true,false,false,false,false,false];
 
 	public function new() 
 	{
@@ -49,46 +46,59 @@ class CharacterSelectState extends FlxState
 		super.create();
 		if (FlxG.save.data.unlockedcharacters == null)
 		{
-			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false,false];
+			FlxG.save.data.unlockedcharacters = [true,true,true,false,false,false,false,false];
 		}
 		if(isDebug)	
 		{
-			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true]; //unlock everyone
+			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true,true]; //unlock everyone
 		}
+		var theDumbBullshitArray:Array<Bool> = FlxG.save.data.unlockedcharacters;
+		if(theDumbBullshitArray.length != saveReformattingShit.length)
+		{
+			var dumbassDiff:Int = theDumbBullshitArray.length - saveReformattingShit.length;
+			for(i in 0...dumbassDiff)
+			{
+				//we just gon assume this a boyfriend slot. if it aint, wellll too bad so sad someone got a character r somethin
+				theDumbBullshitArray.unshift(true);
+				FlxG.save.data.unlockedcharacters = theDumbBullshitArray;
+			}
+		}
+
 		var end:FlxSprite = new FlxSprite(0, 0);
 		FlxG.sound.playMusic(Paths.music("goodEnding"),1,true);
 		add(end);
 		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
+
 		//create stage
-					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
-					bg.antialiasing = true;
-					bg.scrollFactor.set(0.9, 0.9);
-					bg.active = false;
-					add(bg);
+		var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
+		bg.antialiasing = true;
+		bg.scrollFactor.set(0.9, 0.9);
+		bg.active = false;
+		add(bg);
 	
-					var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills_night'));
-					stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
-					stageHills.updateHitbox();
-					stageHills.antialiasing = true;
-					stageHills.scrollFactor.set(1, 1);
-					stageHills.active = false;
-					add(stageHills);
+		var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills_night'));
+		stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
+		stageHills.updateHitbox();
+		stageHills.antialiasing = true;
+		stageHills.scrollFactor.set(1, 1);
+		stageHills.active = false;
+		add(stageHills);
 	
-					var gate:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/gate_night'));
-					gate.setGraphicSize(Std.int(gate.width * 1.2));
-					gate.updateHitbox();
-					gate.antialiasing = true;
-					gate.scrollFactor.set(0.925, 0.925);
-					gate.active = false;
-					add(gate);
+		var gate:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/gate_night'));
+		gate.setGraphicSize(Std.int(gate.width * 1.2));
+		gate.updateHitbox();
+		gate.antialiasing = true;
+		gate.scrollFactor.set(0.925, 0.925);
+		gate.active = false;
+		add(gate);
 		
-					var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass_night'));
-					stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
-					stageFront.updateHitbox();
-					stageFront.antialiasing = true;
-					stageFront.scrollFactor.set(0.9, 0.9);
-					stageFront.active = false;
-					add(stageFront);
+		var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass_night'));
+		stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
+		stageFront.updateHitbox();
+		stageFront.antialiasing = true;
+		stageFront.scrollFactor.set(0.9, 0.9);
+		stageFront.active = false;
+		add(stageFront);
 
 		FlxG.camera.zoom = 0.75;
 
@@ -178,7 +188,7 @@ class CharacterSelectState extends FlxState
 		if (FlxG.keys.justPressed.ENTER){
 			if (!FlxG.save.data.unlockedcharacters[current])
 			{
-				FlxG.sound.play(Paths.sound('badnoise1'), 0.9);
+				FlxG.sound.play(Paths.soundRandom('badnoise', 1, 3), 0.9);
 				return;
 			}
 			if (PressedTheFunny)
@@ -193,7 +203,7 @@ class CharacterSelectState extends FlxState
 			var heyAnimation:Bool = char.animation.getByName("hey") != null; 
 			char.playAnim(heyAnimation ? 'hey' : 'singUP', true);
 			FlxG.sound.music.stop();
-			FlxG.sound.play(Paths.music('gameOverEnd'));
+			FlxG.sound.play(Paths.music('titleShoot'));
 			new FlxTimer().start(1.5, endIt);
 		}
 
