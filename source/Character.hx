@@ -17,6 +17,7 @@ class Character extends FlxSprite
 
 	public var holdTimer:Float = 0;
 	public var furiosityScale:Float = 1.02;
+	public var canDance:Bool = true;
 
 	public var globaloffset:Array<Float> = [0,0];
 
@@ -726,9 +727,9 @@ class Character extends FlxSprite
 
 				addOffset('idle');
 				addOffset("singUP");
-				addOffset("singRIGHT");
+				addOffset("singRIGHT", -9);
 				addOffset("singLEFT");
-				addOffset("singDOWN");
+				addOffset("singDOWN", 40);
 
 				playAnim('idle');
 				
@@ -875,7 +876,7 @@ class Character extends FlxSprite
 	 */
 	public function dance()
 	{
-		if (!debugMode)
+		if (!debugMode && canDance)
 		{
 			switch (curCharacter)
 			{

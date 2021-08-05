@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Yeah.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="YEAH!0000" x="0" y="0" width="303" height="457"/>
+	<SubTexture name="YEAH!0001" x="307" y="0" width="303" height="457"/>
+	<SubTexture name="YEAH!0002" x="614" y="0" width="303" height="457"/>
+</TextureAtlas>

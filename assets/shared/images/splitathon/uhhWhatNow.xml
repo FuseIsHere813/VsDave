@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="uhhWhatNow.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Well0000" x="0" y="0" width="315" height="458"/>
+	<SubTexture name="Well0001" x="319" y="0" width="315" height="458"/>
+	<SubTexture name="Well0002" x="638" y="0" width="315" height="458"/>
+	<SubTexture name="Well0003" x="0" y="462" width="315" height="458"/>
+</TextureAtlas>

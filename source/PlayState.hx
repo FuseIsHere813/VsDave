@@ -1893,6 +1893,11 @@ class PlayState extends MusicBeatState
 				case 1180:
 					dad.visible = true;
 					dadmirror.visible = false;
+
+					dad.frames = Paths.getSparrowAtlas('dave/HolyFubeepWhatJustHappened');
+					dad.animation.addByPrefix('holyFubeep', 'HOLYMOLYWHATJUSTHAPPENED', 24, true);
+					dad.animation.play('holyFubeep');
+					dad.canDance = false;
 			}
 		}
 
@@ -3651,16 +3656,23 @@ class PlayState extends MusicBeatState
 			// change expression based on string param expression
 			if(!delete)
 			{
+				//Guys ben didn't name the animations these, I, T5 did so don't go looking for him plzpzlpzlzplz
 				switch(expression)
 				{
 					case 'lookup':
-						thing.loadGraphic(Paths.image('dave/lookup', 'shared'));
+						thing.frames = Paths.getSparrowAtlas('splitathon/uhhWhatNow');
+						thing.animation.addByPrefix('uhhSoWhatDoWeDoNow', 'Well', 24, true);
+						thing.animation.play('uhhSoWhatDoWeDoNow');
 						add(thing);
 					case 'backup':
-						thing.loadGraphic(Paths.image('dave/backup', 'shared'));
+						thing.frames = Paths.getSparrowAtlas('splitathon/Why');
+						thing.animation.addByPrefix('whyMustYouDoThisToMeBambiWHYYYYY', 'What??????', 24, true);
+						thing.animation.play('whyMustYouDoThisToMeBambiWHYYYYY');
 						add(thing);
 					case 'end':
-						thing.loadGraphic(Paths.image('dave/end', 'shared'));
+						thing.frames = Paths.getSparrowAtlas('splitathon/Yeah');
+						thing.animation.addByPrefix('yeahhhBambiiiiTakeHimDown', 'YEAH!', 24, true);
+						thing.animation.play('yeahhhBambiiiiTakeHimDown');
 						add(thing);
 				}
 			}
@@ -3668,7 +3680,6 @@ class PlayState extends MusicBeatState
 			{
 				remove(thing);
 			}
-		
 		}
 	}
 
