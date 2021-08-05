@@ -1,0 +1,6 @@
+setfont_normal:generic:Here we have Dave, minding his own business...
+:bf: beb 
+:dave: Wait, who are you two?
+:dave: Oh wait! I saw you guys a couple days ago!
+:bf: beep bop
+:dave: Oh, you want to sing? Well let's go then!
