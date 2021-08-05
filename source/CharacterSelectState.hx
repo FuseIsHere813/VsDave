@@ -21,7 +21,6 @@ class CharacterSelectState extends FlxState
 	public var current:Int;
 	public var notemodtext:FlxText;
 	public var characterText:FlxText;
-	public var resetText:FlxText;
 
 	public var isDebug:Bool = false;
 
@@ -56,8 +55,6 @@ class CharacterSelectState extends FlxState
 		var theDumbBullshitArray:Array<Bool> = FlxG.save.data.unlockedcharacters;
 		if(theDumbBullshitArray.length != saveReformattingShit.length)
 		{
-			//this no work so i do the lazy thing!
-			/*
 			var dumbassDiff:Int = theDumbBullshitArray.length - saveReformattingShit.length;
 			for(i in 0...dumbassDiff)
 			{
@@ -65,8 +62,6 @@ class CharacterSelectState extends FlxState
 				theDumbBullshitArray.unshift(true);
 				FlxG.save.data.unlockedcharacters = theDumbBullshitArray;
 			}
-			*/
-			FlxG.save.data.unlockedcharacters = [true,true,true,false,false,false,false,false];
 		}
 
 		var end:FlxSprite = new FlxSprite(0, 0);
@@ -129,11 +124,6 @@ class CharacterSelectState extends FlxState
 		characterText.fieldWidth = 1080;
 		characterText.alignment = FlxTextAlign.CENTER;
 		add(characterText);
-
-		resetText = new FlxText(5, FlxG.height + 40, 0, "Press R to reset your unlocked playable characters!\nThis is irreversable!", 12);
-		resetText.font = 'Comic Sans MS Bold';
-		add(resetText);
-
 	}
 
 
@@ -195,13 +185,6 @@ class CharacterSelectState extends FlxState
 	{
 		super.update(elapsed);
 		//FlxG.camera.focusOn(FlxG.ce);
-
-		if(FlxG.keys.justPressed.R)
-		{
-			FlxG.save.data.unlockedcharacters = [true,true,true,false,false,false,false,false];
-			FlxG.resetState();
-		}
-
 		if (FlxG.keys.justPressed.ENTER){
 			if (!FlxG.save.data.unlockedcharacters[current])
 			{
