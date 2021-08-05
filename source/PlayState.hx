@@ -971,7 +971,7 @@ class PlayState extends MusicBeatState
 				dad.y += 300;
 			}
 			case 'bambi-angey':
-				dad.y += 325;
+				dad.y += 450;
 		}
 
 		dadmirror.y += 0;

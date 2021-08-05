@@ -717,20 +717,21 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 			case 'dave-splitathon':
-			   frames = Paths.getSparrowAtlas('splitathon/daveSplitathon');
-				animation.addByPrefix('idle', 'i', 24, false);
-				animation.addByPrefix('singDOWN', 'd', 24, false);
-				animation.addByPrefix('singUP', 'u', 24, false);
-				animation.addByPrefix('singLEFT', 'l', 24, false);
-				animation.addByPrefix('singRIGHT', 'r', 24, false);
+			   frames = Paths.getSparrowAtlas('splitathon/Splitathon_Dave');
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", 0, 0);
-				addOffset("singRIGHT", 0, 0);
-				addOffset("singLEFT", 0, 0);
-				addOffset("singDOWN", 0, 0);
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
 
 				playAnim('idle');
+				
 			case 'bambi-splitathon':
 				frames = Paths.getSparrowAtlas('splitathon/bambiSplitathon');
 				animation.addByPrefix('idle', 'i', 24, false);
@@ -787,21 +788,20 @@ class Character extends FlxSprite
 	
 				flipX = true;
 			case 'bambi-angey':
-				frames = Paths.getSparrowAtlas('bambi/marcello_but_now_he_is_REALLY_angry');
-				animation.addByPrefix('idle', 'bambi angry idle', 24, false);
-				animation.addByPrefix('singLEFT', 'bambi angry left', 24, false);
-				animation.addByPrefix('singDOWN', 'bambi angry down', 24, false);
-				animation.addByPrefix('singUP', 'bambi angry up', 24, false);
-				animation.addByPrefix('singRIGHT', 'bambi angry right', 24, false);
+				frames = Paths.getSparrowAtlas('bambi/bambimaddddd');
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
 
 				addOffset('idle');
-				addOffset('singLEFT', 25);
+				addOffset('singLEFT');
 				addOffset('singDOWN');
-				addOffset('singUP', 0, 54);
+				addOffset('singUP', 0, 20);
 				addOffset('singRIGHT');
 
 				playAnim('idle');
-				
 		}
 
 		dance();
