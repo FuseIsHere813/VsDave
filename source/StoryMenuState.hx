@@ -1,5 +1,6 @@
 package;
 
+import flixel.tweens.FlxEase;
 import openfl.ui.Keyboard;
 import flixel.util.FlxCollision;
 import flixel.FlxG;
@@ -462,6 +463,16 @@ class StoryMenuState extends MusicBeatState
 			//	LoadingState.loadAndSwitchState(new CharacterSelectState(), true);
 			//});
 			//uncomment out the above code and comment out the other loadandswitchstate to allow for character selection in story mode!
+		}
+	}
+
+	override function beatHit()
+	{
+		super.beatHit();
+		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+		for(char in grpWeekCharacters)
+		{
+			char.bopHead();
 		}
 	}
 

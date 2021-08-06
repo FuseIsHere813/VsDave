@@ -25,12 +25,16 @@ class MainMenuState extends MusicBeatState
 	#if !switch
 	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'options'];
 	#else
-	var optionShit:Array<String> = ['story mode', 'freeplay'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost'];
 	#end
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
 	var newInput:Bool = true;
+
+	public static var firstStart:Bool = true;
+
+	public static var finishedFunnyMove:Bool = false;
 
 	public static var kadeEngineVer:String = "DAVE";
 	public static var gameVer:String = "0.2.7.1";
@@ -68,23 +72,7 @@ class MainMenuState extends MusicBeatState
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
-		switch(randomNum)
-		{
-			case 0:
-				bg.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
-			case 1:
-				bg.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
-			case 2:
-				bg.loadGraphic(Paths.image('backgrounds/Olyantwo'));
-			case 3:
-				bg.loadGraphic(Paths.image('backgrounds/morie'));
-			case 4:
-				bg.loadGraphic(Paths.image('backgrounds/mantis'));
-			case 5:
-				bg.loadGraphic(Paths.image('backgrounds/mamakotomi'));
-			case 6:
-				bg.loadGraphic(Paths.image('backgrounds/T5mpler'));
-		}
+		LoadRandomMenuBg.randomize(bg);
 		bg.color = 0xFFFDE871;
 		add(bg);
 
@@ -99,23 +87,7 @@ class MainMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = true;
-		switch(randomNum)
-		{
-			case 0:
-				magenta.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
-			case 1:
-				magenta.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
-			case 2:
-				magenta.loadGraphic(Paths.image('backgrounds/Olyantwo'));
-			case 3:
-				magenta.loadGraphic(Paths.image('backgrounds/morie'));
-			case 4:
-				magenta.loadGraphic(Paths.image('backgrounds/mantis'));
-			case 5:
-				magenta.loadGraphic(Paths.image('backgrounds/mamakotomi'));
-			case 6:
-				magenta.loadGraphic(Paths.image('backgrounds/T5mpler'));
-		}
+		LoadRandomMenuBg.randomizeNoNewRandomNum(magenta);
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		// magenta.scrollFactor.set();
@@ -127,7 +99,7 @@ class MainMenuState extends MusicBeatState
 
 		for (i in 0...optionShit.length)
 		{
-			var menuItem:FlxSprite = new FlxSprite(0, 60 + (i * 160));
+			var menuItem:FlxSprite = new FlxSprite(0, FlxG.height * 1.6);
 			menuItem.frames = tex;
 			menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
@@ -137,7 +109,17 @@ class MainMenuState extends MusicBeatState
 			menuItems.add(menuItem);
 			menuItem.scrollFactor.set();
 			menuItem.antialiasing = true;
+			if (firstStart)
+				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
+					{ 
+						finishedFunnyMove = true; 
+						changeItem();
+					}});
+			else
+				menuItem.y = 60 + (i * 160);
 		}
+
+		firstStart = false;
 
 		FlxG.camera.follow(camFollow, null, 0.06);
 
@@ -239,20 +221,29 @@ class MainMenuState extends MusicBeatState
 		});
 	}
 
+	override function beatHit()
+	{
+		super.beatHit();
+		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+	}
+
 	function changeItem(huh:Int = 0)
 	{
-		curSelected += huh;
+		if (finishedFunnyMove)
+		{
+			curSelected += huh;
 
-		if (curSelected >= menuItems.length)
-			curSelected = 0;
-		if (curSelected < 0)
-			curSelected = menuItems.length - 1;
+			if (curSelected >= menuItems.length)
+				curSelected = 0;
+			if (curSelected < 0)
+				curSelected = menuItems.length - 1;	
+		}
 
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			spr.animation.play('idle');
 
-			if (spr.ID == curSelected)
+			if (spr.ID == curSelected && finishedFunnyMove)
 			{
 				spr.animation.play('selected');
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
