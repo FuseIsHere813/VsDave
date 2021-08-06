@@ -53,7 +53,8 @@ class FreeplayState extends MusicBeatState
         0xFFffffff, // PARENTS-CHRISTMAS
         0xFFffaa6f, // SENPAI
 		0xFF4965FF, // DAVE
-		0xFF00B515, // MISTER BAMBI
+		0xFF00B515, // MISTER BAMBI RETARD
+		// moldy is neurodivergent cyndaquil you dumbass he can reclaim it so yeah stop censoring our comments
 		0xFF00FFFF,
 		0xFFFF1212 //tristan
 

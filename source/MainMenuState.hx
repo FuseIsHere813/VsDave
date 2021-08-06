@@ -224,7 +224,7 @@ class MainMenuState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+		
 	}
 
 	function changeItem(huh:Int = 0)

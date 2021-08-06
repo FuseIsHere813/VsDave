@@ -71,7 +71,6 @@ class PlayState extends MusicBeatState
 
 	public var elapsedtime:Float = 0;
 
-	public static var rep:Replay;
 	public static var loadRep:Bool = false;
 
 	var halloweenLevel:Bool = false;
@@ -1219,9 +1218,6 @@ class PlayState extends MusicBeatState
 					startCountdown();
 			}
 		}
-
-		if (!loadRep)
-			rep = new Replay("na");
 
 		super.create();
 	}
@@ -2523,8 +2519,6 @@ class PlayState extends MusicBeatState
 	}
 	function endSong():Void
 	{
-		if (!loadRep)
-			rep.SaveReplay();
 		inCutscene = false;
 		canPause = false;
 		FlxG.sound.music.volume = 0;
@@ -2905,43 +2899,10 @@ class PlayState extends MusicBeatState
 			//timeCurrentlyR = Math.abs(rep.replay.keyReleases[repReleases].time - Conductor.songPosition);
 
 			
-			if (repPresses < rep.replay.keyPresses.length && repReleases < rep.replay.keyReleases.length)
-			{
-				upP = NearlyEquals(rep.replay.keyPresses[repPresses].time, Conductor.songPosition) && rep.replay.keyPresses[repPresses].key == "up";
-				rightP = NearlyEquals(rep.replay.keyPresses[repPresses].time, Conductor.songPosition) && rep.replay.keyPresses[repPresses].key == "right";
-				downP = NearlyEquals(rep.replay.keyPresses[repPresses].time, Conductor.songPosition) && rep.replay.keyPresses[repPresses].key == "down";
-				leftP = NearlyEquals(rep.replay.keyPresses[repPresses].time, Conductor.songPosition)  && rep.replay.keyPresses[repPresses].key == "left";	
-
-				upR = NearlyEquals(rep.replay.keyReleases[repReleases].time, Conductor.songPosition) && rep.replay.keyReleases[repReleases].key == "up";
-				rightR = NearlyEquals(rep.replay.keyReleases[repReleases].time, Conductor.songPosition) && rep.replay.keyReleases[repReleases].key == "right";
-				downR = NearlyEquals(rep.replay.keyReleases[repReleases].time, Conductor.songPosition) && rep.replay.keyReleases[repReleases].key == "down";
-				leftR = NearlyEquals(rep.replay.keyReleases[repReleases].time, Conductor.songPosition) && rep.replay.keyReleases[repReleases].key == "left";
-
-				upHold = upP ? true : upR ? false : true;
-				rightHold = rightP ? true : rightR ? false : true;
-				downHold = downP ? true : downR ? false : true;
-				leftHold = leftP ? true : leftR ? false : true;
-			}
 		}
 		else if (!loadRep) // record replay code
 		{
-			if (upP)
-				rep.replay.keyPresses.push({time: Conductor.songPosition, key: "up"});
-			if (rightP)
-				rep.replay.keyPresses.push({time: Conductor.songPosition, key: "right"});
-			if (downP)
-				rep.replay.keyPresses.push({time: Conductor.songPosition, key: "down"});
-			if (leftP)
-				rep.replay.keyPresses.push({time: Conductor.songPosition, key: "left"});
-
-			if (upR)
-				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "up"});
-			if (rightR)
-				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "right"});
-			if (downR)
-				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "down"});
-			if (leftR)
-				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "left"});
+			//no fuck you
 		}
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
@@ -3001,12 +2962,6 @@ class PlayState extends MusicBeatState
 						{
 							if (loadRep)
 							{
-								if (NearlyEquals(daNote.strumTime,rep.replay.keyPresses[repPresses].time, 30))
-								{
-									goodNoteHit(daNote);
-									trace('force note hit');
-								}
-								else
 									noteCheck(controlArray[daNote.noteData], daNote);
 							}
 							else
@@ -3016,34 +2971,12 @@ class PlayState extends MusicBeatState
 						{
 							for (coolNote in possibleNotes)
 							{
-								if (loadRep)
-									{
-										if (NearlyEquals(coolNote.strumTime,rep.replay.keyPresses[repPresses].time, 30))
-										{
-											goodNoteHit(coolNote);
-											trace('force note hit');
-										}
-										else
-											noteCheck(controlArray[daNote.noteData], daNote);
-									}
-								else
 									noteCheck(controlArray[coolNote.noteData], coolNote);
 							}
 						}
 					}
 					else // regular notes?
 					{	
-						if (loadRep)
-						{
-							if (NearlyEquals(daNote.strumTime,rep.replay.keyPresses[repPresses].time, 30))
-							{
-								goodNoteHit(daNote);
-								trace('force note hit');
-							}
-							else
-								noteCheck(controlArray[daNote.noteData], daNote);
-						}
-						else
 							noteCheck(controlArray[daNote.noteData], daNote);
 					}
 					/* 
@@ -3242,15 +3175,6 @@ class PlayState extends MusicBeatState
 					goodNoteHit(note);
 				else if (!theFunne) 
 					badNoteCheck(note);
-				else if (rep.replay.keyPresses.length > repPresses && !keyP)
-				{
-					if (NearlyEquals(note.strumTime,rep.replay.keyPresses[repPresses].time, 4))
-					{
-						goodNoteHit(note);
-					}
-					else if (!theFunne) 
-						badNoteCheck(note);
-				}
 			}
 			else if (keyP)
 				{

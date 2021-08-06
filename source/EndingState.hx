@@ -4,7 +4,10 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 
 /**
- * shut up idiot im not bbpanzu
+ * shut up idiot im not bbpanzu hes a gay
+ * below is the epic messages from ben the chad
+ * oh no cyndaquil i've uncensored this comment now twitters going to cancel us ooooooo spooky
+ * seriously though im omnisexual and i find this shit funny
  */
 class EndingState extends FlxState
 {

@@ -324,7 +324,6 @@ class TitleState extends MusicBeatState
 	{
 		super.beatHit();
 
-		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
 		logoBl.animation.play('bump');
 		danceLeft = !danceLeft;
 
@@ -335,7 +334,7 @@ class TitleState extends MusicBeatState
 
 		FlxG.log.add(curBeat);
 
-		switch (curBeat)
+		switch (curBeat) //cyndaquil do NOT change this back, if you do i'll end you
 		{
 			case 1:
 			createCoolText(['BRUH']);
@@ -346,40 +345,49 @@ class TitleState extends MusicBeatState
 			case 3:
 				addMoreText('MissingTextureMan101');
 			case 4:
-				addMoreText('Rapparep');
+				addMoreText('Rapparep\nTheBuilderXD\nCyndaquilDAC');
+			// credTextShit.text += '\npresent...';
+			// credTextShit.addText();
 			case 5:
-				addMoreText('TheBuilderXD');
+				deleteCoolText();
+			// credTextShit.visible = false;
+			// credTextShit.text = 'In association \nwith';
+			// credTextShit.screenCenter();
 			case 6:
-				addMoreText('CyndaquilDAC');
+				createCoolText(['Supernovae', 'by']);
 			case 7:
-				addMoreText('Krisspo');
+				addMoreText('ArchWk');
+			// credTextShit.text += '\nNewgrounds';
 			case 8:
 				deleteCoolText();
+				ngSpr.visible = false;
+			// credTextShit.visible = false;
+
+			// credTextShit.text = 'Shoutouts Tom Fulp';
+			// credTextShit.screenCenter();
 			case 9:
-				createCoolText(['Supernovae']);
-			case 10:
-				addMoreText('By');
-			case 11:
-				addMoreText('ArchWk');
-			case 12:
-				deleteCoolText();
-			case 13:
 				createCoolText([curWacky[0]]);
-			case 14:
+			// credTextShit.visible = true;
+			case 10:
 				addMoreText(curWacky[1]);
-			case 15:
+			// credTextShit.text += '\nlmao';
+			case 11:
 				deleteCoolText();
-			case 16:
+			// credTextShit.visible = false;
+			// credTextShit.text = "Friday";
+			// credTextShit.screenCenter();
+			case 12:
 				addMoreText('VS');
 			// credTextShit.visible = true;
-			case 17:
-				addMoreText('Dave and Bambi');
+			case 13:
+				addMoreText('Dave');
 			// credTextShit.text += '\nNight';
-			case 18:
+			case 14:
 				addMoreText('Mod'); // credTextShit.text += '\nFunkin';
-			case 19:
+			case 15:
 				deleteCoolText();
-			case 20:
+
+			case 16:
 				skipIntro();
 		}
 	}

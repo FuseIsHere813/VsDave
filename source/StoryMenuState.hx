@@ -469,7 +469,8 @@ class StoryMenuState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+		//FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+		//this one doesn't even work lol
 		for(char in grpWeekCharacters)
 		{
 			char.bopHead();

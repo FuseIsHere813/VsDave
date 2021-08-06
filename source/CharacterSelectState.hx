@@ -249,8 +249,12 @@ class CharacterSelectState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
-		char.dance();
+		//STOP POSTING ABOUT FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD}); I'M TIRED OF SEEING IT
+		
+		if (char != null)
+		{
+			char.dance();
+		}
 	}
 	
 	
