@@ -1254,62 +1254,80 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		new FlxTimer().start(0.3, function(tmr:FlxTimer)
+		if(SONG.song.toLowerCase()=='senpai' || SONG.song.toLowerCase()=='roses' || SONG.song.toLowerCase()=='thorns')
 		{
-			black.alpha -= 0.15;
-
-			if (black.alpha > 0)
-			{
-				tmr.reset(0.3);
-			}
-			else
-			{
-				if (dialogueBox != null)
+			new FlxTimer().start(0.3, function(tmr:FlxTimer)
 				{
-					inCutscene = true;
-
-					if (SONG.song.toLowerCase() == 'thorns')
+					black.alpha -= 0.15;
+		
+					if (black.alpha > 0)
 					{
-						add(senpaiEvil);
-						senpaiEvil.alpha = 0;
-						new FlxTimer().start(0.3, function(swagTimer:FlxTimer)
-						{
-							senpaiEvil.alpha += 0.15;
-							if (senpaiEvil.alpha < 1)
-							{
-								swagTimer.reset();
-							}
-							else
-							{
-								senpaiEvil.animation.play('idle');
-								FlxG.sound.play(Paths.sound('Senpai_Dies'), 1, false, null, true, function()
-								{
-									remove(senpaiEvil);
-									remove(red);
-									FlxG.camera.fade(FlxColor.WHITE, 0.01, true, function()
-									{
-										add(dialogueBox);
-									}, true);
-								});
-								new FlxTimer().start(3.2, function(deadTime:FlxTimer)
-								{
-									FlxG.camera.fade(FlxColor.WHITE, 1.6, false);
-								});
-							}
-						});
+						tmr.reset(0.3);
 					}
 					else
 					{
-						add(dialogueBox);
+						if (dialogueBox != null)
+						{
+							inCutscene = true;
+		
+							if (SONG.song.toLowerCase() == 'thorns')
+							{
+								add(senpaiEvil);
+								senpaiEvil.alpha = 0;
+								new FlxTimer().start(0.3, function(swagTimer:FlxTimer)
+								{
+									senpaiEvil.alpha += 0.15;
+									if (senpaiEvil.alpha < 1)
+									{
+										swagTimer.reset();
+									}
+									else
+									{
+										senpaiEvil.animation.play('idle');
+										FlxG.sound.play(Paths.sound('Senpai_Dies'), 1, false, null, true, function()
+										{
+											remove(senpaiEvil);
+											remove(red);
+											FlxG.camera.fade(FlxColor.WHITE, 0.01, true, function()
+											{
+												add(dialogueBox);
+											}, true);
+										});
+										new FlxTimer().start(3.2, function(deadTime:FlxTimer)
+										{
+											FlxG.camera.fade(FlxColor.WHITE, 1.6, false);
+										});
+									}
+								});
+							}
+							else
+							{
+								add(dialogueBox);
+							}
+						}
+						else
+						{
+							startCountdown();
+						}
+						remove(black);
 					}
+				});
+		}
+		else
+		{
+			FlxTween.tween(black, {alpha: 0}, 6.66);
+			new FlxTimer().start(6.66, function(fuckingSussy:FlxTimer)
+			{
+				if(dialogueBox != null)
+				{
+					add(dialogueBox);
 				}
 				else
 				{
-						startCountdown();
+					startCountdown();
 				}
-				remove(black);
-			}
-		});
+			});
+		}
 	}
 
 	var startTimer:FlxTimer;
