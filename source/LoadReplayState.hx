@@ -60,10 +60,7 @@ class LoadReplayState extends MusicBeatState
 
         for(i in 0...controlsStrings.length)
         {
-            var string:String = controlsStrings[i];
-            actualNames[i] = string;
-			var rep:Replay = Replay.LoadReplay(string);
-            controlsStrings[i] = string.split("time")[0] + " " + (rep.replay.songDiff == 2 ? "HARD" : rep.replay.songDiff == 1 ? "EASY" : "NORMAL");
+            
         }
 
         if (controlsStrings.length == 0)
@@ -161,18 +158,7 @@ class LoadReplayState extends MusicBeatState
 
 			if (controls.ACCEPT && grpControls.members[curSelected].text != "No Replays...")
 			{
-                trace('loading ' + actualNames[curSelected]);
-                PlayState.rep = Replay.LoadReplay(actualNames[curSelected]);
-
-                PlayState.loadRep = true;
-
-                var poop:String = Highscore.formatSong(PlayState.rep.replay.songName.toLowerCase(), PlayState.rep.replay.songDiff);
-
-				PlayState.SONG = Song.loadFromJson(poop, PlayState.rep.replay.songName.toLowerCase());
-                PlayState.isStoryMode = false;
-                PlayState.storyDifficulty = PlayState.rep.replay.songDiff;
-                PlayState.storyWeek = getWeekNumbFromSong(PlayState.rep.replay.songName);
-                LoadingState.loadAndSwitchState(new PlayState());
+                // we dont need any replay junk because ben removed all of it
 			}
 	}
 
@@ -193,9 +179,8 @@ class LoadReplayState extends MusicBeatState
 		if (curSelected >= grpControls.length)
 			curSelected = 0;
 
-		var rep:Replay = Replay.LoadReplay(actualNames[curSelected]);
 
-		poggerDetails.text = "Replay Details - \nDate Created: " + rep.replay.timestamp + "\nSong: " + rep.replay.songName + "\nReplay Version: " + (rep.replay.replayGameVer != Replay.version ? "OUTDATED" : "Latest");
+		
 
 		// selector.y = (70 * curSelected) + 30;
 

@@ -8,6 +8,11 @@ import flixel.util.FlxTimer;
  * below is the epic messages from ben the chad
  * oh no cyndaquil i've uncensored this comment now twitters going to cancel us ooooooo spooky
  * seriously though im omnisexual and i find this shit funny
+
+ * below is the epic messages from moldygh the gigachad
+ * gigafartsexual
+
+ * WHY THE FOACK IS CYNDA CENSORING MY COMMENTS!!!!!!!!!!!
  */
 class EndingState extends FlxState
 {
