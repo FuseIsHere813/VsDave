@@ -1,5 +1,6 @@
 package;
 
+import flixel.tweens.FlxEase;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -51,8 +52,9 @@ class FreeplayState extends MusicBeatState
         0xFFec7aac, // MOM
         0xFFffffff, // PARENTS-CHRISTMAS
         0xFFffaa6f, // SENPAI
-		0xFF4965FF, // DAVVE
+		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD
+		// moldy is neurodivergent cyndaquil you dumbass he can reclaim it so yeah stop censoring our comments
 		0xFF00FFFF,
 		0xFFFF1212 //tristan
 
@@ -84,24 +86,7 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		var randomNum:Int = FlxG.random.int(0, 6);
-		switch(randomNum)
-		{
-			case 0:
-				bg.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
-			case 1:
-				bg.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
-			case 2:
-				bg.loadGraphic(Paths.image('backgrounds/Olyantwo'));
-			case 3:
-				bg.loadGraphic(Paths.image('backgrounds/morie'));
-			case 4:
-				bg.loadGraphic(Paths.image('backgrounds/mantis'));
-			case 5:
-				bg.loadGraphic(Paths.image('backgrounds/mamakotomi'));
-			case 6:
-				bg.loadGraphic(Paths.image('backgrounds/T5mpler'));
-		}
+		LoadRandomMenuBg.randomize(bg);
 		bg.color = 0xFF4965FF;
 		add(bg);
 
@@ -258,6 +243,12 @@ class FreeplayState extends MusicBeatState
 		NameAlpha.x = (FlxG.width / 2) - 164;
 		add(NameAlpha);
 		CurrentSongIcon.loadGraphic(Paths.image('week_icons_' + (AllPossibleSongs[CurrentPack].toLowerCase())));
+	}
+
+	override function beatHit()
+	{
+		super.beatHit();
+		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
 	}
 
 	public function addWeek(songs:Array<String>, weekNum:Int, ?songCharacters:Array<String>)

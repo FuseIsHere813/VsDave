@@ -71,7 +71,6 @@ class PlayState extends MusicBeatState
 
 	public var elapsedtime:Float = 0;
 
-	public static var rep:Replay;
 	public static var loadRep:Bool = false;
 
 	var halloweenLevel:Bool = false;
@@ -1220,9 +1219,6 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (!loadRep)
-			rep = new Replay("na");
-
 		super.create();
 	}
 
@@ -1254,62 +1250,80 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		new FlxTimer().start(0.3, function(tmr:FlxTimer)
+		if(SONG.song.toLowerCase()=='senpai' || SONG.song.toLowerCase()=='roses' || SONG.song.toLowerCase()=='thorns')
 		{
-			black.alpha -= 0.15;
-
-			if (black.alpha > 0)
-			{
-				tmr.reset(0.3);
-			}
-			else
-			{
-				if (dialogueBox != null)
+			new FlxTimer().start(0.3, function(tmr:FlxTimer)
 				{
-					inCutscene = true;
-
-					if (SONG.song.toLowerCase() == 'thorns')
+					black.alpha -= 0.15;
+		
+					if (black.alpha > 0)
 					{
-						add(senpaiEvil);
-						senpaiEvil.alpha = 0;
-						new FlxTimer().start(0.3, function(swagTimer:FlxTimer)
-						{
-							senpaiEvil.alpha += 0.15;
-							if (senpaiEvil.alpha < 1)
-							{
-								swagTimer.reset();
-							}
-							else
-							{
-								senpaiEvil.animation.play('idle');
-								FlxG.sound.play(Paths.sound('Senpai_Dies'), 1, false, null, true, function()
-								{
-									remove(senpaiEvil);
-									remove(red);
-									FlxG.camera.fade(FlxColor.WHITE, 0.01, true, function()
-									{
-										add(dialogueBox);
-									}, true);
-								});
-								new FlxTimer().start(3.2, function(deadTime:FlxTimer)
-								{
-									FlxG.camera.fade(FlxColor.WHITE, 1.6, false);
-								});
-							}
-						});
+						tmr.reset(0.3);
 					}
 					else
 					{
-						add(dialogueBox);
+						if (dialogueBox != null)
+						{
+							inCutscene = true;
+		
+							if (SONG.song.toLowerCase() == 'thorns')
+							{
+								add(senpaiEvil);
+								senpaiEvil.alpha = 0;
+								new FlxTimer().start(0.3, function(swagTimer:FlxTimer)
+								{
+									senpaiEvil.alpha += 0.15;
+									if (senpaiEvil.alpha < 1)
+									{
+										swagTimer.reset();
+									}
+									else
+									{
+										senpaiEvil.animation.play('idle');
+										FlxG.sound.play(Paths.sound('Senpai_Dies'), 1, false, null, true, function()
+										{
+											remove(senpaiEvil);
+											remove(red);
+											FlxG.camera.fade(FlxColor.WHITE, 0.01, true, function()
+											{
+												add(dialogueBox);
+											}, true);
+										});
+										new FlxTimer().start(3.2, function(deadTime:FlxTimer)
+										{
+											FlxG.camera.fade(FlxColor.WHITE, 1.6, false);
+										});
+									}
+								});
+							}
+							else
+							{
+								add(dialogueBox);
+							}
+						}
+						else
+						{
+							startCountdown();
+						}
+						remove(black);
 					}
+				});
+		}
+		else
+		{
+			FlxTween.tween(black, {alpha: 0}, 6.66);
+			new FlxTimer().start(6.66, function(fuckingSussy:FlxTimer)
+			{
+				if(dialogueBox != null)
+				{
+					add(dialogueBox);
 				}
 				else
 				{
-						startCountdown();
+					startCountdown();
 				}
-				remove(black);
-			}
-		});
+			});
+		}
 	}
 
 	var startTimer:FlxTimer;
@@ -1921,11 +1935,11 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.save.data.accuracyDisplay)
 		{
-			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "% " + (fc ? "| FC" : misses == 0 ? "| A" : accuracy <= 75 ? "| BAD" : "");
+			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "% ";
 		}
 		else
 		{
-			scoreTxt.text = "Score:" + songScore;
+			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "% ";
 		}
 		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
 		{
@@ -2505,8 +2519,6 @@ class PlayState extends MusicBeatState
 	}
 	function endSong():Void
 	{
-		if (!loadRep)
-			rep.SaveReplay();
 		inCutscene = false;
 		canPause = false;
 		FlxG.sound.music.volume = 0;
@@ -2887,43 +2899,10 @@ class PlayState extends MusicBeatState
 			//timeCurrentlyR = Math.abs(rep.replay.keyReleases[repReleases].time - Conductor.songPosition);
 
 			
-			if (repPresses < rep.replay.keyPresses.length && repReleases < rep.replay.keyReleases.length)
-			{
-				upP = NearlyEquals(rep.replay.keyPresses[repPresses].time, Conductor.songPosition) && rep.replay.keyPresses[repPresses].key == "up";
-				rightP = NearlyEquals(rep.replay.keyPresses[repPresses].time, Conductor.songPosition) && rep.replay.keyPresses[repPresses].key == "right";
-				downP = NearlyEquals(rep.replay.keyPresses[repPresses].time, Conductor.songPosition) && rep.replay.keyPresses[repPresses].key == "down";
-				leftP = NearlyEquals(rep.replay.keyPresses[repPresses].time, Conductor.songPosition)  && rep.replay.keyPresses[repPresses].key == "left";	
-
-				upR = NearlyEquals(rep.replay.keyReleases[repReleases].time, Conductor.songPosition) && rep.replay.keyReleases[repReleases].key == "up";
-				rightR = NearlyEquals(rep.replay.keyReleases[repReleases].time, Conductor.songPosition) && rep.replay.keyReleases[repReleases].key == "right";
-				downR = NearlyEquals(rep.replay.keyReleases[repReleases].time, Conductor.songPosition) && rep.replay.keyReleases[repReleases].key == "down";
-				leftR = NearlyEquals(rep.replay.keyReleases[repReleases].time, Conductor.songPosition) && rep.replay.keyReleases[repReleases].key == "left";
-
-				upHold = upP ? true : upR ? false : true;
-				rightHold = rightP ? true : rightR ? false : true;
-				downHold = downP ? true : downR ? false : true;
-				leftHold = leftP ? true : leftR ? false : true;
-			}
 		}
 		else if (!loadRep) // record replay code
 		{
-			if (upP)
-				rep.replay.keyPresses.push({time: Conductor.songPosition, key: "up"});
-			if (rightP)
-				rep.replay.keyPresses.push({time: Conductor.songPosition, key: "right"});
-			if (downP)
-				rep.replay.keyPresses.push({time: Conductor.songPosition, key: "down"});
-			if (leftP)
-				rep.replay.keyPresses.push({time: Conductor.songPosition, key: "left"});
-
-			if (upR)
-				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "up"});
-			if (rightR)
-				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "right"});
-			if (downR)
-				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "down"});
-			if (leftR)
-				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "left"});
+			//no fuck you
 		}
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
@@ -2983,12 +2962,6 @@ class PlayState extends MusicBeatState
 						{
 							if (loadRep)
 							{
-								if (NearlyEquals(daNote.strumTime,rep.replay.keyPresses[repPresses].time, 30))
-								{
-									goodNoteHit(daNote);
-									trace('force note hit');
-								}
-								else
 									noteCheck(controlArray[daNote.noteData], daNote);
 							}
 							else
@@ -2998,34 +2971,12 @@ class PlayState extends MusicBeatState
 						{
 							for (coolNote in possibleNotes)
 							{
-								if (loadRep)
-									{
-										if (NearlyEquals(coolNote.strumTime,rep.replay.keyPresses[repPresses].time, 30))
-										{
-											goodNoteHit(coolNote);
-											trace('force note hit');
-										}
-										else
-											noteCheck(controlArray[daNote.noteData], daNote);
-									}
-								else
 									noteCheck(controlArray[coolNote.noteData], coolNote);
 							}
 						}
 					}
 					else // regular notes?
 					{	
-						if (loadRep)
-						{
-							if (NearlyEquals(daNote.strumTime,rep.replay.keyPresses[repPresses].time, 30))
-							{
-								goodNoteHit(daNote);
-								trace('force note hit');
-							}
-							else
-								noteCheck(controlArray[daNote.noteData], daNote);
-						}
-						else
 							noteCheck(controlArray[daNote.noteData], daNote);
 					}
 					/* 
@@ -3224,15 +3175,6 @@ class PlayState extends MusicBeatState
 					goodNoteHit(note);
 				else if (!theFunne) 
 					badNoteCheck(note);
-				else if (rep.replay.keyPresses.length > repPresses && !keyP)
-				{
-					if (NearlyEquals(note.strumTime,rep.replay.keyPresses[repPresses].time, 4))
-					{
-						goodNoteHit(note);
-					}
-					else if (!theFunne) 
-						badNoteCheck(note);
-				}
 			}
 			else if (keyP)
 				{

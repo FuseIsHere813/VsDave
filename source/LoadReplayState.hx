@@ -37,24 +37,30 @@ class LoadReplayState extends MusicBeatState
         #end
 		trace(controlsStrings);
 
-        controlsStrings.sort(Reflect.compare);
+        controlsStrings.sort(sortByDate);
 
         addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
-        addWeek(['Spookeez', 'South', 'Monster'], 2, ['spooky']);
+        addWeek(['Spookeez', 'South', 'Monster'], 2, ['spooky', 'spooky', 'monster']);
         addWeek(['Pico', 'Philly', 'Blammed'], 3, ['pico']);
-
         addWeek(['Satin-Panties', 'High', 'Milf'], 4, ['mom']);
         addWeek(['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas']);
-        
         addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit']);
-
+		addWeek(['House', 'Insanity', 'Furiosity'], 7, ['dave', 'dave', 'dave-angey']);
+		addWeek(['Bonus-Song'],7,['dave']);
+		addWeek(['Blocked','Corn-Theft','Maze',], 8, ['bambi']);
+		addWeek(['Splitathon'],9,['the-duo']);
+		addWeek(['Supernovae', 'Glitch'], 8, ['bambi-stupid']);
+		if (FlxG.save.data.cheatingFound)
+		{
+			addWeek(['cheating'], 8, ['bambi-3d']);
+		}
+		addWeek(['Vs-Tristan'], 10, ['tristan']);
+		addWeek(['Old-Insanity'], 7, ['dave']);
+		addWeek(['Old-Corn-Theft', 'Old-Maze', 'Screwed'], 8, ['bambi', 'bambi', 'bambi-angey']);
 
         for(i in 0...controlsStrings.length)
         {
-            var string:String = controlsStrings[i];
-            actualNames[i] = string;
-			var rep:Replay = Replay.LoadReplay(string);
-            controlsStrings[i] = string.split("time")[0] + " " + (rep.replay.songDiff == 2 ? "HARD" : rep.replay.songDiff == 1 ? "EASY" : "NORMAL");
+            
         }
 
         if (controlsStrings.length == 0)
@@ -65,6 +71,7 @@ class LoadReplayState extends MusicBeatState
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
 		menuBG.antialiasing = true;
+		LoadRandomMenuBg.randomize(menuBG);
 		add(menuBG);
 
 		grpControls = new FlxTypedGroup<Alphabet>();
@@ -108,6 +115,14 @@ class LoadReplayState extends MusicBeatState
         return week;
     }
 
+	function sortByDate(a:String, b:String)
+	{
+		var aTime = Std.parseFloat(a.split("time")[1])/1000;
+		var bTime = Std.parseFloat(b.split("time")[1])/1000;
+
+		return Std.int(bTime - aTime); // Newest first
+	}
+
 	public function addSong(songName:String, weekNum:Int, songCharacter:String)
         {
             songs.push(new FreeplayState.SongMetadata(songName, weekNum, songCharacter));
@@ -143,18 +158,7 @@ class LoadReplayState extends MusicBeatState
 
 			if (controls.ACCEPT && grpControls.members[curSelected].text != "No Replays...")
 			{
-                trace('loading ' + actualNames[curSelected]);
-                PlayState.rep = Replay.LoadReplay(actualNames[curSelected]);
-
-                PlayState.loadRep = true;
-
-                var poop:String = Highscore.formatSong(PlayState.rep.replay.songName.toLowerCase(), PlayState.rep.replay.songDiff);
-
-				PlayState.SONG = Song.loadFromJson(poop, PlayState.rep.replay.songName.toLowerCase());
-                PlayState.isStoryMode = false;
-                PlayState.storyDifficulty = PlayState.rep.replay.songDiff;
-                PlayState.storyWeek = getWeekNumbFromSong(PlayState.rep.replay.songName);
-                LoadingState.loadAndSwitchState(new PlayState());
+                // we dont need any replay junk because ben removed all of it
 			}
 	}
 
@@ -175,9 +179,8 @@ class LoadReplayState extends MusicBeatState
 		if (curSelected >= grpControls.length)
 			curSelected = 0;
 
-		var rep:Replay = Replay.LoadReplay(actualNames[curSelected]);
 
-		poggerDetails.text = "Replay Details - \nDate Created: " + rep.replay.timestamp + "\nSong: " + rep.replay.songName + "\nReplay Version: " + (rep.replay.replayGameVer != Replay.version ? "OUTDATED" : "Latest");
+		
 
 		// selector.y = (70 * curSelected) + 30;
 

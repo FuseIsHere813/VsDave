@@ -1,5 +1,7 @@
 package;
 
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
 import Controls.KeyboardScheme;
 import Controls.Control;
 import flash.text.TextField;
@@ -34,24 +36,7 @@ class OptionsMenu extends MusicBeatState
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
 		menuBG.antialiasing = true;
-		var randomNum:Int = FlxG.random.int(0, 6);
-		switch(randomNum)
-		{
-			case 0:
-				menuBG.loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
-			case 1:
-				menuBG.loadGraphic(Paths.image('backgrounds/SwagnotrllyTheMod'));
-			case 2:
-				menuBG.loadGraphic(Paths.image('backgrounds/Olyantwo'));
-			case 3:
-				menuBG.loadGraphic(Paths.image('backgrounds/morie'));
-			case 4:
-				menuBG.loadGraphic(Paths.image('backgrounds/mantis'));
-			case 5:
-				menuBG.loadGraphic(Paths.image('backgrounds/mamakotomi'));
-			case 6:
-				menuBG.loadGraphic(Paths.image('backgrounds/T5mpler'));
-		}
+		LoadRandomMenuBg.randomize(menuBG);
 		add(menuBG);
 
 		grpControls = new FlxTypedGroup<Alphabet>();
@@ -150,6 +135,12 @@ class OptionsMenu extends MusicBeatState
 	}
 
 	var isSettingControl:Bool = false;
+
+	override function beatHit()
+	{
+		super.beatHit();
+		FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
+	}
 
 	function changeSelection(change:Int = 0)
 	{

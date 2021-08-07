@@ -1,5 +1,7 @@
 package;
 
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.system.FlxSoundGroup;
 import flixel.ui.FlxBar;
 import flixel.system.FlxSound;
@@ -95,7 +97,7 @@ class MusicPlayerState extends MusicBeatState
             iconArray.push(icon);
             add(icon);
     
-            }
+        }
 
         //create hp bar for pico funny
         healthBarBG = new FlxSprite(0, 50).loadGraphic(Paths.image('healthBar'));
@@ -103,11 +105,9 @@ class MusicPlayerState extends MusicBeatState
 		healthBarBG.scrollFactor.set();
 		add(healthBarBG);
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'playdist', 0, 1);
+		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this, 'playdist', 0, 1);
 		healthBar.scrollFactor.set();
 		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
-		// healthBar
 		add(healthBar);
 
         iconP1 = new HealthIcon("bf", true);
@@ -118,17 +118,12 @@ class MusicPlayerState extends MusicBeatState
 		iconP2.y = healthBar.y - (iconP2.height / 2);
 		add(iconP2);
 
-
-
         barText = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 50, 0, "", 20);
 		barText.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		barText.scrollFactor.set();
 		add(barText);
 
-
-
         HideBar();
-
 
         super.create();
     }
@@ -289,7 +284,6 @@ class MusicPlayerState extends MusicBeatState
         }
 
     }
-
 
     function HideBar()
     {

@@ -1,5 +1,6 @@
 package;
 
+import flixel.tweens.FlxTween;
 import haxe.Log;
 import flixel.input.gamepad.lists.FlxBaseGamepadList;
 import flixel.FlxG;
@@ -138,12 +139,19 @@ class DialogueBox extends FlxSpriteGroup
 		bgFade.alpha = 0;
 		add(bgFade);
 
-		new FlxTimer().start(0.83, function(tmr:FlxTimer)
+		if(PlayState.SONG.song.toLowerCase()=='senpai' || PlayState.SONG.song.toLowerCase()=='roses' || PlayState.SONG.song.toLowerCase()=='thorns')
 		{
-			bgFade.alpha += (1 / 5) * 0.7;
-			if (bgFade.alpha > 0.7)
-				bgFade.alpha = 0.7;
-		}, 5);
+			new FlxTimer().start(0.83, function(tmr:FlxTimer)
+				{
+					bgFade.alpha += (1 / 5) * 0.7;
+					if (bgFade.alpha > 0.7)
+						bgFade.alpha = 0.7;
+				}, 5);
+		}
+		else
+		{
+			FlxTween.tween(bgFade, {alpha: 0.7}, 4.15);
+		}
 
 		if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity' || PlayState.SONG.song.toLowerCase()=='furiosity' || PlayState.SONG.song.toLowerCase()=='supernovae' || PlayState.SONG.song.toLowerCase()=='glitch' || PlayState.SONG.song.toLowerCase()=='blocked' || PlayState.SONG.song.toLowerCase()=='corn-theft' || PlayState.SONG.song.toLowerCase()=='maze' || PlayState.SONG.song.toLowerCase()=='splitathon')
 		{
@@ -182,64 +190,73 @@ class DialogueBox extends FlxSpriteGroup
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();		
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 			case 'insanity':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();		
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 			case 'furiosity':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 			case 'supernovae':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 			case 'glitch':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 			case 'blocked':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 			case 'corn-theft':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 			case 'maze':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 			case 'splitathon':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
 				box.updateHitbox();
-				box.animation.addByPrefix('normalOpen', 'speech bubble normal', 24, false);
-				box.animation.addByIndices('normal', 'speech bubble normal', [4], "", 24);
+				box.animation.addByPrefix('normalOpen', 'Speech Bubble Normal Open', 24, false);
+				box.animation.addByPrefix('normal', 'speech bubble normal', 24, true);
+				box.antialiasing = true;
 	
 			var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward'));
 			face.setGraphicSize(Std.int(face.width * 6));
@@ -252,7 +269,7 @@ class DialogueBox extends FlxSpriteGroup
 			return;
 	
 		if (PlayState.SONG.song.toLowerCase()=='senpai' || PlayState.SONG.song.toLowerCase()=='roses' || PlayState.SONG.song.toLowerCase()=='thorns')
-			{
+		{
 			portraitLeft = new FlxSprite(-20, 70);
 			portraitLeft.frames = Paths.getSparrowAtlas('weeb/senpaiPortrait');
 			portraitLeft.animation.addByPrefix('enter', 'Senpai Portrait Enter', 24, false);
@@ -261,26 +278,26 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.scrollFactor.set();
 			add(portraitLeft);
 			portraitLeft.visible = false;
-
 			portraitRight = new FlxSprite(320, 200);
-		portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
-		portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
-		//portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
-		portraitRight.updateHitbox();
-		portraitRight.scrollFactor.set();
-		add(portraitRight);
-		portraitRight.visible = true;
-			}
+			portraitRight.frames = Paths.getSparrowAtlas('weeb/bfPortrait');
+			portraitRight.animation.addByPrefix('enter', 'Boyfriend portrait enter', 24, false);
+			//portraitRight.setGraphicSize(Std.int(portraitRight.width * PlayState.daPixelZoom * 0.9));
+			portraitRight.updateHitbox();
+			portraitRight.scrollFactor.set();
+			add(portraitRight);
+			portraitRight.visible = true;
+		}
 	    else if (PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase()=='insanity')
-			{
+		{
 			portraitLeft = new FlxSprite(276.95, 170);
 			portraitLeft.frames = Paths.getSparrowAtlas(retardedPath);
 			portraitLeft.animation.addByPrefix('enter', 'dave Portrait', 24, false);
 			portraitLeft.updateHitbox();
 			portraitLeft.scrollFactor.set();
+			portraitLeft.antialiasing = true;
 			add(portraitLeft);
 			portraitLeft.visible = false;
-			}
+		}
 		else if(PlayState.SONG.song.toLowerCase()=='furiosity')
 		{
 			portraitLeft = new FlxSprite(276.95, 170);
@@ -288,6 +305,7 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.animation.addByPrefix('enter', '3D Portrait', 24, false);
 			portraitLeft.updateHitbox();
 			portraitLeft.scrollFactor.set();
+			portraitLeft.antialiasing = true;
 			add(portraitLeft);
 			portraitLeft.visible = false;
 		}
@@ -297,19 +315,21 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.frames = Paths.getSparrowAtlas('dave/bambiPortrait');
 			portraitLeft.animation.addByPrefix('enter', 'bambienter', 24, false);
 			portraitLeft.scrollFactor.set();
+			portraitLeft.antialiasing = true;
 			add(portraitLeft);
 			portraitLeft.visible = false;
 		}
 
-		
-			portraitRight = new FlxSprite(230, 170);
-			portraitRight.frames = Paths.getSparrowAtlas('dave/boyfriendPortrait');
-			portraitRight.animation.addByPrefix('enter', 'BF Enter', 24, false);
-			portraitRight.setGraphicSize(Std.int(portraitRight.width / bfPortraitSizeMultiplier));
-			portraitRight.updateHitbox();
-			portraitRight.scrollFactor.set();
-			add(portraitRight);
-			portraitRight.visible = false;
+		portraitRight = new FlxSprite(230, 170);
+		portraitRight.frames = Paths.getSparrowAtlas('dave/boyfriendPortrait');
+		portraitRight.animation.addByPrefix('enter', 'BF Enter', 24, false);
+		portraitRight.setGraphicSize(Std.int(portraitRight.width / bfPortraitSizeMultiplier));
+		portraitRight.updateHitbox();
+		portraitRight.scrollFactor.set();
+		portraitRight.antialiasing = true;
+		add(portraitRight);
+		portraitRight.visible = false;
+
 		box.animation.play('normalOpen');
 		box.setGraphicSize(Std.int(box.width * PlayState.daPixelZoom * 0.9));
 		box.updateHitbox();
@@ -343,15 +363,15 @@ if(PlayState.SONG.song.toLowerCase()=='house' || PlayState.SONG.song.toLowerCase
 else if(PlayState.SONG.song.toLowerCase()=='furiosity')
 {
 	dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-		dropText.font = Paths.font("barcode.ttf");
-		dropText.color = 0xFFFFFFFF;
-		add(dropText);
+	dropText.font = Paths.font("barcode.ttf");
+	dropText.color = 0xFFFFFFFF;
+	add(dropText);
 
-		swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-		swagDialogue.font = Paths.font("barcode.ttf");
-		swagDialogue.color = 0xFF000000;
-		swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
-		add(swagDialogue);
+	swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
+	swagDialogue.font = Paths.font("barcode.ttf");
+	swagDialogue.color = 0xFF000000;
+	swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
+	add(swagDialogue);
 }
 else
 {
@@ -430,15 +450,27 @@ else
 					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' ||PlayState.SONG.song.toLowerCase() == 'house' || PlayState.SONG.song.toLowerCase() == 'insanity' || PlayState.SONG.song.toLowerCase() == 'furiosity' || PlayState.SONG.song.toLowerCase() == 'supernovae' || PlayState.SONG.song.toLowerCase() == 'glitch' || PlayState.SONG.song.toLowerCase() == 'blocked')
 						FlxG.sound.music.fadeOut(2.2, 0);
 
-					new FlxTimer().start(0.2, function(tmr:FlxTimer)
+					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' || PlayState.SONG.song.toLowerCase() == 'roses')
 					{
-						box.alpha -= 1 / 5;
-						bgFade.alpha -= 1 / 5 * 0.7;
-						portraitLeft.visible = false;
-						portraitRight.visible = false;
-						swagDialogue.alpha -= 1 / 5;
-						dropText.alpha = swagDialogue.alpha;
-					}, 5);
+						new FlxTimer().start(0.2, function(tmr:FlxTimer)
+							{
+								box.alpha -= 1 / 5;
+								bgFade.alpha -= 1 / 5 * 0.7;
+								portraitLeft.visible = false;
+								portraitRight.visible = false;
+								swagDialogue.alpha -= 1 / 5;
+								dropText.alpha = swagDialogue.alpha;
+							}, 5);
+					}
+					else
+					{
+						FlxTween.tween(box, {alpha: 0}, 1.2);
+						FlxTween.tween(bgFade, {alpha: 0}, 1.2);
+						FlxTween.tween(portraitLeft, {alpha: 0}, 1.2);
+						FlxTween.tween(portraitRight, {alpha: 0}, 1.2);
+						FlxTween.tween(swagDialogue, {alpha: 0}, 1.2);
+						FlxTween.tween(dropText, {alpha: 0}, 1.2);
+					}
 
 					new FlxTimer().start(1.2, function(tmr:FlxTimer)
 					{

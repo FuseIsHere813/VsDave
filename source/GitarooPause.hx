@@ -30,6 +30,7 @@ class GitarooPause extends MusicBeatState
 		bf.animation.play('lol');
 		add(bf);
 		bf.screenCenter(X);
+		bf.antialiasing = true;
 
 		replayButton = new FlxSprite(FlxG.width * 0.28, FlxG.height * 0.7);
 		replayButton.frames = Paths.getSparrowAtlas('pauseAlt/pauseUI');
@@ -37,6 +38,7 @@ class GitarooPause extends MusicBeatState
 		replayButton.animation.appendByPrefix('selected', 'yellowreplay');
 		replayButton.animation.play('selected');
 		add(replayButton);
+		replayButton.antialiasing = true;
 
 		cancelButton = new FlxSprite(FlxG.width * 0.58, replayButton.y);
 		cancelButton.frames = Paths.getSparrowAtlas('pauseAlt/pauseUI');
@@ -44,6 +46,7 @@ class GitarooPause extends MusicBeatState
 		cancelButton.animation.appendByPrefix('selected', 'cancelyellow');
 		cancelButton.animation.play('selected');
 		add(cancelButton);
+		cancelButton.antialiasing = true;
 
 		changeThing();
 

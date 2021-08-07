@@ -1,4 +1,6 @@
 package;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
 import flixel.text.FlxText;
 import flixel.system.FlxSoundGroup;
 import flixel.math.FlxPoint;
@@ -21,7 +23,7 @@ import flixel.util.FlxStringUtil;
  i do not give you guys permission to grab this specific code and re-use it in your own mods without asking me first.
  the secondary dev, ben
 */
-class CharacterSelectState extends FlxState
+class CharacterSelectState extends MusicBeatState
 {
 	public var char:Boyfriend;
 	public var current:Int;
@@ -241,6 +243,17 @@ class CharacterSelectState extends FlxState
 		if (!FlxG.save.data.unlockedcharacters[current])
 		{
 			char.color = FlxColor.BLACK;
+		}
+	}
+
+	override function beatHit()
+	{
+		super.beatHit();
+		//STOP POSTING ABOUT FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD}); I'M TIRED OF SEEING IT
+		
+		if (char != null)
+		{
+			char.dance();
 		}
 	}
 	
