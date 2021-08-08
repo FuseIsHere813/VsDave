@@ -345,7 +345,7 @@ class TitleState extends MusicBeatState
 			case 3:
 				addMoreText('MissingTextureMan101');
 			case 4:
-				addMoreText('Rapparep\nTheBuilderXD\nCyndaquilDAC');
+				addMoreText('Rapparep\nTheBuilderXD\nT5mpler\nErizur\nCyndaquilDAC');
 			// credTextShit.text += '\npresent...';
 			// credTextShit.addText();
 			case 5:
