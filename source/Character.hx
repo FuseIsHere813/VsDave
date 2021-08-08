@@ -735,10 +735,10 @@ class Character extends FlxSprite
 			case 'bambi-splitathon':
 				frames = Paths.getSparrowAtlas('splitathon/Bambi_Splitathon');
 				animation.addByPrefix('idle', 'Idle', 24, false);
-				animation.addByPrefix('singDOWN', 'Down', 24, false);
-				animation.addByPrefix('singUP', 'Up', 24, false);
-				animation.addByPrefix('singLEFT', 'Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 27, false);
+				animation.addByPrefix('singUP', 'Up', 27, false);
+				animation.addByPrefix('singLEFT', 'Left', 27, false);
+				animation.addByPrefix('singRIGHT', 'Right', 27, false);
 							
 				addOffset('idle');
 				addOffset("singUP", -24, 15);

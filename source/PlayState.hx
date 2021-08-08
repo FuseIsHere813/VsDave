@@ -652,54 +652,53 @@ class PlayState extends MusicBeatState
 
 			var skyType:String = SONG.song.toLowerCase() == 'splitathon' ? 'dave/sky_night' : 'dave/sky';
 
-			var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image(skyType));
+			var bg:FlxSprite = new FlxSprite(-700, 0).loadGraphic(Paths.image(skyType));
 			bg.antialiasing = true;
 			bg.scrollFactor.set(0.9, 0.9);
 			bg.active = false;
 
-			var hills:FlxSprite = new FlxSprite(-600, -75).loadGraphic(Paths.image('bambi/orangey hills'));
-			hills.setGraphicSize(Std.int(hills.width / 1.2));
-			hills.updateHitbox();
+			var hills:FlxSprite = new FlxSprite(-250, 200).loadGraphic(Paths.image('bambi/orangey hills'));
 			hills.antialiasing = true;
 			hills.scrollFactor.set(0.7, 0.7);
 			hills.active = false;
-			
-			var farm:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('bambi/funfarmhouse'));
+
+			var farm:FlxSprite = new FlxSprite(150, 250).loadGraphic(Paths.image('bambi/funfarmhouse'));
 			farm.antialiasing = true;
 			farm.scrollFactor.set(0.9, 0.9);
 			farm.active = false;
 			
-
-			var foreground:FlxSprite = new FlxSprite(-550, 440).loadGraphic(Paths.image('bambi/grass lands'));
+			var foreground:FlxSprite = new FlxSprite(-400, 600).loadGraphic(Paths.image('bambi/grass lands'));
 			foreground.antialiasing = true;
 			foreground.scrollFactor.set(1, 1);
 			foreground.active = false;
 			
-
-			var corn:FlxSprite = new FlxSprite(-325, 150).loadGraphic(Paths.image('bambi/Cornys'));
-			corn.antialiasing = true;
-			corn.scrollFactor.set(1, 1);
-			corn.active = false;
+			var cornSet:FlxSprite = new FlxSprite(-350, 325).loadGraphic(Paths.image('bambi/Cornys'));
+			cornSet.antialiasing = true;
+			cornSet.scrollFactor.set(1, 1);
+			cornSet.active = false;
 			
-
-			var fence:FlxSprite = new FlxSprite(-325, 200).loadGraphic(Paths.image('bambi/crazy fences'));
+			var cornSet2:FlxSprite = new FlxSprite(1050, 325).loadGraphic(Paths.image('bambi/Cornys'));
+			cornSet2.antialiasing = true;
+			cornSet2.scrollFactor.set(1, 1);
+			cornSet2.active = false;
+			
+			var fence:FlxSprite = new FlxSprite(-350, 450).loadGraphic(Paths.image('bambi/crazy fences'));
 			fence.antialiasing = true;
 			fence.scrollFactor.set(0.98, 0.98);
 			fence.active = false;
-			
 
-			var sign:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('bambi/sign'));
+			var sign:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('bambi/sign'));
 			sign.antialiasing = true;
-			sign.scrollFactor.set(0.9, 0.9);
+			sign.scrollFactor.set(1, 1);
 			sign.active = false;
-			
 
 			if (SONG.song.toLowerCase() == 'splitathon')
 			{
 				hills.color = 0xFF878787;
 				farm.color = 0xFF878787;
 				foreground.color = 0xFF878787;
-				corn.color = 0xFF878787;
+				cornSet.color = 0xFF878787;
+				cornSet2.color = 0xFF878787;
 				fence.color = 0xFF878787;
 				sign.color = 0xFF878787;
 			}
@@ -707,7 +706,8 @@ class PlayState extends MusicBeatState
 			add(hills);
 			add(farm);
 			add(foreground);
-			add(corn);
+			add(cornSet);
+			add(cornSet2);
 			add(fence);
 			add(sign);
 
@@ -928,11 +928,13 @@ class PlayState extends MusicBeatState
 				}
 			case 'dave-splitathon':
 				{
-					dad.y += 250;
+					dad.x += 100;
+					dad.y += 300;
 				}
 			case 'bambi-splitathon':
 				{
-					dad.y += 300;
+					dad.x += 175;
+					dad.y += 400;
 				}
 			case 'bambi-angey':
 				dad.y += 450;
@@ -1806,10 +1808,10 @@ class PlayState extends MusicBeatState
 			switch (curStep)
 			{
 				case 4736:
-					splitathonExpression('lookup', 125, 360);
+					splitathonExpression('lookup', 225, 400);
 				case 4800:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
-					splitathonExpression('backup', -300, 360);
+					splitathonExpression('backup', -100, 400);
 					addSplitathonChar("bambi-splitathon");
 					if (BAMBICUTSCENEICONHURHURHUR == null)
 					{
@@ -1823,17 +1825,17 @@ class PlayState extends MusicBeatState
 					}
 				case 5824:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
-					splitathonExpression('bambi-what', -300, 500);
+					splitathonExpression('bambi-what', -100, 550);
 					addSplitathonChar("dave-splitathon");
 					iconP2.animation.play("dave", true);
 				case 6080:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
-					splitathonExpression('end', -300, 360);
+					splitathonExpression('end', -100, 400);
 					addSplitathonChar("bambi-splitathon");
 					iconP2.animation.play("bambi", true);
 				case 8384:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
-					splitathonExpression('bambi-corn', -300, 500);
+					splitathonExpression('bambi-corn', -100, 550);
 					addSplitathonChar("dave-splitathon");
 					iconP2.animation.play("dave", true);
 			}
@@ -3535,11 +3537,13 @@ class PlayState extends MusicBeatState
 		{
 			case 'dave-splitathon':
 				{
-					dad.y += 250;
+					dad.x += 100;
+					dad.y += 300;
 				}
 			case 'bambi-splitathon':
 				{
-					dad.y += 425;
+					dad.x += 100;
+					dad.y += 450;
 				}
 		}
 	}
@@ -3548,7 +3552,7 @@ class PlayState extends MusicBeatState
 	{
 		if (SONG.song.toLowerCase() == 'splitathon')
 		{
-			camFollow.setPosition(dad.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
+			camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 100);
 			thing.color = 0xFF878787;
 			thing.x = x;
 			thing.y = y;
