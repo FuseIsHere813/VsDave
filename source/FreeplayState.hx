@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flash.text.TextField;
 import flixel.FlxG;
@@ -54,7 +55,6 @@ class FreeplayState extends MusicBeatState
         0xFFffaa6f, // SENPAI
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD
-		// moldy is neurodivergent cyndaquil you dumbass he can reclaim it so yeah stop censoring our comments
 		0xFF00FFFF,
 		0xFFFF1212 //tristan
 
@@ -284,10 +284,15 @@ class FreeplayState extends MusicBeatState
 			if (controls.ACCEPT)
 			{
 				LoadProperPack();
-				CurrentSongIcon.destroy();
-				NameAlpha.destroy();
-				GoToActualFreeplay();
-				InMainFreeplayState = true;
+				FlxTween.tween(CurrentSongIcon, {alpha: 0}, 1);
+				FlxTween.tween(NameAlpha, {alpha: 0}, 1);
+				new FlxTimer().start(1, function(Dumbshit:FlxTimer)
+				{
+					CurrentSongIcon.visible = false;
+					NameAlpha.visible = false;
+					GoToActualFreeplay();
+					InMainFreeplayState = true;
+				});
 			}
 			if (controls.BACK)
 			{
