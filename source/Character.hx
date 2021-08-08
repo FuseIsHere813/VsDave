@@ -733,18 +733,18 @@ class Character extends FlxSprite
 				playAnim('idle');
 				
 			case 'bambi-splitathon':
-				frames = Paths.getSparrowAtlas('splitathon/bambiSplitathon');
-				animation.addByPrefix('idle', 'i', 24, false);
-				animation.addByPrefix('singDOWN', 'd', 24, false);
-				animation.addByPrefix('singUP', 'u', 24, false);
-				animation.addByPrefix('singLEFT', 'l', 24, false);
-				animation.addByPrefix('singRIGHT', 'r', 24, false);
+				frames = Paths.getSparrowAtlas('splitathon/Bambi_Splitathon');
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 							
 				addOffset('idle');
-				addOffset("singUP", 0, 0);
-				addOffset("singRIGHT", 0, 0);
-				addOffset("singLEFT", 0, 0);
-				addOffset("singDOWN", 0, 0);
+				addOffset("singUP", -24, 15);
+				addOffset("singRIGHT", -34, -6);
+				addOffset("singLEFT", -3, 6);
+				addOffset("singDOWN", -20, -10);
 		
 				playAnim('idle');
 				

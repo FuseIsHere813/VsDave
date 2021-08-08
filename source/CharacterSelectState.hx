@@ -258,7 +258,8 @@ class CharacterSelectState extends MusicBeatState
 	}
 	
 	
-	public function endIt(e:FlxTimer=null){
+	public function endIt(e:FlxTimer=null)
+	{
 		trace("ENDING");
 		PlayState.characteroverride = CharactersList[current];
 		PlayState.curmult = CharacterNoteMs[current];

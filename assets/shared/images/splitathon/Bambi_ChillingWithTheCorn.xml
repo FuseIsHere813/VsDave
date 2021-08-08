@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Bambi_ChillingWithTheCorn.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="cool0000" x="0" y="0" width="253" height="281"/>
+	<SubTexture name="cool0001" x="0" y="0" width="253" height="281"/>
+	<SubTexture name="cool0002" x="257" y="0" width="253" height="281"/>
+	<SubTexture name="cool0003" x="257" y="0" width="253" height="281"/>
+	<SubTexture name="cool0004" x="514" y="0" width="253" height="281"/>
+	<SubTexture name="cool0005" x="514" y="0" width="253" height="281"/>
+	<SubTexture name="cool0006" x="771" y="0" width="253" height="281"/>
+	<SubTexture name="cool0007" x="771" y="0" width="253" height="281"/>
+</TextureAtlas>

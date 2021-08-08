@@ -86,7 +86,7 @@ class FreeplayState extends MusicBeatState
 
 		// LOAD CHARACTERS
 
-		LoadRandomMenuBg.randomize(bg);
+		bg.loadGraphic(MainMenuState.randomizeBG());
 		bg.color = 0xFF4965FF;
 		add(bg);
 

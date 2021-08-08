@@ -36,7 +36,7 @@ class OptionsMenu extends MusicBeatState
 		menuBG.updateHitbox();
 		menuBG.screenCenter();
 		menuBG.antialiasing = true;
-		LoadRandomMenuBg.randomize(menuBG);
+		menuBG.loadGraphic(MainMenuState.randomizeBG());
 		add(menuBG);
 
 		grpControls = new FlxTypedGroup<Alphabet>();

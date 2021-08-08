@@ -36,19 +36,7 @@ class StoryMenuState extends MusicBeatState
 		['Vs-Tristan']
 	];
 
-	var actualWeeks:Array<Dynamic> = [
-		0,
-		1,
-		2,
-		3,
-		4,
-		5,
-		6,
-		7,
-		10,
-		8,
-		9
-	];
+	var actualWeeks:Array<Dynamic> = [0, 1, 2, 3, 4, 5, 6, 7, 10, 8, 9];
 
 	var curDifficulty:Int = 1;
 
@@ -286,7 +274,7 @@ class StoryMenuState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('doom'));
 			changeWeek(7);
 			imageBG.destroy();
-				imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
+			imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
 			imageBG.antialiasing = true;
 			imageBG.screenCenter(X);
 			imageBG.active = false;
@@ -377,7 +365,7 @@ class StoryMenuState extends MusicBeatState
 				{
 					curDifficulty = 1;
 					sprDifficulty.animation.play('normal');
-				    sprDifficulty.offset.x = 70;
+				   sprDifficulty.offset.x = 70;
 				}
 			}
 
@@ -463,17 +451,6 @@ class StoryMenuState extends MusicBeatState
 			//	LoadingState.loadAndSwitchState(new CharacterSelectState(), true);
 			//});
 			//uncomment out the above code and comment out the other loadandswitchstate to allow for character selection in story mode!
-		}
-	}
-
-	override function beatHit()
-	{
-		super.beatHit();
-		//FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD});
-		//this one doesn't even work lol
-		for(char in grpWeekCharacters)
-		{
-			char.bopHead();
 		}
 	}
 
@@ -612,27 +589,28 @@ class StoryMenuState extends MusicBeatState
 			imageBG.active = false;
 			add(imageBG);
 		}
-			else
-			{
-				trace("this is not week 7");
-				imageBG.destroy();
-				imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
+		else
+		{
+			trace("this is not week 7");
+			imageBG.destroy();
+			imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
 			imageBG.antialiasing = true;
 			imageBG.screenCenter(X);
 			imageBG.active = false;
 			add(imageBG);
-			}
+		}
 	}
 
 	function updateText()
 	{
-		grpWeekCharacters.members[0].animation.play(weekCharacters[curWeek][0]);
-		grpWeekCharacters.members[1].animation.play(weekCharacters[curWeek][1]);
-		if (FlxG.save.data.tristanProgress == "pending play" && !dofunnytristan)
+		for (i in 0...grpWeekCharacters.members.length)
 		{
-			grpWeekCharacters.members[2].visible = false;
+			grpWeekCharacters.members[i].animation.play(weekCharacters[curWeek][i]);
+			if (FlxG.save.data.tristanProgress == "pending play" && !dofunnytristan && i == 2)
+			{
+					grpWeekCharacters.members[i].visible = false;
+			}
 		}
-		grpWeekCharacters.members[2].animation.play(weekCharacters[curWeek][2]);
 		txtTracklist.text = "Tracks\n";
 
 		switch (grpWeekCharacters.members[0].animation.curAnim.name)

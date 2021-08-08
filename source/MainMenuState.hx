@@ -41,6 +41,16 @@ class MainMenuState extends MusicBeatState
 
 	var magenta:FlxSprite;
 	var camFollow:FlxObject;
+	public static var bgPaths:Array<String> = 
+	[
+		'backgrounds/SUSSUS AMOGUS',
+		'backgrounds/SwagnotrllyTheMod',
+		'backgrounds/Olyantwo',
+		'backgrounds/morie',
+		'backgrounds/mantis',
+		'backgrounds/mamakotomi',
+		'backgrounds/T5mpler'
+	];
 
 	override function create()
 	{
@@ -62,24 +72,21 @@ class MainMenuState extends MusicBeatState
 		{
 			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false];
 		}
-
-		var randomNum:Int = FlxG.random.int(0, 6);
-
-		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+		
+		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(randomizeBG());
 		bg.scrollFactor.x = 0;
 		bg.scrollFactor.y = 0.18;
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
 		bg.antialiasing = true;
-		LoadRandomMenuBg.randomize(bg);
 		bg.color = 0xFFFDE871;
 		add(bg);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
+		magenta = new FlxSprite(-80).loadGraphic(bg.graphic);
 		magenta.scrollFactor.x = 0;
 		magenta.scrollFactor.y = 0.18;
 		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
@@ -87,7 +94,6 @@ class MainMenuState extends MusicBeatState
 		magenta.screenCenter();
 		magenta.visible = false;
 		magenta.antialiasing = true;
-		LoadRandomMenuBg.randomizeNoNewRandomNum(magenta);
 		magenta.color = 0xFFfd719b;
 		add(magenta);
 		// magenta.scrollFactor.set();
@@ -111,7 +117,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.antialiasing = true;
 			if (firstStart)
 				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
-					{ 
+					{
 						finishedFunnyMove = true; 
 						changeItem();
 					}});
@@ -251,5 +257,10 @@ class MainMenuState extends MusicBeatState
 
 			spr.updateHitbox();
 		});
+	}
+	public static function randomizeBG():flixel.system.FlxAssets.FlxGraphicAsset
+	{
+		var chance:Int = FlxG.random.int(0, bgPaths.length - 1);
+		return Paths.image(bgPaths[chance]);
 	}
 }
