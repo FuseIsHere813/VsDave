@@ -849,7 +849,7 @@ class PlayState extends MusicBeatState
 		}
 
 		dad = new Character(100, 100, SONG.player2);
-		dadmirror = new Character(100, 100, "dave-angey");
+		dadmirror = new Character(100, 100, "dave-annoyed-3d");
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
