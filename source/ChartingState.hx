@@ -266,6 +266,7 @@ class ChartingState extends MusicBeatState
 	var check_changeBPM:FlxUICheckBox;
 	var stepperSectionBPM:FlxUINumericStepper;
 	var check_altAnim:FlxUICheckBox;
+	var pushNoteLength:FlxUINumericStepper;
 
 	function addSectionUI():Void
 	{
@@ -311,6 +312,16 @@ class ChartingState extends MusicBeatState
 		check_changeBPM = new FlxUICheckBox(10, 60, null, null, 'Change BPM', 100);
 		check_changeBPM.name = 'check_changeBPM';
 
+		pushNoteLength = new FlxUINumericStepper(10, 300, 1, 0, 0, _song.notes.length);
+		pushNoteLength.value = 0;
+		pushNoteLength.name = 'section_pushSectionNotesLength';
+
+		var pushSectionsButton:FlxButton = new FlxButton(100, 300, "Push Sections", function()
+		{
+			pushSections(Std.int(pushNoteLength.value));
+			pushNoteLength.value = 0;
+		});
+
 		tab_group_section.add(stepperLength);
 		tab_group_section.add(stepperSectionBPM);
 		tab_group_section.add(stepperCopy);
@@ -320,6 +331,8 @@ class ChartingState extends MusicBeatState
 		tab_group_section.add(copyButton);
 		tab_group_section.add(clearSectionButton);
 		tab_group_section.add(swapSection);
+		tab_group_section.add(pushNoteLength);
+		tab_group_section.add(pushSectionsButton);
 
 		UI_box.addGroup(tab_group_section);
 	}
@@ -777,6 +790,22 @@ class ChartingState extends MusicBeatState
 			_song.notes[daSec].sectionNotes.push(copiedNote);
 		}
 
+		updateGrid();
+	}
+
+	function pushSections(?sectionNumber = 0)
+	{
+		for (i in 0...sectionNumber)
+		{
+			for (i in curSection..._song.notes.length)
+			{
+				var nextSection:SwagSection = _song.notes[i + 1];
+				if (nextSection != null)
+				{
+					_song.notes[curSection] = nextSection;
+				}
+			}
+		}
 		updateGrid();
 	}
 

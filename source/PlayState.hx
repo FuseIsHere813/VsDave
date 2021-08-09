@@ -3302,42 +3302,27 @@ class PlayState extends MusicBeatState
 		{
 			// dad.dance();
 		}
-		if (SONG.song.toLowerCase() == 'furiosity')
+		switch (SONG.song.toLowerCase())
 		{
-			if (curStep == 512)
-			{
-				shakeCam = true;
-			}
-			else if (curStep == 768)
-			{
-				shakeCam = true;
-			}
-			else if (curStep == 640)
-			{
-				shakeCam = false;
-			}
-			else if (curStep == 896)
-			{
-				shakeCam = false;
-			}
-			if (curStep == 1305)
-			{
-				boyfriend.playAnim('hey', true);
-				gf.playAnim('cheer', true);
-			}
-		}
-		if (SONG.song.toLowerCase() == 'glitch')
-		{
-			if (curStep == 480 || curStep == 681 || curStep == 1390 || curStep == 1445 || curStep == 1515 || curStep == 1542 || curStep == 1598
-				|| curStep == 1655)
-			{
-				shakeCam = true;
-			}
-			if (curStep == 512 || curStep == 688 || curStep == 1420 || curStep == 1464 || curStep == 1540 || curStep == 1558 || curStep == 1608
-				|| curStep == 1745)
-			{
-				shakeCam = false;
-			}
+			case 'furiosity':
+				switch (curStep)
+				{
+					case 512 | 768:
+						shakeCam = true;
+					case 640 | 896:
+						shakeCam = false;
+					case 1305:
+						boyfriend.playAnim('hey', true);
+						gf.playAnim('cheer', true);
+				}
+			case 'glitch':
+				switch (curStep)
+				{
+					case 480 | 681 | 1390 | 1445 | 1515 | 1542 | 1598 | 1655:
+						shakeCam = true;
+					case 512 | 688 | 1420 | 1464 | 1540 | 1558 | 1608 | 1745:
+						shakeCam = false;
+				}
 		}
 	}
 

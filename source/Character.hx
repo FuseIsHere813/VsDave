@@ -192,7 +192,7 @@ class Character extends FlxSprite
 	
 				playAnim('idle');
 			case 'dave-annoyed-3d':
-				frames = Paths.getSparrowAtlas('Dave_insanity_3d');
+				frames = Paths.getSparrowAtlas('dave/Dave_insanity_3d');
 				animation.addByPrefix('idle', 'DaveAngry idle dance', 24);
 				animation.addByPrefix('singUP', 'DaveAngry Sing Note UP', 24);
 				animation.addByPrefix('singRIGHT', 'DaveAngry Sing Note RIGHT', 24);
