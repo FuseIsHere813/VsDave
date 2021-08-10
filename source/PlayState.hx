@@ -3379,7 +3379,7 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 		}
 
-		if (dad.holdTimer <= 0)
+		if (dad.holdTimer <= 0 && dad.animation.finished)
 		{
 			dad.dance();
 			dadmirror.dance();
