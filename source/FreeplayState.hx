@@ -133,7 +133,7 @@ class FreeplayState extends MusicBeatState
 			addWeek(['Supernovae', 'Glitch'], 8, ['bambi-stupid']);
 			if (FlxG.save.data.cheatingFound)
 			{
-				addWeek(['cheating'], 8, ['bambi-3d']);
+				addWeek(['Cheating'], 8, ['bambi-3d']);
 			}
 		}
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
