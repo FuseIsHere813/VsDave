@@ -1467,6 +1467,7 @@ class PlayState extends MusicBeatState
 			{
 				var daStrumTime:Float = songNotes[0];
 				var daNoteData:Int = Std.int(songNotes[1] % 4);
+				var daNoteStyle:String = songNotes[3];
 
 				var gottaHitNote:Bool = section.mustHitSection;
 
@@ -1481,7 +1482,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, false, gottaHitNote, daNoteStyle);
 				swagNote.sustainLength = songNotes[2];
 				swagNote.scrollFactor.set(0, 0);
 
@@ -3093,7 +3094,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function badNoteCheck(note:Note)
+	function badNoteCheck(note:Note = null)
 	{
 		// just double pasting this shit cuz fuk u
 		// REDO THIS SYSTEM!
@@ -3151,6 +3152,10 @@ class PlayState extends MusicBeatState
 	{
 		if (!note.wasGoodHit)
 		{
+			if(note.noteStyle == 'phone')
+				{
+					health -= 0.8;
+				}
 			if (!note.isSustainNote)
 			{
 				popUpScore(note.strumTime, note.noteData);
@@ -3159,6 +3164,7 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('note_click'));
 				}
 				combo += 1;
+
 			}
 			else
 				totalNotesHit += 1;
@@ -3358,7 +3364,7 @@ class PlayState extends MusicBeatState
 			// Conductor.changeBPM(SONG.bpm);
 		}
 
-		if (dad.holdTimer <= 0)
+		if (dad.holdTimer <= 0 && dad.animation.finished)
 		{
 			dad.dance();
 			dadmirror.dance();

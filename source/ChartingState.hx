@@ -57,6 +57,11 @@ class ChartingState extends MusicBeatState
 	var amountSteps:Int = 0;
 	var bullshitUI:FlxGroup;
 
+	var noteType:Int = 0;
+	var styles:Array<String> = ['normal', 'phone'];
+
+	var noteTypeText:FlxText = new FlxText(-200, 0, 0,'Charting: Note', 16);
+
 	var highlight:FlxSprite;
 
 	var GRID_SIZE:Int = 40;
@@ -89,6 +94,9 @@ class ChartingState extends MusicBeatState
 
 		gridBG = FlxGridOverlay.create(GRID_SIZE, GRID_SIZE, GRID_SIZE * 8, GRID_SIZE * 16);
 		add(gridBG);
+
+		noteTypeText.scrollFactor.set(0, 0);
+		add(noteTypeText);
 
 		leftIcon = new HealthIcon('bf');
 		rightIcon = new HealthIcon('dad');
@@ -603,6 +611,22 @@ class ChartingState extends MusicBeatState
 					FlxG.sound.music.play();
 				}
 			}
+			if(FlxG.keys.justPressed.Z)
+			{
+				this.noteType--;
+				if(noteType < 0)
+				{
+					noteType = styles.length - 1;
+				}
+			}
+			if(FlxG.keys.justPressed.X)
+				{
+					this.noteType++;
+					if(noteType == styles.length)
+					{
+						noteType = 0;
+					}
+				}
 
 			if (FlxG.keys.justPressed.R)
 			{
@@ -890,8 +914,11 @@ class ChartingState extends MusicBeatState
 			var daNoteInfo = i[1];
 			var daStrumTime = i[0];
 			var daSus = i[2];
+			var daStyle = i[3];
 
-			var note:Note = new Note(daStrumTime, daNoteInfo % 4);
+			
+
+			var note:Note = new Note(daStrumTime, daNoteInfo % 4, null, false, true, daStyle);
 			note.sustainLength = daSus;
 			note.setGraphicSize(GRID_SIZE, GRID_SIZE);
 			note.updateHitbox();
@@ -986,8 +1013,9 @@ class ChartingState extends MusicBeatState
 		var noteStrum = getStrumTime(dummyArrow.y) + sectionStartTime();
 		var noteData = Math.floor(FlxG.mouse.x / GRID_SIZE);
 		var noteSus = 0;
+		var noteStyle = styles[this.noteType];
 
-		_song.notes[curSection].sectionNotes.push([noteStrum, noteData, noteSus]);
+		_song.notes[curSection].sectionNotes.push([noteStrum, noteData, noteSus, noteStyle]);
 
 		curSelectedNote = _song.notes[curSection].sectionNotes[_song.notes[curSection].sectionNotes.length - 1];
 
