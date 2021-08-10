@@ -281,11 +281,11 @@ class FreeplayState extends MusicBeatState
 			{
 				UpdatePackSelection(1);
 			}
-			if (controls.ACCEPT)
+			if (controls.ACCEPT && InMainFreeplayState)
 			{
 				LoadProperPack();
-				FlxTween.tween(CurrentSongIcon, {alpha: 0}, 1);
-				FlxTween.tween(NameAlpha, {alpha: 0}, 1);
+				FlxTween.tween(CurrentSongIcon, {alpha: 0}, 0.3);
+				FlxTween.tween(NameAlpha, {alpha: 0}, 0.3);
 				new FlxTimer().start(1, function(Dumbshit:FlxTimer)
 				{
 					CurrentSongIcon.visible = false;

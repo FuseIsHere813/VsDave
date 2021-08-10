@@ -24,3 +24,8 @@ bambi-splitathon
 dave-annoyed
 tristan
 bambi-3d
+dave-annoyed-3d
+tristan-golden
+bambi-angey
+bambi-old
+dave-annoyed
