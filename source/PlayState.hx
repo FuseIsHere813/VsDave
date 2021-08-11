@@ -3453,7 +3453,7 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('hey', true);
 		}
 
-		if (curBeat % 8 == 7 && SONG.song == 'Tutorial' && dad.curCharacter.startsWith('gf') && characteroverride != 'bf-pixel') // fixed your stupid fucking code ninjamuffin this is literally the easiest shit to fix like come on seriously why are you so dumb
+		if (curBeat % 8 == 7 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf') // fixed your stupid fucking code ninjamuffin this is literally the easiest shit to fix like come on seriously why are you so dumb
 		{
 			dad.playAnim('cheer', true);
 			boyfriend.playAnim('hey', true);
