@@ -1068,13 +1068,25 @@ class PlayState extends MusicBeatState
 		// healthBar
 		add(healthBar);
 
+		var credits:String;
+		switch (SONG.song.toLowerCase())
+		{
+			case 'supernovae':
+				credits = 'Original Song made by ArchWk';
+			case 'glitch':
+				credits = 'Original Song made by The Boneyard';
+			case 'screwed':
+				credits = 'Original Song made by ALittleBitHorrified';
+			default:
+				credits = '';
+		}
 		// Add Kade Engine watermark
 		var kadeEngineWatermark = new FlxText(4, FlxG.height
 			- 4, 0,
 			SONG.song
 			+ " "
 			+ (storyDifficulty == 3 ? "Unnerfed" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy")
-			+ " - Dave Engine",
+			+ credits + " - Dave Engine",
 			16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
