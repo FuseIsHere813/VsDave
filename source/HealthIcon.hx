@@ -1,6 +1,7 @@
 package;
 
 import flixel.FlxSprite;
+import flixel.math.FlxMath;
 
 class HealthIcon extends FlxSprite
 {
@@ -56,6 +57,8 @@ class HealthIcon extends FlxSprite
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+		offset.set(Std.int(FlxMath.bound(width - 150,0)),Std.int(FlxMath.bound(height - 150,0)));
+
 
 		if (sprTracker != null)
 			setPosition(sprTracker.x + sprTracker.width + 10, sprTracker.y - 30);
