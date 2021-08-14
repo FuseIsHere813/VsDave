@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxPoint;
 import Controls.KeyboardScheme;
 import flixel.FlxG;
 import flixel.FlxObject;
@@ -13,6 +14,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import io.newgrounds.NG;
 import lime.app.Application;
+
 
 using StringTools;
 
@@ -103,6 +105,9 @@ class MainMenuState extends MusicBeatState
 
 		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
 
+		FlxG.camera.follow(camFollow, null, 0.06);
+		
+		camFollow.setPosition(640, 150.5);
 		for (i in 0...optionShit.length)
 		{
 			var menuItem:FlxSprite = new FlxSprite(0, FlxG.height * 1.6);
@@ -126,8 +131,6 @@ class MainMenuState extends MusicBeatState
 		}
 
 		firstStart = false;
-
-		FlxG.camera.follow(camFollow, null, 0.06);
 
 		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer + " FNF - " + "Dave Engine", 12);
 		versionShit.scrollFactor.set();

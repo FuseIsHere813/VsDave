@@ -938,6 +938,7 @@ class PlayState extends MusicBeatState
 				}
 			case 'bambi-angey':
 				dad.y += 450;
+				dad.x += 100;
 		}
 
 		dadmirror.y += 0;
@@ -1085,8 +1086,8 @@ class PlayState extends MusicBeatState
 			- 4, 0,
 			SONG.song
 			+ " "
-			+ (storyDifficulty == 3 ? "Unnerfed" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy")
-			+ credits + " - Dave Engine",
+			+ (storyDifficulty == 3 ? "Unnerfed" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") 
+			+ " - Dave Engine" + "\n" + credits,
 			16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
