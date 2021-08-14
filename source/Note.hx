@@ -202,7 +202,7 @@ class Note extends FlxSprite
 			}
 		}
 		
-		if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState"))
+		if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState") && PlayState.SONG.song.toLowerCase() == 'cheating')
 		{
 			var state:PlayState = cast(FlxG.state,PlayState);
 			InPlayState = true;
