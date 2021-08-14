@@ -940,8 +940,8 @@ class PlayState extends MusicBeatState
 				dad.y += 450;
 		}
 
-		dadmirror.y += 0;
-		dadmirror.x += 150;
+		dadmirror.y -= 20;
+		dadmirror.x -= 130;
 
 		dadmirror.visible = false;
 
