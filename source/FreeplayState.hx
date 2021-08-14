@@ -45,6 +45,8 @@ class FreeplayState extends MusicBeatState
 
 	private var NameAlpha:Alphabet;
 
+	var loadingPack:Bool = false;
+
 	var songColors:Array<FlxColor> = [
         0xFFca1f6f, // GF
         0xFFc885e5, // DAD
@@ -281,17 +283,19 @@ class FreeplayState extends MusicBeatState
 			{
 				UpdatePackSelection(1);
 			}
-			if (controls.ACCEPT && InMainFreeplayState)
+			if (controls.ACCEPT && !loadingPack)
 			{
+				loadingPack = true;
 				LoadProperPack();
 				FlxTween.tween(CurrentSongIcon, {alpha: 0}, 0.3);
 				FlxTween.tween(NameAlpha, {alpha: 0}, 0.3);
-				new FlxTimer().start(1, function(Dumbshit:FlxTimer)
+				new FlxTimer().start(0.5, function(Dumbshit:FlxTimer)
 				{
 					CurrentSongIcon.visible = false;
 					NameAlpha.visible = false;
 					GoToActualFreeplay();
 					InMainFreeplayState = true;
+					loadingPack = false;
 				});
 			}
 			if (controls.BACK)
