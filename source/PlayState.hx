@@ -593,7 +593,7 @@ class PlayState extends MusicBeatState
 				add(waveSpriteFG);
 			 */
 		}
-		else if (SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity' || SONG.song.toLowerCase() == 'supernovae' || SONG.song.toLowerCase() == 'old-insanity')
+		else if (SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity' || SONG.song.toLowerCase() == 'supernovae')
 		{
 			defaultCamZoom = 0.9;
 			curStage = 'daveHouse';
@@ -644,6 +644,11 @@ class PlayState extends MusicBeatState
 				bg.shader = testshader.shader;
 				curbg = bg;
 			}
+		}
+		else if(SONG.song.toLowerCase() == 'old-insanity')
+		{
+			var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/daveoldbg'));
+			add(bg);
 		}
 		else if (SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'screwed' || SONG.song.toLowerCase() == 'splitathon')
 		{
@@ -1904,6 +1909,7 @@ class PlayState extends MusicBeatState
 					dad.canDance = false;
 			}
 		}
+
 
 		switch (curStage)
 		{

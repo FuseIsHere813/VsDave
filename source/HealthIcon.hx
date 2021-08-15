@@ -50,6 +50,7 @@ class HealthIcon extends FlxSprite
 		animation.add('tristan', [30, 31], 0, false, isPlayer);
 		animation.add('tristan-golden', [38, 39], 0, false, isPlayer);
 		animation.add('bambi-angey', [40, 41], 0, false, isPlayer);
+		animation.add('dave-old', [42, 43], 0, false, isPlayer);
 		animation.play(char);
 		scrollFactor.set();
 	}

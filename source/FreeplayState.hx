@@ -148,7 +148,7 @@ class FreeplayState extends MusicBeatState
 				}
 			}
 			addWeek(['Vs-Tristan'], 10, ['tristan']);
-			addWeek(['Old-Insanity'], 7, ['dave']);
+			addWeek(['Old-Insanity'], 7, ['dave-old']);
 			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Screwed'], 8, ['bambi', 'bambi', 'bambi-angey']);
 		}
 	}
