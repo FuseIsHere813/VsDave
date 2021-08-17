@@ -8,7 +8,9 @@ internal,blocked,bambi,bad
 internal,corn-theft,bambi,bad
 internal,maze,bambi,good
 internal,splitathon,the-duo,good
-external,a-new-day,dave,good
+internal,a-new-day,dave,good
 external,bambi-speak,bambi,bad
 external,good-ending,bf-old,good
 external,bad-ending,bf-old,bad
+internal,old-corn-theft,bambi,bad
+internal,old-maze,bambi,bad
