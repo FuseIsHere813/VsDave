@@ -1312,8 +1312,8 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			FlxTween.tween(black, {alpha: 0}, 6.66);
-			new FlxTimer().start(6.66, function(fuckingSussy:FlxTimer)
+			FlxTween.tween(black, {alpha: 0}, 1);
+			new FlxTimer().start(1, function(fuckingSussy:FlxTimer)
 			{
 				if (dialogueBox != null)
 				{
