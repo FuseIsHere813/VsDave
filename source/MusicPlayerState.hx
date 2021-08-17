@@ -1,5 +1,6 @@
 package;
 
+import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.system.FlxSoundGroup;
@@ -176,8 +177,8 @@ class MusicPlayerState extends MusicBeatState
             {
                 if (CurVocals != null)
                 {
-                CurVocals.stop();
-                FlxG.sound.list.remove(CurVocals);
+                    CurVocals.stop();
+                    FlxG.sound.list.remove(CurVocals);
                 }
                 HideBar();
                 FlxG.sound.music.stop();
@@ -244,17 +245,27 @@ class MusicPlayerState extends MusicBeatState
 
                 for (i in 0...iconArray.length)
                 {
-                   iconArray[i].alpha = 0;
+                    if(i != curSelected)
+                    {
+                        FlxTween.tween(iconArray[i], {alpha:0}, 0.15);
+                        //iconArray[i].alpha = 0;
+                    }
+                    else
+                    {
+                        iconArray[curSelected].alpha = 1;
+                    }
                 }
-    
-                iconArray[curSelected].alpha = 1;
     
                 for (item in grpSongs.members)
                 {
                     item.targetY = bullShit - curSelected;
                     bullShit++;
 
-                    item.alpha = 0;
+                    if(item.targetY != 0)
+                        {
+                            FlxTween.tween(item, {alpha:0}, 0.15);
+                            //item.alpha = 0;
+                        }
                     // item.setGraphicSize(Std.int(item.width * 0.8));
 
                     if (item.targetY == 0)
@@ -270,21 +281,39 @@ class MusicPlayerState extends MusicBeatState
 
     function HideBar()
     {
-        iconP1.visible = false;
-        iconP2.visible = false;
-        barText.visible = false;
-        healthBar.visible = false;
-        healthBarBG.visible = false;
+        FlxTween.tween(iconP1, {alpha: 0}, 0.15);
+        FlxTween.tween(iconP2, {alpha: 0}, 0.15);
+        FlxTween.tween(barText, {alpha: 0}, 0.15);
+        FlxTween.tween(healthBar, {alpha: 0}, 0.15);
+        FlxTween.tween(healthBarBG, {alpha: 0}, 0.15);
+        new FlxTimer().start(0.15, function(bitchFuckAssDickCockBalls:FlxTimer)
+        {
+            iconP1.visible = false;
+            iconP2.visible = false;
+            barText.visible = false;
+            healthBar.visible = false;
+            healthBarBG.visible = false;
+        });
     }
 
     function ShowBar(char:String)
     {
+        iconP1.alpha = 0;
+        iconP2.alpha = 0;
+        barText.alpha = 0;
+        healthBar.alpha = 0;
+        healthBarBG.alpha = 0;
         iconP1.visible = true;
         iconP2.animation.play(char);
         iconP2.visible = true;
         barText.visible = true;
         healthBar.visible = true;
         healthBarBG.visible = true;
+        FlxTween.tween(iconP1, {alpha: 1}, 0.15);
+        FlxTween.tween(iconP2, {alpha: 1}, 0.15);
+        FlxTween.tween(barText, {alpha: 1}, 0.15);
+        FlxTween.tween(healthBar, {alpha: 1}, 0.15);
+        FlxTween.tween(healthBarBG, {alpha: 1}, 0.15);
     }
 
 
@@ -306,17 +335,27 @@ class MusicPlayerState extends MusicBeatState
 
         for (i in 0...iconArray.length)
         {
-            iconArray[i].alpha = 0.6;
+            if(i != curSelected)
+            {
+                FlxTween.tween(iconArray[i], {alpha: 0.6}, 0.15);
+                //iconArray[i].alpha = 0.6;
+            }
+            else
+            {
+                iconArray[curSelected].alpha = 1;
+            }
         }
-    
-        iconArray[curSelected].alpha = 1;
     
         for (item in grpSongs.members)
         {
             item.targetY = bullShit - curSelected;
             bullShit++;
 
-            item.alpha = 0.6;
+            if(item.targetY != 0)
+            {
+                FlxTween.tween(item, {alpha: 0.6}, 0.15);
+                //item.alpha = 0.6;
+            }
             // item.setGraphicSize(Std.int(item.width * 0.8));
 
             if (item.targetY == 0)

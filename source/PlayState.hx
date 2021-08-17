@@ -72,8 +72,6 @@ class PlayState extends MusicBeatState
 
 	public var elapsedtime:Float = 0;
 
-	public static var loadRep:Bool = false;
-
 	var halloweenLevel:Bool = false;
 
 	private var vocals:FlxSound;
@@ -160,7 +158,6 @@ class PlayState extends MusicBeatState
 	var talking:Bool = true;
 	var songScore:Int = 0;
 	var scoreTxt:FlxText;
-	var replayTxt:FlxText;
 
 	var GFScared:Bool = false;
 
@@ -178,9 +175,6 @@ class PlayState extends MusicBeatState
 	var funneEffect:FlxSprite;
 	var inCutscene:Bool = false;
 
-	public static var repPresses:Int = 0;
-	public static var repReleases:Int = 0;
-
 	public static var timeCurrently:Float = 0;
 	public static var timeCurrentlyR:Float = 0;
 
@@ -195,15 +189,12 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		eyesoreson = FlxG.save.data.eyesores;
+
 		sicks = 0;
 		bads = 0;
 		shits = 0;
 		goods = 0;
-
 		misses = 0;
-
-		repPresses = 0;
-		repReleases = 0;
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
@@ -1116,14 +1107,6 @@ class PlayState extends MusicBeatState
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
-
-		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (FlxG.save.data.downscroll ? 100 : -100), 0, "REPLAY", 20);
-		replayTxt.setFormat(Paths.font("vcr.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		replayTxt.scrollFactor.set();
-		if (loadRep)
-		{
-			add(replayTxt);
-		}
 
 		iconP1 = new HealthIcon((characteroverride == "none" || characteroverride == "bf") ? SONG.player1 : characteroverride, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
@@ -2070,12 +2053,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
-		if (loadRep) // rep debug
-		{
-			FlxG.watch.addQuick('rep rpesses', repPresses);
-			FlxG.watch.addQuick('rep releases', repReleases);
-			// FlxG.watch.addQuick('Queued',inputsQueued);
-		}
 
 		if (curSong == 'Fresh')
 		{
@@ -2875,32 +2852,11 @@ class PlayState extends MusicBeatState
 		var downR = controls.DOWN_R;
 		var leftR = controls.LEFT_R;
 
-		if (loadRep) // replay code
-		{
-			// disable input
-			up = false;
-			down = false;
-			right = false;
-			left = false;
-
-			// new input
-
-			// if (rep.replay.keys[repPresses].time == Conductor.songPosition)
-			//	trace('DO IT!!!!!');
-
-			// timeCurrently = Math.abs(rep.replay.keyPresses[repPresses].time - Conductor.songPosition);
-			// timeCurrentlyR = Math.abs(rep.replay.keyReleases[repReleases].time - Conductor.songPosition);
-		}
-		else if (!loadRep) // record replay code
-		{
-			// no fuck you
-		}
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
 		{
-			repPresses++;
 			boyfriend.holdTimer = 0;
 
 			var possibleNotes:Array<Note> = [];
@@ -2950,12 +2906,7 @@ class PlayState extends MusicBeatState
 					}
 					else if (possibleNotes[0].noteData == possibleNotes[1].noteData)
 					{
-						if (loadRep)
-						{
-							noteCheck(controlArray[daNote.noteData], daNote);
-						}
-						else
-							noteCheck(controlArray[daNote.noteData], daNote);
+						noteCheck(controlArray[daNote.noteData], daNote);
 					}
 					else
 					{
@@ -3004,11 +2955,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if ((up || right || down || left)
-			&& generatedMusic
-			|| (upHold || downHold || leftHold || rightHold)
-			&& loadRep
-			&& generatedMusic)
+		if ((up || right || down || left) && generatedMusic)
 		{
 			notes.forEachAlive(function(daNote:Note)
 			{
@@ -3055,7 +3002,6 @@ class PlayState extends MusicBeatState
 					if (upR)
 					{
 						spr.animation.play('static');
-						repReleases++;
 					}
 				case 3:
 					if (rightP && spr.animation.curAnim.name != 'confirm')
@@ -3063,7 +3009,6 @@ class PlayState extends MusicBeatState
 					if (rightR)
 					{
 						spr.animation.play('static');
-						repReleases++;
 					}
 				case 1:
 					if (downP && spr.animation.curAnim.name != 'confirm')
@@ -3071,7 +3016,6 @@ class PlayState extends MusicBeatState
 					if (downR)
 					{
 						spr.animation.play('static');
-						repReleases++;
 					}
 				case 0:
 					if (leftP && spr.animation.curAnim.name != 'confirm')
@@ -3079,7 +3023,6 @@ class PlayState extends MusicBeatState
 					if (leftR)
 					{
 						spr.animation.play('static');
-						repReleases++;
 					}
 			}
 
@@ -3162,14 +3105,7 @@ class PlayState extends MusicBeatState
 
 	function noteCheck(keyP:Bool, note:Note):Void // sorry lol
 	{
-		if (loadRep)
-		{
-			if (keyP)
-				goodNoteHit(note);
-			else if (!theFunne)
-				badNoteCheck(note);
-		}
-		else if (keyP)
+		if (keyP)
 		{
 			goodNoteHit(note);
 		}
