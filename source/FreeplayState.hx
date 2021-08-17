@@ -147,7 +147,7 @@ class FreeplayState extends MusicBeatState
 					Highscore.setScore(Highscore.formatSong('week10', diff), 0, "bf");
 				}
 			}
-			addWeek(['Vs-Tristan'], 10, ['tristan']);
+			addWeek(['ThreeDimensional', ' Second-Tristan-Song'], 10, ['tristan', 'tristan']);
 			addWeek(['Old-Insanity'], 7, ['dave']);
 			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Screwed'], 8, ['bambi', 'bambi', 'bambi-angey']);
 		}
@@ -301,7 +301,7 @@ class FreeplayState extends MusicBeatState
 			if (controls.BACK)
 			{
 				FlxG.switchState(new MainMenuState());
-			}
+			}	
 		
 			return;
 		}
@@ -368,7 +368,7 @@ class FreeplayState extends MusicBeatState
 	function changeDiff(change:Int = 0)
 	{
 		curDifficulty += change;
-		if (songs[curSelected].week != 7)
+		if (songs[curSelected].week != 7 && songs[curSelected].songName.toLowerCase() != 'old-insanity')
 		{
 		if (curDifficulty < 0)
 			curDifficulty = 2;
@@ -410,23 +410,23 @@ class FreeplayState extends MusicBeatState
 			curSelected = 0;
 		curChar = Highscore.getChar(songs[curSelected].songName, curDifficulty);
 		if (songs[curSelected].week != 7)
-			{
+		{
 			if (curDifficulty < 0)
 				curDifficulty = 2;
 			if (curDifficulty > 2)
 				curDifficulty = 0;
-			}
-			switch (curDifficulty)
-			{
-				case 0:
-					diffText.text = "EASY" + " - " + curChar.toUpperCase();
-				case 1:
-					diffText.text = 'NORMAL' + " - " + curChar.toUpperCase();
-				case 2:
-					diffText.text = "HARD" + " - " + curChar.toUpperCase();
-				case 3:
-					diffText.text = "UNNERFED" + " - " + curChar.toUpperCase();
-			}
+		}
+		switch (curDifficulty)
+		{
+			case 0:
+				diffText.text = "EASY" + " - " + curChar.toUpperCase();
+			case 1:
+				diffText.text = 'NORMAL' + " - " + curChar.toUpperCase();
+			case 2:
+				diffText.text = "HARD" + " - " + curChar.toUpperCase();
+			case 3:
+				diffText.text = "UNNERFED" + " - " + curChar.toUpperCase();
+		}
 		// selector.y = (70 * curSelected) + 30;
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
