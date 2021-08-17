@@ -946,7 +946,7 @@ class PlayState extends MusicBeatState
 				dad.x += 100;
 		}
 
-		dadmirror.y -= 20;
+		dadmirror.y -= 50;
 		dadmirror.x -= 130;
 
 		dadmirror.visible = false;
@@ -1312,8 +1312,8 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			FlxTween.tween(black, {alpha: 0}, 6.66);
-			new FlxTimer().start(6.66, function(fuckingSussy:FlxTimer)
+			FlxTween.tween(black, {alpha: 0}, 1);
+			new FlxTimer().start(1, function(fuckingSussy:FlxTimer)
 			{
 				if (dialogueBox != null)
 				{
@@ -3394,7 +3394,8 @@ class PlayState extends MusicBeatState
 			// else
 			// Conductor.changeBPM(SONG.bpm);
 		}
-
+		trace('Hold timer is under 0? ' + (dad.holdTimer <= 0) + "Hold timer's currently " + dad.holdTimer);
+		trace('Is the current animation finished? ' + (dad.animation.finished));
 		if (dad.holdTimer <= 0 && dad.animation.finished)
 		{
 			dad.dance();
@@ -3577,7 +3578,7 @@ class PlayState extends MusicBeatState
 	{
 		if (SONG.song.toLowerCase() == 'splitathon')
 		{
-			camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 100);
+			camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 150);
 			thing.color = 0xFF878787;
 			thing.x = x;
 			thing.y = y;
