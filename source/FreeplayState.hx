@@ -147,13 +147,8 @@ class FreeplayState extends MusicBeatState
 					Highscore.setScore(Highscore.formatSong('week10', diff), 0, "bf");
 				}
 			}
-<<<<<<< HEAD
 			addWeek(['ThreeDimensional', ' Second-Tristan-Song'], 10, ['tristan', 'tristan']);
 			addWeek(['Old-Insanity'], 7, ['dave']);
-=======
-			addWeek(['Vs-Tristan'], 10, ['tristan']);
-			addWeek(['Old-Insanity'], 7, ['dave-old']);
->>>>>>> b61118e3702aa1262dd10935698a3db1a34e549c
 			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Screwed'], 8, ['bambi', 'bambi', 'bambi-angey']);
 		}
 	}
