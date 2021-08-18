@@ -33,7 +33,7 @@ class StoryMenuState extends MusicBeatState
 		['House', 'Insanity', 'Furiosity'],
 		['Blocked', 'Corn-Theft', 'Maze'],
 		['Splitathon'],
-		['Vs-Tristan']
+		['Threedimensional', 'Second-Tristan-Song']
 	];
 
 	var actualWeeks:Array<Dynamic> = [0, 1, 2, 3, 4, 5, 6, 7, 10, 8, 9];
