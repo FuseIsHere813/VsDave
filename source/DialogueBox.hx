@@ -210,7 +210,6 @@ class DialogueBox extends FlxSpriteGroup
 			case 'house' | 'insanity' | 'furiosity' | 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon':
 				portraitLeft.setPosition(276.95, 170);
 				portraitLeft.visible = true;
-				portraitRight.setGraphicSize(Std.int(portraitRight.width / bfPortraitSizeMultiplier));
 		}
 		add(portraitLeft);
 		add(portraitRight);
@@ -404,17 +403,13 @@ class DialogueBox extends FlxSpriteGroup
 			switch (curCharacter)
 			{
 				case 'dave' | 'bambi': //guys its the funny bambi character
-						portraitLeft.setPosition(276.95, 170);
+						portraitLeft.setPosition(220, 220);
 				case 'senpai':
 					portraitLeft.setPosition(-20, 70);
 					portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
 	
-				case 'bf': //create boyfriend & genderbent boyfriend
-					portraitRight.setPosition(-10, 20);
-					portraitRight.setGraphicSize(Std.int(portraitRight.width / bfPortraitSizeMultiplier));
-				case 'gf':
-					portraitRight.setPosition(-10, 30);
-					portraitRight.setGraphicSize(Std.int(portraitRight.width / bfPortraitSizeMultiplier));
+				case 'bf' | 'gf': //create boyfriend & genderbent boyfriend
+					portraitRight.setPosition(570, 220);
 			}
 			box.flipX = portraitLeft.visible;
 			portraitLeft.x -= 150;
@@ -495,8 +490,8 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/bambi_blocked';
 						portrait.portraitPrefix = 'bambi blocked portrait';
 					case 'corn-theft':
-						portrait.portraitPath = 'dialogue/bambi_corn theft';
-						portrait.portraitPrefix = 'bambi corn theft portrait';
+						portrait.portraitPath = 'dialogue/bambi_corntheft';
+						portrait.portraitPrefix = 'bambi corntheft portrait';
 					case 'maze':
 						portrait.portraitPath = 'dialogue/bambi_maze';
 						portrait.portraitPrefix = 'bambi maze portrait';
@@ -514,12 +509,38 @@ class DialogueBox extends FlxSpriteGroup
 				portrait.portraitLibraryPath = 'week6';
 				portrait.left = false;
 			case 'bf':
-				portrait.portraitPath = 'dialogue/boyfriendPortrait';
-				portrait.portraitPrefix = 'BF Enter';
+				switch (PlayState.SONG.song.toLowerCase())
+				{
+					case 'blocked' | 'maze':
+						portrait.portraitPath = 'dialogue/bf_blocked_maze';
+						portrait.portraitPrefix = 'bf blocked & maze portrait';
+					case 'furiosity'| 'corn-theft':
+						portrait.portraitPath = 'dialogue/bf_furiosity_corntheft';
+						portrait.portraitPrefix = 'bf furiosity & corntheft portrait';
+					case 'house':
+						portrait.portraitPath = 'dialogue/bf_house';
+						portrait.portraitPrefix = 'bf house portrait';
+					case 'insanity' | 'splitathon':
+						portrait.portraitPath = 'dialogue/bf_insanity_splitathon';
+						portrait.portraitPrefix = 'bf insanity & splitathon portrait';
+				}
 				portrait.left = false;
 			case 'gf':
-				portrait.portraitPath = 'dialogue/gfPortrait';
-				portrait.portraitPrefix = 'GF Enter';
+				switch (PlayState.SONG.song.toLowerCase())
+				{
+					case 'blocked':
+						portrait.portraitPath = 'dialogue/gf_blocked';
+						portrait.portraitPrefix = 'gf blocked portrait';
+					case 'corn-theft':
+						portrait.portraitPath = 'dialogue/gf_corntheft';
+						portrait.portraitPrefix = 'gf corntheft portrait';
+					case 'maze':
+						portrait.portraitPath = 'dialogue/gf_maze';
+						portrait.portraitPrefix = 'gf maze portrait';
+					case 'splitathon':
+						portrait.portraitPath = 'dialogue/gf_splitathon';
+						portrait.portraitPrefix = 'gf splitathon portrait';
+				}
 				portrait.left = false;
 			case 'generic':
 				portraitLeft.visible = false;

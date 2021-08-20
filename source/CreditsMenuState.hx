@@ -31,13 +31,13 @@ class CreditsMenuState extends MusicBeatState
    var selectedFormat:FlxText;
    var defaultFormat:FlxText;
    var currentY:Float;
-   var curNameSelected:Int = 1;
+   var curNameSelected:Int = 0;
    var creditsTextGroup:Array<CreditsText>;
    var state:State;
    var selectedPersonGroup:FlxSpriteGroup = new FlxSpriteGroup();
-   var transitioningBack:Bool = false;
    var peopleInCredits:Array<Person> = 
    [
+      //devs
      new Person("MoldyGH", CreditsType.Dev, "Creator/Main Dev of Vs Dave & Bambi",
         [
            new Social('youtube', 'https://www.youtube.com/channel/UCHIvkOUDfbMCv-BEIPGgpmA'), 
@@ -73,7 +73,84 @@ class CreditsMenuState extends MusicBeatState
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
          ]
-      ), 
+      ),
+      //contributors
+      new Person("Zmac", CreditsType.Contributor, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("That Pizza Tower Fan", CreditsType.Contributor, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("Stats45", CreditsType.Contributor, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("Samuran", CreditsType.Contributor, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      //beta testers
+      new Person("mamakotomi", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("wildy", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("Billy Bobbo", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("mantis", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("b sides ron.", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("1irx", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("KayipCock", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("normal", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("Rendurse", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("Lordryan1999", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
+      new Person("Vanquiler", CreditsType.BetaTester, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+         ]
+      ),
    ];
 
 	override function create()
@@ -100,7 +177,7 @@ class CreditsMenuState extends MusicBeatState
             case Contributor: contributors.push(person);
          }
       }
-      
+      /*
       var devTitleText = new FlxText(0, 0, 0, 'Developers');
       devTitleText.setFormat("Comic Sans MS Bold", 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
       devTitleText.screenCenter(X);
@@ -122,6 +199,48 @@ class CreditsMenuState extends MusicBeatState
          add(textItem);
          creditsTextGroup.push(creditsTextItem);
       }
+      */
+
+      //make a looping array for the peopleInCredits variable
+
+      //create a new title text every time one of the elements in peopleInCredits is the first element in one of the seperate arrays
+         //just create a new text for that person if that isn't the case
+       
+
+      for (i in 0...peopleInCredits.length)
+      {
+         var currentPerson = peopleInCredits[i];
+         if (currentPerson == developers[0] || currentPerson == contributors[0] || currentPerson == betaTesters[0])
+         {
+            var textString:String = '';
+            switch (currentPerson.creditsType)
+            {
+               case Dev:
+                  textString = 'Developers';
+               case Contributor:
+                  textString = 'Contributors';
+               case BetaTester:
+                  textString = 'Beta Testers';
+            }
+            var titleText:FlxText = new FlxText(0, 0, 0, textString);
+            titleText.setFormat("Comic Sans MS Bold", 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+            titleText.screenCenter(X);
+            add(titleText);
+
+            var creditsText:CreditsText = new CreditsText(titleText, false);
+            creditsTextGroup.push(creditsText);
+         }
+
+         var textItem:FlxText = new FlxText(0, i * 50, 0, currentPerson.name, 32);
+         textItem.setFormat(defaultFormat.font, defaultFormat.size, defaultFormat.color, defaultFormat.alignment, defaultFormat.borderStyle, defaultFormat.borderColor);
+         textItem.screenCenter(X);
+
+         var creditsTextItem:CreditsText = new CreditsText(textItem, true);
+
+         add(textItem);
+         creditsTextGroup.push(creditsTextItem);
+      }
+      trace(creditsTextGroup.length);
       changeSelection();
 		super.create();
 	}
@@ -146,35 +265,22 @@ class CreditsMenuState extends MusicBeatState
 				}
 				if (upPressed)
 				{
-               var creditsText = creditsTextGroup[curNameSelected - 1];
-               if (creditsText != null && !creditsText.menuItem)
-               {
-                  changeSelection(-2);
-               }
-               else
-               {
-                  changeSelection(-1);
-               }
+               changeSelection(-1);
 				}
 				if (downPressed)
 				{
-               var creditsText = creditsTextGroup[curNameSelected + 1];
-               if (creditsText != null && !creditsText.menuItem)
-               {
-                  changeSelection(2);
-               }
-               else
-               {
-                  changeSelection(1);
-               }
-				}
+               changeSelection(1);
+            }
 				if (back)
 				{
 					FlxG.switchState(new MainMenuState());
 				}
 				if (accept && creditsTextGroup[curNameSelected].menuItem)
 				{
-					selectPerson(peopleInCredits[curNameSelected - 1]);
+               var remappedRange:Int = Math.floor(FlxMath.remapToRange(curNameSelected, 0, creditsTextGroup.length - 1, 0, peopleInCredits.length - 1));
+               trace('current name index: ' + curNameSelected);
+               trace('remapped name index: ' + remappedRange);
+					selectPerson(peopleInCredits[remappedRange]);
 					state = State.OnName;
                FlxG.mouse.visible = true;
 				}
@@ -205,30 +311,20 @@ class CreditsMenuState extends MusicBeatState
       FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
       var selection:Int = 0;
       curNameSelected += amount;
-      
-      if (curNameSelected > peopleInCredits.length)
+      if (curNameSelected > creditsTextGroup.length - 1)
       {
          curNameSelected = 0;
-         if (!creditsTextGroup[curNameSelected].menuItem)
-         {
-            curNameSelected = 1;
-         }
       }
       if (curNameSelected < 0)
       {
-         curNameSelected = peopleInCredits.length;
-         if (!creditsTextGroup[curNameSelected].menuItem)
-         {
-            curNameSelected = peopleInCredits.length - 1;
-         }
+         curNameSelected = creditsTextGroup.length - 1;
       }
-      
+      trace(curNameSelected);
       for (creditsText in creditsTextGroup)
       {
          creditsText.selectionId = selection - curNameSelected;
          selection++;
       }
-
 		var currentText:FlxText = creditsTextGroup[curNameSelected].text;
       if (creditsTextGroup[curNameSelected].menuItem)
       {
@@ -251,6 +347,7 @@ class CreditsMenuState extends MusicBeatState
 
    function selectPerson(selectedPerson:Person)
    {
+      var fadeTime:Float = 0.4;
       var personName:FlxText = new FlxText(0, 100, 0, selectedPerson.name, 50);
       personName.setFormat(selectedFormat.font, selectedFormat.size, selectedFormat.color, selectedFormat.alignment, selectedFormat.borderStyle, selectedFormat.borderColor);
       personName.screenCenter(X);
@@ -271,9 +368,9 @@ class CreditsMenuState extends MusicBeatState
       add(personName);
       add(credits);
 
-      FlxTween.tween(blackBg, { alpha: 0.7 }, 0.8);
-      FlxTween.tween(personName, { alpha: 1 }, 0.8);
-      FlxTween.tween(credits, { alpha: 1 }, 0.8);
+      FlxTween.tween(blackBg, { alpha: 0.7 }, fadeTime);
+      FlxTween.tween(personName, { alpha: 1 }, fadeTime);
+      FlxTween.tween(credits, { alpha: 1 }, fadeTime);
 
       for (i in 0...selectedPerson.socialMedia.length)
       {
@@ -297,7 +394,7 @@ class CreditsMenuState extends MusicBeatState
          socialButton.alpha = 0;
          add(socialButton);
 
-         FlxTween.tween(socialButton, { alpha: 1 }, 0.8);
+         FlxTween.tween(socialButton, { alpha: 1 }, fadeTime);
          selectedPersonGroup.add(socialButton);
       }
    }

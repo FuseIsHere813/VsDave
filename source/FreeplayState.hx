@@ -57,8 +57,7 @@ class FreeplayState extends MusicBeatState
         0xFFffaa6f, // SENPAI
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD
-		0xFF00FFFF,
-		0xFFFF1212 //tristan
+		0xFF00FFFF //SPLIT THE THONNNNN
 
 
     ];
@@ -140,14 +139,6 @@ class FreeplayState extends MusicBeatState
 		}
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
 		{
-			for (diff in 0...2)
-			{
-				if (!Highscore.songScores.exists(Highscore.formatSong('week10', diff)))
-				{
-					Highscore.setScore(Highscore.formatSong('week10', diff), 0, "bf");
-				}
-			}
-			addWeek(['ThreeDimensional', 'Second-Tristan-Song'], 10, ['tristan', 'tristan']);
 			addWeek(['Old-Insanity'], 7, ['dave']);
 			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Screwed'], 8, ['bambi', 'bambi', 'bambi-angey']);
 		}
