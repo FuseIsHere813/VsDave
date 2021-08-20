@@ -3374,7 +3374,7 @@ class PlayState extends MusicBeatState
 			gf.playAnim('scared', true);
 		}
 
-		var funny:Float = (healthBar.percent * 0.02) + 0.001;
+		var funny:Float = (healthBar.percent * 0.01) + 0.01;
 
 		//health icon bounce but epic
 		iconP1.setGraphicSize(Std.int(iconP1.width + (50 * funny)),Std.int(iconP2.height - (25 * funny)));
