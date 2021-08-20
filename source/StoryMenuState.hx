@@ -73,7 +73,7 @@ class StoryMenuState extends MusicBeatState
 		"Dave's Fun Rapping Battle!",
 		"Mr. Bambi's Fun Corn Maze!",
 		"The Finale",
-		"Tristan..?"
+		"SUSSY BALLS"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -99,6 +99,10 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		FlxG.save.data.tristanProgress = null; //undo tristan stuff since its being moved
+		//DONT REMOVE THIS CODE because we might use it for reference in the future
+		tristanunlocked = false;
+		dofunnytristan = false;
 		if (FlxG.save.data.tristanProgress == "unlocked")
 		{
 			dofunnytristan = true;
