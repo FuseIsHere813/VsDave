@@ -88,6 +88,8 @@ class ChartingState extends MusicBeatState
 	var leftIcon:HealthIcon;
 	var rightIcon:HealthIcon;
 
+	var oneSectionSong:Bool = false;
+	
 	override function create()
 	{
 		curSection = lastSection;
@@ -248,6 +250,13 @@ class ChartingState extends MusicBeatState
 
 		player2DropDown.selectedLabel = _song.player2;
 
+		var oneSectionSongCheckbox = new FlxUICheckBox(10, 400, null, null, "1 Section Song", 100);
+		oneSectionSongCheckbox.checked = false;
+		oneSectionSongCheckbox.callback = function()
+		{
+			oneSectionSong = !oneSectionSong;
+		};
+
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
 		tab_group_song.add(UI_songTitle);
@@ -262,6 +271,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(stepperSpeed);
 		tab_group_song.add(player1DropDown);
 		tab_group_song.add(player2DropDown);
+		tab_group_song.add(oneSectionSongCheckbox);
 
 		UI_box.addGroup(tab_group_song);
 		UI_box.scrollFactor.set();
@@ -490,6 +500,15 @@ class ChartingState extends MusicBeatState
 		return daPos;
 	}
 
+	function getSongLengthInSteps():Float
+	{
+		var songLengthInSteps:Float = 0;
+		for (i in 0..._song.notes.length)
+		{
+			songLengthInSteps += _song.notes[i].lengthInSteps;
+		}
+		return songLengthInSteps;
+	}
 	override function update(elapsed:Float)
 	{
 		curStep = recalculateSteps();
@@ -497,8 +516,15 @@ class ChartingState extends MusicBeatState
 		Conductor.songPosition = FlxG.sound.music.time;
 		_song.song = typingShit.text;
 
-		strumLine.y = getYfromStrum((Conductor.songPosition - sectionStartTime()) % (Conductor.stepCrochet * _song.notes[curSection].lengthInSteps));
-
+		if (!oneSectionSong)
+		{
+			strumLine.y = getYfromStrum((Conductor.songPosition - sectionStartTime()) % (Conductor.stepCrochet * _song.notes[curSection].lengthInSteps));
+		}
+		else
+		{
+			
+			strumLine.y = getYfromStrum(Conductor.songPosition % (Conductor.stepCrochet * getSongLengthInSteps()));
+		}
 		if (curBeat % 4 == 0 && curStep >= 16 * (curSection + 1))
 		{
 			trace(curStep);
@@ -509,8 +535,11 @@ class ChartingState extends MusicBeatState
 			{
 				addSection();
 			}
-
-			changeSection(curSection + 1, false);
+			
+			if (!oneSectionSong)
+			{
+				changeSection(curSection + 1, false);
+			}
 		}
 
 		FlxG.watch.addQuick('daBeat', curBeat);
