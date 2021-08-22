@@ -417,6 +417,11 @@ class DialogueBox extends FlxSpriteGroup
 			portraitLeft.animation.play('enter',true);
 			portraitRight.animation.play('enter',true);
 		}
+		else
+		{
+			portraitLeft.visible = false;
+			portraitRight.visible = false;
+		}
 		switch (curMod)
 		{
 			case 'distort':
@@ -468,7 +473,7 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/dave_insanity';
 						portrait.portraitPrefix = 'dave insanity portrait';
 
-					case 'idontknowwhattodowiththisrappareptellme':
+					case 'pre-furiosity LUL':
 						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
 						portrait.portraitPrefix = 'dave pre-furiosity portrait';
 
@@ -478,7 +483,7 @@ class DialogueBox extends FlxSpriteGroup
 
 					case 'blocked' | 'corn-theft' | 'maze':
 						portrait.portraitPath = 'dialogue/dave_bambiweek';
-						portrait.portraitPrefix = 'dave bambiweek portrait';
+						portrait.portraitPrefix = 'dave bambi week portrait';
 					case 'splitathon':
 						portrait.portraitPath = 'dialogue/dave_splitathon';
 						portrait.portraitPrefix = 'dave splitathon portrait';
@@ -542,9 +547,6 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPrefix = 'gf splitathon portrait';
 				}
 				portrait.left = false;
-			case 'generic':
-				portraitLeft.visible = false;
-				portraitRight.visible = false;
 		}
 		return portrait;
 	}

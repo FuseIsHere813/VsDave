@@ -1821,9 +1821,9 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStep)
 			{
-				case 4736:
+				case 5:
 					splitathonExpression('lookup', 225, 400);
-				case 4800:
+				case 10:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
 					splitathonExpression('backup', -100, 400);
 					addSplitathonChar("bambi-splitathon");
@@ -1854,6 +1854,11 @@ class PlayState extends MusicBeatState
 					iconP2.animation.play("dave", true);
 			}
 		}
+		//4736
+		//4800
+		//5824
+		//6080
+		//8384
 		if (SONG.song.toLowerCase() == 'insanity')
 		{
 			switch (curStep)
@@ -3522,7 +3527,7 @@ class PlayState extends MusicBeatState
 	{
 		if (SONG.song.toLowerCase() == 'splitathon')
 		{
-			camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 150);
+			camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 50);
 			thing.color = 0xFF878787;
 			thing.x = x;
 			thing.y = y;

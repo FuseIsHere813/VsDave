@@ -282,7 +282,6 @@ class CreditsMenuState extends MusicBeatState
                         {
                            FlxCamera.defaultCameras = [selectPersonCam];
                            selectPerson(peopleInCredits[curNameSelected]);
-                           state = State.OnName;
                            FlxG.mouse.visible = true;
                         }
                      });
@@ -290,27 +289,29 @@ class CreditsMenuState extends MusicBeatState
                }
 				}
          case State.OnName:
-            if (back)
+            if (back && !transitioning)
             {
                transitioning = true; 
                for (item in selectedPersonGroup)
                {
-                  FlxTween.tween(item, {alpha: 0}, 0.3);
+                  FlxTween.tween(item, {alpha: 0}, fadeTimer);
                   if (item == selectedPersonGroup.members[selectedPersonGroup.members.length - 1])
                   {
-                     FlxTween.tween(item, {alpha: 0}, 0.3,
+                     FlxTween.tween(item, {alpha: 0}, fadeTimer,
                      { 
                         onComplete: function (tween:FlxTween) 
                         {
-                           selectedPersonGroup.remove(item, true);
-                           remove(item);
+                           selectedPersonGroup.forEach(function(spr:FlxSprite)
+                           {
+                              remove(selectedPersonGroup.remove(spr, true));
+                           });
                            FlxCamera.defaultCameras = [mainCam];
                            for (creditsText in creditsTextGroup)
                            {
                               FlxTween.tween(creditsText.text, {alpha: 1}, fadeTimer);
                               if (creditsText == creditsTextGroup[creditsTextGroup.length - 1])
                               {
-                                 FlxTween.tween(creditsText.text, {alpha: 0}, fadeTimer, 
+                                 FlxTween.tween(creditsText.text, {alpha: 1}, fadeTimer, 
                                  {
                                     onComplete: function(tween:FlxTween)
                                     {
@@ -409,7 +410,14 @@ class CreditsMenuState extends MusicBeatState
 
       FlxTween.tween(blackBg, { alpha: 0.7 }, fadeTime);
       FlxTween.tween(personName, { alpha: 1 }, fadeTime);
-      FlxTween.tween(credits, { alpha: 1 }, fadeTime);
+      FlxTween.tween(credits, { alpha: 1 }, fadeTime, { onComplete: function(tween:FlxTween)
+      {
+         if (selectedPerson.socialMedia.length == 0)
+         {
+            transitioning = false;
+            state = State.OnName;
+         }
+      }});
       
       for (i in 0...selectedPerson.socialMedia.length)
       {
@@ -436,11 +444,13 @@ class CreditsMenuState extends MusicBeatState
             FlxTween.tween(discordText, { alpha: 1 }, fadeTime);
             selectedPersonGroup.add(discordText);
          }
-
-         FlxTween.tween(socialButton, { alpha: 1 }, fadeTime);
+         FlxTween.tween(socialButton, { alpha: 1 }, fadeTime, { onComplete: function(tween:FlxTween)
+         {
+            transitioning = false;
+            state = State.OnName;
+         }});
          selectedPersonGroup.add(socialButton);
       }
-      transitioning = false;
    }
 }
 
