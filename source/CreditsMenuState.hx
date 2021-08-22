@@ -296,7 +296,6 @@ class CreditsMenuState extends MusicBeatState
                      {
                         selectedPersonGroup.remove(item, true);
                         remove(item);
-                        FlxCamera.defaultCameras = [mainCam];
                         transitioning = false;
                      }
                   });
@@ -305,6 +304,7 @@ class CreditsMenuState extends MusicBeatState
                {
                   FlxTween.tween(creditsText.text, {alpha: 1}, 0.1);
                }
+               FlxCamera.defaultCameras = [mainCam];
                selectedPersonGroup = new FlxSpriteGroup();
                FlxG.mouse.visible = false;
                state = State.SelectingName;
