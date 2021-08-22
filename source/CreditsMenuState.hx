@@ -48,12 +48,14 @@ class CreditsMenuState extends MusicBeatState
      new Person("MoldyGH", CreditsType.Dev, "Creator/Main Dev of Vs Dave & Bambi",
         [
            new Social('youtube', 'https://www.youtube.com/channel/UCHIvkOUDfbMCv-BEIPGgpmA'), 
-           new Social('soundcloud', 'https://soundcloud.com/moldygh'),
+           new Social('twitter', 'https://twitter.com/moldy_gh'),
+           new Social('soundcloud', 'https://soundcloud.com/moldygh')
          ]
       ),
       new Person("MissingTextureMan101", CreditsType.Dev, "Secondary Dev of Vs Dave & Bambi",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
+            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ'),
+            new Social('twitter', 'https://twitter.com/OfficialMTM101')
          ]
       ),
       new Person("rapparep lol", CreditsType.Dev, "Main Artist of Vs Dave & Bambi",
@@ -61,9 +63,10 @@ class CreditsMenuState extends MusicBeatState
             new Social('youtube', 'https://www.youtube.com/channel/UCKfdkmcdFftv4pFWr0Bh45A')
          ]
       ),
-      new Person("TheBuilderXD", CreditsType.Dev, "Gamebanana Page Manager & made Tristan sprites & more",
+      new Person("TheBuilderXD", CreditsType.Dev, "Gamebanana Page Manager, made Tristan sprites, and more",
          [
-            new Social('youtube', 'https://www.youtube.com/user/99percentMember')
+            new Social('youtube', 'https://www.youtube.com/user/99percentMember'),
+            new Social('twitter', 'https://twitter.com/TheBuilderXD')
          ]
       ),
       new Person("Erizur", CreditsType.Dev, "Programmer & Made some assets",
@@ -73,16 +76,18 @@ class CreditsMenuState extends MusicBeatState
       ),
       new Person("T5mpler", CreditsType.Dev, "Dev/Programmer & Supporter",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw')
+            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
+            new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
          ]
       ),
       new Person("CyndaquilDAC", CreditsType.Dev, "Dev/Programmer some new additions",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCTaq4jni33NoaI1TfMXCRcA')
+            new Social('youtube', 'https://www.youtube.com/channel/UCTaq4jni33NoaI1TfMXCRcA'),
+            new Social('twitter', 'https://twitter.com/CyndaquilDAC')
          ]
       ),
       //contributors
-      new Person("Zmac", CreditsType.Contributor, "Made the Furiosity BG, hedlped with Intro text, \n& helped getting the mod into Funky Friday",
+      new Person("Zmac", CreditsType.Contributor, "Made the Furiosity BG, helped with Intro text, \n& helped getting the mod into Funky Friday",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
          ]
@@ -93,7 +98,7 @@ class CreditsMenuState extends MusicBeatState
             new Social('youtube', 'https://www.youtube.com/channel/UClb4YjR8i74G-ue2nyiH2DQ')
          ]
       ),
-      new Person("Samuran", CreditsType.Contributor, "Help with charting of the Screwed fantrack",
+      new Person("Samuran", CreditsType.Contributor, "Help with charting for the Screwed fan song",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCT87mhGyNax_Y3nPo2rnDHg')
          ]
@@ -243,6 +248,7 @@ class CreditsMenuState extends MusicBeatState
    
 	override function update(elapsed:Float)
    {
+      var fadeTimer:Float = 0.08;
       var upPressed = controls.UP_P;
 		var downPressed = controls.DOWN_P;
 		var back = controls.BACK;
@@ -264,14 +270,13 @@ class CreditsMenuState extends MusicBeatState
 				}
 				if (accept && !transitioning)
 				{
-               var fadeTime:Float = 0.08;
                transitioning = true;
                for (creditsText in creditsTextGroup)
                {
-                  FlxTween.tween(creditsText.text, {alpha: 0}, fadeTime);
+                  FlxTween.tween(creditsText.text, {alpha: 0}, fadeTimer);
                   if (creditsText == creditsTextGroup[creditsTextGroup.length - 1])
                   {
-                     FlxTween.tween(creditsText.text, {alpha: 0}, fadeTime, 
+                     FlxTween.tween(creditsText.text, {alpha: 0}, fadeTimer, 
                      {
                         onComplete: function(tween:FlxTween)
                         {
@@ -302,12 +307,21 @@ class CreditsMenuState extends MusicBeatState
                }
                for (creditsText in creditsTextGroup)
                {
-                  FlxTween.tween(creditsText.text, {alpha: 1}, 0.1);
+                  FlxTween.tween(creditsText.text, {alpha: 1}, fadeTimer);
+                  if (creditsText == creditsTextGroup[creditsTextGroup.length])
+                  {
+                     FlxTween.tween(creditsText.text, {alpha: 0}, fadeTimer, 
+                     {
+                        onComplete: function(tween:FlxTween)
+                        {
+                           FlxCamera.defaultCameras = [mainCam];
+                           selectedPersonGroup = new FlxSpriteGroup();
+                           FlxG.mouse.visible = false;
+                           state = State.SelectingName;
+                        }
+                     });
+                  }
                }
-               FlxCamera.defaultCameras = [mainCam];
-               selectedPersonGroup = new FlxSpriteGroup();
-               FlxG.mouse.visible = false;
-               state = State.SelectingName;
             }
       }
       
@@ -406,7 +420,8 @@ class CreditsMenuState extends MusicBeatState
          add(socialButton);
          if (social.socialMediaName == 'discord')
          {
-            var discordText:FlxText = new FlxText(socialButton.x + 100, socialButton.y + (i * 100), 0, social.socialLink, 40);
+            var offsetY:Float = 20;
+            var discordText:FlxText = new FlxText(socialButton.x + 100, socialButton.y + (i * 100) + offsetY, 0, social.socialLink, 40);
             discordText.setFormat(defaultFormat.font, defaultFormat.size, defaultFormat.color, defaultFormat.alignment, defaultFormat.borderStyle,
                defaultFormat.borderColor);
             discordText.alpha = 0;
