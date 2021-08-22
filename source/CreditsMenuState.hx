@@ -295,29 +295,33 @@ class CreditsMenuState extends MusicBeatState
                transitioning = true; 
                for (item in selectedPersonGroup)
                {
-                  FlxTween.tween(item, {alpha: 0}, 0.3,
-                  { 
-                     onComplete: function (tween:FlxTween) 
-                     {
-                        selectedPersonGroup.remove(item, true);
-                        remove(item);
-                        transitioning = false;
-                     }
-                  });
-               }
-               for (creditsText in creditsTextGroup)
-               {
-                  FlxTween.tween(creditsText.text, {alpha: 1}, fadeTimer);
-                  if (creditsText == creditsTextGroup[creditsTextGroup.length - 1])
+                  FlxTween.tween(item, {alpha: 0}, 0.3);
+                  if (item == selectedPersonGroup.members[selectedPersonGroup.members.length - 1])
                   {
-                     FlxTween.tween(creditsText.text, {alpha: 0}, fadeTimer, 
-                     {
-                        onComplete: function(tween:FlxTween)
+                     FlxTween.tween(item, {alpha: 0}, 0.3,
+                     { 
+                        onComplete: function (tween:FlxTween) 
                         {
+                           selectedPersonGroup.remove(item, true);
+                           remove(item);
                            FlxCamera.defaultCameras = [mainCam];
-                           selectedPersonGroup = new FlxSpriteGroup();
-                           FlxG.mouse.visible = false;
-                           state = State.SelectingName;
+                           for (creditsText in creditsTextGroup)
+                           {
+                              FlxTween.tween(creditsText.text, {alpha: 1}, fadeTimer);
+                              if (creditsText == creditsTextGroup[creditsTextGroup.length - 1])
+                              {
+                                 FlxTween.tween(creditsText.text, {alpha: 0}, fadeTimer, 
+                                 {
+                                    onComplete: function(tween:FlxTween)
+                                    {
+                                       selectedPersonGroup = new FlxSpriteGroup();
+                                       FlxG.mouse.visible = false;
+                                       transitioning = false;
+                                       state = State.SelectingName;
+                                    }
+                                 });
+                              }
+                           }
                         }
                      });
                   }
