@@ -3330,12 +3330,20 @@ class PlayState extends MusicBeatState
 			// else
 			// Conductor.changeBPM(SONG.bpm);
 		}
-		trace('Hold timer is under 0? ' + (dad.holdTimer <= 0) + "Hold timer's currently " + dad.holdTimer);
-		trace('Is the current animation finished? ' + (dad.animation.finished));
-		if (dad.holdTimer <= 0 && dad.animation.finished)
+		if (dad.animation.finished)
 		{
-			dad.dance();
-			dadmirror.dance();
+			switch (SONG.song.toLowerCase())
+			{
+				case 'tutorial':
+					dad.dance();
+					dadmirror.dance();
+				default:
+					if (dad.holdTimer <= 0)
+					{
+						dad.dance();
+						dadmirror.dance();
+					}
+			}
 		}
 
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);

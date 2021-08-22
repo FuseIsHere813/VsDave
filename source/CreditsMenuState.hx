@@ -24,7 +24,11 @@ import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
 
 using StringTools;
-
+/*
+hi cool lil committers looking at this code, 95% of this is my code and I'd appreciate if you didn't steal it without asking for my permission
+-vs dave dev T5mpler 
+i have to put this here just in case you think of doing so
+*/
 class CreditsMenuState extends MusicBeatState
 {
 	var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/SUSSUS AMOGUS'));
@@ -78,7 +82,7 @@ class CreditsMenuState extends MusicBeatState
          ]
       ),
       //contributors
-      new Person("Zmac", CreditsType.Contributor, "Made the Furiosity BG",
+      new Person("Zmac", CreditsType.Contributor, "Made the Furiosity BG, hedlped with Intro text, \n& helped getting the mod into Funky Friday",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
          ]
@@ -112,7 +116,7 @@ class CreditsMenuState extends MusicBeatState
       ),
       new Person("mantis", CreditsType.BetaTester, "Beta Tester",
          [
-            new Social('twitter', 'https://twitter.com/GhostlyJasmine')
+            new Social('discord', 'mantis#6969')
          ]
       ),
       new Person("ArturSef", CreditsType.BetaTester, "Beta Tester",
@@ -120,12 +124,8 @@ class CreditsMenuState extends MusicBeatState
             new Social('gamebanana', 'https://gamebanana.com/members/1766076')
          ]
       ),
-      new Person("1irx", CreditsType.BetaTester, "Beta Tester",
-         [
-            new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ')
-         ]
-      ),
-      new Person("KayipCock", CreditsType.BetaTester, "Beta Tester",
+      new Person("1irx", CreditsType.BetaTester, "Beta Tester", []),
+      new Person("KayipKux", CreditsType.BetaTester, "Beta Tester",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCKwsYcSSdpeZOodnPldfn6Q'),
             new Social('gamebanana', 'https://gamebanana.com/members/1726754')
@@ -143,7 +143,8 @@ class CreditsMenuState extends MusicBeatState
       ),
       new Person("Lordryan1999", CreditsType.BetaTester, "Beta Tester",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCEdSlV8RvVnEd8w_yQz-Feg')
+            new Social('youtube', 'https://www.youtube.com/channel/UCEdSlV8RvVnEd8w_yQz-Feg'),
+            new Social('twitter', 'https://twitter.com/lr1999_baldi')
          ]
       ),
       new Person("Vanquiler", CreditsType.BetaTester, "Beta Tester",
@@ -170,7 +171,7 @@ class CreditsMenuState extends MusicBeatState
       selectedFormat = new FlxText().setFormat("Comic Sans MS Bold", 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
       
       bg.loadGraphic(MainMenuState.randomizeBG());
-		bg.color = 0xFF4965FF;
+		bg.color = 0xFFFF0000;
       bg.scrollFactor.set();
 		add(bg);
       
@@ -263,10 +264,25 @@ class CreditsMenuState extends MusicBeatState
 				}
 				if (accept && !transitioning)
 				{
-               FlxCamera.defaultCameras = [selectPersonCam];
-					selectPerson(peopleInCredits[curNameSelected]);
-					state = State.OnName;
-               FlxG.mouse.visible = true;
+               var fadeTime:Float = 0.08;
+               transitioning = true;
+               for (creditsText in creditsTextGroup)
+               {
+                  FlxTween.tween(creditsText.text, {alpha: 0}, fadeTime);
+                  if (creditsText == creditsTextGroup[creditsTextGroup.length - 1])
+                  {
+                     FlxTween.tween(creditsText.text, {alpha: 0}, fadeTime, 
+                     {
+                        onComplete: function(tween:FlxTween)
+                        {
+                           FlxCamera.defaultCameras = [selectPersonCam];
+                           selectPerson(peopleInCredits[curNameSelected]);
+                           state = State.OnName;
+                           FlxG.mouse.visible = true;
+                        }
+                     });
+                  }
+               }
 				}
          case State.OnName:
             if (back)
@@ -275,7 +291,7 @@ class CreditsMenuState extends MusicBeatState
                for (item in selectedPersonGroup)
                {
                   FlxTween.tween(item, {alpha: 0}, 0.3,
-                  {
+                  { 
                      onComplete: function (tween:FlxTween) 
                      {
                         selectedPersonGroup.remove(item, true);
@@ -284,6 +300,10 @@ class CreditsMenuState extends MusicBeatState
                         transitioning = false;
                      }
                   });
+               }
+               for (creditsText in creditsTextGroup)
+               {
+                  FlxTween.tween(creditsText.text, {alpha: 1}, 0.1);
                }
                selectedPersonGroup = new FlxSpriteGroup();
                FlxG.mouse.visible = false;
@@ -336,7 +356,6 @@ class CreditsMenuState extends MusicBeatState
 
    function selectPerson(selectedPerson:Person)
    {
-      transitioning = true;
       var fadeTime:Float = 0.4;
       var blackBg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
       blackBg.screenCenter(X);
@@ -385,6 +404,19 @@ class CreditsMenuState extends MusicBeatState
          socialButton.active = false;
          socialButton.alpha = 0;
          add(socialButton);
+         if (social.socialMediaName == 'discord')
+         {
+            var discordText:FlxText = new FlxText(socialButton.x + 100, socialButton.y + (i * 100), 0, social.socialLink, 40);
+            discordText.setFormat(defaultFormat.font, defaultFormat.size, defaultFormat.color, defaultFormat.alignment, defaultFormat.borderStyle,
+               defaultFormat.borderColor);
+            discordText.alpha = 0;
+            discordText.updateHitbox();
+            discordText.scrollFactor.set();
+            discordText.active = false;
+            add(discordText);
+            FlxTween.tween(discordText, { alpha: 1 }, fadeTime);
+            selectedPersonGroup.add(discordText);
+         }
 
          FlxTween.tween(socialButton, { alpha: 1 }, fadeTime);
          selectedPersonGroup.add(socialButton);

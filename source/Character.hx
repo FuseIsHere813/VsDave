@@ -792,7 +792,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 				
 			case 'bambi-splitathon':
-				frames = Paths.getSparrowAtlas('splitathon/Bambi_Splitathon');
+				frames = Paths.getSparrowAtlas('splitathon/Splitathon_Bambi');
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singDOWN', 'Down', 27, false);
 				animation.addByPrefix('singUP', 'Up', 27, false);
