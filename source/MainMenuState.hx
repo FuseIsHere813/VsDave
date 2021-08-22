@@ -156,11 +156,6 @@ class MainMenuState extends MusicBeatState
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
 		}
 
-		if (FlxG.keys.pressed.ONE)
-		{
-			FlxG.switchState(new CreditsMenuState());
-		}
-
 		if (!selectedSomethin)
 		{
 			if (controls.UP_P)

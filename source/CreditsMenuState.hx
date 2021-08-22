@@ -308,7 +308,7 @@ class CreditsMenuState extends MusicBeatState
                for (creditsText in creditsTextGroup)
                {
                   FlxTween.tween(creditsText.text, {alpha: 1}, fadeTimer);
-                  if (creditsText == creditsTextGroup[creditsTextGroup.length])
+                  if (creditsText == creditsTextGroup[creditsTextGroup.length - 1])
                   {
                      FlxTween.tween(creditsText.text, {alpha: 0}, fadeTimer, 
                      {
