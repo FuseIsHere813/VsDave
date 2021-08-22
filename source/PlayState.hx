@@ -1821,9 +1821,9 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStep)
 			{
-				case 5:
+				case 4736:
 					splitathonExpression('lookup', 225, 400);
-				case 10:
+				case 4800:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
 					splitathonExpression('backup', -100, 400);
 					addSplitathonChar("bambi-splitathon");
