@@ -15,7 +15,7 @@ import flixel.util.FlxColor;
 import io.newgrounds.NG;
 import lime.app.Application;
 
-=
+
 using StringTools;
 
 class MainMenuState extends MusicBeatState
