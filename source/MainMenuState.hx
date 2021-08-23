@@ -15,7 +15,7 @@ import flixel.util.FlxColor;
 import io.newgrounds.NG;
 import lime.app.Application;
 
-
+=
 using StringTools;
 
 class MainMenuState extends MusicBeatState
@@ -32,7 +32,7 @@ class MainMenuState extends MusicBeatState
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
-	var newInput:Bool = true;
+	var newInput:Bool  true;
 
 	public static var firstStart:Bool = true;
 
