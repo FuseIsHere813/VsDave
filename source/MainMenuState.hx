@@ -32,7 +32,7 @@ class MainMenuState extends MusicBeatState
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
-	var newInput:Bool  true;
+	var newInput:Bool;
 
 	public static var firstStart:Bool = true;
 
