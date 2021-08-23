@@ -1217,7 +1217,7 @@ class PlayState extends MusicBeatState
 		red.scrollFactor.set();
 
 		var senpaiEvil:FlxSprite = new FlxSprite();
-		senpaiEvil.frames = Paths.getSparrowAtlas('weeb/senpaiCrazy');
+		senpaiEvil.frames = Paths.getSparrowAtlas('weeb/senpaiCrazy', 'week6');
 		senpaiEvil.animation.addByPrefix('idle', 'Senpai Pre Explosion', 24, false);
 		senpaiEvil.setGraphicSize(Std.int(senpaiEvil.width * 6));
 		senpaiEvil.scrollFactor.set();
@@ -1821,9 +1821,9 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStep)
 			{
-				case 4736:
+				case 5:
 					splitathonExpression('lookup', 225, 400);
-				case 4800:
+				case 10:
 					FlxG.camera.flash(FlxColor.WHITE, 1);
 					splitathonExpression('backup', -100, 400);
 					addSplitathonChar("bambi-splitathon");
@@ -1854,6 +1854,11 @@ class PlayState extends MusicBeatState
 					iconP2.animation.play("dave", true);
 			}
 		}
+		//4736
+		//4800
+		//5824
+		//6080
+		//8384
 		if (SONG.song.toLowerCase() == 'insanity')
 		{
 			switch (curStep)
@@ -3330,12 +3335,20 @@ class PlayState extends MusicBeatState
 			// else
 			// Conductor.changeBPM(SONG.bpm);
 		}
-		trace('Hold timer is under 0? ' + (dad.holdTimer <= 0) + "Hold timer's currently " + dad.holdTimer);
-		trace('Is the current animation finished? ' + (dad.animation.finished));
-		if (dad.holdTimer <= 0 && dad.animation.finished)
+		if (dad.animation.finished)
 		{
-			dad.dance();
-			dadmirror.dance();
+			switch (SONG.song.toLowerCase())
+			{
+				case 'tutorial':
+					dad.dance();
+					dadmirror.dance();
+				default:
+					if (dad.holdTimer <= 0)
+					{
+						dad.dance();
+						dadmirror.dance();
+					}
+			}
 		}
 
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);
@@ -3374,7 +3387,7 @@ class PlayState extends MusicBeatState
 			gf.playAnim('scared', true);
 		}
 
-		var funny:Float = (healthBar.percent * 0.02) + 0.001;
+		var funny:Float = (healthBar.percent * 0.01) + 0.01;
 
 		//health icon bounce but epic
 		iconP1.setGraphicSize(Std.int(iconP1.width + (50 * funny)),Std.int(iconP2.height - (25 * funny)));
@@ -3514,7 +3527,7 @@ class PlayState extends MusicBeatState
 	{
 		if (SONG.song.toLowerCase() == 'splitathon')
 		{
-			camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 150);
+			camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 50);
 			thing.color = 0xFF878787;
 			thing.x = x;
 			thing.y = y;

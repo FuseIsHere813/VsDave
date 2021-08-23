@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Splitathon_Bambi.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="Down0000" x="0" y="0" width="245" height="263"/>
+	<SubTexture name="Down0001" x="0" y="0" width="245" height="263"/>
+	<SubTexture name="Down0002" x="249" y="0" width="245" height="263"/>
+	<SubTexture name="Down0003" x="249" y="0" width="245" height="263"/>
+	<SubTexture name="Down0004" x="498" y="0" width="245" height="263"/>
+	<SubTexture name="Down0005" x="498" y="0" width="245" height="263"/>
+	<SubTexture name="Idle0000" x="747" y="0" width="239" height="285"/>
+	<SubTexture name="Idle0001" x="747" y="0" width="239" height="285"/>
+	<SubTexture name="Idle0002" x="990" y="0" width="239" height="285"/>
+	<SubTexture name="Idle0003" x="1233" y="0" width="239" height="285"/>
+	<SubTexture name="Idle0004" x="1476" y="0" width="239" height="285"/>
+	<SubTexture name="Left0000" x="1719" y="0" width="240" height="284"/>
+	<SubTexture name="Left0001" x="1719" y="0" width="240" height="284"/>
+	<SubTexture name="Left0002" x="0" y="289" width="240" height="284"/>
+	<SubTexture name="Left0003" x="0" y="289" width="240" height="284"/>
+	<SubTexture name="Left0004" x="244" y="289" width="240" height="284"/>
+	<SubTexture name="Left0005" x="244" y="289" width="240" height="284"/>
+	<SubTexture name="Right0000" x="488" y="289" width="238" height="274"/>
+	<SubTexture name="Right0001" x="488" y="289" width="238" height="274"/>
+	<SubTexture name="Right0002" x="730" y="289" width="238" height="274"/>
+	<SubTexture name="Right0003" x="730" y="289" width="238" height="274"/>
+	<SubTexture name="Right0004" x="972" y="289" width="238" height="274"/>
+	<SubTexture name="Right0005" x="972" y="289" width="238" height="274"/>
+	<SubTexture name="Up0000" x="1214" y="289" width="228" height="295"/>
+	<SubTexture name="Up0001" x="1214" y="289" width="228" height="295"/>
+	<SubTexture name="Up0002" x="1446" y="289" width="228" height="295"/>
+	<SubTexture name="Up0003" x="1446" y="289" width="228" height="295"/>
+	<SubTexture name="Up0004" x="1678" y="289" width="228" height="295"/>
+	<SubTexture name="Up0005" x="1678" y="289" width="228" height="295"/>
+</TextureAtlas>

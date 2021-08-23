@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import openfl.ui.Keyboard;
 import flixel.util.FlxCollision;
@@ -14,7 +15,6 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import lime.net.curl.CURLCode;
 
 using StringTools;
 
@@ -33,7 +33,7 @@ class StoryMenuState extends MusicBeatState
 		['House', 'Insanity', 'Furiosity'],
 		['Blocked', 'Corn-Theft', 'Maze'],
 		['Splitathon'],
-		['Vs-Tristan']
+		['Threedimensional', 'Second-Tristan-Song']
 	];
 
 	var actualWeeks:Array<Dynamic> = [0, 1, 2, 3, 4, 5, 6, 7, 10, 8, 9];
@@ -46,7 +46,7 @@ class StoryMenuState extends MusicBeatState
 
 	public static var dofunnytristan:Bool = false;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true,true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true];
 
 	var weekCharacters:Array<Dynamic> = [
 		['dad', 'bf', 'gf'],
@@ -59,7 +59,6 @@ class StoryMenuState extends MusicBeatState
 		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty'],
-		['empty', 'empty', 'empty']
 	];
 
 	var weekNames:Array<String> = [
@@ -73,7 +72,6 @@ class StoryMenuState extends MusicBeatState
 		"Dave's Fun Rapping Battle!",
 		"Mr. Bambi's Fun Corn Maze!",
 		"The Finale",
-		"Tristan..?"
 	];
 
 	var txtWeekTitle:FlxText;
@@ -99,6 +97,10 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		FlxG.save.data.tristanProgress = null; //undo tristan stuff since its being moved
+		//DONT REMOVE THIS CODE because we might use it for reference in the future
+		tristanunlocked = false;
+		dofunnytristan = false;
 		if (FlxG.save.data.tristanProgress == "unlocked")
 		{
 			dofunnytristan = true;
@@ -558,47 +560,35 @@ class StoryMenuState extends MusicBeatState
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 
 		updateText();
+		imageBgCheck();
+	}
+	
 
-		if (curWeek == 7)
+	function imageBgCheck()
+	{
+		var path:String;
+		var position:FlxPoint;
+		switch (curWeek)
 		{
-				trace("this is a new week");
-				imageBG.destroy();
-				imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/DaveHouse", "shared"));
-				imageBG.antialiasing = true;
-				imageBG.screenCenter(X);
-				imageBG.active = false;
-				add(imageBG);
+			case 7:
+				path = Paths.image("dave/DaveHouse", "shared");
+				position = new FlxPoint(600, 55);
+			case 8:
+				path = Paths.image("dave/bamboi", "shared");
+				position = new FlxPoint(600, 55);
+			case 9:
+				path = Paths.image("dave/splitathon", "shared");
+				position = new FlxPoint(600, 55);
+			default:
+				path = Paths.image("blank", "shared");
+				position = new FlxPoint(600, 200);
 		}
-		else if (curWeek == 8)
-		{
-			trace("this is a new week");
-			imageBG.destroy();
-			imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/bamboi", "shared"));
-			imageBG.antialiasing = true;
-			imageBG.screenCenter(X);
-			imageBG.active = false;
-			add(imageBG);
-		}
-		else if(curWeek == 9)
-		{
-			trace("this is a new week");
-			imageBG.destroy();
-			imageBG = new FlxSprite(600, 55).loadGraphic(Paths.image("dave/splitathon", "shared"));
-			imageBG.antialiasing = true;
-			imageBG.screenCenter(X);
-			imageBG.active = false;
-			add(imageBG);
-		}
-		else
-		{
-			trace("this is not week 7");
-			imageBG.destroy();
-			imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
-			imageBG.antialiasing = true;
-			imageBG.screenCenter(X);
-			imageBG.active = false;
-			add(imageBG);
-		}
+		imageBG.destroy();
+		imageBG = new FlxSprite(position.x, position.y).loadGraphic(path);
+		imageBG.antialiasing = true;
+		imageBG.screenCenter(X);
+		imageBG.active = false;
+		add(imageBG);
 	}
 
 	function updateText()

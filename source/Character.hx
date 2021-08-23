@@ -698,14 +698,14 @@ class Character extends FlxSprite
 				var tex = Paths.getSparrowAtlas('dave/bambi');
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
-				animation.addByPrefix('singUP', 'BF NOTE UP', 24, false);
-				animation.addByPrefix('singLEFT', 'BF NOTE LEFT', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT', 24, false);
-				animation.addByPrefix('singDOWN', 'BF NOTE DOWN', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS0', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS0', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS0', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS0', 24, false);
 
 				animation.addByPrefix('firstDeath', "BF dies", 24, false);
 				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
@@ -792,8 +792,8 @@ class Character extends FlxSprite
 				playAnim('idle');
 				
 			case 'bambi-splitathon':
-				frames = Paths.getSparrowAtlas('splitathon/Bambi_Splitathon');
-				animation.addByPrefix('idle', 'Idle', 24, false);
+				frames = Paths.getSparrowAtlas('splitathon/Splitathon_Bambi');
+				animation.addByPrefix('idle', 'Idle', 18, false);
 				animation.addByPrefix('singDOWN', 'Down', 27, false);
 				animation.addByPrefix('singUP', 'Up', 27, false);
 				animation.addByPrefix('singLEFT', 'Left', 27, false);
