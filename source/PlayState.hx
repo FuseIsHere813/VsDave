@@ -209,7 +209,7 @@ class PlayState extends MusicBeatState
 		switch (SONG.player2)
 		{
 			case 'dave':
-				iconRPC = 'icon_Dave';
+				iconRPC = 'icon_dave';
 			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old':
 				iconRPC = 'icon_bambi';
 			default:
