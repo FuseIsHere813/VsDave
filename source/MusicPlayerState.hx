@@ -16,6 +16,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
+import Discord.DiscordClient;
 using StringTools;
 
 
@@ -65,6 +66,8 @@ class MusicPlayerState extends MusicBeatState
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
+
+        DiscordClient.changePresence("In the OST Menu", null);
 
         for (i in 0...songs.length)
         {

@@ -25,9 +25,9 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	#if !switch
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'options', 'donate'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'options', 'credits'];
 	#else
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'donate'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'credits'];
 	#end
 
 	var newGaming:FlxText;
@@ -211,7 +211,7 @@ class MainMenuState extends MusicBeatState
 									FlxG.switchState(new OptionsMenu());
 								case 'ost':
 									FlxG.switchState(new MusicPlayerState());
-								case 'donate':
+								case 'credits':
 									FlxG.switchState(new CreditsMenuState());
 							}
 						});

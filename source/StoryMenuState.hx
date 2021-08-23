@@ -15,6 +15,7 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+import Discord.DiscordClient;
 
 using StringTools;
 
@@ -97,6 +98,8 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		DiscordClient.changePresence("In the Story Menu", null);
+
 		FlxG.save.data.tristanProgress = null; //undo tristan stuff since its being moved
 		//DONT REMOVE THIS CODE because we might use it for reference in the future
 		tristanunlocked = false;

@@ -14,6 +14,8 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
 
+import Discord.DiscordClient;
+
 using StringTools;
 
 class FreeplayState extends MusicBeatState
@@ -74,6 +76,8 @@ class FreeplayState extends MusicBeatState
 					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 			}
 		 */
+		 
+		DiscordClient.changePresence("In the Freeplay Menu", null);
 
 		var isDebug:Bool = false;
 
@@ -400,7 +404,7 @@ class FreeplayState extends MusicBeatState
 		if (curSelected >= songs.length)
 			curSelected = 0;
 		curChar = Highscore.getChar(songs[curSelected].songName, curDifficulty);
-		if (songs[curSelected].week != 7)
+		if (songs[curSelected].week != 7 || songs[curSelected].songName == 'Old-Insanity')
 		{
 			if (curDifficulty < 0)
 				curDifficulty = 2;
