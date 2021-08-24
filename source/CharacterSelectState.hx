@@ -202,7 +202,7 @@ class CharacterSelectState extends MusicBeatState
 			char.playAnim(heyAnimation ? 'hey' : 'singUP', true);
 			FlxG.sound.music.stop();
 			FlxG.sound.play(Paths.music('gameOverEnd'));
-			new FlxTimer().start(1.5, endIt);
+			new FlxTimer().start(1.9, endIt);
 		}
 
 
