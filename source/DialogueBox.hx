@@ -406,7 +406,7 @@ class DialogueBox extends FlxSpriteGroup
 			switch (curCharacter)
 			{
 				case 'dave' | 'bambi': //guys its the funny bambi character
-						portraitLeft.setPosition(276.95, 170);
+						portraitLeft.setPosition(220, 220);
 				case 'bf' | 'gf': //create boyfriend & genderbent boyfriend
 					portraitRight.setPosition(570, 220);
 			}
