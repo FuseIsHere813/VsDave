@@ -413,7 +413,7 @@ class DialogueBox extends FlxSpriteGroup
 			box.flipX = portraitLeft.visible;
 			portraitLeft.x -= 150;
 			//portraitRight.x += 100;
-			portraitLeft.antialiasing = true;
+			portraitLeft.antialiasing = portrait.portraitPath != "dialogue/dave_furiosity";
 			portraitRight.antialiasing = true;
 			portraitLeft.animation.play('enter',true);
 			portraitRight.animation.play('enter',true);

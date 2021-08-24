@@ -1134,7 +1134,7 @@ class PlayState extends MusicBeatState
 		var textYPos:Float = healthBarBG.y + 50;
 		if (creditsText)
 		{
-			textYPos = healthBarBG.y + 38;
+			textYPos = healthBarBG.y + 36;
 		}
 		// Add Kade Engine watermark
 		var kadeEngineWatermark = new FlxText(4, textYPos, 0,
