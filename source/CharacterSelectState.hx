@@ -57,6 +57,7 @@ class CharacterSelectState extends MusicBeatState
 		{
 			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true]; //unlock everyone
 		}
+
 		var end:FlxSprite = new FlxSprite(0, 0);
 		FlxG.sound.playMusic(Paths.music("goodEnding"),1,true);
 		add(end);
@@ -93,7 +94,6 @@ class CharacterSelectState extends MusicBeatState
 		add(stageFront);
 
 		FlxG.camera.zoom = 0.75;
-
 
 		//create character
 		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, "bf");
@@ -245,6 +245,11 @@ class CharacterSelectState extends MusicBeatState
 		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, CharactersList[current]);
 		char.screenCenter();
 		char.y = FlxG.height / 2;
+		switch (char.curCharacter)
+		{
+			case 'dave-angey':
+				char.y -= 225;
+		}
 		add(char);
 		if (!FlxG.save.data.unlockedcharacters[current])
 		{
