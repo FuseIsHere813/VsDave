@@ -125,12 +125,12 @@ class DialogueBox extends FlxSpriteGroup
 		switch (PlayState.SONG.song.toLowerCase())
 		{
 			case 'senpai':
-				hasDialog = true;
+				hasDialog = false;
 				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-pixel');
 				box.animation.addByPrefix('normalOpen', 'Text Box Appear', 24, false);
 				box.animation.addByIndices('normal', 'Text Box Appear', [4], "", 24);
 			case 'roses':
-				hasDialog = true;
+				hasDialog = false;
 				FlxG.sound.play(Paths.sound('ANGRY_TEXT_BOX'));
 
 				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-senpaiMad');
@@ -138,7 +138,7 @@ class DialogueBox extends FlxSpriteGroup
 				box.animation.addByIndices('normal', 'SENPAI ANGRY IMPACT SPEECH', [4], "", 24);
 
 			case 'thorns':
-				hasDialog = true;
+				hasDialog = false;
 				box.frames = Paths.getSparrowAtlas('weeb/pixelUI/dialogueBox-evil');
 				box.animation.addByPrefix('normalOpen', 'Spirit Textbox spawn', 24, false);
 				box.animation.addByIndices('normal', 'Spirit Textbox spawn', [11], "", 24);
@@ -243,6 +243,7 @@ class DialogueBox extends FlxSpriteGroup
 				dropText.font = Paths.font("barcode.ttf");
 				dropText.color = 0xFFFFFFFF;
 				add(dropText);
+				dropText.antialiasing = true;
 			
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = Paths.font("barcode.ttf");
@@ -261,6 +262,8 @@ class DialogueBox extends FlxSpriteGroup
 				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
 				add(swagDialogue);
 		}
+		dropText.antialiasing = true;
+		swagDialogue.antialiasing = true;
 		dialogue = new Alphabet(0, 80, "", false, true);
 		// dialogue.x = 90;
 		// add(dialogue);
@@ -403,17 +406,15 @@ class DialogueBox extends FlxSpriteGroup
 			switch (curCharacter)
 			{
 				case 'dave' | 'bambi': //guys its the funny bambi character
-						portraitLeft.setPosition(220, 220);
-				case 'senpai':
-					portraitLeft.setPosition(-20, 70);
-					portraitLeft.setGraphicSize(Std.int(portraitLeft.width * PlayState.daPixelZoom * 0.9));
-	
+						portraitLeft.setPosition(276.95, 170);
 				case 'bf' | 'gf': //create boyfriend & genderbent boyfriend
 					portraitRight.setPosition(570, 220);
 			}
 			box.flipX = portraitLeft.visible;
 			portraitLeft.x -= 150;
 			//portraitRight.x += 100;
+			portraitLeft.antialiasing = true;
+			portraitRight.antialiasing = true;
 			portraitLeft.animation.play('enter',true);
 			portraitRight.animation.play('enter',true);
 		}
