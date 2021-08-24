@@ -42,6 +42,7 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import flash.system.System;
+import Discord.DiscordClient;
 
 using StringTools;
 
@@ -73,6 +74,11 @@ class PlayState extends MusicBeatState
 	public var elapsedtime:Float = 0;
 
 	var halloweenLevel:Bool = false;
+
+	var storyDifficultyText:String = "";
+	var iconRPC:String = "";
+	var detailsText:String = "";
+	var detailsPausedText:String = "";
 
 	private var vocals:FlxSound;
 
@@ -196,6 +202,53 @@ class PlayState extends MusicBeatState
 		goods = 0;
 		misses = 0;
 
+		// Making difficulty text for Discord Rich Presence.
+		storyDifficultyText = CoolUtil.difficultyString();
+
+		// To avoid having duplicate images in Discord assets
+		switch (SONG.player2)
+		{
+			case 'dave':
+				iconRPC = 'icon_dave';
+			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old':
+				iconRPC = 'icon_bambi';
+			default:
+				iconRPC = 'icon_none';
+		}
+		switch (SONG.song.toLowerCase())
+		{
+			case 'splitathon':
+				iconRPC = 'icon_both';
+		}
+
+		if (isStoryMode)
+		{
+			detailsText = "Story Mode: Week " + storyWeek;
+		}
+		else
+		{
+			detailsText = "Freeplay Mode: ";
+		}
+
+		// String for when the game is paused
+		detailsPausedText = "Paused - " + detailsText;
+
+		curStage = "";
+
+		// Updating Discord Rich Presence.
+		DiscordClient.changePresence(detailsText
+			+ " "
+			+ SONG.song
+			+ " ("
+			+ storyDifficultyText
+			+ ") ",
+			"\nAcc: "
+			+ truncateFloat(accuracy, 2)
+			+ "% | Score: "
+			+ songScore
+			+ " | Misses: "
+			+ misses, iconRPC);
+		
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -1073,7 +1126,7 @@ class PlayState extends MusicBeatState
 			case 'glitch':
 				credits = 'Original Song made by The Boneyard';
 			case 'screwed':
-				credits = 'Original Song made by ALittleBitHorrified';
+				credits = 'Original Song made by That Pizza Tower Fan';
 			default:
 				credits = '';
 		}
@@ -1455,6 +1508,19 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.volume = 0;
 		}
 
+		DiscordClient.changePresence(detailsText
+			+ " "
+			+ SONG.song
+			+ " ("
+			+ storyDifficultyText
+			+ ") ",
+			"\nAcc: "
+			+ truncateFloat(accuracy, 2)
+			+ "% | Score: "
+			+ songScore
+			+ " | Misses: "
+			+ misses, iconRPC);
+
 		FlxG.sound.music.onComplete = endSong;
 	}
 
@@ -1723,6 +1789,18 @@ class PlayState extends MusicBeatState
 				vocals.pause();
 			}
 
+			DiscordClient.changePresence("PAUSED on "
+				+ SONG.song
+				+ " ("
+				+ storyDifficultyText
+				+ ") |",
+				"Acc: "
+				+ truncateFloat(accuracy, 2)
+				+ "% | Score: "
+				+ songScore
+				+ " | Misses: "
+				+ misses, iconRPC);
+
 			if (!startTimer.finished)
 				startTimer.active = false;
 		}
@@ -1742,6 +1820,28 @@ class PlayState extends MusicBeatState
 			if (!startTimer.finished)
 				startTimer.active = true;
 			paused = false;
+
+			if (startTimer.finished)
+				{
+					DiscordClient.changePresence(detailsText
+						+ " "
+						+ SONG.song
+						+ " ("
+						+ storyDifficultyText
+						+ ") ",
+						"\nAcc: "
+						+ truncateFloat(accuracy, 2)
+						+ "% | Score: "
+						+ songScore
+						+ " | Misses: "
+						+ misses, iconRPC, true,
+						FlxG.sound.music.length
+						- Conductor.songPosition);
+				}
+				else
+				{
+					DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ") ", iconRPC);
+				}
 		}
 
 		super.closeSubState();
@@ -1755,6 +1855,19 @@ class PlayState extends MusicBeatState
 		Conductor.songPosition = FlxG.sound.music.time;
 		vocals.time = Conductor.songPosition;
 		vocals.play();
+
+		DiscordClient.changePresence(detailsText
+			+ " "
+			+ SONG.song
+			+ " ("
+			+ storyDifficultyText
+			+ ") ",
+			"\nAcc: "
+			+ truncateFloat(accuracy, 2)
+			+ "% | Score: "
+			+ songScore
+			+ " | Misses: "
+			+ misses, iconRPC);
 	}
 
 	private var paused:Bool = false;
@@ -1869,6 +1982,11 @@ class PlayState extends MusicBeatState
 					iconP2.animation.play("dave", true);
 			}
 		}
+		//4736
+		//4800
+		//5824
+		//6080
+		//8384
 		if (SONG.song.toLowerCase() == 'insanity')
 		{
 			switch (curStep)
@@ -1967,6 +2085,7 @@ class PlayState extends MusicBeatState
 				return;
 			}
 			FlxG.switchState(new ChartingState());
+			DiscordClient.changePresence("Chart Editor", null, null, true);
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
@@ -2003,10 +2122,6 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.EIGHT)
 			FlxG.switchState(new AnimationDebug(SONG.player2));
 		#end
-		if (FlxG.keys.justPressed.ZERO)
-		{
-			curStep = 5800 * 4;
-		}
 		if (startingSong)
 		{
 			if (startedCountdown)
@@ -2134,6 +2249,18 @@ class PlayState extends MusicBeatState
 			{
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
 					.y, characteroverride == "bf" || characteroverride == "none" ? SONG.player1 : characteroverride));
+
+					DiscordClient.changePresence("GAME OVER -- "
+					+ SONG.song
+					+ " ("
+					+ storyDifficultyText
+					+ ") ",
+					"\nAcc: "
+					+ truncateFloat(accuracy, 2)
+					+ "% | Score: "
+					+ songScore
+					+ " | Misses: "
+					+ misses, iconRPC);
 			}
 			else
 			{
@@ -2155,6 +2282,18 @@ class PlayState extends MusicBeatState
 				{
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
 						.y, characteroverride == "bf" || characteroverride == "none" ? SONG.player1 : characteroverride));
+
+						DiscordClient.changePresence("GAME OVER -- "
+						+ SONG.song
+						+ " ("
+						+ storyDifficultyText
+						+ ") ",
+						"\nAcc: "
+						+ truncateFloat(accuracy, 2)
+						+ "% | Score: "
+						+ songScore
+						+ " | Misses: "
+						+ misses, iconRPC);
 				}
 			}
 
@@ -3312,6 +3451,20 @@ class PlayState extends MusicBeatState
 						shakeCam = false;
 				}
 		}
+		DiscordClient.changePresence(detailsText
+			+ " "
+			+ SONG.song
+			+ " ("
+			+ storyDifficultyText
+			+ ") ",
+			"Acc: "
+			+ truncateFloat(accuracy, 2)
+			+ "% | Score: "
+			+ songScore
+			+ " | Misses: "
+			+ misses, iconRPC, true,
+			FlxG.sound.music.length
+			- Conductor.songPosition);
 	}
 
 	var lightningStrikeBeat:Int = 0;
@@ -3345,12 +3498,20 @@ class PlayState extends MusicBeatState
 			// else
 			// Conductor.changeBPM(SONG.bpm);
 		}
-		trace('Hold timer is under 0? ' + (dad.holdTimer <= 0) + "Hold timer's currently " + dad.holdTimer);
-		trace('Is the current animation finished? ' + (dad.animation.finished));
-		if (dad.holdTimer <= 0 && dad.animation.finished)
+		if (dad.animation.finished)
 		{
-			dad.dance();
-			dadmirror.dance();
+			switch (SONG.song.toLowerCase())
+			{
+				case 'tutorial':
+					dad.dance();
+					dadmirror.dance();
+				default:
+					if (dad.holdTimer <= 0)
+					{
+						dad.dance();
+						dadmirror.dance();
+					}
+			}
 		}
 
 		// FlxG.log.add('change bpm' + SONG.notes[Std.int(curStep / 16)].changeBPM);

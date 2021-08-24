@@ -233,43 +233,43 @@ class Character extends FlxSprite
 		
 				playAnim('idle');
 			
-				case 'dave-old':
-					var tex = Paths.getSparrowAtlas('dave/dave_old');
-					frames = tex;
-					animation.addByPrefix('idle', 'Dave idle dance', 24, false);
-					animation.addByPrefix('singUP', 'Dave Sing Note UP0', 24, false);
-					animation.addByPrefix('singLEFT', 'Dave Sing Note LEFT0', 24, false);
-					animation.addByPrefix('singRIGHT', 'Dave Sing Note RIGHT0', 24, false);
-					animation.addByPrefix('singDOWN', 'Dave Sing Note DOWN0', 24, false); 
-					animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-					animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-					animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-					animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
-					animation.addByPrefix('hey', 'BF HEY', 24, false);
+			case 'dave-old':
+				var tex = Paths.getSparrowAtlas('dave/dave_old');
+				frames = tex;
+				animation.addByPrefix('idle', 'Dave idle dance', 24, false);
+				animation.addByPrefix('singUP', 'Dave Sing Note UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'Dave Sing Note LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'Dave Sing Note RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'Dave Sing Note DOWN0', 24, false); 
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('hey', 'BF HEY', 24, false);
 	
-					animation.addByPrefix('firstDeath', "BF dies", 24, false);
-					animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
-					animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
-					animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
-					animation.addByPrefix('scared', 'BF idle shaking', 24);
-					animation.addByPrefix('hit', 'BF hit', 24);
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
+				animation.addByPrefix('scared', 'BF idle shaking', 24);
+				animation.addByPrefix('hit', 'BF hit', 24);
 	
-					addOffset('idle', -5);
-					addOffset("singUP", -29, 27);
-					addOffset("singRIGHT", -38, -7);
-					addOffset("singLEFT", 12, -6);
-					addOffset("singDOWN", -10, -50);
-					addOffset("singUPmiss", -29, 27);
-					addOffset("singRIGHTmiss", -30, 21);
-					addOffset("singLEFTmiss", 12, 24);
-					addOffset("singDOWNmiss", -11, -19);
-					addOffset("hey", 7, 4);
-					addOffset('firstDeath', 37, 11);
-					addOffset('deathLoop', 37, 5);
-					addOffset('deathConfirm', 37, 69);
-					addOffset('scared', -4);
+				addOffset('idle', -5);
+				addOffset("singUP", -29, 27);
+				addOffset("singRIGHT", -38, -7);
+				addOffset("singLEFT", 12, -6);
+				addOffset("singDOWN", -10, -50);
+				addOffset("singUPmiss", -29, 27);
+				addOffset("singRIGHTmiss", -30, 21);
+				addOffset("singLEFTmiss", 12, 24);
+				addOffset("singDOWNmiss", -11, -19);
+				addOffset("hey", 7, 4);
+				addOffset('firstDeath', 37, 11);
+				addOffset('deathLoop', 37, 5);
+				addOffset('deathConfirm', 37, 69);
+				addOffset('scared', -4);
 	
-					playAnim('idle');
+				playAnim('idle');
 
 			case 'bambi-3d':
 				// BAMBI SHITE ANIMATION LOADING CODE
@@ -698,14 +698,14 @@ class Character extends FlxSprite
 				var tex = Paths.getSparrowAtlas('dave/bambi');
 				frames = tex;
 				animation.addByPrefix('idle', 'BF idle dance', 24, false);
-				animation.addByPrefix('singUP', 'BF NOTE UP', 24, false);
-				animation.addByPrefix('singLEFT', 'BF NOTE LEFT', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT', 24, false);
-				animation.addByPrefix('singDOWN', 'BF NOTE DOWN', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS0', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS0', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS0', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS0', 24, false);
 
 				animation.addByPrefix('firstDeath', "BF dies", 24, false);
 				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
@@ -792,8 +792,8 @@ class Character extends FlxSprite
 				playAnim('idle');
 				
 			case 'bambi-splitathon':
-				frames = Paths.getSparrowAtlas('splitathon/Bambi_Splitathon');
-				animation.addByPrefix('idle', 'Idle', 24, false);
+				frames = Paths.getSparrowAtlas('splitathon/Splitathon_Bambi');
+				animation.addByPrefix('idle', 'Idle', 18, false);
 				animation.addByPrefix('singDOWN', 'Down', 27, false);
 				animation.addByPrefix('singUP', 'Up', 27, false);
 				animation.addByPrefix('singLEFT', 'Left', 27, false);
@@ -962,45 +962,45 @@ class Character extends FlxSprite
 	}
 
 	public function playAnim(AnimName:String, Force:Bool = false, Reversed:Bool = false, Frame:Int = 0):Void
+	{
+		if (animation.getByName(AnimName) == null)
 		{
-			if (animation.getByName(AnimName) == null)
-			{
-				return; //why wasn't this a thing in the first place
-			}
-			animation.play(AnimName, Force, Reversed, Frame);
+			return; //why wasn't this a thing in the first place
+		}
+		animation.play(AnimName, Force, Reversed, Frame);
 	
-			var daOffset = animOffsets.get(AnimName);
-			if (animOffsets.exists(AnimName))
+		var daOffset = animOffsets.get(AnimName);
+		if (animOffsets.exists(AnimName))
+		{
+			if (isPlayer)
 			{
-				if (isPlayer)
-				{
-					offset.set(daOffset[0] + globaloffset[0], daOffset[1] + globaloffset[1]);
-				}
-				else
-				{
-					offset.set(daOffset[0], daOffset[1]);
-				}
+				offset.set(daOffset[0] + globaloffset[0], daOffset[1] + globaloffset[1]);
 			}
 			else
-				offset.set(0, 0);
-	
-			if (curCharacter == 'gf')
 			{
-				if (AnimName == 'singLEFT')
-				{
-					danced = true;
-				}
-				else if (AnimName == 'singRIGHT')
-				{
-					danced = false;
-				}
-	
-				if (AnimName == 'singUP' || AnimName == 'singDOWN')
-				{
-					danced = !danced;
-				}
+				offset.set(daOffset[0], daOffset[1]);
 			}
 		}
+		else
+			offset.set(0, 0);
+	
+		if (curCharacter == 'gf')
+		{
+			if (AnimName == 'singLEFT')
+			{
+				danced = true;
+			}
+			else if (AnimName == 'singRIGHT')
+			{
+				danced = false;
+			}
+	
+			if (AnimName == 'singUP' || AnimName == 'singDOWN')
+			{
+				danced = !danced;
+			}
+		}
+	}
 
 	public function addOffset(name:String, x:Float = 0, y:Float = 0)
 	{

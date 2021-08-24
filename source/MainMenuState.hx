@@ -14,7 +14,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import io.newgrounds.NG;
 import lime.app.Application;
-
+import Discord.DiscordClient;
 
 using StringTools;
 
@@ -25,14 +25,14 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
 	#if !switch
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'options'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'options', 'credits'];
 	#else
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost'];
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'credits'];
 	#end
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
-	var newInput:Bool = true;
+	var newInput:Bool;
 
 	public static var firstStart:Bool = true;
 
@@ -68,7 +68,7 @@ class MainMenuState extends MusicBeatState
 			FlxG.save.data.eyesores = true;
 		}
 
-		
+		DiscordClient.changePresence("In the Menus", null);
 
 		if (FlxG.save.data.unlockedcharacters == null)
 		{
@@ -76,8 +76,7 @@ class MainMenuState extends MusicBeatState
 		}
 		
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(randomizeBG());
-		bg.scrollFactor.x = 0;
-		bg.scrollFactor.y = 0.18;
+		bg.scrollFactor.set();
 		bg.setGraphicSize(Std.int(bg.width * 1.1));
 		bg.updateHitbox();
 		bg.screenCenter();
@@ -85,12 +84,8 @@ class MainMenuState extends MusicBeatState
 		bg.color = 0xFFFDE871;
 		add(bg);
 
-		camFollow = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
-
 		magenta = new FlxSprite(-80).loadGraphic(bg.graphic);
-		magenta.scrollFactor.x = 0;
-		magenta.scrollFactor.y = 0.18;
+		magenta.scrollFactor.set();
 		magenta.setGraphicSize(Std.int(magenta.width * 1.1));
 		magenta.updateHitbox();
 		magenta.screenCenter();
@@ -98,12 +93,14 @@ class MainMenuState extends MusicBeatState
 		magenta.antialiasing = true;
 		magenta.color = 0xFFfd719b;
 		add(magenta);
-		// magenta.scrollFactor.set();
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
 		var tex = Paths.getSparrowAtlas('FNF_main_menu_assets');
+
+		camFollow = new FlxObject(0, 0, 1, 1);
+		add(camFollow);
 
 		FlxG.camera.follow(camFollow, null, 0.06);
 		
@@ -118,7 +115,7 @@ class MainMenuState extends MusicBeatState
 			menuItem.ID = i;
 			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
-			menuItem.scrollFactor.set();
+			menuItem.scrollFactor.set(0, 1);
 			menuItem.antialiasing = true;
 			if (firstStart)
 				FlxTween.tween(menuItem,{y: 60 + (i * 160)},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween) 
@@ -157,11 +154,6 @@ class MainMenuState extends MusicBeatState
 		if (FlxG.sound.music.volume < 0.8)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-		}
-
-		if (FlxG.keys.pressed.ONE)
-		{
-			FlxG.switchState(new CreditsMenuState());
 		}
 
 		if (!selectedSomethin)
@@ -219,6 +211,8 @@ class MainMenuState extends MusicBeatState
 									FlxG.switchState(new OptionsMenu());
 								case 'ost':
 									FlxG.switchState(new MusicPlayerState());
+								case 'credits':
+									FlxG.switchState(new CreditsMenuState());
 							}
 						});
 					}

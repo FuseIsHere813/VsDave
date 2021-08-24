@@ -2,20 +2,20 @@
 <TextureAtlas imagePath="Dave_insanity_lol.png">
 	<!-- Created with Adobe Animate version 21.0.7.42652 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="Dave Idle0000" x="0" y="0" width="245" height="456" frameX="-7" frameY="0" frameWidth="270" frameHeight="456"/>
-	<SubTexture name="Dave Idle0001" x="249" y="0" width="245" height="456" frameX="-7" frameY="0" frameWidth="270" frameHeight="456"/>
-	<SubTexture name="Dave Idle0002" x="498" y="0" width="246" height="446" frameX="-3" frameY="-10" frameWidth="270" frameHeight="456"/>
-	<SubTexture name="Dave Idle0003" x="249" y="0" width="245" height="456" frameX="-7" frameY="0" frameWidth="270" frameHeight="456"/>
-	<SubTexture name="Dave Sing Down0000" x="1022" y="0" width="254" height="428" frameX="-2" frameY="0" frameWidth="256" frameHeight="428"/>
-	<SubTexture name="Dave Sing Down0001" x="1280" y="0" width="253" height="428" frameX="-1" frameY="0" frameWidth="256" frameHeight="428"/>
-	<SubTexture name="Dave Sing Down0002" x="1537" y="0" width="253" height="428" frameX="0" frameY="0" frameWidth="256" frameHeight="428"/>
-	<SubTexture name="Dave Sing Left0000" x="1794" y="0" width="250" height="457" frameX="-14" frameY="-3" frameWidth="284" frameHeight="463"/>
-	<SubTexture name="Dave Sing Left0001" x="0" y="461" width="262" height="461" frameX="-11" frameY="-1" frameWidth="284" frameHeight="463"/>
-	<SubTexture name="Dave Sing Left0002" x="266" y="461" width="284" height="463"/>
-	<SubTexture name="Dave Sing Right0000" x="554" y="461" width="284" height="457" frameX="-3" frameY="0" frameWidth="299" frameHeight="457"/>
-	<SubTexture name="Dave Sing Right0001" x="842" y="461" width="293" height="456" frameX="-2" frameY="-1" frameWidth="299" frameHeight="457"/>
-	<SubTexture name="Dave Sing Right0002" x="1139" y="461" width="299" height="456" frameX="0" frameY="-1" frameWidth="299" frameHeight="457"/>
-	<SubTexture name="Dave Sing Up0000" x="1442" y="461" width="244" height="462" frameX="-11" frameY="-5" frameWidth="259" frameHeight="467"/>
-	<SubTexture name="Dave Sing Up0001" x="1690" y="461" width="254" height="463" frameX="-2" frameY="-4" frameWidth="259" frameHeight="467"/>
-	<SubTexture name="Dave Sing Up0002" x="0" y="928" width="259" height="463" frameX="0" frameY="0" frameWidth="259" frameHeight="467"/>
+	<SubTexture name="Dave Idle0000" x="0" y="0" width="270" height="456"/>
+	<SubTexture name="Dave Idle0001" x="274" y="0" width="270" height="456"/>
+	<SubTexture name="Dave Idle0002" x="548" y="0" width="270" height="456"/>
+	<SubTexture name="Dave Idle0003" x="822" y="0" width="270" height="456"/>
+	<SubTexture name="Dave Sing Down0000" x="1096" y="0" width="256" height="428"/>
+	<SubTexture name="Dave Sing Down0001" x="1356" y="0" width="256" height="428"/>
+	<SubTexture name="Dave Sing Down0002" x="1616" y="0" width="256" height="428"/>
+	<SubTexture name="Dave Sing Left0000" x="0" y="460" width="284" height="463"/>
+	<SubTexture name="Dave Sing Left0001" x="288" y="460" width="284" height="463"/>
+	<SubTexture name="Dave Sing Left0002" x="576" y="460" width="284" height="463"/>
+	<SubTexture name="Dave Sing Right0000" x="864" y="460" width="299" height="457"/>
+	<SubTexture name="Dave Sing Right0001" x="1167" y="460" width="299" height="457"/>
+	<SubTexture name="Dave Sing Right0002" x="1470" y="460" width="299" height="457"/>
+	<SubTexture name="Dave Sing Up0000" x="1773" y="460" width="258" height="467"/>
+	<SubTexture name="Dave Sing Up0001" x="0" y="931" width="258" height="467"/>
+	<SubTexture name="Dave Sing Up0002" x="262" y="931" width="258" height="467"/>
 </TextureAtlas>

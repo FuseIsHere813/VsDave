@@ -16,6 +16,7 @@ import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
+import Discord.DiscordClient;
 using StringTools;
 
 
@@ -41,8 +42,7 @@ class MusicPlayerState extends MusicBeatState
 	private var iconP2:HealthIcon;
 
     private var barText:FlxText;
-
-    
+  
     override function create()
     {
         var initSonglist = CoolUtil.coolTextFile(Paths.txt('djSonglist')); //ah yeah dj song list
@@ -65,6 +65,8 @@ class MusicPlayerState extends MusicBeatState
 
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
+
+        DiscordClient.changePresence("In the OST Menu", null);
 
         for (i in 0...songs.length)
         {
@@ -130,6 +132,27 @@ class MusicPlayerState extends MusicBeatState
         iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - 26);
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - 26);
 
+        var currentTimeFormatted = FlxStringUtil.formatTime(FlxG.sound.music.time / 1000);
+        var lengthFormatted = FlxStringUtil.formatTime(FlxG.sound.music.length / 1000);
+        if (currentlyplaying)
+        {
+            if (songs[curSelected].hasVocals || songs[curSelected].ExternalSong)
+            {
+                DiscordClient.changePresence('In The OST Menu', '\nListening To: ' +
+                    formatSongName(songs[curSelected].songName) + ' | ' + 
+                    currentTimeFormatted + ' / ' + lengthFormatted,
+                    null);
+                
+            }
+            else
+            {
+                DiscordClient.changePresence('In The OST Menu', '\nListening To: ' +
+                    formatSongName(songs[curSelected].songName) + ' Instrumental | ' +
+                    currentTimeFormatted + ' / ' + lengthFormatted, 
+                    null);
+            }
+        }
+
         if (healthBar.percent < 20)
 			iconP1.animation.curAnim.curFrame = 1;
 		else
@@ -175,6 +198,8 @@ class MusicPlayerState extends MusicBeatState
         {
             if (currentlyplaying)
             {
+                DiscordClient.changePresence('In The OST Menu', null);
+                
                 if (CurVocals != null)
                 {
                     CurVocals.stop();
@@ -184,6 +209,7 @@ class MusicPlayerState extends MusicBeatState
                 FlxG.sound.music.stop();
                 currentlyplaying = false;
                 FlxG.sound.playMusic(Paths.music('freakyMenu'));
+                
                 var bullShit:Int = 0; //the fact that i have to copy this code is bullshit
 
                 for (i in 0...iconArray.length)
@@ -223,11 +249,11 @@ class MusicPlayerState extends MusicBeatState
                     currentlyplaying = true;
                     if (songs[curSelected].hasVocals)
                     {
-                    CurVocals = new FlxSound().loadEmbedded(Paths.voices(songs[curSelected].songName));
+                        CurVocals = new FlxSound().loadEmbedded(Paths.voices(songs[curSelected].songName));
                     }
                     else
                     {
-                    CurVocals = new FlxSound();
+                        CurVocals = new FlxSound();
                     }
                     //let both the vocals and the instrumental load before playing
                     FlxG.sound.playMusic(Paths.inst(songs[curSelected].songName), 1,true);
@@ -277,6 +303,26 @@ class MusicPlayerState extends MusicBeatState
             }
         }
 
+    }
+
+    function formatSongName(song:String):String
+    {
+        var split:Array<String> = song.split('-');
+        var formattedSong:String = '';
+        for (i in 0...split.length) 
+        {
+            var piece:String = split[i];
+            var allSplit = piece.split('');
+            var firstLetterUpperCased = allSplit[0].toUpperCase();
+            var substring = piece.substr(1, piece.length - 1);
+            var newPiece = firstLetterUpperCased + substring;
+            if (i != split.length - 1)
+            {
+                newPiece += " ";
+            }
+            formattedSong += newPiece;
+        }
+        return formattedSong;
     }
 
     function HideBar()

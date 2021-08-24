@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bf_house.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="bf house portrait0000" x="0" y="0" width="480" height="270" frameX="-100" frameY="0" frameWidth="580" frameHeight="270"/>
+	<SubTexture name="bf house portrait0001" x="484" y="0" width="480" height="270" frameX="-75" frameY="0" frameWidth="580" frameHeight="270"/>
+	<SubTexture name="bf house portrait0002" x="0" y="274" width="480" height="270" frameX="-50" frameY="0" frameWidth="580" frameHeight="270"/>
+	<SubTexture name="bf house portrait0003" x="484" y="274" width="480" height="270" frameX="-25" frameY="0" frameWidth="580" frameHeight="270"/>
+	<SubTexture name="bf house portrait0004" x="0" y="548" width="480" height="270" frameX="0" frameY="0" frameWidth="580" frameHeight="270"/>
+</TextureAtlas>

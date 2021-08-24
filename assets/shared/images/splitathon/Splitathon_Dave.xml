@@ -5,18 +5,17 @@
 	<SubTexture name="Down0000" x="0" y="0" width="347" height="455"/>
 	<SubTexture name="Down0001" x="351" y="0" width="347" height="455"/>
 	<SubTexture name="Down0002" x="702" y="0" width="347" height="455"/>
-	<SubTexture name="Idle0000" x="1053" y="0" width="310" height="457"/>
-	<SubTexture name="Idle0001" x="1367" y="0" width="310" height="457"/>
-	<SubTexture name="Idle0002" x="1681" y="0" width="310" height="457"/>
-	<SubTexture name="Idle0003" x="0" y="461" width="310" height="457"/>
-	<SubTexture name="Idle0004" x="314" y="461" width="310" height="457"/>
-	<SubTexture name="Left0000" x="628" y="461" width="310" height="457"/>
-	<SubTexture name="Left0001" x="942" y="461" width="310" height="457"/>
-	<SubTexture name="Left0002" x="1256" y="461" width="310" height="457"/>
-	<SubTexture name="Right0000" x="1570" y="461" width="300" height="459"/>
-	<SubTexture name="Right0001" x="0" y="924" width="300" height="459"/>
-	<SubTexture name="Right0002" x="304" y="924" width="300" height="459"/>
-	<SubTexture name="Up0000" x="608" y="924" width="314" height="457"/>
-	<SubTexture name="Up0001" x="926" y="924" width="314" height="457"/>
-	<SubTexture name="Up0002" x="1244" y="924" width="314" height="457"/>
+	<SubTexture name="Idle0000" x="1053" y="0" width="323" height="457"/>
+	<SubTexture name="Idle0001" x="1380" y="0" width="323" height="457"/>
+	<SubTexture name="Idle0002" x="1707" y="0" width="323" height="457"/>
+	<SubTexture name="Idle0003" x="0" y="461" width="323" height="457"/>
+	<SubTexture name="Left0000" x="327" y="461" width="310" height="457"/>
+	<SubTexture name="Left0001" x="641" y="461" width="310" height="457"/>
+	<SubTexture name="Left0002" x="955" y="461" width="310" height="457"/>
+	<SubTexture name="Right0000" x="1269" y="461" width="300" height="459"/>
+	<SubTexture name="Right0001" x="1573" y="461" width="300" height="459"/>
+	<SubTexture name="Right0002" x="0" y="924" width="300" height="459"/>
+	<SubTexture name="Up0000" x="304" y="924" width="314" height="457"/>
+	<SubTexture name="Up0001" x="622" y="924" width="314" height="457"/>
+	<SubTexture name="Up0002" x="940" y="924" width="314" height="457"/>
 </TextureAtlas>
