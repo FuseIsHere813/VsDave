@@ -87,19 +87,19 @@ class CreditsMenuState extends MusicBeatState
             new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
          ]
       ),
-      new Person("CyndaquilDAC", CreditsType.Dev, "Dev/Programmer some new additions",
+      new Person("CyndaquilDAC", CreditsType.Dev, "Dev/Programmed some new additions",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCTaq4jni33NoaI1TfMXCRcA'),
             new Social('twitter', 'https://twitter.com/CyndaquilDAC')
          ]
       ),
       //contributors
-      new Person("Zmac", CreditsType.Contributor, "Made the Furiosity BG, helped with Intro text, \n& helped getting the mod into Funky Friday",
+      new Person("Zmac", CreditsType.Contributor, "Made the Furiosity BG, helped with Intro text, and helped getting the mod into Funky Friday",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
          ]
       ),
-      new Person("That Pizza Tower Fan", CreditsType.Contributor, "Creator of the Screwed Fantrack", []),
+      new Person("That Pizza Tower Fan", CreditsType.Contributor, "Creator of the Screwed fantrack", []),
       new Person("Stats45", CreditsType.Contributor, "Giving moral support",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UClb4YjR8i74G-ue2nyiH2DQ')
@@ -465,7 +465,7 @@ class CreditsMenuState extends MusicBeatState
       personName.scrollFactor.set();
       personName.active = false;
       
-      var credits:FlxText = new FlxText(0, personName.y + 50, 0, selectedPerson.credits, 25);
+      var credits:FlxText = new FlxText(0, personName.y + 50, FlxG.width / 1.25, selectedPerson.credits, 25);
       credits.setFormat(selectedFormat.font, selectedFormat.size, selectedFormat.color, selectedFormat.alignment, selectedFormat.borderStyle, selectedFormat.borderColor);
       credits.screenCenter(X);
       credits.updateHitbox();
