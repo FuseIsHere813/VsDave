@@ -66,7 +66,7 @@ class TitleState extends MusicBeatState
 
 		// DEBUG BULLSHIT
 
-		#if desktop
+		#if windows
 		DiscordClient.initialize();
 		#end
 
