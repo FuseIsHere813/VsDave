@@ -1078,27 +1078,41 @@ class PlayState extends MusicBeatState
 				credits = '';
 		}
 		var creditsText:Bool = credits != '';
-		var textYPos:Float = FlxG.height - 4;
+		var textYPos:Float = healthBarBG.y + 50;
 		if (creditsText)
 		{
-			textYPos = FlxG.height - 12;
+			textYPos = healthBarBG.y + 38;
 		}
 		// Add Kade Engine watermark
 		var kadeEngineWatermark = new FlxText(4, textYPos, 0,
 		SONG.song
 		+ " "
-		+ (storyDifficulty == 3 ? "Unnerfed" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") 
-		+ " - Dave Engine", 16);
-		
+		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Unnerfed" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "FINAL")
+		+ " - Dave Engine(KE 1.2)", 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
 		if (creditsText)
 		{
-			var creditsWatermark = new FlxText(4, FlxG.height + 10, 0, credits, 16);
+			var creditsWatermark = new FlxText(4, healthBarBG.y + 50, 0, credits, 16);
 			creditsWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			creditsWatermark.scrollFactor.set();
 			add(creditsWatermark);
+			creditsWatermark.cameras = [camHUD];
+		}
+
+		if (curSong.toLowerCase() == 'splitathon')
+		{
+			preload('splitathon/uhhWhatNow');
+			preload('splitathon/Why');
+			preload('splitathon/Yeah');
+			preload('splitathon/Bambi_WaitWhatNow');
+			preload('splitathon/Bambi_ChillingWithTheCorn');
+		}
+		if (curSong.toLowerCase() == 'insanity')
+		{
+			preload('dave/redsky');
+			preload('dave/redsky_fix_attempt');
 		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 50, 0, "", 20);
@@ -1123,6 +1137,7 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		kadeEngineWatermark.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
@@ -3491,6 +3506,7 @@ class PlayState extends MusicBeatState
 
 	public function addSplitathonChar(char:String):Void
 	{
+		boyfriend.stunned = true; //hopefully this stun stuff should prevent BF from randomly missing a note
 		remove(dad);
 		dad = new Character(100, 100, char);
 		add(dad);
@@ -3508,13 +3524,34 @@ class PlayState extends MusicBeatState
 					dad.y += 450;
 				}
 		}
+		boyfriend.stunned = false;
 	}
+
+	public function preload(graphic:String) //preload assets
+	{
+		var newthing:FlxSprite = new FlxSprite(1000,-1000).loadGraphic(Paths.image(graphic));
+		if (boyfriend != null)
+		{
+			boyfriend.stunned = true;
+		}
+		add(newthing);
+		remove(newthing);
+		if (boyfriend != null)
+		{
+			boyfriend.stunned = false;
+		}
+	}
+
 
 	public function splitathonExpression(expression:String, x:Float, y:Float):Void
 	{
 		if (SONG.song.toLowerCase() == 'splitathon')
 		{
-			camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 150);
+			if (expression != 'lookup')
+			{
+				camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 150);
+			}
+			boyfriend.stunned = true;
 			thing.color = 0xFF878787;
 			thing.x = x;
 			thing.y = y;
@@ -3548,6 +3585,8 @@ class PlayState extends MusicBeatState
 				splitathonExpressionAdded = true;
 				add(thing);
 			}
+			thing.antialiasing = true;
+			boyfriend.stunned = false;
 		}
 	}
 
