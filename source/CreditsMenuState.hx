@@ -1,5 +1,7 @@
 package;
 
+import cpp.abi.Abi;
+import flixel.graphics.FlxGraphic;
 import flixel.FlxCamera;
 import flixel.addons.plugin.taskManager.FlxTask;
 import flixel.group.FlxSpriteGroup;
@@ -43,6 +45,10 @@ class CreditsMenuState extends MusicBeatState
    var selectPersonCam:FlxCamera = new FlxCamera();
    var mainCam:FlxCamera = new FlxCamera();
    var transitioning:Bool = false;
+
+   var curSocialMediaSelected:Int = 0;
+   var socialButtons:Array<SocialButton> = new Array<SocialButton>();
+   var isThereSocialMedia:Bool = true;
    var peopleInCredits:Array<Person> = 
    [
       //devs
@@ -285,7 +291,7 @@ class CreditsMenuState extends MusicBeatState
                         {
                            FlxCamera.defaultCameras = [selectPersonCam];
                            selectPerson(peopleInCredits[curNameSelected]);
-                           FlxG.mouse.visible = true;
+                           updateSocialMediaUI();
                         }
                      });
                   }
@@ -308,6 +314,10 @@ class CreditsMenuState extends MusicBeatState
                            {
                               remove(selectedPersonGroup.remove(spr, true));
                            });
+                           for (i in 0...socialButtons.length) 
+                           {
+                              socialButtons.remove(socialButtons[i]);
+                           }
                            FlxCamera.defaultCameras = [mainCam];
                            for (creditsText in creditsTextGroup)
                            {
@@ -319,6 +329,7 @@ class CreditsMenuState extends MusicBeatState
                                     onComplete: function(tween:FlxTween)
                                     {
                                        selectedPersonGroup = new FlxSpriteGroup();
+                                       socialButtons = new Array<SocialButton>();
                                        FlxG.mouse.visible = false;
                                        transitioning = false;
                                        state = State.SelectingName;
@@ -328,6 +339,25 @@ class CreditsMenuState extends MusicBeatState
                            }
                         }
                      });
+                  }
+               }
+            }
+            if (isThereSocialMedia)
+            {
+               if (upPressed)
+               {
+                    changeSocialMediaSelection(-1);
+               }
+               if (downPressed)
+               {
+                  changeSocialMediaSelection(1);
+               }
+               if (accept)
+               {
+                  var socialButton = socialButtons[curSocialMediaSelected];
+                  if (socialButton != null && socialButton.socialMedia.socialMediaName != 'discord')
+                  {
+                     FlxG.openURL(socialButton.socialMedia.socialLink);
                   }
                }
             }
@@ -354,6 +384,23 @@ class CreditsMenuState extends MusicBeatState
       FlxG.camera.follow(menuItems[curNameSelected].text, 0.1);
       updateText(curNameSelected);
    }
+   function changeSocialMediaSelection(amount:Int = 0)
+   {
+      if (amount != 0)
+      {
+         FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+         curSocialMediaSelected += amount;
+      }
+      if (curSocialMediaSelected > socialButtons.length - 1)
+      {
+         curSocialMediaSelected = 0;
+      }
+      if (curSocialMediaSelected < 0)
+      {
+         curSocialMediaSelected = socialButtons.length - 1;
+      }
+      updateSocialMediaUI();
+   }
 
    function updateText(index:Int)
    {
@@ -375,9 +422,33 @@ class CreditsMenuState extends MusicBeatState
 			currentText.screenCenter(X);
 		}
    }
+   function updateSocialMediaUI()
+   {
+      for (socialButton in socialButtons)
+      {
+         var isCurrentSelected = socialButton == socialButtons[curSocialMediaSelected];
+         if (isCurrentSelected)
+         {
+            fadeSocialMedia(socialButton, 1);
+         }
+         else
+         {
+            fadeSocialMedia(socialButton, 0.3);
+         }
+      }
+   }
+   function fadeSocialMedia(socialButton:SocialButton, amount:Float)
+   {
+      for (i in 0...socialButton.graphics.length) 
+      {
+         var graphic:FlxSprite = socialButton.graphics[i];
+         graphic.alpha = amount;
+      }
+   }
 
    function selectPerson(selectedPerson:Person)
    {
+      curSocialMediaSelected = 0;
       var fadeTime:Float = 0.4;
       var blackBg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
       blackBg.screenCenter(X);
@@ -425,18 +496,18 @@ class CreditsMenuState extends MusicBeatState
       for (i in 0...selectedPerson.socialMedia.length)
       {
          var social:Social = selectedPerson.socialMedia[i];
-         var socialButton:FlxButton = new FlxButton(0, credits.y + 100 + (i * 100), '', function() { FlxG.openURL(social.socialLink); });
-         socialButton.loadGraphic(Paths.image('credits/' + social.socialMediaName));
-         socialButton.updateHitbox();
-         socialButton.screenCenter(X);
-         socialButton.scrollFactor.set();
-         socialButton.active = false;
-         socialButton.alpha = 0;
-         add(socialButton);
+         var socialGraphic:FlxSprite = new FlxSprite(0, credits.y + 100 + (i * 100)).loadGraphic(Paths.image('credits/' + social.socialMediaName));
+         var discordText:FlxText = null;
+         socialGraphic.updateHitbox();
+         socialGraphic.screenCenter(X);
+         socialGraphic.scrollFactor.set();
+         socialGraphic.active = false;
+         socialGraphic.alpha = 0;
+         add(socialGraphic);
          if (social.socialMediaName == 'discord')
          {
             var offsetY:Float = 20;
-            var discordText:FlxText = new FlxText(socialButton.x + 100, socialButton.y + (i * 100) + offsetY, 0, social.socialLink, 40);
+            discordText = new FlxText(socialGraphic.x + 100, socialGraphic.y + (i * 100) + offsetY, 0, social.socialLink, 40);
             discordText.setFormat(defaultFormat.font, defaultFormat.size, defaultFormat.color, defaultFormat.alignment, defaultFormat.borderStyle,
                defaultFormat.borderColor);
             discordText.alpha = 0;
@@ -447,13 +518,25 @@ class CreditsMenuState extends MusicBeatState
             FlxTween.tween(discordText, { alpha: 1 }, fadeTime);
             selectedPersonGroup.add(discordText);
          }
-         FlxTween.tween(socialButton, { alpha: 1 }, fadeTime, { onComplete: function(tween:FlxTween)
+         var socialButton:SocialButton;
+         if (discordText != null)
+         {
+            socialButton = new SocialButton([socialGraphic, discordText], social);
+         }
+         else
+         {
+            socialButton = new SocialButton([socialGraphic], social);
+         }
+         FlxTween.tween(socialGraphic, { alpha: 1 }, fadeTime, { onComplete: function(tween:FlxTween)
          {
             transitioning = false;
             state = State.OnName;
          }});
-         selectedPersonGroup.add(socialButton);
+         socialButtons.push(socialButton);
+         selectedPersonGroup.add(socialGraphic);
       }
+      isThereSocialMedia = socialButtons.length != 0;
+      changeSocialMediaSelection();
    }
 }
 
@@ -493,6 +576,17 @@ class CreditsText
    {
       this.text = text;
       this.menuItem = menuItem;
+   }
+}
+class SocialButton
+{
+   public var graphics:Array<FlxSprite>;
+   public var socialMedia:Social;
+
+   public function new(graphics:Array<FlxSprite>, socialMedia:Social)
+   {
+      this.graphics = graphics;
+      this.socialMedia = socialMedia;
    }
 }
 enum CreditsType

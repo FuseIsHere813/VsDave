@@ -1126,7 +1126,7 @@ class PlayState extends MusicBeatState
 			case 'glitch':
 				credits = 'Original Song made by The Boneyard';
 			case 'screwed':
-				credits = 'Original Song made by ALittleBitHorrified';
+				credits = 'Original Song made by That Pizza Tower Fan';
 			default:
 				credits = '';
 		}

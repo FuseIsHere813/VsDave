@@ -363,7 +363,7 @@ class FreeplayState extends MusicBeatState
 	function changeDiff(change:Int = 0)
 	{
 		curDifficulty += change;
-		if (songs[curSelected].week != 7 && songs[curSelected].songName.toLowerCase() != 'old-insanity')
+		if (songs[curSelected].week != 7 || songs[curSelected].songName == 'Old-Insanity')
 		{
 		if (curDifficulty < 0)
 			curDifficulty = 2;

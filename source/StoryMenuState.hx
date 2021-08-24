@@ -34,7 +34,7 @@ class StoryMenuState extends MusicBeatState
 		['House', 'Insanity', 'Furiosity'],
 		['Blocked', 'Corn-Theft', 'Maze'],
 		['Splitathon'],
-		['Threedimensional', 'Second-Tristan-Song']
+		['huh', 'huh', 'huh']
 	];
 
 	var actualWeeks:Array<Dynamic> = [0, 1, 2, 3, 4, 5, 6, 7, 10, 8, 9];
@@ -47,7 +47,7 @@ class StoryMenuState extends MusicBeatState
 
 	public static var dofunnytristan:Bool = false;
 
-	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true];
+	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true, true];
 
 	var weekCharacters:Array<Dynamic> = [
 		['dad', 'bf', 'gf'],
@@ -60,6 +60,7 @@ class StoryMenuState extends MusicBeatState
 		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty'],
+		['empty', 'empty', 'empty']
 	];
 
 	var weekNames:Array<String> = [
@@ -73,6 +74,7 @@ class StoryMenuState extends MusicBeatState
 		"Dave's Fun Rapping Battle!",
 		"Mr. Bambi's Fun Corn Maze!",
 		"The Finale",
+		'?????????'
 	];
 
 	var txtWeekTitle:FlxText;
