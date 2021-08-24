@@ -988,6 +988,9 @@ class PlayState extends MusicBeatState
 			case 'bambi-angey':
 				dad.y += 450;
 				dad.x += 100;
+			case 'bambi-reallyangey':
+				dad.y += 450;
+				dad.x += 100;
 		}
 
 		dadmirror.y -= 50;
@@ -2008,6 +2011,28 @@ class PlayState extends MusicBeatState
 					dad.animation.addByPrefix('holyFubeep', 'HOLYMOLYWHATJUSTHAPPENED', 24, true);
 					dad.animation.play('holyFubeep');
 					dad.canDance = false;
+			}
+		}
+		if(SONG.song.toLowerCase() == 'screwed')
+		{
+			switch(curBeat)
+			{
+				case 96:
+					remove(dad);
+					dad = new Character(100, 450, 'bambi-reallyangey');
+					add(dad);
+				case 160:
+					remove(dad);
+					dad = new Character(100, 450, 'bambi-angey');
+					add(dad);
+				case 232:
+					remove(dad);
+					dad = new Character(100, 450, 'bambi-reallyangey');
+					add(dad);
+				case 296:
+					remove(dad);
+					dad = new Character(100, 450, 'bambi-angey');
+					add(dad);
 			}
 		}
 

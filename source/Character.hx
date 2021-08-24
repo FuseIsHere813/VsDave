@@ -861,6 +861,21 @@ class Character extends FlxSprite
 				addOffset('singRIGHT');
 
 				playAnim('idle');
+			case 'bambi-reallyangey':
+				frames = Paths.getSparrowAtlas('bambi/bambireallymaddddd');
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singLEFT', 'left', 24, false);
+				animation.addByPrefix('singDOWN', 'down', 24, false);
+				animation.addByPrefix('singUP', 'up', 24, false);
+				animation.addByPrefix('singRIGHT', 'right', 24, false);
+
+				addOffset('idle');
+				addOffset('singLEFT');
+				addOffset('singDOWN');
+				addOffset('singUP', 0, 20);
+				addOffset('singRIGHT');
+
+				playAnim('idle');
 		}
 
 		dance();
