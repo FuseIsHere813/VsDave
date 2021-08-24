@@ -2107,10 +2107,6 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.EIGHT)
 			FlxG.switchState(new AnimationDebug(SONG.player2));
 		#end
-		if (FlxG.keys.justPressed.ZERO)
-		{
-			curStep = 5800 * 4;
-		}
 		if (startingSong)
 		{
 			if (startedCountdown)

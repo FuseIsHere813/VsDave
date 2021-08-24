@@ -48,7 +48,7 @@ class CreditsMenuState extends MusicBeatState
 
    var curSocialMediaSelected:Int = 0;
    var socialButtons:Array<SocialButton> = new Array<SocialButton>();
-   var isThereSocialMedia:Bool = true;
+   var hasSocialMedia:Bool = true;
    var peopleInCredits:Array<Person> = 
    [
       //devs
@@ -291,7 +291,6 @@ class CreditsMenuState extends MusicBeatState
                         {
                            FlxCamera.defaultCameras = [selectPersonCam];
                            selectPerson(peopleInCredits[curNameSelected]);
-                           updateSocialMediaUI();
                         }
                      });
                   }
@@ -342,7 +341,7 @@ class CreditsMenuState extends MusicBeatState
                   }
                }
             }
-            if (isThereSocialMedia)
+            if (hasSocialMedia)
             {
                if (upPressed)
                {
@@ -424,16 +423,19 @@ class CreditsMenuState extends MusicBeatState
    }
    function updateSocialMediaUI()
    {
-      for (socialButton in socialButtons)
+      if (hasSocialMedia)
       {
-         var isCurrentSelected = socialButton == socialButtons[curSocialMediaSelected];
-         if (isCurrentSelected)
+         for (socialButton in socialButtons)
          {
-            fadeSocialMedia(socialButton, 1);
-         }
-         else
-         {
-            fadeSocialMedia(socialButton, 0.3);
+            var isCurrentSelected = socialButton == socialButtons[curSocialMediaSelected];
+            if (isCurrentSelected)
+            {
+               fadeSocialMedia(socialButton, 1);
+            }
+            else
+            {
+               fadeSocialMedia(socialButton, 0.3);
+            }
          }
       }
    }
@@ -504,6 +506,7 @@ class CreditsMenuState extends MusicBeatState
          socialGraphic.active = false;
          socialGraphic.alpha = 0;
          add(socialGraphic);
+
          if (social.socialMediaName == 'discord')
          {
             var offsetY:Float = 20;
@@ -518,7 +521,9 @@ class CreditsMenuState extends MusicBeatState
             FlxTween.tween(discordText, { alpha: 1 }, fadeTime);
             selectedPersonGroup.add(discordText);
          }
+
          var socialButton:SocialButton;
+         
          if (discordText != null)
          {
             socialButton = new SocialButton([socialGraphic, discordText], social);
@@ -527,16 +532,27 @@ class CreditsMenuState extends MusicBeatState
          {
             socialButton = new SocialButton([socialGraphic], social);
          }
-         FlxTween.tween(socialGraphic, { alpha: 1 }, fadeTime, { onComplete: function(tween:FlxTween)
-         {
-            transitioning = false;
-            state = State.OnName;
-         }});
          socialButtons.push(socialButton);
          selectedPersonGroup.add(socialGraphic);
+         
+         var isCurrentSelectedButton = socialButton == socialButtons[curSocialMediaSelected];
+         var targetAlpha = isCurrentSelectedButton ? 1 : 0.3;
+
+         if (i == selectedPerson.socialMedia.length - 1)
+         {
+            FlxTween.tween(socialGraphic, { alpha: targetAlpha }, fadeTime, { onComplete: function(tween:FlxTween)
+            {
+               transitioning = false;
+               state = State.OnName;
+            }});
+         }
+         else
+         {
+            FlxTween.tween(socialGraphic, { alpha: targetAlpha }, fadeTime);
+         }
       }
-      isThereSocialMedia = socialButtons.length != 0;
-      changeSocialMediaSelection();
+      hasSocialMedia = socialButtons.length != 0;
+
    }
 }
 
