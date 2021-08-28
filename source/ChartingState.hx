@@ -736,6 +736,8 @@ class ChartingState extends MusicBeatState
 			+ curSection
 			+ "\nCur Step: "
 			+ curStep
+			+ "\n Cur Beat: "
+			+ curBeat
 			+ "\nSec Start: "
 			+ sectionStartTime();
 		super.update(elapsed);
