@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.effects.chainable.FlxEffectSprite;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.animation.FlxBaseAnimation;
@@ -136,11 +137,11 @@ class Character extends FlxSprite
 				// DAD ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('DADDY_DEAREST');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dad idle dance', 24);
-				animation.addByPrefix('singUP', 'Dad Sing Note UP', 24);
-				animation.addByPrefix('singRIGHT', 'Dad Sing Note RIGHT', 24);
-				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN', 24);
-				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24);
+				animation.addByPrefix('idle', 'Dad idle dance', 24, false);
+				animation.addByPrefix('singUP', 'Dad Sing Note UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'Dad Sing Note RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'Dad Sing Note DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'Dad Sing Note LEFT', 24, false);
 
 				addOffset('idle');
 				addOffset("singUP", -6, 50);
@@ -153,11 +154,11 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/dave_sheet');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 12);
-				animation.addByPrefix('singUP', 'Dave Sing Up', 12);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 12);
-				animation.addByPrefix('singDOWN', 'Dave Sing Down', 12);
-				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12);
+				animation.addByPrefix('idle', 'Dave Idle', 12, false);
+				animation.addByPrefix('singUP', 'Dave Sing Up', 12, false);
+				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 12, false);
+				animation.addByPrefix('singDOWN', 'Dave Sing Down', 12, false);
+				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12, false);
 	
 				addOffset('idle');
 				addOffset("singUP", 7, 5);
@@ -174,11 +175,11 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 12);
-				animation.addByPrefix('singUP', 'Dave Sing Up', 12);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 12);
-				animation.addByPrefix('singDOWN', 'Dave Sing Down', 12);
-				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12);
+				animation.addByPrefix('idle', 'Dave Idle', 12, false);
+				animation.addByPrefix('singUP', 'Dave Sing Up', 12, false);
+				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 12, false);
+				animation.addByPrefix('singDOWN', 'Dave Sing Down', 12, false);
+				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12, false);
 		
 				addOffset('idle');
 				addOffset("singUP", 7, 5);
@@ -193,11 +194,11 @@ class Character extends FlxSprite
 				playAnim('idle');
 			case 'dave-annoyed-3d':
 				frames = Paths.getSparrowAtlas('dave/Dave_insanity_3d');
-				animation.addByPrefix('idle', 'DaveAngry idle dance', 24);
-				animation.addByPrefix('singUP', 'DaveAngry Sing Note UP', 24);
-				animation.addByPrefix('singRIGHT', 'DaveAngry Sing Note RIGHT', 24);
-				animation.addByPrefix('singDOWN', 'DaveAngry Sing Note DOWN', 24);
-				animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24);
+				animation.addByPrefix('idle', 'DaveAngry idle dance', 24, false);
+				animation.addByPrefix('singUP', 'DaveAngry Sing Note UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'DaveAngry Sing Note RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DaveAngry Sing Note DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24, false);
 		
 				addOffset('idle');
 				addOffset("singUP", 0, 0);
@@ -216,11 +217,11 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_Furiosity');
 				frames = tex;
-				animation.addByPrefix('idle', 'IDLE', 24);
-				animation.addByPrefix('singUP', 'UP', 24);
-				animation.addByPrefix('singRIGHT', 'RIGHT', 24);
-				animation.addByPrefix('singDOWN', 'DOWN', 24);
-				animation.addByPrefix('singLEFT', 'LEFT', 24);
+				animation.addByPrefix('idle', 'IDLE', 24, false);
+				animation.addByPrefix('singUP', 'UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
 		
 				addOffset('idle', 7, 0);
 				addOffset("singUP", -14, 16);
@@ -252,7 +253,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
 				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
-				animation.addByPrefix('hit', 'BF hit', 24);
+				animation.addByPrefix('hit', 'BF hit', 24, false);
 	
 				addOffset('idle', -5);
 				addOffset("singUP", -29, 27);
@@ -275,11 +276,11 @@ class Character extends FlxSprite
 				// BAMBI SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/bambi_angryboy');
 				frames = tex;
-				animation.addByPrefix('idle', 'DaveAngry idle dance', 24);
-				animation.addByPrefix('singUP', 'DaveAngry Sing Note UP', 24);
-				animation.addByPrefix('singRIGHT', 'DaveAngry Sing Note RIGHT', 24);
-				animation.addByPrefix('singDOWN', 'DaveAngry Sing Note DOWN', 24);
-				animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24);
+				animation.addByPrefix('idle', 'DaveAngry idle dance', 24, false);
+				animation.addByPrefix('singUP', 'DaveAngry Sing Note UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'DaveAngry Sing Note RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'DaveAngry Sing Note DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24, false);
 		
 				addOffset('idle');
 				addOffset("singUP", 0, 0);
@@ -384,7 +385,7 @@ class Character extends FlxSprite
 			case 'pico':
 				tex = Paths.getSparrowAtlas('Pico_FNF_assetss');
 				frames = tex;
-				animation.addByPrefix('idle', "Pico Idle Dance", 24);
+				animation.addByPrefix('idle', "Pico Idle Dance", 24, false);
 				animation.addByPrefix('singUP', 'pico Up note0', 24, false);
 				animation.addByPrefix('singDOWN', 'Pico Down Note0', 24, false);
 				if (isPlayer)
@@ -403,8 +404,8 @@ class Character extends FlxSprite
 					animation.addByPrefix('singLEFTmiss', 'Pico Note Right Miss', 24, false);
 				}
 
-				animation.addByPrefix('singUPmiss', 'pico Up note miss', 24);
-				animation.addByPrefix('singDOWNmiss', 'Pico Down Note MISS', 24);
+				animation.addByPrefix('singUPmiss', 'pico Up note miss', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'Pico Down Note MISS', 24, false);
 
 				addOffset('idle');
 				addOffset("singUP", -29, 27);
@@ -439,7 +440,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
 				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
-				animation.addByPrefix('hit', 'BF hit', 24);
+				animation.addByPrefix('hit', 'BF hit', 24, false);
 
 				addOffset('idle', -5);
 				addOffset("singUP", -29, 27);
@@ -478,7 +479,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
 				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
-				animation.addByPrefix('hit', 'BF hit', 24);
+				animation.addByPrefix('hit', 'BF hit', 24, false);
 	
 				addOffset('idle', -5);
 				addOffset("singUP", -29, 27);
@@ -760,7 +761,7 @@ class Character extends FlxSprite
 				flipX = true;
 				
 			case 'bambi-new':
-			   frames = Paths.getSparrowAtlas('bambi/bambiRemake');
+				frames = Paths.getSparrowAtlas('bambi/bambiRemake');
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singDOWN', 'down', 24, false);
 				animation.addByPrefix('singUP', 'up', 24, false);
@@ -776,7 +777,7 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 			case 'dave-splitathon':
-			   frames = Paths.getSparrowAtlas('splitathon/Splitathon_Dave');
+				frames = Paths.getSparrowAtlas('splitathon/Splitathon_Dave');
 				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);
@@ -826,7 +827,7 @@ class Character extends FlxSprite
 				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
 				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
-				animation.addByPrefix('hit', 'BF hit', 24);
+				animation.addByPrefix('hit', 'BF hit', 24, false);
 	
 				addOffset('idle', -5);
 				addOffset("singUP", -29, 27);

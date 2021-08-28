@@ -254,6 +254,7 @@ class CharacterSelectState extends MusicBeatState
 		if (!FlxG.save.data.unlockedcharacters[current])
 		{
 			char.color = FlxColor.BLACK;
+			characterText.text = '???';
 		}
 	}
 
