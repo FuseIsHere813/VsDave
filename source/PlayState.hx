@@ -1134,20 +1134,20 @@ class PlayState extends MusicBeatState
 		var textYPos:Float = healthBarBG.y + 50;
 		if (creditsText)
 		{
-			textYPos = healthBarBG.y + 36;
+			textYPos = healthBarBG.y + 30;
 		}
 		// Add Kade Engine watermark
 		var kadeEngineWatermark = new FlxText(4, textYPos, 0,
 		SONG.song
 		+ " "
-		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Unnerfed" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "FINAL")
+		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Unnerfed" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "FINALE")
 		+ " - Dave Engine(KE 1.2)", 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
 		add(kadeEngineWatermark);
 		if (creditsText)
 		{
-			var creditsWatermark = new FlxText(4, healthBarBG.y + 50, 0, credits, 16);
+			var creditsWatermark = new FlxText(4, healthBarBG.y + 45, 0, credits, 16);
 			creditsWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			creditsWatermark.scrollFactor.set();
 			add(creditsWatermark);
@@ -1247,15 +1247,7 @@ class PlayState extends MusicBeatState
 				case 'corn-theft':
 					schoolIntro(doof);
 				case 'maze':
-					if (amogus == 0)
-					{
-						bambiCutscene(doof);
-					}
-					else
-					{
-						schoolIntro(doof);
-						amogus = 0;
-					}
+					schoolIntro(doof);
 				case 'splitathon':
 					schoolIntro(doof);
 				default:
@@ -2768,8 +2760,14 @@ class PlayState extends MusicBeatState
 
 				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
 				FlxG.sound.music.stop();
-
-				LoadingState.loadAndSwitchState(new PlayState());
+				
+				switch (curSong.toLowerCase())
+				{
+					case 'corn-theft':
+						LoadingState.loadAndSwitchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()), false);
+					default:
+						LoadingState.loadAndSwitchState(new PlayState());
+				}
 			}
 		}
 		else
@@ -3652,17 +3650,6 @@ class PlayState extends MusicBeatState
 		{
 			trace(dialogue[0]);
 		}
-	}
-
-	public function bambiCutscene(?fuck:DialogueBox):Void
-	{
-		trace(amogus);
-		if (amogus == 0)
-		{
-			FlxG.switchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()));
-		}
-		amogus++;
-		trace(amogus);
 	}
 
 	public function addSplitathonChar(char:String):Void

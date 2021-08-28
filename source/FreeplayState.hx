@@ -325,19 +325,10 @@ class FreeplayState extends MusicBeatState
 		{
 			changeSelection(1);
 		}
-
-		if(songs[curSelected].week != 9)
-		{
-			if (controls.LEFT_P)
-				changeDiff(-1);
-			if (controls.RIGHT_P)
-				changeDiff(1);
-		}
-		else
-		{
-			curDifficulty = 1;
-			diffText.text = 'FINALE' + " - " + curChar.toUpperCase();
-		}
+		if (controls.LEFT_P)
+			changeDiff(-1);
+		if (controls.RIGHT_P)
+			changeDiff(1);
 
 		if (controls.BACK)
 		{
@@ -377,20 +368,36 @@ class FreeplayState extends MusicBeatState
 			if (curDifficulty > 3)
 				curDifficulty = 0;
 		}
+		if (songs[curSelected].week != 9)
+		{
+			curDifficulty = 1;
+		}
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);
 		#end
 		curChar = Highscore.getChar(songs[curSelected].songName, curDifficulty);
-		switch (curDifficulty)
+		updateDifficultyText();
+		
+	}
+
+	function updateDifficultyText()
+	{
+		switch (songs[curSelected].week)
 		{
-			case 0:
-				diffText.text = "EASY" + " - " + curChar.toUpperCase();
-			case 1:
-				diffText.text = 'NORMAL' + " - " + curChar.toUpperCase();
-			case 2:
-				diffText.text = "HARD" + " - " + curChar.toUpperCase();
-			case 3:
-				diffText.text = "UNNERFED" + " - " + curChar.toUpperCase();
+			case 9:
+				diffText.text = 'FINALE' + " - " + curChar.toUpperCase();
+			default:
+				switch (curDifficulty)
+				{
+					case 0:
+						diffText.text = "EASY" + " - " + curChar.toUpperCase();
+					case 1:
+						diffText.text = 'NORMAL' + " - " + curChar.toUpperCase();
+					case 2:
+						diffText.text = "HARD" + " - " + curChar.toUpperCase();
+					case 3:
+						diffText.text = "UNNERFED" + " - " + curChar.toUpperCase();
+				}
 		}
 	}
 
@@ -403,7 +410,6 @@ class FreeplayState extends MusicBeatState
 			curSelected = songs.length - 1;
 		if (curSelected >= songs.length)
 			curSelected = 0;
-		curChar = Highscore.getChar(songs[curSelected].songName, curDifficulty);
 		if (songs[curSelected].week != 7 || songs[curSelected].songName == 'Old-Insanity')
 		{
 			if (curDifficulty < 0)
@@ -411,17 +417,12 @@ class FreeplayState extends MusicBeatState
 			if (curDifficulty > 2)
 				curDifficulty = 0;
 		}
-		switch (curDifficulty)
+		if (songs[curSelected].week == 9)
 		{
-			case 0:
-				diffText.text = "EASY" + " - " + curChar.toUpperCase();
-			case 1:
-				diffText.text = 'NORMAL' + " - " + curChar.toUpperCase();
-			case 2:
-				diffText.text = "HARD" + " - " + curChar.toUpperCase();
-			case 3:
-				diffText.text = "UNNERFED" + " - " + curChar.toUpperCase();
+			curDifficulty = 1;
 		}
+		curChar = Highscore.getChar(songs[curSelected].songName, curDifficulty);
+		updateDifficultyText();
 		// selector.y = (70 * curSelected) + 30;
 		#if !switch
 		intendedScore = Highscore.getScore(songs[curSelected].songName, curDifficulty);

@@ -241,6 +241,7 @@ class StoryMenuState extends MusicBeatState
 		sprDifficulty.animation.addByPrefix('normal', 'NORMAL');
 		sprDifficulty.animation.addByPrefix('hard', 'HARD');
 		sprDifficulty.animation.addByPrefix('unnerfed', 'UNNERFED');
+		sprDifficulty.animation.addByPrefix('finale', 'FINALE');
 		sprDifficulty.animation.play('easy');
 		changeDifficulty();
 
@@ -361,19 +362,10 @@ class StoryMenuState extends MusicBeatState
 				else
 					leftArrow.animation.play('idle');
 
-				if(curWeek != 9)
-				{
-					if (controls.RIGHT_P)
-						changeDifficulty(1);
-					if (controls.LEFT_P)
-						changeDifficulty(-1);
-				}
-				else
-				{
-					curDifficulty = 1;
-					sprDifficulty.animation.play('normal');
-				   sprDifficulty.offset.x = 70;
-				}
+				if (controls.RIGHT_P)
+					changeDifficulty(1);
+				if (controls.LEFT_P)
+					changeDifficulty(-1);
 			}
 
 			if (controls.ACCEPT && !dofunnytristan)
@@ -460,6 +452,32 @@ class StoryMenuState extends MusicBeatState
 			//uncomment out the above code and comment out the other loadandswitchstate to allow for character selection in story mode!
 		}
 	}
+	function updateDifficultySprite()
+	{
+		sprDifficulty.offset.x = 0;
+		switch (curWeek)
+		{
+			case 9:
+				sprDifficulty.animation.play('finale');
+				sprDifficulty.offset.x = 45;
+			default:
+				switch (curDifficulty)
+				{
+					case 0:
+						sprDifficulty.animation.play('easy');
+						sprDifficulty.offset.x = 20;
+					case 1:
+						sprDifficulty.animation.play('normal');
+						sprDifficulty.offset.x = 70;
+					case 2:
+						sprDifficulty.animation.play('hard');
+						sprDifficulty.offset.x = 20;
+					case 3:
+						sprDifficulty.animation.play('unnerfed');
+						sprDifficulty.offset.x = 70;
+				}
+		}
+	}
 
 	function changeDifficulty(change:Int = 0):Void
 	{
@@ -478,24 +496,12 @@ class StoryMenuState extends MusicBeatState
 			if (curDifficulty > 2)
 				curDifficulty = 0;
 		}
-
-		sprDifficulty.offset.x = 0;
-
-		switch (curDifficulty)
+		if (curWeek == 9)
 		{
-			case 0:
-				sprDifficulty.animation.play('easy');
-				sprDifficulty.offset.x = 20;
-			case 1:
-				sprDifficulty.animation.play('normal');
-				sprDifficulty.offset.x = 70;
-			case 2:
-				sprDifficulty.animation.play('hard');
-				sprDifficulty.offset.x = 20;
-			case 3:
-				sprDifficulty.animation.play('unnerfed');
-				sprDifficulty.offset.x = 70;
+			curDifficulty = 1;
 		}
+
+		updateDifficultySprite();
 
 		sprDifficulty.alpha = 0;
 
@@ -529,28 +535,14 @@ class StoryMenuState extends MusicBeatState
 			if (curDifficulty > 2)
 				curDifficulty = 0;
 		}
-
-		sprDifficulty.offset.x = 0;
-
-		switch (curDifficulty)
+		if (curWeek == 9)
 		{
-			case 0:
-				sprDifficulty.animation.play('easy');
-				sprDifficulty.offset.x = 20;
-			case 1:
-				sprDifficulty.animation.play('normal');
-				sprDifficulty.offset.x = 70;
-			case 2:
-				sprDifficulty.animation.play('hard');
-				sprDifficulty.offset.x = 20;
-			case 3:
-				sprDifficulty.animation.play('unnerfed');
-				sprDifficulty.offset.x = 70;
+			curDifficulty = 1;
 		}
+
+		updateDifficultySprite();
 		
 		var bullShit:Int = 0;
-
-
 		
 		for (item in grpWeekText.members)
 		{
