@@ -368,7 +368,7 @@ class FreeplayState extends MusicBeatState
 			if (curDifficulty > 3)
 				curDifficulty = 0;
 		}
-		if (songs[curSelected].week != 9)
+		if (songs[curSelected].week == 9)
 		{
 			curDifficulty = 1;
 		}
