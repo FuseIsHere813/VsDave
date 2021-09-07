@@ -139,7 +139,7 @@ class MusicPlayerState extends MusicBeatState
             if (songs[curSelected].hasVocals || songs[curSelected].ExternalSong)
             {
                 DiscordClient.changePresence('In The OST Menu', '\nListening To: ' +
-                    formatSongName(songs[curSelected].songName) + ' | ' + 
+                    CoolUtil.formatString(songs[curSelected].songName) + ' | ' + 
                     currentTimeFormatted + ' / ' + lengthFormatted,
                     null);
                 
@@ -147,7 +147,7 @@ class MusicPlayerState extends MusicBeatState
             else
             {
                 DiscordClient.changePresence('In The OST Menu', '\nListening To: ' +
-                    formatSongName(songs[curSelected].songName) + ' Instrumental | ' +
+                    CoolUtil.formatString(songs[curSelected].songName) + ' Instrumental | ' +
                     currentTimeFormatted + ' / ' + lengthFormatted, 
                     null);
             }
@@ -303,26 +303,6 @@ class MusicPlayerState extends MusicBeatState
             }
         }
 
-    }
-
-    function formatSongName(song:String):String
-    {
-        var split:Array<String> = song.split('-');
-        var formattedSong:String = '';
-        for (i in 0...split.length) 
-        {
-            var piece:String = split[i];
-            var allSplit = piece.split('');
-            var firstLetterUpperCased = allSplit[0].toUpperCase();
-            var substring = piece.substr(1, piece.length - 1);
-            var newPiece = firstLetterUpperCased + substring;
-            if (i != split.length - 1)
-            {
-                newPiece += " ";
-            }
-            formattedSong += newPiece;
-        }
-        return formattedSong;
     }
 
     function HideBar()
