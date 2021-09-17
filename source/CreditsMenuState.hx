@@ -1,6 +1,8 @@
 package;
 
+#if desktop
 import cpp.abi.Abi;
+#end
 import flixel.graphics.FlxGraphic;
 import flixel.FlxCamera;
 import flixel.addons.plugin.taskManager.FlxTask;
