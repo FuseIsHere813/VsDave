@@ -14,7 +14,9 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import io.newgrounds.NG;
 import lime.app.Application;
+#if desktop
 import Discord.DiscordClient;
+#end
 
 using StringTools;
 

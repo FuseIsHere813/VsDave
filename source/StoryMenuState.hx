@@ -15,7 +15,9 @@ import flixel.text.FlxText;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+#if desktop
 import Discord.DiscordClient;
+#end
 
 using StringTools;
 

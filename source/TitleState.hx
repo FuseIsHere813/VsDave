@@ -23,7 +23,9 @@ import flixel.util.FlxTimer;
 import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
+#if desktop
 import Discord.DiscordClient;
+#end
 
 using StringTools;
 
@@ -66,7 +68,7 @@ class TitleState extends MusicBeatState
 
 		// DEBUG BULLSHIT
 
-		#if windows
+		#if desktop
 		DiscordClient.initialize();
 		#end
 

@@ -1,8 +1,9 @@
 package;
 
 import Sys.sleep;
+#if desktop
 import discord_rpc.DiscordRpc;
-
+#end
 using StringTools;
 
 class DiscordClient

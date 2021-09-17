@@ -13,9 +13,9 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxStringUtil;
 import lime.utils.Assets;
-
+#if desktop
 import Discord.DiscordClient;
-
+#end
 using StringTools;
 
 class FreeplayState extends MusicBeatState
