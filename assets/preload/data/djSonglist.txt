@@ -1,6 +1,5 @@
 internal,house,dave,good
 internal,insanity,dave,bad
-external,insanity-old,dave,bad
 external,im-angey,dave-angey,bad
 internal,furiosity,dave-angey,good
 internal,bonus-song,dave,good
@@ -12,5 +11,6 @@ external,a-new-day,dave,good
 external,bambi-speak,bambi,bad
 external,good-ending,bf-old,good
 external,bad-ending,bf-old,bad
-internal,old-corn-theft,bambi,bad
-internal,old-maze,bambi,bad
+internal,old-insanity,dave-old,bad
+internal,old-corn-theft,bambi-old,bad
+internal,old-maze,bambi-old,bad
