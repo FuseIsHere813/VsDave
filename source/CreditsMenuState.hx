@@ -171,7 +171,9 @@ class CreditsMenuState extends MusicBeatState
 
 	override function create()
 	{
+      #if desktop
       DiscordClient.changePresence("In the Credits Menu", null);
+      #end
 
       mainCam.bgColor.alpha = 0;
       selectPersonCam.bgColor.alpha = 0;

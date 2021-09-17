@@ -102,8 +102,10 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		#if desktop
 		DiscordClient.changePresence("In the Story Menu", null);
-
+		#end
+		
 		FlxG.save.data.tristanProgress = null; //undo tristan stuff since its being moved
 		//DONT REMOVE THIS CODE because we might use it for reference in the future
 		tristanunlocked = false;

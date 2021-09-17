@@ -238,6 +238,7 @@ class PlayState extends MusicBeatState
 		curStage = "";
 
 		// Updating Discord Rich Presence.
+		#if desktop
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -250,7 +251,7 @@ class PlayState extends MusicBeatState
 			+ songScore
 			+ " | Misses: "
 			+ misses, iconRPC);
-		
+		#end
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
 		camHUD = new FlxCamera();
@@ -1502,6 +1503,7 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.volume = 0;
 		}
 
+		#if desktop
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -1514,7 +1516,7 @@ class PlayState extends MusicBeatState
 			+ songScore
 			+ " | Misses: "
 			+ misses, iconRPC);
-
+		#end
 		FlxG.sound.music.onComplete = endSong;
 	}
 
@@ -1783,6 +1785,7 @@ class PlayState extends MusicBeatState
 				vocals.pause();
 			}
 
+			#if desktop
 			DiscordClient.changePresence("PAUSED on "
 				+ SONG.song
 				+ " ("
@@ -1794,7 +1797,7 @@ class PlayState extends MusicBeatState
 				+ songScore
 				+ " | Misses: "
 				+ misses, iconRPC);
-
+			#end
 			if (!startTimer.finished)
 				startTimer.active = false;
 		}
@@ -1817,6 +1820,7 @@ class PlayState extends MusicBeatState
 
 			if (startTimer.finished)
 				{
+					#if desktop
 					DiscordClient.changePresence(detailsText
 						+ " "
 						+ SONG.song
@@ -1831,10 +1835,13 @@ class PlayState extends MusicBeatState
 						+ misses, iconRPC, true,
 						FlxG.sound.music.length
 						- Conductor.songPosition);
+					#end
 				}
 				else
 				{
+					#if desktop
 					DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ") ", iconRPC);
+					#end
 				}
 		}
 
@@ -1850,6 +1857,7 @@ class PlayState extends MusicBeatState
 		vocals.time = Conductor.songPosition;
 		vocals.play();
 
+		#if desktop
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -1862,6 +1870,7 @@ class PlayState extends MusicBeatState
 			+ songScore
 			+ " | Misses: "
 			+ misses, iconRPC);
+		#end
 	}
 
 	private var paused:Bool = false;
@@ -2079,7 +2088,9 @@ class PlayState extends MusicBeatState
 				return;
 			}
 			FlxG.switchState(new ChartingState());
+			#if desktop
 			DiscordClient.changePresence("Chart Editor", null, null, true);
+			#end
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
@@ -2244,6 +2255,7 @@ class PlayState extends MusicBeatState
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
 					.y, characteroverride == "bf" || characteroverride == "none" ? SONG.player1 : characteroverride));
 
+					#if desktop
 					DiscordClient.changePresence("GAME OVER -- "
 					+ SONG.song
 					+ " ("
@@ -2255,6 +2267,7 @@ class PlayState extends MusicBeatState
 					+ songScore
 					+ " | Misses: "
 					+ misses, iconRPC);
+					#end
 			}
 			else
 			{
@@ -2277,6 +2290,7 @@ class PlayState extends MusicBeatState
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
 						.y, characteroverride == "bf" || characteroverride == "none" ? SONG.player1 : characteroverride));
 
+						#if desktop
 						DiscordClient.changePresence("GAME OVER -- "
 						+ SONG.song
 						+ " ("
@@ -2288,6 +2302,7 @@ class PlayState extends MusicBeatState
 						+ songScore
 						+ " | Misses: "
 						+ misses, iconRPC);
+						#end
 				}
 			}
 
@@ -3451,6 +3466,7 @@ class PlayState extends MusicBeatState
 						shakeCam = false;
 				}
 		}
+		#if desktop
 		DiscordClient.changePresence(detailsText
 			+ " "
 			+ SONG.song
@@ -3465,6 +3481,7 @@ class PlayState extends MusicBeatState
 			+ misses, iconRPC, true,
 			FlxG.sound.music.length
 			- Conductor.songPosition);
+		#end
 	}
 
 	var lightningStrikeBeat:Int = 0;
