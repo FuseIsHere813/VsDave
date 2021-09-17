@@ -68,7 +68,9 @@ class MusicPlayerState extends MusicBeatState
 		grpSongs = new FlxTypedGroup<Alphabet>();
 		add(grpSongs);
 
+        #if desktop
         DiscordClient.changePresence("In the OST Menu", null);
+        #end
 
         for (i in 0...songs.length)
         {
@@ -140,18 +142,22 @@ class MusicPlayerState extends MusicBeatState
         {
             if (songs[curSelected].hasVocals || songs[curSelected].ExternalSong)
             {
+                #if desktop
                 DiscordClient.changePresence('In The OST Menu', '\nListening To: ' +
                     CoolUtil.formatString(songs[curSelected].songName) + ' | ' + 
                     currentTimeFormatted + ' / ' + lengthFormatted,
                     null);
+                #end
                 
             }
             else
             {
+                #if desktop
                 DiscordClient.changePresence('In The OST Menu', '\nListening To: ' +
                     CoolUtil.formatString(songs[curSelected].songName) + ' Instrumental | ' +
                     currentTimeFormatted + ' / ' + lengthFormatted, 
                     null);
+                #end
             }
         }
 
@@ -200,7 +206,9 @@ class MusicPlayerState extends MusicBeatState
         {
             if (currentlyplaying)
             {
+                #if desktop
                 DiscordClient.changePresence('In The OST Menu', null);
+                #end
                 
                 if (CurVocals != null)
                 {

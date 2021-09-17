@@ -70,7 +70,9 @@ class MainMenuState extends MusicBeatState
 			FlxG.save.data.eyesores = true;
 		}
 
+		#if desktop
 		DiscordClient.changePresence("In the Menus", null);
+		#end
 
 		if (FlxG.save.data.unlockedcharacters == null)
 		{
