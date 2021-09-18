@@ -2,6 +2,7 @@ Furiosity is missing due to me losing it, sorry
 Blocked has missing samples I can't find so you'll have to deal with those
 For Bambi's vocals just open Slicex and add break_phone.ogg from the Dave files
 Bambi's samples for Splitathon are included in the Samples folder, simply open Fruity Slicer (not slicex) and drag them in
+Bambi Finale (Cheating)'s audio files "markdm" and "marcello for 9 mins" won't be uploaded for now until found.
 
 Plugins required to load these songs properly:
 sforzando w/ this soundfont: https://gamebanana.com/tools/7009
@@ -12,5 +13,3 @@ Serum (Used in Corntheft for those heavy leads you hear)
 reFX Nexus (Used in Corntheft for basses and pads)
 
 Samples for songs will be included
-
-
