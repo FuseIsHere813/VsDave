@@ -1,4 +1,5 @@
 package;
+import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.text.FlxText;
@@ -23,6 +24,19 @@ import flixel.util.FlxStringUtil;
  i do not give you guys permission to grab this specific code and re-use it in your own mods without asking me first.
  the secondary dev, ben
 */
+class CharacterInSelect
+{
+	public var name:String;
+	public var noteMs:Array<Float>;
+	public var polishedName:String;
+
+	public function new(name:String, noteMs:Array<Float>, polishedName:String)
+	{
+		this.name = name;
+		this.noteMs = noteMs;
+		this.polishedName = polishedName;
+	}
+}
 class CharacterSelectState extends MusicBeatState
 {
 	public var char:Boyfriend;
@@ -36,11 +50,22 @@ class CharacterSelectState extends MusicBeatState
 
 	var selectedCharacter:Bool = false;
 
-	public static var CharactersList:Array<String> = ["bf","bf-pixel","tristan","dave","bambi","dave-angey", "tristan-golden"];
-	public static var CharacterNoteMs:Array<Array<Float>> = [[1,1,1,1],[1,1,1,1],[2,0.5,0.5,0.5],[0.25,0.25,2,2],[0,0,3,0],[2,2,0.25,0.25], [0.25,0.25,0.25,2]];
-	public var polishedCharacterList:Array<String> = ["Boyfriend","Pixel Boyfriend","Tristan","Dave","Mr. Bambi","3D Dave","Golden Tristan"];
-	//it goes left,right,up,down
+	var currentSelectedCharacter:CharacterInSelect;
 
+	var noteMsTexts:FlxTypedGroup<FlxText> = new FlxTypedGroup<FlxText>();
+
+	//it goes left,right,up,down
+	
+	public var characters:Array<CharacterInSelect> = 
+	[
+		new CharacterInSelect('bf', [1, 1, 1, 1], "Boyfriend"),
+		new CharacterInSelect('bf-pixel', [1, 1, 1, 1], "Pixel Boyfriend"),
+		new CharacterInSelect('tristan', [2, 0.5, 0.5, 0.5], "Tristan"),
+		new CharacterInSelect('dave', [0.25, 0.25, 2, 2], "Dave"),
+		new CharacterInSelect('bambi', [0, 0, 3, 0], "Mr. Bambi"),
+		new CharacterInSelect('dave-angey', [2, 2, 0.25, 0.25], "3D Dave"),
+		new CharacterInSelect('tristan-golden', [0.25, 0.25, 0.25, 2], "Golden Tristan")
+	];
 	public function new() 
 	{
 		super();
@@ -49,6 +74,7 @@ class CharacterSelectState extends MusicBeatState
 	override public function create():Void 
 	{
 		super.create();
+		currentSelectedCharacter = characters[current];
 		if (FlxG.save.data.unlockedcharacters == null)
 		{
 			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false,false];
@@ -102,13 +128,12 @@ class CharacterSelectState extends MusicBeatState
 		add(char);
 	
 		generateStaticArrows();
-
-
+		
 		notemodtext = new FlxText((FlxG.width / 3.5) + 80, 40, 0, "1.00x       1.00x        1.00x       1.00x", 30);
 		notemodtext.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		notemodtext.scrollFactor.set();
 		add(notemodtext);
-
+		
 		characterText = new FlxText((FlxG.width / 9) - 50, (FlxG.height / 8) - 225, "Boyfriend");
 		characterText.font = 'Comic Sans MS Bold';
 		characterText.autoSize = false;
@@ -118,72 +143,64 @@ class CharacterSelectState extends MusicBeatState
 		add(characterText);
 	}
 
-
-
-
 	private function generateStaticArrows():Void
+	{
+		for (i in 0...4)
 		{
-			for (i in 0...4)
+			// FlxG.log.add(i);
+			var babyArrow:FlxSprite = new FlxSprite(0, 0);
+
+			babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets');
+			babyArrow.animation.addByPrefix('green', 'arrowUP');
+			babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
+			babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
+			babyArrow.animation.addByPrefix('red', 'arrowRIGHT');
+
+			babyArrow.antialiasing = true;
+			babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
+
+			babyArrow.x += Note.swagWidth * i;
+			switch (Math.abs(i))
 			{
-				// FlxG.log.add(i);
-				var babyArrow:FlxSprite = new FlxSprite(0, 0);
-
-						babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets');
-						babyArrow.animation.addByPrefix('green', 'arrowUP');
-						babyArrow.animation.addByPrefix('blue', 'arrowDOWN');
-						babyArrow.animation.addByPrefix('purple', 'arrowLEFT');
-						babyArrow.animation.addByPrefix('red', 'arrowRIGHT');
-	
-						babyArrow.antialiasing = true;
-					babyArrow.setGraphicSize(Std.int(babyArrow.width * 0.7));
-
-					switch (Math.abs(i))
-					{
-						case 0:
-						babyArrow.x += Note.swagWidth * 0;
-						babyArrow.animation.addByPrefix('static', 'arrowLEFT');
-						babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
-						babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
-					case 1:
-						babyArrow.x += Note.swagWidth * 1;
-						babyArrow.animation.addByPrefix('static', 'arrowDOWN');
-						babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
-						babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
-					case 2:
-						babyArrow.x += Note.swagWidth * 2;
-						babyArrow.animation.addByPrefix('static', 'arrowUP');
-						babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
-						babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
-					case 3:
-						babyArrow.x += Note.swagWidth * 3;
-						babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
-						babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
-						babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
-				}
-				
-				babyArrow.updateHitbox();
-				babyArrow.scrollFactor.set();
-
-	
-				babyArrow.ID = i;
-	
-				babyArrow.animation.play('static');
-				babyArrow.x += 50;
-				babyArrow.x += ((FlxG.width / 3.5));
-				add(babyArrow);
+				case 0:
+					babyArrow.animation.addByPrefix('static', 'arrowLEFT');
+					babyArrow.animation.addByPrefix('pressed', 'left press', 24, false);
+					babyArrow.animation.addByPrefix('confirm', 'left confirm', 24, false);
+				case 1:
+					babyArrow.animation.addByPrefix('static', 'arrowDOWN');
+					babyArrow.animation.addByPrefix('pressed', 'down press', 24, false);
+					babyArrow.animation.addByPrefix('confirm', 'down confirm', 24, false);
+				case 2:
+					babyArrow.animation.addByPrefix('static', 'arrowUP');
+					babyArrow.animation.addByPrefix('pressed', 'up press', 24, false);
+					babyArrow.animation.addByPrefix('confirm', 'up confirm', 24, false);
+				case 3:
+					babyArrow.animation.addByPrefix('static', 'arrowRIGHT');
+					babyArrow.animation.addByPrefix('pressed', 'right press', 24, false);
+					babyArrow.animation.addByPrefix('confirm', 'right confirm', 24, false);
 			}
+			babyArrow.updateHitbox();
+			babyArrow.scrollFactor.set();
+			babyArrow.ID = i;
+	
+			babyArrow.animation.play('static');
+			babyArrow.x += 50;
+			babyArrow.x += ((FlxG.width / 3.5));
+			add(babyArrow);
 		}
+	}
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
 		//FlxG.camera.focusOn(FlxG.ce);
 
-		if(FlxG.keys.justPressed.ESCAPE)
+		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			LoadingState.loadAndSwitchState(new FreeplayState());
 		}
 
-		if (FlxG.keys.justPressed.ENTER){
+		if (FlxG.keys.justPressed.ENTER)
+		{
 			if (!FlxG.save.data.unlockedcharacters[current])
 			{
 				FlxG.sound.play(Paths.sound('badnoise1'), 0.9);
@@ -204,45 +221,35 @@ class CharacterSelectState extends MusicBeatState
 			FlxG.sound.play(Paths.music('gameOverEnd'));
 			new FlxTimer().start(1.9, endIt);
 		}
-
-
-		notemodtext.text = FlxStringUtil.formatMoney(CharacterNoteMs[current][0]) + "x       " + FlxStringUtil.formatMoney(CharacterNoteMs[current][3]) + "x        " + FlxStringUtil.formatMoney(CharacterNoteMs[current][2]) + "x       " + FlxStringUtil.formatMoney(CharacterNoteMs[current][1]) + "x";
-
-		if (FlxG.keys.justPressed.LEFT && !selectedCharacter){
+		if (FlxG.keys.justPressed.LEFT && !selectedCharacter)
+		{
 			current--;
 			if (current < 0)
 			{
-				current = 0;
-			}
-			else if (current > CharactersList.length - 1)
-			{
-				current = CharactersList.length - 1;
+				current = characters.length - 1;
 			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
 
-		if (FlxG.keys.justPressed.RIGHT && !selectedCharacter){
+		if (FlxG.keys.justPressed.RIGHT && !selectedCharacter)
+		{
 			current++;
-			if (current < 0)
+			if (current > characters.length - 1)
 			{
 				current = 0;
-			}
-			else if (current > CharactersList.length - 1)
-			{
-				current = CharactersList.length - 1;
 			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
-		
 	}
 
 	public function UpdateBF()
 	{
-		characterText.text = polishedCharacterList[current];
+		currentSelectedCharacter = characters[current];
+		characterText.text = currentSelectedCharacter.polishedName;
 		char.destroy();
-		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, CharactersList[current]);
+		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, currentSelectedCharacter.name);
 		char.screenCenter();
 		char.y = FlxG.height / 2;
 		switch (char.curCharacter)
@@ -256,6 +263,7 @@ class CharacterSelectState extends MusicBeatState
 			char.color = FlxColor.BLACK;
 			characterText.text = '???';
 		}
+		notemodtext.text = FlxStringUtil.formatMoney(currentSelectedCharacter.noteMs[0]) + "x       " + FlxStringUtil.formatMoney(currentSelectedCharacter.noteMs[3]) + "x        " + FlxStringUtil.formatMoney(currentSelectedCharacter.noteMs[2]) + "x       " + FlxStringUtil.formatMoney(currentSelectedCharacter.noteMs[1]) + "x";
 	}
 
 	override function beatHit()
@@ -270,11 +278,11 @@ class CharacterSelectState extends MusicBeatState
 	}
 	
 	
-	public function endIt(e:FlxTimer=null)
+	public function endIt(e:FlxTimer = null)
 	{
 		trace("ENDING");
-		PlayState.characteroverride = CharactersList[current];
-		PlayState.curmult = CharacterNoteMs[current];
+		PlayState.characteroverride = currentSelectedCharacter.name;
+		PlayState.curmult = currentSelectedCharacter.noteMs;
 		LoadingState.loadAndSwitchState(new PlayState());
 	}
 	
