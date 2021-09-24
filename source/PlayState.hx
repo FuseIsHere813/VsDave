@@ -52,6 +52,7 @@ class PlayState extends MusicBeatState
 {
 	public static var curStage:String = '';
 	public static var characteroverride:String = "none";
+	public static var formoverride:String = "none";
 	public static var SONG:SwagSong;
 	public static var isStoryMode:Bool = false;
 	public static var storyWeek:Int = 0;
@@ -76,6 +77,8 @@ class PlayState extends MusicBeatState
 	public var elapsedtime:Float = 0;
 
 	var halloweenLevel:Bool = false;
+
+	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what'];
 
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -881,7 +884,7 @@ class PlayState extends MusicBeatState
 
 		var charoffsetx:Float = 0;
 		var charoffsety:Float = 0;
-		if (characteroverride == "bf-pixel"
+		if (formoverride == "bf-pixel"
 			&& (SONG.song != "Tutorial" && SONG.song != "Roses" && SONG.song != "Thorns" && SONG.song != "Senpai"))
 		{
 			gfVersion = 'gf-pixel';
@@ -891,7 +894,7 @@ class PlayState extends MusicBeatState
 		gf = new Character(400 + charoffsetx, 130 + charoffsety, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
 
-		if (!(characteroverride == "bf" || characteroverride == "none" || characteroverride == "bf-pixel") && SONG.song != "Tutorial")
+		if (!(formoverride == "bf" || formoverride == "none" || formoverride == "bf-pixel") && SONG.song != "Tutorial")
 		{
 			gf.visible = false;
 		}
@@ -998,13 +1001,13 @@ class PlayState extends MusicBeatState
 
 		dadmirror.visible = false;
 
-		if (characteroverride == "none" || characteroverride == "bf")
+		if (formoverride == "none" || formoverride == "bf")
 		{
 			boyfriend = new Boyfriend(770, 450, SONG.player1);
 		}
 		else
 		{
-			boyfriend = new Boyfriend(770, 450, characteroverride);
+			boyfriend = new Boyfriend(770, 450, formoverride);
 		}
 
 		// REPOSITIONING PER STAGE
@@ -1178,7 +1181,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.scrollFactor.set();
 		add(scoreTxt);
 
-		iconP1 = new HealthIcon((characteroverride == "none" || characteroverride == "bf") ? SONG.player1 : characteroverride, true);
+		iconP1 = new HealthIcon((formoverride == "none" || formoverride == "bf") ? SONG.player1 : formoverride, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
 		add(iconP1);
 
@@ -1631,8 +1634,7 @@ class PlayState extends MusicBeatState
 			// FlxG.log.add(i);
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
 
-			if (((SONG.player2 == "dave-angey" || SONG.player2 == "bambi-3d") && player == 0)
-				|| (((SONG.player1 == "dave-angey" || SONG.player1 == "bambi-3d") || characteroverride == "dave-angey") && player == 1))
+			if (((SONG.player2 == "dave-angey" || SONG.player2 == "bambi-3d") && player == 0) || (((SONG.player1 == "dave-angey" || SONG.player1 == "bambi-3d") || formoverride == "dave-angey" || formoverride == 'bambi-3d') && player == 1))
 			{
 				babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets_3D');
 				babyArrow.animation.addByPrefix('green', 'arrowUP');
@@ -1896,9 +1898,23 @@ class PlayState extends MusicBeatState
 				shad.uTime.value[0] += elapsed;
 			}
 		}
-		if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating')
+
+		//welcome to 3d sinning avenue
+		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()))
 		{
 			dad.y += (Math.sin(elapsedtime) * 0.2);
+		}
+		if(funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()))
+		{
+			boyfriend.y += (Math.sin(elapsedtime) * 0.2);
+		}
+		if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
+		{
+			dadmirror.y += (Math.sin(elapsedtime) * 0.2);
+		}
+		if(funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()))
+		{
+			gf.y += (Math.sin(elapsedtime) * 0.2);
 		}
 
 		if (SONG.song.toLowerCase() == 'cheating') // fuck you
@@ -1939,8 +1955,8 @@ class PlayState extends MusicBeatState
 		{
 			if (iconP1.animation.curAnim.name == 'bf-old')
 			{
-				var isBF:Bool = characteroverride == 'bf' || characteroverride == 'none';
-				iconP1.animation.play(isBF ? SONG.player1 : characteroverride);
+				var isBF:Bool = formoverride == 'bf' || formoverride == 'none';
+				iconP1.animation.play(isBF ? SONG.player1 : formoverride);
 			}
 			else
 			{
@@ -2253,7 +2269,7 @@ class PlayState extends MusicBeatState
 			if (!shakeCam)
 			{
 				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
-					.y, characteroverride == "bf" || characteroverride == "none" ? SONG.player1 : characteroverride));
+					.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
 
 					#if desktop
 					DiscordClient.changePresence("GAME OVER -- "
@@ -2288,7 +2304,7 @@ class PlayState extends MusicBeatState
 				else
 				{
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
-						.y, characteroverride == "bf" || characteroverride == "none" ? SONG.player1 : characteroverride));
+						.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
 
 						#if desktop
 						DiscordClient.changePresence("GAME OVER -- "
@@ -2543,7 +2559,7 @@ class PlayState extends MusicBeatState
 				return;
 			}
 		}
-		if (camFollow.x != dad.getMidpoint().x + 150 && focusondad)
+		if (camFollow.x != dad.getMidpoint().x + 150 && focusondad || camFollow.y != dad.getMidpoint().y - 100 && focusondad)
 		{
 			camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 			// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
@@ -2558,7 +2574,7 @@ class PlayState extends MusicBeatState
 				case 'senpai-angry':
 					camFollow.y = dad.getMidpoint().y - 430;
 					camFollow.x = dad.getMidpoint().x - 100;
-				case 'dave-angey':
+				case 'dave-angey' | 'bambi-3d':
 					camFollow.y = dad.getMidpoint().y;
 			}
 
@@ -2571,7 +2587,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (camFollow.x != boyfriend.getMidpoint().x - 100 && !focusondad)
+		if (camFollow.x != boyfriend.getMidpoint().x - 100 && !focusondad || camFollow.y != boyfriend.getMidpoint().y - 100 && !focusondad)
 		{
 			camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 

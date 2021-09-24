@@ -26,21 +26,22 @@ import flixel.util.FlxStringUtil;
 */
 class CharacterInSelect
 {
-	public var name:String;
+	public var names:Array<String>;
 	public var noteMs:Array<Float>;
-	public var polishedName:String;
+	public var polishedNames:Array<String>;
 
-	public function new(name:String, noteMs:Array<Float>, polishedName:String)
+	public function new(names:Array<String>, noteMs:Array<Float>, polishedNames:Array<String>)
 	{
-		this.name = name;
+		this.names = names;
 		this.noteMs = noteMs;
-		this.polishedName = polishedName;
+		this.polishedNames = polishedNames;
 	}
 }
 class CharacterSelectState extends MusicBeatState
 {
 	public var char:Boyfriend;
 	public var current:Int;
+	public var curForm:Int;
 	public var notemodtext:FlxText;
 	public var characterText:FlxText;
 
@@ -58,13 +59,13 @@ class CharacterSelectState extends MusicBeatState
 	
 	public var characters:Array<CharacterInSelect> = 
 	[
-		new CharacterInSelect('bf', [1, 1, 1, 1], "Boyfriend"),
-		new CharacterInSelect('bf-pixel', [1, 1, 1, 1], "Pixel Boyfriend"),
-		new CharacterInSelect('tristan', [2, 0.5, 0.5, 0.5], "Tristan"),
-		new CharacterInSelect('dave', [0.25, 0.25, 2, 2], "Dave"),
-		new CharacterInSelect('bambi', [0, 0, 3, 0], "Mr. Bambi"),
-		new CharacterInSelect('dave-angey', [2, 2, 0.25, 0.25], "3D Dave"),
-		new CharacterInSelect('tristan-golden', [0.25, 0.25, 0.25, 2], "Golden Tristan")
+		new CharacterInSelect(['bf'], [1, 1, 1, 1], ["Boyfriend"]),
+		new CharacterInSelect(['bf-pixel'], [1, 1, 1, 1], ["Pixel Boyfriend"]),
+		new CharacterInSelect(['tristan'], [2, 0.5, 0.5, 0.5], ["Tristan"]),
+		new CharacterInSelect(['dave', 'dave-annoyed', 'dave-splitathon', 'dave-old'], [0.25, 0.25, 2, 2], ["Dave", "Dave (Insanity)", 'Dave (Splitathon)' , "Dave (Old)"]),
+		new CharacterInSelect(['bambi', 'bambi-new', 'bambi-splitathon', 'bambi-angey', 'bambi-old', 'bambi-bevel', 'bambi-farmer-beta'], [0, 0, 3, 0], ["Mr. Bambi", 'Mr. Bambi (Farmer)', 'Mr. Bambi (Splitathon)', 'Mr. Bambi (Screwed)', 'Mr. Bambi (Old)', 'Mr. Bambi (Bambi Update)', 'Mr. Bambi (Farmer) (Old)']),
+		new CharacterInSelect(['dave-angey', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what'], [2, 2, 0.25, 0.25], ["3D Dave", "3D Dave (Insanity)", "3D Dave (Old)"]),
+		new CharacterInSelect(['tristan-golden'], [0.25, 0.25, 0.25, 2], ["Golden Tristan"])
 	];
 	public function new() 
 	{
@@ -223,6 +224,7 @@ class CharacterSelectState extends MusicBeatState
 		}
 		if (FlxG.keys.justPressed.LEFT && !selectedCharacter)
 		{
+			curForm = 0;
 			current--;
 			if (current < 0)
 			{
@@ -234,10 +236,32 @@ class CharacterSelectState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.RIGHT && !selectedCharacter)
 		{
+			curForm = 0;
 			current++;
 			if (current > characters.length - 1)
 			{
 				current = 0;
+			}
+			UpdateBF();
+			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		}
+		if (FlxG.keys.justPressed.DOWN && !selectedCharacter)
+		{
+			curForm--;
+			if (curForm < 0)
+			{
+				curForm = characters[current].names.length - 1;
+			}
+			UpdateBF();
+			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		}
+
+		if (FlxG.keys.justPressed.UP && !selectedCharacter)
+		{
+			curForm++;
+			if (curForm > characters[current].names.length - 1)
+			{
+				curForm = 0;
 			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
@@ -247,9 +271,9 @@ class CharacterSelectState extends MusicBeatState
 	public function UpdateBF()
 	{
 		currentSelectedCharacter = characters[current];
-		characterText.text = currentSelectedCharacter.polishedName;
+		characterText.text = currentSelectedCharacter.polishedNames[curForm];
 		char.destroy();
-		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, currentSelectedCharacter.name);
+		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, currentSelectedCharacter.names[curForm]);
 		char.screenCenter();
 		char.y = FlxG.height / 2;
 		switch (char.curCharacter)
@@ -268,20 +292,19 @@ class CharacterSelectState extends MusicBeatState
 
 	override function beatHit()
 	{
-		super.beatHit();
-		//STOP POSTING ABOUT FlxTween.tween(FlxG.camera, {zoom:1.05}, 0.3, {ease: FlxEase.quadOut, type: BACKWARD}); I'M TIRED OF SEEING IT
-		
 		if (char != null)
 		{
 			char.dance();
 		}
+		super.beatHit();
 	}
 	
 	
 	public function endIt(e:FlxTimer = null)
 	{
 		trace("ENDING");
-		PlayState.characteroverride = currentSelectedCharacter.name;
+		PlayState.characteroverride = currentSelectedCharacter.names[0];
+		PlayState.formoverride = currentSelectedCharacter.names[curForm];
 		PlayState.curmult = currentSelectedCharacter.noteMs;
 		LoadingState.loadAndSwitchState(new PlayState());
 	}
