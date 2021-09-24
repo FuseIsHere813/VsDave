@@ -36,6 +36,8 @@ class HealthIcon extends FlxSprite
 		animation.add('dave-annoyed', [24, 25], 0, false, isPlayer);
 		animation.add('dave-splitathon', [24, 25], 0, false, isPlayer);
 		animation.add('dave-angey', [26, 27], 0, false, isPlayer);
+		animation.add('dave-3d-standing-bruh-what', [26, 27], 0, false, isPlayer);
+		animation.add('dave-annoyed-3d', [26, 27], 0, false, isPlayer);
 		animation.add('bambi', [28, 29], 0, false, isPlayer);
 		animation.add('bambi-splitathon', [28, 29], 0, false, isPlayer);
 		animation.add('bambi-new', [28, 29], 0, false, isPlayer);
@@ -51,13 +53,7 @@ class HealthIcon extends FlxSprite
 		animation.add('tristan-golden', [38, 39], 0, false, isPlayer);
 		animation.add('bambi-angey', [40, 41], 0, false, isPlayer);
 		animation.add('dave-old', [42, 43], 0, false, isPlayer);
-		animation.add('dave-bambi-update', [42, 43], 0, false, isPlayer);
-		animation.add('dave-angry-alpha-four', [44, 45], 0, false, isPlayer);
-		animation.add('bambi-bevel', [46, 47], 0, false, isPlayer);
-		animation.add('bambi-pixel', [46, 47], 0, false, isPlayer);
-		animation.add('bambi-car', [46, 47], 0, false, isPlayer);
-		animation.add('bambi-christmas', [46, 47], 0, false, isPlayer);
-		animation.add('dave-angry-alpha-one', [48, 49], 0, false, isPlayer);
+		animation.add('bambi-bevel', [46, 47], 0, false, isPlayer);er);
 		animation.play(char);
 		if (char == 'dave-angey' || char == 'bambi-3d' || char == 'senpai' || char == 'bf-pixel' || char == 'spirit' || char == 'senpai-angry')
 		{
