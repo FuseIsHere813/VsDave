@@ -242,6 +242,7 @@ class ChartingState extends MusicBeatState
 			_song.player1 = characters[Std.parseInt(character)];
 		});
 		player1DropDown.selectedLabel = _song.player1;
+		player1DropDown.dropDirection = FlxUIDropDownMenuDropDirection.Down;
 
 		var player2DropDown = new FlxUIDropDownMenu(140, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
 		{
@@ -249,6 +250,7 @@ class ChartingState extends MusicBeatState
 		});
 
 		player2DropDown.selectedLabel = _song.player2;
+		player2DropDown.dropDirection = FlxUIDropDownMenuDropDirection.Down;
 
 		var oneSectionSongCheckbox = new FlxUICheckBox(10, 400, null, null, "1 Section Song", 100);
 		oneSectionSongCheckbox.checked = false;

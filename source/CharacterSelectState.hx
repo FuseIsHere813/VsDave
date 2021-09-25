@@ -45,7 +45,7 @@ class CharacterSelectState extends MusicBeatState
 	public var notemodtext:FlxText;
 	public var characterText:FlxText;
 
-	public var isDebug:Bool = false;
+	public var isDebug:Bool = false; //CHANGE THIS TO FALSE BEFORE YOU COMMIT RETARDS
 
 	public var PressedTheFunny:Bool = false;
 

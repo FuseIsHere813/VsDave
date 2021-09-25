@@ -17,7 +17,7 @@ class Boyfriend extends Character
 		{
 			default:
 				super(x, y, char, true);
-			case "dave":
+			case "dave" | "dave-old" | "dave-annoyed" | 'dave-splitathon':
 				super(x, y - 40, char, true);
 		}
 	}

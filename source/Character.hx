@@ -20,6 +20,8 @@ class Character extends FlxSprite
 	public var furiosityScale:Float = 1.02;
 	public var canDance:Bool = true;
 
+	public var nativelyPlayable:Bool = false;
+
 	public var globaloffset:Array<Float> = [0,0];
 
 	public function new(x:Float, y:Float, ?character:String = "bf", ?isPlayer:Bool = false)
@@ -170,7 +172,7 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int(width * 1.1));
 				updateHitbox();
 
-					playAnim('idle');
+				playAnim('idle');
 			case 'dave-annoyed':
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
@@ -458,6 +460,8 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 
+				nativelyPlayable = true;
+
 				flipX = true;
 			case 'tristan':
 				var tex = Paths.getSparrowAtlas('dave/TRISTAN');
@@ -496,6 +500,8 @@ class Character extends FlxSprite
 				addOffset('scared', -4);
 	
 				playAnim('idle');
+
+				nativelyPlayable = true;
 	
 				flipX = true;
 
@@ -526,6 +532,8 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 
+				nativelyPlayable = true;
+
 				flipX = true;
 			case 'bf-car':
 				var tex = Paths.getSparrowAtlas('bfCar');
@@ -550,6 +558,8 @@ class Character extends FlxSprite
 				addOffset("singLEFTmiss", 12, 24);
 				addOffset("singDOWNmiss", -11, -19);
 				playAnim('idle');
+
+				nativelyPlayable = true;
 
 				flipX = true;
 				
@@ -589,6 +599,8 @@ class Character extends FlxSprite
 
 				antialiasing = false;
 
+				nativelyPlayable = true;
+
 				flipX = true;
 				
 			case 'bf-pixel-dead':
@@ -607,6 +619,7 @@ class Character extends FlxSprite
 				setGraphicSize(Std.int(width * 6));
 				updateHitbox();
 				antialiasing = false;
+				nativelyPlayable = true;
 				flipX = true;
 
 			case 'senpai':
@@ -725,6 +738,8 @@ class Character extends FlxSprite
 				addOffset('deathLoop', 37, 5);
 				addOffset('deathConfirm', 37, 69);
 				playAnim('idle');
+
+				nativelyPlayable = true;
 				flipX = true;
 
 
@@ -757,6 +772,8 @@ class Character extends FlxSprite
 				addOffset("singDOWNmiss", -7, -14);
 
 				playAnim('idle');
+
+				nativelyPlayable = true;
 	
 				flipX = true;
 				
@@ -769,10 +786,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'right', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", 44, 0);
-				addOffset("singRIGHT", -16, -3);
-				addOffset("singLEFT", -5, -8);
-				addOffset("singDOWN", -5, -48);
+				addOffset("singUP", 54, 3);
+				addOffset("singRIGHT", -50, 0);
+				addOffset("singLEFT", 20, -7);
+				addOffset("singDOWN", -5, -43);
 
 				playAnim('idle');
 
@@ -861,6 +878,8 @@ class Character extends FlxSprite
 				addOffset('scared', -4);
 	
 				playAnim('idle');
+
+				nativelyPlayable = true;
 	
 				flipX = true;
 			case 'bambi-angey':
@@ -914,30 +933,15 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 
+				nativelyPlayable = true;
+
 				flipX = true;
 		}
-
 		dance();
 
-		if (isPlayer)
+		if(isPlayer)
 		{
 			flipX = !flipX;
-			// Doesn't flip for BF, since his are already in the right place???
-			if (!curCharacter.startsWith('bf') && false) //this is dumb lol
-			{
-				// var animArray
-				var oldRight = animation.getByName('singRIGHT').frames;
-				animation.getByName('singRIGHT').frames = animation.getByName('singLEFT').frames;
-				animation.getByName('singLEFT').frames = oldRight;
-
-				// IF THEY HAVE MISS ANIMATIONS??
-				if (animation.getByName('singRIGHTmiss') != null)
-				{
-					var oldMiss = animation.getByName('singRIGHTmiss').frames;
-					animation.getByName('singRIGHTmiss').frames = animation.getByName('singLEFTmiss').frames;
-					animation.getByName('singLEFTmiss').frames = oldMiss;
-				}
-			}
 		}
 	}
 
@@ -953,7 +957,7 @@ class Character extends FlxSprite
 			super.update(elapsed);
 			return;
 		}
-		if (!curCharacter.startsWith('bf') && !isPlayer)
+		if (!nativelyPlayable && !isPlayer)
 		{
 			if (animation.curAnim.name.startsWith('sing'))
 			{
