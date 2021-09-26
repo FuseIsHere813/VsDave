@@ -3520,6 +3520,8 @@ class PlayState extends MusicBeatState
 					case 640 | 896:
 						shakeCam = false;
 					case 1305:
+						boyfriend.canDance = false;
+						gf.canDance = false;
 						boyfriend.playAnim('hey', true);
 						gf.playAnim('cheer', true);
 				}

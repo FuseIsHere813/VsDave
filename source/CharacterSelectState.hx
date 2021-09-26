@@ -75,6 +75,7 @@ class CharacterSelectState extends MusicBeatState
 	override public function create():Void 
 	{
 		super.create();
+		Conductor.changeBPM(110);
 		currentSelectedCharacter = characters[current];
 		if (FlxG.save.data.unlockedcharacters == null)
 		{
@@ -292,9 +293,9 @@ class CharacterSelectState extends MusicBeatState
 
 	override function beatHit()
 	{
-		if (char != null)
+		if (char != null && !selectedCharacter)
 		{
-			char.dance();
+			char.playAnim('idle');
 		}
 		super.beatHit();
 	}

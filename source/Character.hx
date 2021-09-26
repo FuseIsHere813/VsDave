@@ -482,20 +482,20 @@ class Character extends FlxSprite
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
 				animation.addByPrefix('hit', 'BF hit', 24, false);
 	
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", -38, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
-				addOffset("hey", 7, 4);
-				addOffset('firstDeath', 37, 11);
-				addOffset('deathLoop', 37, 5);
-				addOffset('deathConfirm', 37, 69);
-				addOffset('scared', -4);
+				addOffset('idle');
+				addOffset("singUP", -59, 57);
+				addOffset("singRIGHT", -58, -6);
+				addOffset("singLEFT", -4, -2);
+				addOffset("singDOWN", -40, -30);
+				addOffset("singUPmiss", -59, 57);
+				addOffset("singRIGHTmiss", -58, -6);
+				addOffset("singLEFTmiss", -4, -2);
+				addOffset("singDOWNmiss", -40, -30);
+				addOffset("hey", -2, 1);
+				addOffset('firstDeath', 17, 1);
+				addOffset('deathLoop', 17, 5);
+				addOffset('deathConfirm', 12, 36);
+				addOffset('scared', 6, 3);
 	
 				playAnim('idle');
 
@@ -816,10 +816,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP");
-				addOffset("singRIGHT", -9);
-				addOffset("singLEFT");
-				addOffset("singDOWN", 40);
+				addOffset("singUP", 0, -1);
+				addOffset("singRIGHT", -16, -1);
+				addOffset("singLEFT", -4, -1);
+				addOffset("singDOWN", 43, -2);
 
 				playAnim('idle');
 				
@@ -860,20 +860,20 @@ class Character extends FlxSprite
 				animation.addByPrefix('scared', 'BF idle shaking', 24);
 				animation.addByPrefix('hit', 'BF hit', 24, false);
 	
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", -38, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
-				addOffset("hey", 7, 4);
-				addOffset('firstDeath', 37, 11);
-				addOffset('deathLoop', 37, 5);
-				addOffset('deathConfirm', 37, 69);
-				addOffset('scared', -4);
+				addOffset('idle');
+				addOffset("singUP", -59, 57);
+				addOffset("singRIGHT", -58, -6);
+				addOffset("singLEFT", -4, -2);
+				addOffset("singDOWN", -40, -30);
+				addOffset("singUPmiss", -59, 57);
+				addOffset("singRIGHTmiss", -58, -6);
+				addOffset("singLEFTmiss", -4, -2);
+				addOffset("singDOWNmiss", -40, -30);
+				addOffset("hey", -2, 1);
+				addOffset('firstDeath', 17, 1);
+				addOffset('deathLoop', 17, 5);
+				addOffset('deathConfirm', 12, 36);
+				addOffset('scared', 6, 3);
 	
 				playAnim('idle');
 
@@ -1022,6 +1022,10 @@ class Character extends FlxSprite
 		if (animation.getByName(AnimName) == null)
 		{
 			return; //why wasn't this a thing in the first place
+		}
+		if(AnimName.toLowerCase() == 'idle' && !canDance)
+		{
+			return;
 		}
 		animation.play(AnimName, Force, Reversed, Frame);
 	
