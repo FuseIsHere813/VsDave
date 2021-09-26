@@ -230,8 +230,6 @@ class Character extends FlxSprite
 				addOffset("singRIGHT", 13, 23);
 				addOffset("singLEFT", 49, -9);
 				addOffset("singDOWN", 0, -10);
-				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
-				updateHitbox();
 				antialiasing = false;
 		
 				playAnim('idle');
@@ -246,10 +244,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
 		
 				addOffset('idle', 7, 0);
-				addOffset("singUP", -14, 16);
-				addOffset("singRIGHT", 13, 23);
-				addOffset("singLEFT", 49, -9);
-				addOffset("singDOWN", 0, -10);
+				addOffset("singUP", 26, -4);
+				addOffset("singRIGHT", 33, 13);
+				addOffset("singLEFT", 59, -9);
+				addOffset("singDOWN", 10, -13);
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
@@ -265,11 +263,11 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'Dave Sing Note RIGHT0', 24, false);
 				animation.addByPrefix('singDOWN', 'Dave Sing Note DOWN0', 24, false);
 	
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", -38, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", -10, -50);
+				addOffset('idle');
+				addOffset("singUP", -19, 37);
+				addOffset("singRIGHT", 52, 23);
+				addOffset("singLEFT", 22, 4);
+				addOffset("singDOWN", -3, -33);
 	
 				playAnim('idle');
 
@@ -284,10 +282,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24, false);
 		
 				addOffset('idle');
-				addOffset("singUP", 0, 0);
-				addOffset("singRIGHT", 0, 0);
-				addOffset("singLEFT", 0, 0);
-				addOffset("singDOWN", 0, 0);
+				addOffset("singUP", 20, -10);
+				addOffset("singRIGHT", 80, -20);
+				addOffset("singLEFT", 0, -10);
+				addOffset("singDOWN", 0, 10);
 				globaloffset[0] = 150;
 				globaloffset[1] = 450; //this is the y
 				setGraphicSize(Std.int(width / furiosityScale));
@@ -762,14 +760,14 @@ class Character extends FlxSprite
 				animation.addByPrefix('deathConfirm', "MARCELLO dead0", 24, false);
 	
 				addOffset('idle');
-				addOffset("singUP", -6, 3);
+				addOffset("singUP", -16, 3);
 				addOffset("singRIGHT", 0, -4);
 				addOffset("singLEFT", -10, -2);
-				addOffset("singDOWN", 0, -17);
+				addOffset("singDOWN", -10, -17);
 				addOffset("singUPmiss", -6, 4);
 				addOffset("singRIGHTmiss", 0, -4);
 				addOffset("singLEFTmiss", -10, -2);
-				addOffset("singDOWNmiss", -7, -14);
+				addOffset("singDOWNmiss", -10, -17);
 
 				playAnim('idle');
 
@@ -802,10 +800,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'right', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", 44, 0);
-				addOffset("singRIGHT", -16, -3);
-				addOffset("singLEFT", -5, -8);
-				addOffset("singDOWN", -5, -48);
+				addOffset("singUP", 18, 49);
+				addOffset("singRIGHT", -46, 13);
+				addOffset("singLEFT", 12, -4);
+				addOffset("singDOWN", -7, -23);
 
 				playAnim('idle');
 
@@ -917,19 +915,19 @@ class Character extends FlxSprite
 				animation.addByPrefix('scared', 'MARCELLO idle shaking', 24);
 				animation.addByPrefix('hit', 'MARCELLO hit', 24, false);
 
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", -38, -7);
+				addOffset('idle');
+				addOffset("singUP", -59, 37);
+				addOffset("singRIGHT", -38, -3);
 				addOffset("singLEFT", 12, -6);
 				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
-				addOffset("hey", 7, 4);
+				addOffset("singUPmiss", -59, 37);
+				addOffset("singRIGHTmiss", -38, -3);
+				addOffset("singLEFTmiss", 12, -6);
+				addOffset("singDOWNmiss", -10, -50);
+				addOffset("hey", 3, 21);
 				addOffset('firstDeath', 37, 11);
 				addOffset('deathLoop', 37, 5);
-				addOffset('scared', -4);
+				addOffset('scared', -24, -10);
 
 				playAnim('idle');
 
