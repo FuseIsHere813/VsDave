@@ -163,10 +163,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12, false);
 	
 				addOffset('idle');
-				addOffset("singUP", 7, 5);
-				addOffset("singRIGHT", -36, -1);
-				addOffset("singLEFT", 7, 4);
-				addOffset("singDOWN", -9, -33);
+				addOffset("singUP", 40, 11);
+				addOffset("singRIGHT", -21, 4);
+				addOffset("singLEFT", 29, 10);
+				addOffset("singDOWN", 4, -28);
 				globaloffset[1] = 100;
 
 				setGraphicSize(Std.int(width * 1.1));
@@ -184,10 +184,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12, false);
 		
 				addOffset('idle');
-				addOffset("singUP", 7, 5);
-				addOffset("singRIGHT", -36, -1);
-				addOffset("singLEFT", 7, 4);
-				addOffset("singDOWN", -9, -33);
+				addOffset("singUP", 40, 11);
+				addOffset("singRIGHT", -21, 4);
+				addOffset("singLEFT", 29, 10);
+				addOffset("singDOWN", 4, -28);
 				globaloffset[1] = 100;
 	
 				setGraphicSize(Std.int(width * 1.1));
