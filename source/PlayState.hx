@@ -1927,6 +1927,20 @@ class PlayState extends MusicBeatState
 			});
 		}
 
+		if (SONG.song.toLowerCase() == 'furiosity') // fuck you
+			{
+				playerStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.y += Math.sin(elapsedtime) * Math.random();
+					spr.y -= Math.sin(elapsedtime) * 1.2;
+				});
+				dadStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.y -= Math.sin(elapsedtime) * Math.random();
+					spr.y += Math.sin(elapsedtime) * 1.2;
+				});
+			}
+
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
 		if (shakeCam && eyesoreson)
 		{
@@ -2226,12 +2240,52 @@ class PlayState extends MusicBeatState
 			switch (curBeat)
 			{
 				case 127:
+					playerStrums.forEach(function(spr:FlxSprite)
+					{
+						spr.y += Math.sin(elapsedtime) * Math.random();
+						spr.y -= Math.sin(elapsedtime) * 1.4;
+					});
+					dadStrums.forEach(function(spr:FlxSprite)
+					{
+						spr.y -= Math.sin(elapsedtime) * Math.random();
+						spr.y += Math.sin(elapsedtime) * 1.4;
+					});
 					camZooming = true;
 				case 159:
+					playerStrums.forEach(function(spr:FlxSprite)
+					{
+						spr.y += Math.sin(elapsedtime) * Math.random();
+						spr.y -= Math.sin(elapsedtime) * 1.2;
+					});
+					dadStrums.forEach(function(spr:FlxSprite)
+					{
+						spr.y -= Math.sin(elapsedtime) * Math.random();
+						spr.y += Math.sin(elapsedtime) * 1.2;
+					});
 					camZooming = false;
 				case 191:
+					playerStrums.forEach(function(spr:FlxSprite)
+					{
+						spr.y += Math.sin(elapsedtime) * Math.random();
+						spr.y -= Math.sin(elapsedtime) * 1.4;
+					});
+					dadStrums.forEach(function(spr:FlxSprite)
+					{
+						spr.y -= Math.sin(elapsedtime) * Math.random();
+						spr.y += Math.sin(elapsedtime) * 1.4;
+					});
 					camZooming = true;
 				case 223:
+					playerStrums.forEach(function(spr:FlxSprite)
+					{
+						spr.y += Math.sin(elapsedtime) * Math.random();
+						spr.y -= Math.sin(elapsedtime) * 1.2;
+					});
+					dadStrums.forEach(function(spr:FlxSprite)
+					{
+						spr.y -= Math.sin(elapsedtime) * Math.random();
+						spr.y += Math.sin(elapsedtime) * 1.2;
+					});
 					camZooming = false;
 			}
 		}
