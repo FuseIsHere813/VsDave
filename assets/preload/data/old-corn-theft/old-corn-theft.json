@@ -4561,8 +4561,8 @@
     "sections": 1,
     "needsVoices": true,
     "player1": "bf",
-    "player2": "bambi-new",
-    "speed": 3.1,
+    "player2": "bambi-farmer-beta",
+    "speed": 2,
     "song": "Old-Corn-Theft",
     "sectionLengths": [],
     "validScore": true
