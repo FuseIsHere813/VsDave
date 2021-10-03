@@ -1,6 +1,7 @@
 package;
 
 // crazy system shit!!!!! (only for windows)
+// lordryan wrote this :)
 #if windows
 import sys.io.File;
 import sys.io.Process;
