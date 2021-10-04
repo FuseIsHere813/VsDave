@@ -97,7 +97,7 @@ class CreditsMenuState extends MusicBeatState
          ]
       ),
       //contributors
-      new Person("Zmac", CreditsType.Contributor, "Made the Furiosity BG, helped with Intro text, and helped getting the mod into Funky Friday",
+      new Person("Zmac", CreditsType.Contributor, "Made the Polygonized BG, helped with Intro text, and helped getting the mod into Even More Friday Night Funkin' 2",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
          ]
