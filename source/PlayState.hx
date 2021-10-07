@@ -46,6 +46,11 @@ import flash.system.System;
 import Discord.DiscordClient;
 #end
 
+#if windows
+import sys.io.File;
+import sys.io.Process;
+#end
+
 using StringTools;
 
 class PlayState extends MusicBeatState
