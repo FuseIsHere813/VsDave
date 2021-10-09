@@ -749,7 +749,7 @@ class PlayState extends MusicBeatState
 			fence.scrollFactor.set(0.98, 0.98);
 			fence.active = false;
 
-			var sign:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('bambi/sign'));
+			var sign:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('bambi/Sign'));
 			sign.antialiasing = true;
 			sign.scrollFactor.set(1, 1);
 			sign.active = false;
