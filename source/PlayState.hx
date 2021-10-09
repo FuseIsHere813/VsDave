@@ -664,7 +664,7 @@ class PlayState extends MusicBeatState
 			stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
 			stageHills.updateHitbox();
 			stageHills.antialiasing = true;
-			stageHills.scrollFactor.set(1, 1);
+			stageHills.scrollFactor.set(0.8, 0.8);
 			stageHills.active = false;
 			add(stageHills);
 
@@ -672,7 +672,7 @@ class PlayState extends MusicBeatState
 			gate.setGraphicSize(Std.int(gate.width * 1.2));
 			gate.updateHitbox();
 			gate.antialiasing = true;
-			gate.scrollFactor.set(0.925, 0.925);
+			gate.scrollFactor.set(0.8, 0.8);
 			gate.x += 25;
 			gate.active = false;
 			add(gate);
@@ -681,7 +681,7 @@ class PlayState extends MusicBeatState
 			stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
 			stageFront.updateHitbox();
 			stageFront.antialiasing = true;
-			stageFront.scrollFactor.set(0.9, 0.9);
+			stageFront.scrollFactor.set(1, 1);
 			stageFront.active = false;
 			add(stageFront);
 			UsingNewCam = true;
@@ -689,7 +689,7 @@ class PlayState extends MusicBeatState
 			{
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
+				bg.scrollFactor.set();
 				bg.active = true;
 				bg.visible = false;
 				add(bg);
@@ -736,22 +736,22 @@ class PlayState extends MusicBeatState
 			
 			var cornSet:FlxSprite = new FlxSprite(-350, 325).loadGraphic(Paths.image('bambi/Cornys'));
 			cornSet.antialiasing = true;
-			cornSet.scrollFactor.set(1, 1);
+			cornSet.scrollFactor.set(1.2, 1);
 			cornSet.active = false;
 			
 			var cornSet2:FlxSprite = new FlxSprite(1050, 325).loadGraphic(Paths.image('bambi/Cornys'));
 			cornSet2.antialiasing = true;
-			cornSet2.scrollFactor.set(1, 1);
+			cornSet2.scrollFactor.set(1.2, 1);
 			cornSet2.active = false;
 			
 			var fence:FlxSprite = new FlxSprite(-350, 450).loadGraphic(Paths.image('bambi/crazy fences'));
 			fence.antialiasing = true;
-			fence.scrollFactor.set(0.98, 0.98);
+			fence.scrollFactor.set(0.9, 1);
 			fence.active = false;
 
 			var sign:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('bambi/Sign'));
 			sign.antialiasing = true;
-			sign.scrollFactor.set(1, 1);
+			sign.scrollFactor.set(1.25, 1);
 			sign.active = false;
 
 			if (SONG.song.toLowerCase() == 'splitathon')
@@ -789,7 +789,7 @@ class PlayState extends MusicBeatState
 			stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
 			stageHills.updateHitbox();
 			stageHills.antialiasing = true;
-			stageHills.scrollFactor.set(1, 1);
+			stageHills.scrollFactor.set(0.8, 0.8);
 			stageHills.active = false;
 			add(stageHills);
 
@@ -797,7 +797,7 @@ class PlayState extends MusicBeatState
 			gate.setGraphicSize(Std.int(gate.width * 1.2));
 			gate.updateHitbox();
 			gate.antialiasing = true;
-			gate.scrollFactor.set(0.925, 0.925);
+			gate.scrollFactor.set(0.8, 0.8);
 			gate.active = false;
 			add(gate);
 
@@ -805,7 +805,7 @@ class PlayState extends MusicBeatState
 			stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
 			stageFront.updateHitbox();
 			stageFront.antialiasing = true;
-			stageFront.scrollFactor.set(0.9, 0.9);
+			stageFront.scrollFactor.set(1, 1);
 			stageFront.active = false;
 			add(stageFront);
 			// UsingNewCam = true;
@@ -816,7 +816,7 @@ class PlayState extends MusicBeatState
 			curStage = 'daveEvilHouse';
 			var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 			bg.antialiasing = true;
-			bg.scrollFactor.set(0.9, 0.9);
+			bg.scrollFactor.set();
 			bg.active = true;
 
 			switch (SONG.song.toLowerCase())
