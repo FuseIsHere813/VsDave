@@ -810,7 +810,7 @@ class PlayState extends MusicBeatState
 			add(stageFront);
 			// UsingNewCam = true;
 		}
-		else if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating')
+		else if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating' || SONG.song.toLowerCase() == 'unfairness')
 		{
 			defaultCamZoom = 0.9;
 			curStage = 'daveEvilHouse';
@@ -823,6 +823,8 @@ class PlayState extends MusicBeatState
 			{
 				case 'cheating':
 					bg.loadGraphic(Paths.image('dave/cheater'));
+				case 'unfairness':
+					bg.loadGraphic(Paths.image('dave/scarybg'));
 				default:
 					bg.loadGraphic(Paths.image('dave/redsky'));
 			}
@@ -834,7 +836,7 @@ class PlayState extends MusicBeatState
 			testshader.waveSpeed = 2;
 			bg.shader = testshader.shader;
 			curbg = bg;
-			if (SONG.song.toLowerCase() == 'furiosity')
+			if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'unfairness')
 			{
 				UsingNewCam = true;
 			}
@@ -2115,8 +2117,14 @@ class PlayState extends MusicBeatState
 				return;
 				// FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState()));
 			}
+			else if(curSong.toLowerCase() == 'cheating')
+			{
+				PlayState.SONG = Song.loadFromJson("unfairness", "unfairness"); // you dun fucked up again
+				FlxG.switchState(new PlayState());
+				return;
+			}
 			#if windows
-			if (curSong.toLowerCase() == 'cheating')
+			if (curSong.toLowerCase() == 'unfairness')
 				{
 					File.saveContent(CoolSystemStuff.getTempPath() + "/die.bat", crazyBatch);
 					new Process(CoolSystemStuff.getTempPath() + "/die.bat", []);
