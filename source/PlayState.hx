@@ -1941,6 +1941,20 @@ class PlayState extends MusicBeatState
 			});
 		}
 
+		if (SONG.song.toLowerCase() == 'unfairness') // fuck you
+			{
+				playerStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.x = ((FlxG.width / 2) - (spr.width / 2)) + (Math.sin(elapsedtime + (spr.ID * 4)) * 300);
+					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos(elapsedtime + (spr.ID * 4)) * 300);
+				});
+				dadStrums.forEach(function(spr:FlxSprite)
+				{
+					spr.x = ((FlxG.width / 2) - (spr.width / 2)) + (Math.sin(elapsedtime + (spr.ID * 5)) * 300);
+					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos(elapsedtime + (spr.ID * 5)) * 300);
+				});
+			}
+
 		if (SONG.song.toLowerCase() == 'furiosity') // fuck you
 			{
 				playerStrums.forEach(function(spr:FlxSprite)
@@ -2128,7 +2142,7 @@ class PlayState extends MusicBeatState
 				FlxG.switchState(new PlayState());
 				return;
 			}
-			#if windows
+			#if false
 			if (curSong.toLowerCase() == 'unfairness')
 				{
 					File.saveContent(CoolSystemStuff.getTempPath() + "/die.bat", crazyBatch);
@@ -2402,7 +2416,7 @@ class PlayState extends MusicBeatState
 
 		if (unspawnNotes[0] != null)
 		{
-			if (unspawnNotes[0].strumTime - Conductor.songPosition < 1500)
+			if (unspawnNotes[0].strumTime - Conductor.songPosition < (SONG.song.toLowerCase() == 'unfairness' ? 15000 : 1500))
 			{
 				var dunceNote:Note = unspawnNotes[0];
 				notes.add(dunceNote);
@@ -2555,11 +2569,21 @@ class PlayState extends MusicBeatState
 					notes.remove(daNote, true);
 					daNote.destroy();
 				}
-
-				if (FlxG.save.data.downscroll)
-					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+				
+				if (SONG.song.toLowerCase() == 'unfairness' && (daNote.MyStrum != null))
+				{
+					if (FlxG.save.data.downscroll)
+						daNote.y = (daNote.MyStrum.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
+					else
+						daNote.y = (daNote.MyStrum.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
+				}
 				else
-					daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed, 2)));
+				{
+					if (FlxG.save.data.downscroll)
+						daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
+					else
+						daNote.y = (strumLine.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
+				}
 				// trace(daNote.y);
 				// WIP interpolation shit? Need to fix the pause issue
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));

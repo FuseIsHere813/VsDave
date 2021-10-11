@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxRandom;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -22,6 +23,7 @@ class Note extends FlxSprite
 	public var tooLate:Bool = false;
 	public var wasGoodHit:Bool = false;
 	public var prevNote:Note;
+	public var LocalScrollSpeed:Float = 1;
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
@@ -38,7 +40,7 @@ class Note extends FlxSprite
 
 	private var notetolookfor = 0;
 
-	private var MyStrum:FlxSprite;
+	public var MyStrum:FlxSprite;
 
 	private var InPlayState:Bool = false;
 
@@ -202,7 +204,7 @@ class Note extends FlxSprite
 			}
 		}
 		
-		if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState") && PlayState.SONG.song.toLowerCase() == 'cheating')
+		if (Type.getClassName(Type.getClass(FlxG.state)).contains("PlayState") && (PlayState.SONG.song.toLowerCase() == 'cheating' || PlayState.SONG.song.toLowerCase() == 'unfairness'))
 		{
 			var state:PlayState = cast(FlxG.state,PlayState);
 			InPlayState = true;
@@ -227,6 +229,22 @@ class Note extends FlxSprite
 							MyStrum = spr;
 						}
 					});
+			}
+		}
+
+		
+
+
+		if (PlayState.SONG.song.toLowerCase() == 'unfairness')
+		{
+			var rng:FlxRandom = new FlxRandom();
+			if (rng.int(0,120) == 1)
+			{
+				LocalScrollSpeed = 0.1;
+			}
+			else
+			{
+				LocalScrollSpeed = rng.float(1,3);
 			}
 		}
 		
