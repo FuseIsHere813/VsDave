@@ -1147,6 +1147,8 @@ class PlayState extends MusicBeatState
 				credits = 'Original Song made by The Boneyard';
 			case 'screwed':
 				credits = 'Original Song made by That Pizza Tower Fan';
+			case 'unfairness':
+				credits = 'Ghost Noting is forced OFF!';
 			default:
 				credits = '';
 		}
@@ -1945,13 +1947,13 @@ class PlayState extends MusicBeatState
 			{
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
-					spr.x = ((FlxG.width / 2) - (spr.width / 2)) + (Math.sin(elapsedtime + (spr.ID * 4)) * 300);
-					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos(elapsedtime + (spr.ID * 4)) * 300);
+					spr.x = ((FlxG.width / 2) - (spr.width / 2)) + (Math.sin(elapsedtime + (spr.ID)) * 300);
+					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos(elapsedtime + (spr.ID)) * 300);
 				});
 				dadStrums.forEach(function(spr:FlxSprite)
 				{
-					spr.x = ((FlxG.width / 2) - (spr.width / 2)) + (Math.sin(elapsedtime + (spr.ID * 5)) * 300);
-					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos(elapsedtime + (spr.ID * 5)) * 300);
+					spr.x = ((FlxG.width / 2) - (spr.width / 2)) + (Math.sin((elapsedtime + (spr.ID )) * 2) * 300);
+					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos((elapsedtime + (spr.ID)) * 2) * 300);
 				});
 			}
 
@@ -2555,9 +2557,9 @@ class PlayState extends MusicBeatState
 					{
 						health -= healthtolower;
 					}
-					else if(SONG.song.toLowerCase() == "unfairness" && curStep <= 256)
+					else if(SONG.song.toLowerCase() == "unfairness")
 					{
-						health -= healthtolower;
+						health -= (healthtolower / 4);
 					}
 					// boyfriend.playAnim('hit',true);
 					dad.holdTimer = 0;
@@ -3200,7 +3202,7 @@ class PlayState extends MusicBeatState
 									if (controlArray[ignoreList[shit]])
 										inIgnoreList = true;
 								}
-								if (!inIgnoreList && !theFunne)
+								if (!inIgnoreList && (!theFunne || SONG.song.toLowerCase() == 'unfairness'))
 									badNoteCheck(coolNote);
 							}
 						}
@@ -3250,7 +3252,7 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			}
-			else if (!theFunne)
+			else if (!theFunne || SONG.song.toLowerCase() == 'unfairness')
 			{
 				badNoteCheck(null);
 			}
@@ -3436,7 +3438,7 @@ class PlayState extends MusicBeatState
 		{
 			goodNoteHit(note);
 		}
-		else if (!theFunne)
+		else if (!theFunne || SONG.song.toLowerCase() == 'unfairness')
 		{
 			badNoteCheck(note);
 		}
