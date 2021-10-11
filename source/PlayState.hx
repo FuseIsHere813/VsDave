@@ -1071,6 +1071,11 @@ class PlayState extends MusicBeatState
 		add(dadmirror);
 		add(boyfriend);
 
+		if(SONG.song.toLowerCase() == "unfairness")
+		{
+			health = 2;
+		}
+
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;
@@ -2533,6 +2538,10 @@ class PlayState extends MusicBeatState
 					}
 
 					if (SONG.song.toLowerCase() == "cheating")
+					{
+						health -= healthtolower;
+					}
+					else if(SONG.song.toLowerCase() == "unfairness" && curStep <= 256)
 					{
 						health -= healthtolower;
 					}
