@@ -220,7 +220,7 @@ class PlayState extends MusicBeatState
 		// To avoid having duplicate images in Discord assets
 		switch (SONG.player2)
 		{
-			case 'dave':
+			case 'dave' | 'dave-old':
 				iconRPC = 'icon_dave';
 			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old':
 				iconRPC = 'icon_bambi';
@@ -650,7 +650,7 @@ class PlayState extends MusicBeatState
 				add(waveSpriteFG);
 			 */
 		}
-		else if (SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity' || SONG.song.toLowerCase() == 'supernovae')
+		else if (SONG.song.toLowerCase() == 'house' || SONG.song.toLowerCase() == 'insanity' || SONG.song.toLowerCase() == 'supernovae' || SONG.song.toLowerCase() == 'old-insanity')
 		{
 			defaultCamZoom = 0.9;
 			curStage = 'daveHouse';
@@ -701,11 +701,6 @@ class PlayState extends MusicBeatState
 				bg.shader = testshader.shader;
 				curbg = bg;
 			}
-		}
-		else if(SONG.song.toLowerCase() == 'old-insanity')
-		{
-			var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/daveoldbg'));
-			add(bg);
 		}
 		else if (SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'screwed' || SONG.song.toLowerCase() == 'splitathon')
 		{
@@ -810,12 +805,11 @@ class PlayState extends MusicBeatState
 			add(stageFront);
 			// UsingNewCam = true;
 		}
-		else if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating' || SONG.song.toLowerCase() == 'unfairness')
+		else if (SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating' || SONG.song.toLowerCase() == 'unfairness')
 		{
 			defaultCamZoom = 0.9;
 			curStage = 'daveEvilHouse';
 			var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
-			bg.antialiasing = true;
 			bg.scrollFactor.set();
 			bg.active = true;
 
@@ -956,7 +950,7 @@ class PlayState extends MusicBeatState
 				dad.x -= 150;
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'dave':
+			case 'dave' | 'dave-old':
 				{
 					dad.y += 270;
 					dad.x += 150;
@@ -985,7 +979,7 @@ class PlayState extends MusicBeatState
 				{
 					dad.y += 400;
 				}
-			case 'bambi-new':
+			case 'bambi-new' | 'bambi-farmer-beta':
 				{
 					dad.y += 450;
 					dad.x += 200;
@@ -1914,19 +1908,19 @@ class PlayState extends MusicBeatState
 		//welcome to 3d sinning avenue
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()))
 		{
-			dad.y += (Math.sin(elapsedtime) * 0.2);
+			dad.y += (Math.sin(elapsedtime) * 0.5);
 		}
 		if(funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()))
 		{
-			boyfriend.y += (Math.sin(elapsedtime) * 0.2);
+			boyfriend.y += (Math.sin(elapsedtime) * 0.5);
 		}
 		if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
 		{
-			dadmirror.y += (Math.sin(elapsedtime) * 0.2);
+			dadmirror.y += (Math.sin(elapsedtime) * 0.5);
 		}
 		if(funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()))
 		{
-			gf.y += (Math.sin(elapsedtime) * 0.2);
+			gf.y += (Math.sin(elapsedtime) * 0.5);
 		}
 
 		if (SONG.song.toLowerCase() == 'cheating') // fuck you
@@ -2141,6 +2135,7 @@ class PlayState extends MusicBeatState
 			else if(curSong.toLowerCase() == 'cheating')
 			{
 				PlayState.SONG = Song.loadFromJson("unfairness", "unfairness"); // you dun fucked up again
+				FlxG.save.data.unfairnessFound = true;
 				FlxG.switchState(new PlayState());
 				return;
 			}

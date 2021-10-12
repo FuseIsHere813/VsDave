@@ -173,6 +173,27 @@ class Character extends FlxSprite
 				updateHitbox();
 
 				playAnim('idle');
+			case 'dave-old':
+				// DAVE SHITE ANIMATION LOADING CODE
+				tex = Paths.getSparrowAtlas('dave/dave_old');
+				frames = tex;
+				animation.addByPrefix('idle', 'Dave idle dance', 12, false);
+				animation.addByPrefix('singUP', 'Dave Sing Note UP', 12, false);
+				animation.addByPrefix('singRIGHT', 'Dave Sing Note RIGHT', 12, false);
+				animation.addByPrefix('singDOWN', 'Dave Sing Note DOWN', 12, false);
+				animation.addByPrefix('singLEFT', 'Dave Sing Note LEFT', 12, false);
+	
+				addOffset('idle');
+				addOffset("singUP", 0, -3);
+				addOffset("singRIGHT", -1, 1);
+				addOffset("singLEFT", -3, 0);
+				addOffset("singDOWN", -1, -3);
+				globaloffset[1] = 100;
+
+				setGraphicSize(Std.int(width * 1.1));
+				updateHitbox();
+
+				playAnim('idle');
 			case 'dave-annoyed':
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
@@ -252,23 +273,6 @@ class Character extends FlxSprite
 				updateHitbox();
 				antialiasing = false;
 		
-				playAnim('idle');
-			
-			case 'dave-old':
-				var tex = Paths.getSparrowAtlas('dave/dave_old');
-				frames = tex;
-				animation.addByPrefix('idle', 'Dave idle dance', 24, false);
-				animation.addByPrefix('singUP', 'Dave Sing Note UP0', 24, false);
-				animation.addByPrefix('singLEFT', 'Dave Sing Note LEFT0', 24, false);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Note RIGHT0', 24, false);
-				animation.addByPrefix('singDOWN', 'Dave Sing Note DOWN0', 24, false);
-	
-				addOffset('idle');
-				addOffset("singUP", -19, 37);
-				addOffset("singRIGHT", 52, 23);
-				addOffset("singLEFT", 22, 4);
-				addOffset("singDOWN", -3, -33);
-	
 				playAnim('idle');
 
 			case 'bambi-3d':
@@ -800,10 +804,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'right', 24, false);
 
 				addOffset('idle');
-				addOffset("singUP", 18, 49);
-				addOffset("singRIGHT", -46, 13);
-				addOffset("singLEFT", 12, -4);
-				addOffset("singDOWN", -7, -23);
+				addOffset("singUP", -2, 49);
+				addOffset("singRIGHT", -66, 13);
+				addOffset("singLEFT", 2, -4);
+				addOffset("singDOWN", -14, -23);
 
 				playAnim('idle');
 
