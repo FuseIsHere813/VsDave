@@ -156,11 +156,11 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/dave_sheet');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 12, false);
-				animation.addByPrefix('singUP', 'Dave Sing Up', 12, false);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 12, false);
-				animation.addByPrefix('singDOWN', 'Dave Sing Down', 12, false);
-				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12, false);
+				animation.addByPrefix('idle', 'Dave Idle', 24, false);
+				animation.addByPrefix('singUP', 'Dave Sing Up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Dave Sing Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Dave Sing Left', 24, false);
 	
 				addOffset('idle');
 				addOffset("singUP", 40, 11);
@@ -177,11 +177,11 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/dave_old');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave idle dance', 12, false);
-				animation.addByPrefix('singUP', 'Dave Sing Note UP', 12, false);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Note RIGHT', 12, false);
-				animation.addByPrefix('singDOWN', 'Dave Sing Note DOWN', 12, false);
-				animation.addByPrefix('singLEFT', 'Dave Sing Note LEFT', 12, false);
+				animation.addByPrefix('idle', 'Dave idle dance', 24, false);
+				animation.addByPrefix('singUP', 'Dave Sing Note UP', 24, false);
+				animation.addByPrefix('singRIGHT', 'Dave Sing Note RIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'Dave Sing Note DOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'Dave Sing Note LEFT', 24, false);
 	
 				addOffset('idle');
 				addOffset("singUP", 0, -3);
@@ -198,11 +198,11 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 12, false);
-				animation.addByPrefix('singUP', 'Dave Sing Up', 12, false);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 12, false);
-				animation.addByPrefix('singDOWN', 'Dave Sing Down', 12, false);
-				animation.addByPrefix('singLEFT', 'Dave Sing Left', 12, false);
+				animation.addByPrefix('idle', 'Dave Idle', 24, false);
+				animation.addByPrefix('singUP', 'Dave Sing Up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Dave Sing Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Dave Sing Left', 24, false);
 		
 				addOffset('idle');
 				addOffset("singUP", 40, 11);

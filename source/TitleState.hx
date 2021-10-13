@@ -341,59 +341,39 @@ class TitleState extends MusicBeatState
 
 		FlxG.log.add(curBeat);
 
-		switch (curBeat) //cyndaquil do NOT change this back, if you do i'll end you
+		switch (curBeat)
 		{
 			case 1:
-			createCoolText(['BRUH']);
-				//createCoolText(['MoldyGH', 'Rapparep', 'Krisspo', 'TheBuilderXD']);
-			// credTextShit.visible = true;
+			createCoolText(['Created by people like:']);
 			case 2:
-				addMoreText('MoldyGH');
+				addMoreText('MoldyGH\nMissingTextureMan101\nRapparep LOL');
 			case 3:
-				addMoreText('MissingTextureMan101');
+				addMoreText('TheBuilderXD\nCyndaquilDAC\nErizur');
 			case 4:
-				addMoreText('Rapparep\nTheBuilderXD\nT5mpler\nErizur\nCyndaquilDAC');
-			// credTextShit.text += '\npresent...';
-			// credTextShit.addText();
+				addMoreText('and our wonderful contributors!');
 			case 5:
 				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = 'In association \nwith';
-			// credTextShit.screenCenter();
 			case 6:
-				createCoolText(['Supernovae', 'by']);
+				createCoolText(['Supernovae by ArchWk']);
 			case 7:
-				addMoreText('ArchWk');
-			// credTextShit.text += '\nNewgrounds';
+				addMoreText('Glitch by The Boneyard');
 			case 8:
 				deleteCoolText();
 				ngSpr.visible = false;
-			// credTextShit.visible = false;
-
-			// credTextShit.text = 'Shoutouts Tom Fulp';
-			// credTextShit.screenCenter();
 			case 9:
 				createCoolText([curWacky[0]]);
-			// credTextShit.visible = true;
 			case 10:
 				addMoreText(curWacky[1]);
-			// credTextShit.text += '\nlmao';
 			case 11:
 				deleteCoolText();
-			// credTextShit.visible = false;
-			// credTextShit.text = "Friday";
-			// credTextShit.screenCenter();
 			case 12:
-				addMoreText('VS');
-			// credTextShit.visible = true;
+				addMoreText('VS.');
 			case 13:
-				addMoreText('Dave');
-			// credTextShit.text += '\nNight';
+				addMoreText('Dave and Bambi');
 			case 14:
-				addMoreText('Mod'); // credTextShit.text += '\nFunkin';
+				addMoreText('Mod');
 			case 15:
 				deleteCoolText();
-
 			case 16:
 				skipIntro();
 		}
