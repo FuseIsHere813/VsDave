@@ -924,7 +924,7 @@ class PlayState extends MusicBeatState
 
 			case "spooky":
 				dad.y += 200;
-			case "tristan":
+			case "tristan" | 'tristan-beta':
 				dad.y += 325;
 				dad.x += 100;
 			case "monster":
@@ -3295,7 +3295,6 @@ class PlayState extends MusicBeatState
 					if (upP && spr.animation.curAnim.name != 'confirm')
 					{
 						spr.animation.play('pressed');
-						trace('play');
 					}
 					if (upR)
 					{

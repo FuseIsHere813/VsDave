@@ -507,6 +507,48 @@ class Character extends FlxSprite
 	
 				flipX = true;
 
+			case 'tristan-beta':
+				var tex = Paths.getSparrowAtlas('beta_tristan');
+				frames = tex;
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('hey', 'BF HEY', 24, false);
+	
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
+				animation.addByPrefix('scared', 'BF idle shaking', 24);
+				animation.addByPrefix('hit', 'BF hit', 24, false);
+	
+				addOffset('idle');
+				addOffset("singUP", -59, 57);
+				addOffset("singRIGHT", -58, -6);
+				addOffset("singLEFT", -4, -2);
+				addOffset("singDOWN", -40, -30);
+				addOffset("singUPmiss", -59, 57);
+				addOffset("singRIGHTmiss", -58, -6);
+				addOffset("singLEFTmiss", -4, -2);
+				addOffset("singDOWNmiss", -40, -30);
+				addOffset("hey", -2, 1);
+				addOffset('firstDeath', 17, 1);
+				addOffset('deathLoop', 17, 5);
+				addOffset('deathConfirm', 12, 36);
+				addOffset('scared', 6, 3);
+	
+				playAnim('idle');
+
+				nativelyPlayable = true;
+	
+				flipX = true;
+
 			case 'bf-christmas':
 				var tex = Paths.getSparrowAtlas('christmas/bfChristmas');
 				frames = tex;
