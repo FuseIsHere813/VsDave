@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Bambi3dportrait.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="bambi 3d portrait0000" x="10" y="10" width="265" height="270" pivotX="0" pivotY="0" frameX="0" frameY="0" frameWidth="365" frameHeight="270"/>
+	<SubTexture name="bambi 3d portrait0001" x="285" y="10" width="265" height="270" frameX="0" frameY="0" frameWidth="365" frameHeight="270"/>
+	<SubTexture name="bambi 3d portrait0002" x="560" y="10" width="265" height="270" frameX="0" frameY="0" frameWidth="365" frameHeight="270"/>
+	<SubTexture name="bambi 3d portrait0003" x="10" y="290" width="265" height="270" frameX="0" frameY="0" frameWidth="365" frameHeight="270"/>
+	<SubTexture name="bambi 3d portrait0004" x="285" y="290" width="265" height="270" frameX="-100" frameY="0" frameWidth="365" frameHeight="270"/>
+</TextureAtlas>

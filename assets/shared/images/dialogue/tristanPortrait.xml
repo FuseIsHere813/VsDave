@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="tristanPortrait.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="tristan portrait0000" x="10" y="10" width="313" height="268" pivotX="-11.2" pivotY="-2.25" frameX="0" frameY="0" frameWidth="414" frameHeight="268"/>
+	<SubTexture name="tristan portrait0001" x="333" y="10" width="313" height="268" frameX="-25" frameY="0" frameWidth="414" frameHeight="268"/>
+	<SubTexture name="tristan portrait0002" x="656" y="10" width="313" height="268" frameX="-50" frameY="0" frameWidth="414" frameHeight="268"/>
+	<SubTexture name="tristan portrait0003" x="10" y="288" width="314" height="268" frameX="-75" frameY="0" frameWidth="414" frameHeight="268"/>
+	<SubTexture name="tristan portrait0004" x="334" y="288" width="313" height="268" frameX="-101" frameY="0" frameWidth="414" frameHeight="268"/>
+</TextureAtlas>
