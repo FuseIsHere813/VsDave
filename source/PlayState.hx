@@ -689,7 +689,6 @@ class PlayState extends MusicBeatState
 			{
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.antialiasing = true;
-				bg.scrollFactor.set();
 				bg.active = true;
 				bg.visible = false;
 				add(bg);
@@ -810,7 +809,6 @@ class PlayState extends MusicBeatState
 			defaultCamZoom = 0.9;
 			curStage = 'daveEvilHouse';
 			var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
-			bg.scrollFactor.set();
 			bg.active = true;
 
 			switch (SONG.song.toLowerCase())
