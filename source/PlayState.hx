@@ -1950,21 +1950,7 @@ class PlayState extends MusicBeatState
 					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos((elapsedtime + (spr.ID)) * 2) * 300);
 				});
 			}
-
-		if (SONG.song.toLowerCase() == 'furiosity') // fuck you
-			{
-				playerStrums.forEach(function(spr:FlxSprite)
-				{
-					spr.y += Math.sin(elapsedtime) * Math.random();
-					spr.y -= Math.sin(elapsedtime) * 1.2;
-				});
-				dadStrums.forEach(function(spr:FlxSprite)
-				{
-					spr.y -= Math.sin(elapsedtime) * Math.random();
-					spr.y += Math.sin(elapsedtime) * 1.2;
-				});
-			}
-
+			
 		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
 		if (shakeCam && eyesoreson)
 		{
