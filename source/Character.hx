@@ -156,7 +156,7 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/dave_sheet');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 24, false);
+				animation.addByPrefix('idle', 'Dave Idle', 12, false);
 				animation.addByPrefix('singUP', 'Dave Sing Up', 24, false);
 				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 24, false);
 				animation.addByPrefix('singDOWN', 'Dave Sing Down', 24, false);
@@ -198,7 +198,7 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 24, false);
+				animation.addByPrefix('idle', 'Dave Idle', 12, false);
 				animation.addByPrefix('singUP', 'Dave Sing Up', 24, false);
 				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 24, false);
 				animation.addByPrefix('singDOWN', 'Dave Sing Down', 24, false);
