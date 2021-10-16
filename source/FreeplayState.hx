@@ -129,7 +129,7 @@ class FreeplayState extends MusicBeatState
 		}
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'dave')
 		{
-			addWeek(['House', 'Insanity', 'Furiosity'], 7, ['dave', 'dave', 'dave-angey']);
+			addWeek(['House', 'Insanity', 'Polygonized'], 7, ['dave', 'dave', 'dave-angey']);
 			addWeek(['Bonus-Song'],7,['dave']);
 			addWeek(['Blocked','Corn-Theft','Maze',], 8, ['bambi']);
 			addWeek(['Splitathon'],9,['the-duo']);
@@ -149,7 +149,7 @@ class FreeplayState extends MusicBeatState
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
 		{
 			addWeek(['Old-Insanity'], 7, ['dave-old']);
-			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Screwed'], 8, ['bambi-old', 'bambi-old', 'bambi-angey']);
+			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Furiosity', 'Screwed'], 8, ['bambi-old', 'bambi-old', 'dave-angey', 'bambi-angey']);
 		}
 	}
 

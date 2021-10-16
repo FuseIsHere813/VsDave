@@ -33,7 +33,7 @@ class StoryMenuState extends MusicBeatState
 		['Satin-Panties', "High", "Milf"],
 		['Cocoa', 'Eggnog', 'Winter-Horrorland'],
 		['Senpai', 'Roses', 'Thorns'],
-		['House', 'Insanity', 'Furiosity'],
+		['House', 'Insanity', 'Polygonized'],
 		['Blocked', 'Corn-Theft', 'Maze'],
 		['Splitathon'],
 		['huh', 'huh', 'huh']

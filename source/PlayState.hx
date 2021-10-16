@@ -325,6 +325,8 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('insanity/insanityDialogue'));
 			case 'furiosity':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('furiosity/furiosityDialogue'));
+			case 'polygonized':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('polygonized/polyDialogue'));
 			case 'supernovae':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('supernovae/supernovaeDialogue'));
 			case 'glitch':
@@ -828,7 +830,7 @@ class PlayState extends MusicBeatState
 			testshader.waveSpeed = 2;
 			bg.shader = testshader.shader;
 			curbg = bg;
-			if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'unfairness')
+			if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'unfairness')
 			{
 				UsingNewCam = true;
 			}
@@ -1251,6 +1253,8 @@ class PlayState extends MusicBeatState
 				case 'insanity':
 					schoolIntro(doof);
 				case 'furiosity':
+					schoolIntro(doof);
+				case 'polygonized':
 					schoolIntro(doof);
 				case 'supernovae':
 					schoolIntro(doof);
@@ -2330,7 +2334,7 @@ class PlayState extends MusicBeatState
 			vocals.stop();
 			FlxG.sound.music.stop();
 
-			if (curSong.toLowerCase() == 'furiosity')
+			if (curSong.toLowerCase() == 'furiosity' || curSong.toLowerCase() == 'polygonized')
 			{
 				screenshader.shader.uampmul.value[0] = 0;
 				screenshader.Enabled = false;
@@ -2789,7 +2793,7 @@ class PlayState extends MusicBeatState
 			campaignScore += songScore;
 
 			var completedSongs:Array<String> = [];
-			var mustCompleteSongs:Array<String> = ['House', 'Insanity', 'Furiosity', 'Blocked', 'Corn-Theft', 'Maze', 'Splitathon'];
+			var mustCompleteSongs:Array<String> = ['House', 'Insanity', 'Polygonized', 'Blocked', 'Corn-Theft', 'Maze', 'Splitathon'];
 			var allSongsCompleted:Bool = true;
 			if (FlxG.save.data.songsCompleted == null)
 			{
@@ -2816,7 +2820,7 @@ class PlayState extends MusicBeatState
 
 			if (storyPlaylist.length <= 0)
 			{
-				if (curSong.toLowerCase() == 'furiosity')
+				if (curSong.toLowerCase() == 'polygonized')
 				{
 					FlxG.save.data.tristanProgress = "unlocked";
 					if (health >= 0.1)

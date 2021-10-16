@@ -67,6 +67,9 @@ class DialogueBox extends FlxSpriteGroup
 			case 'furiosity':
 				FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'polygonized':
+				FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'supernovae' | 'glitch':
 				randomNumber = FlxG.random.int(0, 50);
 				if(randomNumber == 50)
@@ -113,7 +116,7 @@ class DialogueBox extends FlxSpriteGroup
 		}
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'house' | 'insanity' | 'furiosity' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
 				box = new FlxSprite(-20, 400);
 			default:
 				box = new FlxSprite(-20, 45);
@@ -146,7 +149,7 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward', 'week6'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
-			case 'house' | 'insanity' | 'furiosity' | 'supernovae' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
@@ -172,7 +175,7 @@ class DialogueBox extends FlxSpriteGroup
 				portraitLeftCharacter = 'senpai';
 				portraitRightCharacter = 'bfPixel';
 				
-			case 'house' | 'insanity' | 'furiosity':
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized':
 				portraitLeftCharacter = 'dave';
 				
 			case 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon':
@@ -207,7 +210,7 @@ class DialogueBox extends FlxSpriteGroup
 				portraitRight.visible = true;
 				portraitLeft.antialiasing = false;
 
-			case 'house' | 'insanity' | 'furiosity' | 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon':
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon':
 				portraitLeft.setPosition(276.95, 170);
 				portraitLeft.visible = true;
 		}
@@ -245,6 +248,18 @@ class DialogueBox extends FlxSpriteGroup
 				add(dropText);
 				dropText.antialiasing = true;
 			
+				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
+				swagDialogue.font = Paths.font("barcode.ttf");
+				swagDialogue.color = 0xFF000000;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
+				add(swagDialogue);
+			case 'polygonized':
+				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
+				dropText.font = Paths.font("barcode.ttf");
+				dropText.color = 0xFFFFFFFF;
+				add(dropText);
+				dropText.antialiasing = true;
+				
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = Paths.font("barcode.ttf");
 				swagDialogue.color = 0xFF000000;
@@ -316,13 +331,11 @@ class DialogueBox extends FlxSpriteGroup
 				if (!isEnding)
 				{
 					isEnding = true;
-
-					if (PlayState.SONG.song.toLowerCase() == 'senpai' || PlayState.SONG.song.toLowerCase() == 'thorns' ||PlayState.SONG.song.toLowerCase() == 'house' || PlayState.SONG.song.toLowerCase() == 'insanity' || PlayState.SONG.song.toLowerCase() == 'furiosity' || PlayState.SONG.song.toLowerCase() == 'supernovae' || PlayState.SONG.song.toLowerCase() == 'glitch' || PlayState.SONG.song.toLowerCase() == 'blocked')
 						
 					
 					switch (PlayState.SONG.song.toLowerCase())
 					{
-						case 'senpai' | 'thorns' | 'house' | 'insanity' | 'furiosity' | 'supernovae' | 'glitch' | 'blocked':
+						case 'senpai' | 'thorns' | 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'glitch' | 'blocked':
 							FlxG.sound.music.fadeOut(2.2, 0);
 					}
 					switch (PlayState.SONG.song.toLowerCase())
@@ -478,7 +491,7 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
 						portrait.portraitPrefix = 'dave pre-furiosity portrait';
 
-					case 'furiosity':
+					case 'furiosity' | 'polygonized':
 						portrait.portraitPath = 'dialogue/dave_furiosity';
 						portrait.portraitPrefix = 'dave furiosity portrait';
 
@@ -520,7 +533,7 @@ class DialogueBox extends FlxSpriteGroup
 					case 'blocked' | 'maze':
 						portrait.portraitPath = 'dialogue/bf_blocked_maze';
 						portrait.portraitPrefix = 'bf blocked & maze portrait';
-					case 'furiosity'| 'corn-theft':
+					case 'furiosity' | 'polygonized' | 'corn-theft':
 						portrait.portraitPath = 'dialogue/bf_furiosity_corntheft';
 						portrait.portraitPrefix = 'bf furiosity & corntheft portrait';
 					case 'house':
