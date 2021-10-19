@@ -1,7 +1,7 @@
 internal,house,dave,good
 internal,insanity,dave,bad
 external,im-angey,dave-angey,bad
-internal,furiosity,dave-angey,good
+internal,polygonized,dave-angey,bad
 internal,bonus-song,dave,good
 internal,blocked,bambi,bad
 internal,corn-theft,bambi,bad
@@ -14,3 +14,4 @@ external,bad-ending,bf-old,bad
 internal,old-insanity,dave-old,bad
 internal,old-corn-theft,bambi-old,bad
 internal,old-maze,bambi-old,bad
+internal,furiosity,dave-angey,good
