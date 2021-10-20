@@ -1282,7 +1282,7 @@ class PlayState extends MusicBeatState
 		super.create();
 	}
 
-	function schoolIntro(?dialogueBox:DialogueBox):Void
+	function schoolIntro(?dialogueBox:DialogueBox, isStart:Bool = true):Void
 	{
 		camFollow.setPosition(boyfriend.getGraphicMidpoint().x - 200, dad.getGraphicMidpoint().y - 10);
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
@@ -1371,8 +1371,17 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			FlxTween.tween(black, {alpha: 0}, 1);
-			new FlxTimer().start(1, function(fuckingSussy:FlxTimer)
+			var stupidBasics:Float = 1;
+			if(isStart)
+			{
+				FlxTween.tween(black, {alpha: 0}, stupidBasics);
+			}
+			else
+			{
+				black.alpha = 0;
+				stupidBasics = 0;
+			}
+			new FlxTimer().start(stupidBasics, function(fuckingSussy:FlxTimer)
 			{
 				if (dialogueBox != null)
 				{
@@ -2715,7 +2724,7 @@ class PlayState extends MusicBeatState
 	{
 		if (isStoryMode)
 		{
-			if (curSong.toLowerCase() == 'corn-theft')
+			if (curSong.toLowerCase() == 'glitch')
 			{
 				canPause = false;
 				FlxG.sound.music.volume = 0;
@@ -2728,7 +2737,7 @@ class PlayState extends MusicBeatState
 				marcello.frames = Paths.getSparrowAtlas('dave/cutscene');
 				marcello.animation.addByPrefix('throw_phone', 'bambi0', 24, false);
 				FlxG.sound.play(Paths.sound('break_phone'), 1, false, null, true);
-				boyfriend.playAnim('singDOWNmiss', true);
+				boyfriend.playAnim('hit', true);
 				STUPDVARIABLETHATSHOULDNTBENEEDED = marcello;
 				new FlxTimer().start(5.5, THROWPHONEMARCELLO);
 			}
@@ -2742,7 +2751,19 @@ class PlayState extends MusicBeatState
 				var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('maze/endDialogue')));
 				doof.scrollFactor.set();
 				doof.finishThing = endSong;
-				schoolIntro(doof);
+				schoolIntro(doof, false);
+			}
+			else if (curSong.toLowerCase() == 'insanity')
+			{
+				canPause = false;
+				FlxG.sound.music.volume = 0;
+				vocals.volume = 0;
+				generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
+				boyfriend.stunned = true;
+				var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('insanity/endDialogue')));
+				doof.scrollFactor.set();
+				doof.finishThing = endSong;
+				schoolIntro(doof, false);
 			}
 			else
 			{
