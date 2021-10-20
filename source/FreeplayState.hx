@@ -49,8 +49,7 @@ class FreeplayState extends MusicBeatState
 
 	var loadingPack:Bool = false;
 
-	var songColors:Array<FlxColor> =
-	[
+	var songColors:Array<FlxColor> = [
         0xFFca1f6f, // GF
         0xFFc885e5, // DAD
         0xFFf9a326, // SPOOKY
@@ -61,6 +60,8 @@ class FreeplayState extends MusicBeatState
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD
 		0xFF00FFFF //SPLIT THE THONNNNN
+
+
     ];
 
 	private var iconArray:Array<HealthIcon> = [];
@@ -147,8 +148,8 @@ class FreeplayState extends MusicBeatState
 		}
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
 		{
-			addWeek(['Old-Insanity', 'Furiosity'], 7, ['dave-old', 'dave-angey']);
-			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Mealie'], 8, ['bambi-old', 'bambi-old', 'bambi-angey']);
+			addWeek(['Old-Insanity'], 7, ['dave-old']);
+			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Furiosity', 'Screwed'], 8, ['bambi-old', 'bambi-old', 'dave-angey', 'bambi-angey']);
 		}
 	}
 
