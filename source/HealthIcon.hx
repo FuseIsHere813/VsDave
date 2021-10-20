@@ -54,6 +54,7 @@ class HealthIcon extends FlxSprite
 		animation.add('bambi-angey', [40, 41], 0, false, isPlayer);
 		animation.add('dave-old', [52, 53], 0, false, isPlayer);
 		animation.add('bambi-bevel', [46, 47], 0, false, isPlayer);
+		animation.add('what-lmao', [34, 35], 0, false, isPlayer);
 		animation.add('tristan-beta', [50, 51], 0, false, isPlayer);
 		animation.play(char);
 		if (char == 'dave-angey' || char == 'bambi-3d' || char == 'senpai' || char == 'bf-pixel' || char == 'spirit' || char == 'senpai-angry')
