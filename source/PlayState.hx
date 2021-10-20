@@ -2341,7 +2341,7 @@ class PlayState extends MusicBeatState
 			vocals.stop();
 			FlxG.sound.music.stop();
 
-			if (curSong.toLowerCase() == 'furiosity' || curSong.toLowerCase() == 'polygonized')
+			if (curSong.toLowerCase() == 'furiosity' || curSong.toLowerCase() == 'polygonized' || curSong.toLowerCase() == 'glitch')
 			{
 				screenshader.shader.uampmul.value[0] = 0;
 				screenshader.Enabled = false;
