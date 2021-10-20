@@ -21,6 +21,8 @@ class DialogueBox extends FlxSpriteGroup
 {
 	var box:FlxSprite;
 
+	var blackScreen:FlxSprite;
+
 	var curCharacter:String = '';
 	var curMod:String = '';
 
@@ -122,7 +124,10 @@ class DialogueBox extends FlxSpriteGroup
 				box = new FlxSprite(-20, 45);
 		}
 
-		
+		blackScreen = new FlxSprite(0, 0).makeGraphic(5000, 5000, FlxColor.BLACK);
+		blackScreen.screenCenter();
+		blackScreen.alpha = 0;
+		add(blackScreen);
 		
 		var hasDialog = false;
 		switch (PlayState.SONG.song.toLowerCase())
@@ -229,8 +234,21 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			case 'senpai' | 'roses' | 'thorns':
 				handSelect = new FlxSprite(FlxG.width * 0.9, FlxG.height * 0.9).loadGraphic(Paths.image('weeb/pixelUI/hand_textbox'));
+				handSelect.setGraphicSize(Std.int(handSelect.width * 6));
+				handSelect.updateHitbox();
 				add(handSelect);
-			case 'house' | 'insanity' | 'supernovae' | 'glitch' |  'blocked' | 'corn-theft' | 'maze' | 'splitathon':
+			case 'furiosity' | 'polygonized':
+				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
+				dropText.font = Paths.font("barcode.ttf");
+				dropText.color = 0xFFFFFFFF;
+				add(dropText);
+			
+				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
+				swagDialogue.font = Paths.font("barcode.ttf");
+				swagDialogue.color = 0xFF000000;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dave_dialogue'), 0.6)];
+				add(swagDialogue);
+			default:
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 				dropText.font = 'Comic Sans MS Bold';
 				dropText.color = 0xFF00137F;
@@ -239,46 +257,9 @@ class DialogueBox extends FlxSpriteGroup
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = 'Comic Sans MS Bold';
 				swagDialogue.color = 0xFF000000;
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
-				add(swagDialogue);
-			case 'furiosity':
-				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-				dropText.font = Paths.font("barcode.ttf");
-				dropText.color = 0xFFFFFFFF;
-				add(dropText);
-				dropText.antialiasing = true;
-			
-				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-				swagDialogue.font = Paths.font("barcode.ttf");
-				swagDialogue.color = 0xFF000000;
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
-				add(swagDialogue);
-			case 'polygonized':
-				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-				dropText.font = Paths.font("barcode.ttf");
-				dropText.color = 0xFFFFFFFF;
-				add(dropText);
-				dropText.antialiasing = true;
-				
-				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-				swagDialogue.font = Paths.font("barcode.ttf");
-				swagDialogue.color = 0xFF000000;
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
-				add(swagDialogue);
-			default:
-				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-				dropText.font = 'Pixel Arial 11 Bold';
-				dropText.color = 0xFFD89494;
-				add(dropText);
-			
-				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-				swagDialogue.font = 'Pixel Arial 11 Bold';
-				swagDialogue.color = 0xFF3F2021;
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dave_dialogue'), 0.6)];
 				add(swagDialogue);
 		}
-		dropText.antialiasing = true;
-		swagDialogue.antialiasing = true;
 		dialogue = new Alphabet(0, 80, "", false, true);
 		// dialogue.x = 90;
 		// add(dialogue);
@@ -450,6 +431,14 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					portraitLeft.shader = shad.shader;
 					portraitRight.shader = shad.shader;
+					box.shader = shad.shader;
+				}
+			case 'undistort':
+				if (curCharacter != 'generic')
+				{
+					portraitLeft.shader = null;
+					portraitRight.shader = null;
+					box.shader = null;
 				}
 			case 'distortbg':
 				var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
@@ -465,10 +454,11 @@ class DialogueBox extends FlxSpriteGroup
 			case 'setfont_normal':
 				dropText.font = 'Comic Sans MS Bold';
 				swagDialogue.font = 'Comic Sans MS Bold';
-
 			case 'setfont_code':
 				dropText.font = Paths.font("barcode.ttf");
 				swagDialogue.font = Paths.font("barcode.ttf");
+			case 'to_black':
+				FlxTween.tween(blackScreen, {alpha:1}, 0.25);
 		}
 	}
 	function getPortrait(character:String):Portrait
@@ -487,7 +477,7 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/dave_insanity';
 						portrait.portraitPrefix = 'dave insanity portrait';
 
-					case 'pre-furiosity LUL':
+					case 'pre-furiosity':
 						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
 						portrait.portraitPrefix = 'dave pre-furiosity portrait';
 
@@ -502,22 +492,38 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/dave_splitathon';
 						portrait.portraitPrefix = 'dave splitathon portrait';
 				}
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dave_dialogue'), 0.6)];
+			case 'insanityEndDave':
+				switch (PlayState.SONG.song.toLowerCase())
+				{
+					default:
+						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
+						portrait.portraitPrefix = 'dave pre-furiosity portrait';
+				}
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dave_dialogue'), 0.6)];
 			case 'bambi':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
 					case 'blocked':
 						portrait.portraitPath = 'dialogue/bambi_blocked';
 						portrait.portraitPrefix = 'bambi blocked portrait';
+					case 'old-corn-theft' | 'old-maze':
+						portrait.portraitPath = 'dialogue/oldFarmBambiPortrait';
+						portrait.portraitPrefix = 'bambienter';
 					case 'corn-theft':
 						portrait.portraitPath = 'dialogue/bambi_corntheft';
 						portrait.portraitPrefix = 'bambi corntheft portrait';
 					case 'maze':
 						portrait.portraitPath = 'dialogue/bambi_maze';
 						portrait.portraitPrefix = 'bambi maze portrait';
+					case 'supernovae' | 'glitch':
+						portrait.portraitPath = 'dialogue/bambi_bevel';
+						portrait.portraitPrefix = 'bambienter';
 					case 'splitathon':
 						portrait.portraitPath = 'dialogue/bambi_splitathon';
 						portrait.portraitPrefix = 'bambi splitathon portrait';
 				}
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('bambi_dialogue'), 0.6)];
 			case 'senpai':
 				portrait.portraitPath = 'weeb/senpaiPortrait';
 				portrait.portraitPrefix = 'Senpai Portrait Enter';
@@ -544,6 +550,7 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPrefix = 'bf insanity & splitathon portrait';
 				}
 				portrait.left = false;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('bf_dialogue'), 0.6)];
 			case 'gf':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
@@ -561,6 +568,15 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPrefix = 'gf splitathon portrait';
 				}
 				portrait.left = false;
+				swagDialogue.sounds = [FlxG.sound.load(Paths.soundRandom('GF_', 1, 4), 0.6)];
+			case 'tristan':
+				switch (PlayState.SONG.song.toLowerCase())
+				{
+					default:
+						portrait.portraitPath = 'dialogue/tristanPortrait';
+						portrait.portraitPrefix = 'tristan portrait';
+				}
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('tristan_dialogue'), 0.6)];
 		}
 		return portrait;
 	}

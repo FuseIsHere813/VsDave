@@ -32,7 +32,7 @@ import Discord.DiscordClient;
 using StringTools;
 /*
 hi cool lil committers looking at this code, 95% of this is my code and I'd appreciate if you didn't steal it without asking for my permission
--vs dave dev T5mpler 
+-vs dave contributor T5mpler 
 i have to put this here just in case you think of doing so
 */
 class CreditsMenuState extends MusicBeatState
@@ -55,22 +55,23 @@ class CreditsMenuState extends MusicBeatState
    var peopleInCredits:Array<Person> = 
    [
       //devs
-     new Person("MoldyGH", CreditsType.Dev, "Creator/Main Dev of Vs Dave & Bambi",
+     new Person("MoldyGH", CreditsType.Dev, "Creator and Main Developer of Vs. Dave & Bambi",
         [
            new Social('youtube', 'https://www.youtube.com/channel/UCHIvkOUDfbMCv-BEIPGgpmA'), 
            new Social('twitter', 'https://twitter.com/moldy_gh'),
            new Social('soundcloud', 'https://soundcloud.com/moldygh')
          ]
       ),
-      new Person("MissingTextureMan101", CreditsType.Dev, "Secondary Dev of Vs Dave & Bambi",
+      new Person("MissingTextureMan101", CreditsType.Dev, "Secondary Developer of Vs. Dave & Bambi",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ'),
             new Social('twitter', 'https://twitter.com/OfficialMTM101')
          ]
       ),
-      new Person("rapparep lol", CreditsType.Dev, "Main Artist of Vs Dave & Bambi",
+      new Person("rapparep lol", CreditsType.Dev, "Main Artist of Vs. Dave & Bambi",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCKfdkmcdFftv4pFWr0Bh45A')
+            new Social('youtube', 'https://www.youtube.com/channel/UCKfdkmcdFftv4pFWr0Bh45A'),
+            new Social('twitter', 'https://twitter.com/rappareplol')
          ]
       ),
       new Person("TheBuilderXD", CreditsType.Dev, "Gamebanana Page Manager, made Tristan sprites, and more",
@@ -79,38 +80,33 @@ class CreditsMenuState extends MusicBeatState
             new Social('twitter', 'https://twitter.com/TheBuilderXD')
          ]
       ),
-      new Person("Erizur", CreditsType.Dev, "Programmer & Made some assets",
+      new Person("Erizur", CreditsType.Dev, "Programmer, Made some assets",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCdCAaQzt9yOGfFM0gJDJ4bQ')
+            new Social('youtube', 'https://www.youtube.com/channel/UCdCAaQzt9yOGfFM0gJDJ4bQ'),
+            new Social('twitter', 'https://twitter.com/am_erizur')
          ]
       ),
-      new Person("T5mpler", CreditsType.Dev, "Dev/Programmer & Supporter",
-         [
-            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
-            new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
-         ]
-      ),
-      new Person("CyndaquilDAC", CreditsType.Dev, "Dev/Programmed some new additions",
+      new Person("CyndaquilDAC", CreditsType.Dev, "Developer",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCTaq4jni33NoaI1TfMXCRcA'),
             new Social('twitter', 'https://twitter.com/CyndaquilDAC')
          ]
       ),
       //contributors
-      new Person("Zmac", CreditsType.Contributor, "Made the Polygonized BG, helped with Intro text, and helped getting the mod into Even More Friday Night Funkin' 2",
+      new Person("T5mpler", CreditsType.Contributor, "Programmer & Supporter",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
+            new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
+         ]
+      ),
+      new Person("Zmac", CreditsType.Contributor, "Made the 3D BG, helped with intro text, and helped getting the mod into EMFNF2",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
          ]
       ),
-      new Person("That Pizza Tower Fan", CreditsType.Contributor, "Creator of the Screwed fantrack", []),
-      new Person("Stats45", CreditsType.Contributor, "Giving moral support",
+      new Person("Stats45", CreditsType.Contributor, "Moral support",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UClb4YjR8i74G-ue2nyiH2DQ')
-         ]
-      ),
-      new Person("Samuran", CreditsType.Contributor, "Help with charting for the Screwed fan song",
-         [
-            new Social('youtube', 'https://www.youtube.com/channel/UCT87mhGyNax_Y3nPo2rnDHg')
          ]
       ),
       //beta testers
@@ -121,12 +117,14 @@ class CreditsMenuState extends MusicBeatState
       ),
       new Person("wildy", CreditsType.BetaTester, "Beta Tester",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCrUhQeLDv7lpZifWfPr4uGQ')
+            new Social('youtube', 'https://www.youtube.com/channel/UCrUhQeLDv7lpZifWfPr4uGQ'),
+            new Social('twitter', 'https://twitter.com/wildythomas1233')
          ]
       ),
       new Person("Billy Bobbo", CreditsType.BetaTester, "Beta Tester",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCWbxUPrpRb3lWFHULkmR0IQ')
+            new Social('youtube', 'https://www.youtube.com/channel/UCWbxUPrpRb3lWFHULkmR0IQ'),
+            new Social('twitter', 'https://twitter.com/BillyBobboLOL')
          ]
       ),
       new Person("mantis", CreditsType.BetaTester, "Beta Tester",
@@ -139,7 +137,11 @@ class CreditsMenuState extends MusicBeatState
             new Social('gamebanana', 'https://gamebanana.com/members/1766076')
          ]
       ),
-      new Person("1irx", CreditsType.BetaTester, "Beta Tester", []),
+      new Person("1irx", CreditsType.BetaTester, "Beta Tester",
+         [
+
+         ]
+      ),
       new Person("KayipKux", CreditsType.BetaTester, "Beta Tester",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCKwsYcSSdpeZOodnPldfn6Q'),
@@ -225,6 +227,8 @@ class CreditsMenuState extends MusicBeatState
             }
             var titleText:FlxText = new FlxText(0, 0, 0, textString);
             titleText.setFormat("Comic Sans MS Bold", 64, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+            titleText.borderSize = 3;
+            titleText.borderQuality = 3;
             titleText.screenCenter(X);
             titleText.scrollFactor.set(0, 1);
 
@@ -235,6 +239,8 @@ class CreditsMenuState extends MusicBeatState
 
          var textItem:FlxText = new FlxText(0, i * 50, 0, currentPerson.name, 32);
          textItem.setFormat(defaultFormat.font, defaultFormat.size, defaultFormat.color, defaultFormat.alignment, defaultFormat.borderStyle, defaultFormat.borderColor);
+         textItem.borderSize = 3;
+         textItem.borderQuality = 3;
          textItem.screenCenter(X);
          textItem.scrollFactor.set(0, 1);
          
