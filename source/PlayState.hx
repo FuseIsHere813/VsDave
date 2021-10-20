@@ -703,7 +703,7 @@ class PlayState extends MusicBeatState
 				curbg = bg;
 			}
 		}
-		else if (SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'splitathon')
+		else if (SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'splitathon' || SONG.song.toLowerCase() == 'mealie')
 		{
 			defaultCamZoom = 0.9;
 			curStage = SONG.song.toLowerCase() == 'splitathon' ? 'bambiFarmNight' : 'bambiFarm';
@@ -2370,9 +2370,7 @@ class PlayState extends MusicBeatState
 			{
 				if (isStoryMode)
 				{
-					if (SONG.song.toLowerCase() == "blocked"
-						|| SONG.song.toLowerCase() == "corn-theft"
-						|| SONG.song.toLowerCase() == "maze")
+					if (SONG.song.toLowerCase() == "blocked" || SONG.song.toLowerCase() == "corn-theft" || SONG.song.toLowerCase() == "maze")
 					{
 						FlxG.openURL("https://www.youtube.com/watch?v=eTJOdgDzD64");
 						System.exit(0);
