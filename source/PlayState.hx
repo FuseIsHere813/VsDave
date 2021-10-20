@@ -69,6 +69,8 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 
+	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night'];
+
 	public var stupidx:Float = 0;
 	public var stupidy:Float = 0; // stupid velocities for cutscene
 	public var updatevels:Bool = false;
@@ -222,7 +224,7 @@ class PlayState extends MusicBeatState
 		{
 			case 'dave' | 'dave-old':
 				iconRPC = 'icon_dave';
-			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old':
+			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
 				iconRPC = 'icon_bambi';
 			default:
 				iconRPC = 'icon_none';
@@ -689,8 +691,8 @@ class PlayState extends MusicBeatState
 			UsingNewCam = true;
 			if (SONG.song.toLowerCase() == 'insanity')
 			{
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
-				bg.antialiasing = true;
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky_insanity'));
+				bg.alpha = 0.75;
 				bg.active = true;
 				bg.visible = false;
 				add(bg);
@@ -703,7 +705,7 @@ class PlayState extends MusicBeatState
 				curbg = bg;
 			}
 		}
-		else if (SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'splitathon')
+		else if (SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'mealie' || SONG.song.toLowerCase() == 'splitathon')
 		{
 			defaultCamZoom = 0.9;
 			curStage = SONG.song.toLowerCase() == 'splitathon' ? 'bambiFarmNight' : 'bambiFarm';
@@ -975,7 +977,7 @@ class PlayState extends MusicBeatState
 				{
 					dad.y += 400;
 				}
-			case 'bambi-old':
+			case 'bambi-old' | 'bambi-bevel' | 'what-lmao':
 				{
 					dad.y += 400;
 				}
@@ -1047,12 +1049,12 @@ class PlayState extends MusicBeatState
 				boyfriend.y += 220;
 				gf.x += 180;
 				gf.y += 300;
-			case 'bambiFarmNight':
-				{
-					dad.color = 0xFF878787;
-					gf.color = 0xFF878787;
-					boyfriend.color = 0xFF878787;
-				}
+		}
+		if(darkLevels.contains(curStage))
+		{
+			dad.color = 0xFF878787;
+			gf.color = 0xFF878787;
+			boyfriend.color = 0xFF878787;
 		}
 
 		add(gf);
@@ -1136,11 +1138,13 @@ class PlayState extends MusicBeatState
 		switch (SONG.song.toLowerCase())
 		{
 			case 'supernovae':
-				credits = 'Original Song made by ArchWk';
+				credits = 'Original Song made by ArchWk!';
 			case 'glitch':
-				credits = 'Original Song made by The Boneyard';
+				credits = 'Original Song made by The Boneyard!';
+			case 'mealie':
+				credits = 'Original Song made by Alexander Cooper 19!';
 			case 'unfairness':
-				credits = 'Ghost Noting is forced OFF!';
+				credits = 'Ghost tapping is forced off!';
 			default:
 				credits = '';
 		}
@@ -1154,7 +1158,7 @@ class PlayState extends MusicBeatState
 		var kadeEngineWatermark = new FlxText(4, textYPos, 0,
 		SONG.song
 		+ " "
-		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Unnerfed" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "FINALE")
+		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Legacy" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "Finale")
 		+ " - Dave Engine (KE 1.2)", 16);
 		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
@@ -1179,7 +1183,7 @@ class PlayState extends MusicBeatState
 		if (curSong.toLowerCase() == 'insanity')
 		{
 			preload('dave/redsky');
-			preload('dave/redsky_fix_attempt');
+			preload('dave/redsky_insanity');
 		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 50, 0, "", 20);
@@ -2061,7 +2065,8 @@ class PlayState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('static'), 0.1);
 					dad.visible = false;
 					dadmirror.visible = true;
-					curbg.loadGraphic(Paths.image('dave/redsky_fix_attempt'));
+					curbg.loadGraphic(Paths.image('dave/redsky'));
+					curbg.alpha = 1;
 					curbg.visible = true;
 				case 1180:
 					dad.visible = true;
@@ -3471,7 +3476,7 @@ class PlayState extends MusicBeatState
 			else
 				health += 0.004;
 
-			if (curStage != "bambiFarmNight")
+			if (!darkLevels.contains(curStage))
 			{
 				boyfriend.color = FlxColor.WHITE;
 			}
@@ -3763,7 +3768,7 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
 		{
 			boyfriend.playAnim('idle');
-			if (curStage == "bambiFarmNight")
+			if (darkLevels.contains(curStage))
 			{
 				boyfriend.color = 0xFF878787;
 			}

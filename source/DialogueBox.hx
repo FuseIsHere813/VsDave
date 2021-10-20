@@ -246,7 +246,7 @@ class DialogueBox extends FlxSpriteGroup
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = Paths.font("barcode.ttf");
 				swagDialogue.color = 0xFF000000;
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dave_dialogue'), 0.6)];
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
 				add(swagDialogue);
 			default:
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
@@ -257,7 +257,7 @@ class DialogueBox extends FlxSpriteGroup
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
 				swagDialogue.font = 'Comic Sans MS Bold';
 				swagDialogue.color = 0xFF000000;
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dave_dialogue'), 0.6)];
+				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
 				add(swagDialogue);
 		}
 		dialogue = new Alphabet(0, 80, "", false, true);
@@ -492,7 +492,6 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/dave_splitathon';
 						portrait.portraitPrefix = 'dave splitathon portrait';
 				}
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dave_dialogue'), 0.6)];
 			case 'insanityEndDave':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
@@ -500,7 +499,6 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
 						portrait.portraitPrefix = 'dave pre-furiosity portrait';
 				}
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('dave_dialogue'), 0.6)];
 			case 'bambi':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
@@ -523,7 +521,6 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/bambi_splitathon';
 						portrait.portraitPrefix = 'bambi splitathon portrait';
 				}
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('bambi_dialogue'), 0.6)];
 			case 'senpai':
 				portrait.portraitPath = 'weeb/senpaiPortrait';
 				portrait.portraitPrefix = 'Senpai Portrait Enter';
@@ -550,7 +547,6 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPrefix = 'bf insanity & splitathon portrait';
 				}
 				portrait.left = false;
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('bf_dialogue'), 0.6)];
 			case 'gf':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
@@ -568,7 +564,6 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPrefix = 'gf splitathon portrait';
 				}
 				portrait.left = false;
-				swagDialogue.sounds = [FlxG.sound.load(Paths.soundRandom('GF_', 1, 4), 0.6)];
 			case 'tristan':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
@@ -576,7 +571,6 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/tristanPortrait';
 						portrait.portraitPrefix = 'tristan portrait';
 				}
-				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('tristan_dialogue'), 0.6)];
 		}
 		return portrait;
 	}
