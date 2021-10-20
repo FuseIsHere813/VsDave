@@ -2279,7 +2279,7 @@ class PlayState extends MusicBeatState
 						spr.y -= Math.sin(elapsedtime) * Math.random();
 						spr.y += Math.sin(elapsedtime) * 1.4;
 					});
-					camZooming = true;
+					camZooming = true;	
 				case 159:
 					playerStrums.forEach(function(spr:FlxSprite)
 					{
