@@ -149,7 +149,7 @@ class FreeplayState extends MusicBeatState
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
 		{
 			addWeek(['Old-Insanity'], 7, ['dave-old']);
-			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Furiosity', 'Screwed'], 8, ['bambi-old', 'bambi-old', 'dave-angey', 'bambi-angey']);
+			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Furiosity', 'Mealie'], 8, ['bambi-old', 'bambi-old', 'dave-angey', 'bambi-angey']);
 		}
 	}
 
