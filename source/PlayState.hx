@@ -297,7 +297,7 @@ class PlayState extends MusicBeatState
 		switch (SONG.song.toLowerCase())
 		{
 			case 'tutorial':
-				dialogue = ["Hey you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
+				dialogue = ["Hey, you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
 			case 'bopeebo':
 				dialogue = [
 					'HEY!',
@@ -306,10 +306,10 @@ class PlayState extends MusicBeatState
 					"You're going to have to go \nthrough ME first!"
 				];
 			case 'fresh':
-				dialogue = ["Not too shabby boy.", ""];
+				dialogue = ["Not too shabby, boy."];
 			case 'dadbattle':
 				dialogue = [
-					"gah you think you're hot stuff?",
+					"Gah, you think you're hot stuff?",
 					"If you can beat me here...",
 					"Only then I will even CONSIDER letting you\ndate my daughter!"
 				];
@@ -703,7 +703,7 @@ class PlayState extends MusicBeatState
 				curbg = bg;
 			}
 		}
-		else if (SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'screwed' || SONG.song.toLowerCase() == 'splitathon')
+		else if (SONG.song.toLowerCase() == 'blocked' || SONG.song.toLowerCase() == 'corn-theft' || SONG.song.toLowerCase() == 'maze' || SONG.song.toLowerCase() == 'old-corn-theft' || SONG.song.toLowerCase() == 'old-maze' || SONG.song.toLowerCase() == 'splitathon')
 		{
 			defaultCamZoom = 0.9;
 			curStage = SONG.song.toLowerCase() == 'splitathon' ? 'bambiFarmNight' : 'bambiFarm';
@@ -1139,8 +1139,6 @@ class PlayState extends MusicBeatState
 				credits = 'Original Song made by ArchWk';
 			case 'glitch':
 				credits = 'Original Song made by The Boneyard';
-			case 'screwed':
-				credits = 'Original Song made by That Pizza Tower Fan';
 			case 'unfairness':
 				credits = 'Ghost Noting is forced OFF!';
 			default:

@@ -450,6 +450,14 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					portraitLeft.shader = shad.shader;
 					portraitRight.shader = shad.shader;
+					box.shader = shad.shader;
+				}
+			case 'undistort':
+				if (curCharacter != 'generic')
+				{
+					portraitLeft.shader = null;
+					portraitRight.shader = null;
+					box.shader = null;
 				}
 			case 'distortbg':
 				var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
@@ -465,7 +473,6 @@ class DialogueBox extends FlxSpriteGroup
 			case 'setfont_normal':
 				dropText.font = 'Comic Sans MS Bold';
 				swagDialogue.font = 'Comic Sans MS Bold';
-
 			case 'setfont_code':
 				dropText.font = Paths.font("barcode.ttf");
 				swagDialogue.font = Paths.font("barcode.ttf");
@@ -487,7 +494,7 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/dave_insanity';
 						portrait.portraitPrefix = 'dave insanity portrait';
 
-					case 'pre-furiosity LUL':
+					case 'pre-furiosity':
 						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
 						portrait.portraitPrefix = 'dave pre-furiosity portrait';
 
@@ -508,12 +515,18 @@ class DialogueBox extends FlxSpriteGroup
 					case 'blocked':
 						portrait.portraitPath = 'dialogue/bambi_blocked';
 						portrait.portraitPrefix = 'bambi blocked portrait';
+					case 'old-corn-theft' | 'old-maze':
+						portrait.portraitPath = 'dialogue/oldFarmBambiPortrait';
+						portrait.portraitPrefix = 'bambienter';
 					case 'corn-theft':
 						portrait.portraitPath = 'dialogue/bambi_corntheft';
 						portrait.portraitPrefix = 'bambi corntheft portrait';
 					case 'maze':
 						portrait.portraitPath = 'dialogue/bambi_maze';
 						portrait.portraitPrefix = 'bambi maze portrait';
+					case 'supernovae' | 'glitch':
+						portrait.portraitPath = 'dialogue/bambi_bevel';
+						portrait.portraitPrefix = 'bambienter';
 					case 'splitathon':
 						portrait.portraitPath = 'dialogue/bambi_splitathon';
 						portrait.portraitPrefix = 'bambi splitathon portrait';
@@ -561,6 +574,13 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPrefix = 'gf splitathon portrait';
 				}
 				portrait.left = false;
+			case 'tristan':
+				switch (PlayState.SONG.song.toLowerCase())
+				{
+					default:
+						portrait.portraitPath = 'dialogue/tristanPortrait';
+						portrait.portraitPrefix = 'tristan portrait';
+				}
 		}
 		return portrait;
 	}
