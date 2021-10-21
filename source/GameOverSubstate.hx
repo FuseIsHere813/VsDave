@@ -29,6 +29,10 @@ class GameOverSubstate extends MusicBeatSubstate
 		{
 			char = "bf-pixel-dead";
 		}
+		if (char == "what-lmao")
+		{
+			char = "bambi-bevel";
+		}
 		if (char == "bf-car")
 		{
 			char = "bf";
@@ -39,6 +43,10 @@ class GameOverSubstate extends MusicBeatSubstate
 		Conductor.songPosition = 0;
 
 		bf = new Boyfriend(x, y, char);
+		if(bf.animation.getByName('firstDeath') == null)
+		{
+			bf = new Boyfriend(x, y, "bf");
+		}
 		add(bf);
 
 		camFollow = new FlxObject(bf.getGraphicMidpoint().x, bf.getGraphicMidpoint().y, 1, 1);

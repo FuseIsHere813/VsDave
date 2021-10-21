@@ -891,10 +891,14 @@ class PlayState extends MusicBeatState
 			charoffsetx += 300;
 			charoffsety += 300;
 		}
+		if(formoverride == "bf-christmas")
+		{
+			gfVersion = 'gf-christmas';
+		}
 		gf = new Character(400 + charoffsetx, 130 + charoffsety, gfVersion);
 		gf.scrollFactor.set(0.95, 0.95);
 
-		if (!(formoverride == "bf" || formoverride == "none" || formoverride == "bf-pixel") && SONG.song != "Tutorial")
+		if (!(formoverride == "bf" || formoverride == "none" || formoverride == "bf-pixel" || formoverride == "bf-christmas") && SONG.song != "Tutorial")
 		{
 			gf.visible = false;
 		}
@@ -947,17 +951,12 @@ class PlayState extends MusicBeatState
 				dad.x -= 150;
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'dave' | 'dave-old':
+			case 'dave' | 'dave-old' | 'dave-annoyed':
 				{
 					dad.y += 270;
 					dad.x += 150;
 				}
-			case 'dave-annoyed':
-				{
-					dad.y += 270;
-					dad.x += 150;
-				}
-			case 'dave-angey':
+			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 				{
 					dad.y += 0;
 					dad.x += 150;
@@ -968,11 +967,7 @@ class PlayState extends MusicBeatState
 					dad.y -= 200;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
-			case 'bambi':
-				{
-					dad.y += 400;
-				}
-			case 'bambi-old' | 'bambi-bevel' | 'what-lmao':
+			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
 				{
 					dad.y += 400;
 				}
@@ -2682,7 +2677,7 @@ class PlayState extends MusicBeatState
 				case 'senpai-angry':
 					camFollow.y = dad.getMidpoint().y - 430;
 					camFollow.x = dad.getMidpoint().x - 100;
-				case 'dave-angey' | 'bambi-3d':
+				case 'dave-angey' | 'bambi-3d' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 					camFollow.y = dad.getMidpoint().y;
 			}
 
@@ -2711,6 +2706,19 @@ class PlayState extends MusicBeatState
 				case 'schoolEvil':
 					camFollow.x = boyfriend.getMidpoint().x - 200;
 					camFollow.y = boyfriend.getMidpoint().y - 200;
+			}
+			switch(boyfriend.curCharacter)
+			{
+				case 'mom':
+					camFollow.y = boyfriend.getMidpoint().y;
+				case 'senpai':
+					camFollow.y = boyfriend.getMidpoint().y - 430;
+					camFollow.x = boyfriend.getMidpoint().x - 100;
+				case 'senpai-angry':
+					camFollow.y = boyfriend.getMidpoint().y - 430;
+					camFollow.x = boyfriend.getMidpoint().x - 100;
+				case 'dave-angey' | 'bambi-3d' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
+					camFollow.y = boyfriend.getMidpoint().y;
 			}
 
 			if (SONG.song.toLowerCase() == 'tutorial')
@@ -3632,6 +3640,21 @@ class PlayState extends MusicBeatState
 						gf.canDance = false;
 						boyfriend.playAnim('hey', true);
 						gf.playAnim('cheer', true);
+						FlxTween.tween(dad, {alpha: 0}, 1);
+				}
+			case 'polygonized':
+				switch(curStep)
+				{
+					case 1024 | 1312 | 1424 | 1552 | 1664:
+						shakeCam = true;
+					case 1152 | 1408 | 1472 | 1600 | 2048 | 2176:
+						shakeCam = false;
+					case 2432:
+						boyfriend.canDance = false;
+						gf.canDance = false;
+						boyfriend.playAnim('hey', true);
+						gf.playAnim('cheer', true);
+						FlxTween.tween(dad, {alpha: 0}, 1);
 				}
 			case 'glitch':
 				switch (curStep)
