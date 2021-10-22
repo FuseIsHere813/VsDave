@@ -33,14 +33,16 @@ class EndingState extends FlxState
 	{
 		super.update(elapsed);
 		
-		if (FlxG.keys.pressed.ENTER){
+		if (FlxG.keys.pressed.ENTER)
+		{
 			endIt();
 		}
 		
 	}
 	
 	
-	public function endIt(){
+	public function endIt()
+	{
 		trace("ENDING");
 		FlxG.switchState(new MainMenuState());
 		FlxG.sound.playMusic(Paths.music('freakyMenu'));

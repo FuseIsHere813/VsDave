@@ -125,9 +125,9 @@ class TitleState extends MusicBeatState
 			diamond.destroyOnNoUse = false;
 
 			FlxTransitionableState.defaultTransIn = new TransitionData(FADE, FlxColor.BLACK, 1, new FlxPoint(-1, 0), {asset: diamond, width: 32, height: 32},
-				new FlxRect(-200, -200, FlxG.width * 1.4, FlxG.height * 1.4));
+				new FlxRect(-200, -200, FlxG.width * 1.42, FlxG.height * 4.2));
 			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.7, new FlxPoint(1, 0),
-				{asset: diamond, width: 32, height: 32}, new FlxRect(-200, -200, FlxG.width * 1.4, FlxG.height * 1.4));
+				{asset: diamond, width: 32, height: 32}, new FlxRect(-200, -200, FlxG.width * 1.42, FlxG.height * 4.2));
 
 			transIn = FlxTransitionableState.defaultTransIn;
 			transOut = FlxTransitionableState.defaultTransOut;
@@ -367,9 +367,9 @@ class TitleState extends MusicBeatState
 			case 11:
 				deleteCoolText();
 			case 12:
-				addMoreText('VS.');
+				addMoreText("Friday Night Funkin'");
 			case 13:
-				addMoreText('Dave and Bambi');
+				addMoreText('VS. Dave and Bambi');
 			case 14:
 				addMoreText('Mod');
 			case 15:

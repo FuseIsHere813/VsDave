@@ -305,7 +305,13 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			remove(dialogue);
 			
-			FlxG.sound.play(Paths.sound('clickText'), 0.8);
+			switch (PlayState.SONG.song.toLowerCase())
+			{
+				case 'senpai' | 'thorns' | 'roses':
+					FlxG.sound.play(Paths.sound('clickText'), 0.8);
+				default:
+					FlxG.sound.play(Paths.sound('textclickmodern'), 0.8);
+			}
 
 			if (dialogueList[1] == null && dialogueList[0] != null)
 			{
@@ -313,7 +319,6 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					isEnding = true;
 						
-					
 					switch (PlayState.SONG.song.toLowerCase())
 					{
 						case 'senpai' | 'thorns' | 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'glitch' | 'blocked':
@@ -330,7 +335,7 @@ class DialogueBox extends FlxSpriteGroup
 									portraitRight.visible = false;
 									swagDialogue.alpha -= 1 / 5;
 									dropText.alpha = swagDialogue.alpha;
-								}, 5);
+								},5);
 							default:
 								FlxTween.tween(box, {alpha: 0}, 1.2);
 								FlxTween.tween(bgFade, {alpha: 0}, 1.2);

@@ -995,8 +995,6 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWNmiss', 'MARCELLO NOTE DOWN MISS', 24, false);
 				animation.addByPrefix('hey', 'MARCELLO HEY', 24, false);
 
-				animation.addByPrefix('firstDeath', "MARCELLO dies", 24, false);
-				animation.addByPrefix('deathLoop', "MARCELLO Dead Loop", 24, true);
 				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
 				animation.addByPrefix('scared', 'MARCELLO idle shaking', 24);
 				animation.addByPrefix('hit', 'MARCELLO hit', 24, false);
@@ -1011,8 +1009,6 @@ class Character extends FlxSprite
 				addOffset("singLEFTmiss", 12, -6);
 				addOffset("singDOWNmiss", -10, -50);
 				addOffset("hey", 3, 21);
-				addOffset('firstDeath', 37, 11);
-				addOffset('deathLoop', 37, 5);
 				addOffset('scared', -24, -10);
 
 				playAnim('idle');
