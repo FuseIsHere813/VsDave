@@ -93,7 +93,7 @@ class CreditsMenuState extends MusicBeatState
          ]
       ),
       //contributors
-      new Person("T5mpler", CreditsType.Dev, "Programmer most of the features in 2.0",
+      new Person("T5mpler", CreditsType.Dev, "Programmer, features in 2.0",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
             new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
