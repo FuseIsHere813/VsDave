@@ -279,7 +279,7 @@ class CharacterSelectState extends MusicBeatState
 		char.y = FlxG.height / 2;
 		switch (char.curCharacter)
 		{
-			case 'dave-angey':
+			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 				char.y -= 225;
 		}
 		add(char);
