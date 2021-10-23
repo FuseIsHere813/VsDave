@@ -1925,19 +1925,19 @@ class PlayState extends MusicBeatState
 		//welcome to 3d sinning avenue
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()))
 		{
-			dad.y += (Math.sin(elapsedtime) * 0.5);
+			dad.y += (Math.sin(elapsedtime));
 		}
 		if(funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()))
 		{
-			boyfriend.y += (Math.sin(elapsedtime) * 0.5);
+			boyfriend.y += (Math.sin(elapsedtime));
 		}
 		if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
 		{
-			dadmirror.y += (Math.sin(elapsedtime) * 0.5);
+			dadmirror.y += (Math.sin(elapsedtime));
 		}
 		if(funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()))
 		{
-			gf.y += (Math.sin(elapsedtime) * 0.5);
+			gf.y += (Math.sin(elapsedtime));
 		}
 
 		if (SONG.song.toLowerCase() == 'cheating') // fuck you
