@@ -1130,34 +1130,47 @@ class PlayState extends MusicBeatState
 			case 'supernovae':
 				credits = 'Original Song made by ArchWk!';
 			case 'glitch':
-				credits = 'Original Song made by The Boneyard!';
+				credits = 'Original Song made by DeadShadow and PixelGH!';
 			case 'mealie':
 				credits = 'Original Song made by Alexander Cooper 19!';
 			case 'unfairness':
-				credits = 'Ghost tapping is forced off!';
+				credits = 'Ghost tapping is forced off! Screw you!';
 			default:
 				credits = '';
+		}
+		var randomThingy:Int = FlxG.random.int(0, 2);
+		var engineName:String = 'stupid';
+		switch(randomThingy)
+	    {
+			case 0:
+				engineName = 'Dave ';
+			case 1:
+				engineName = 'Bambi ';
+			case 2:
+				engineName = 'Tristan ';
 		}
 		var creditsText:Bool = credits != '';
 		var textYPos:Float = healthBarBG.y + 50;
 		if (creditsText)
 		{
-			textYPos = healthBarBG.y + 30;
+			textYPos = healthBarBG.y - 30;
 		}
 		// Add Kade Engine watermark
 		var kadeEngineWatermark = new FlxText(4, textYPos, 0,
 		SONG.song
 		+ " "
 		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Legacy" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "Finale")
-		+ " - Dave Engine (KE 1.2)", 16);
-		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		+ " - " + engineName + "Engine (KE 1.2)", 16);
+		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
+		kadeEngineWatermark.borderSize = 1.5;
 		add(kadeEngineWatermark);
 		if (creditsText)
 		{
 			var creditsWatermark = new FlxText(4, healthBarBG.y + 50, 0, credits, 16);
-			creditsWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			creditsWatermark.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			creditsWatermark.scrollFactor.set();
+			creditsWatermark.borderSize = 1.5;
 			add(creditsWatermark);
 			creditsWatermark.cameras = [camHUD];
 		}
@@ -1179,8 +1192,9 @@ class PlayState extends MusicBeatState
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 50, 0, "", 20);
 		if (!FlxG.save.data.accuracyDisplay)
 			scoreTxt.x = healthBarBG.x + healthBarBG.width / 2;
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		scoreTxt.scrollFactor.set();
+		scoreTxt.borderSize = 1.5;
 		add(scoreTxt);
 
 		iconP1 = new HealthIcon((formoverride == "none" || formoverride == "bf") ? SONG.player1 : formoverride, true);
