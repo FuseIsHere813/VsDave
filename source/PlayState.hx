@@ -2182,7 +2182,7 @@ class PlayState extends MusicBeatState
 			FlxG.switchState(new AnimationDebug(dad.curCharacter));
 		if (FlxG.keys.justPressed.TWO)
 			FlxG.switchState(new AnimationDebug(boyfriend.curCharacter));
-		if (FlxG.keys.justPressed.ONE)
+		if (FlxG.keys.justPressed.THREE)
 			FlxG.switchState(new AnimationDebug(gf.curCharacter));
 		if (startingSong)
 		{
@@ -2349,8 +2349,15 @@ class PlayState extends MusicBeatState
 
 			if (!shakeCam)
 			{
-				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
-					.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
+				var character:String = '';
+				switch (formoverride)
+				{
+					case 'bf' | 'none':
+						character = 'bf-death';
+					default:
+						character = formoverride;
+				}
+				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y, character));
 
 					#if desktop
 					DiscordClient.changePresence("GAME OVER -- "
@@ -2370,22 +2377,27 @@ class PlayState extends MusicBeatState
 			{
 				if (isStoryMode)
 				{
-					if (SONG.song.toLowerCase() == "blocked"
-						|| SONG.song.toLowerCase() == "corn-theft"
-						|| SONG.song.toLowerCase() == "maze")
+					switch (SONG.song.toLowerCase())
 					{
-						FlxG.openURL("https://www.youtube.com/watch?v=eTJOdgDzD64");
-						System.exit(0);
-					}
-					else
-					{
-						FlxG.switchState(new EndingState('rtxx_ending', 'badEnding'));
+						case 'blocked' | 'corn-theft' | 'maze':
+							FlxG.openURL("https://www.youtube.com/watch?v=eTJOdgDzD64");
+							System.exit(0);
+						default:
+							FlxG.switchState(new EndingState('rtxx_ending', 'badEnding'));
 					}
 				}
 				else
 				{
-					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
-						.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
+					
+					var character:String = '';
+					switch (formoverride)
+					{
+						case 'bf' | 'none':
+							character = 'bf-death';
+						default:
+							character = formoverride;
+					}
+					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y, character));
 
 						#if desktop
 						DiscordClient.changePresence("GAME OVER -- "
@@ -2720,71 +2732,14 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function NEVERMARCELLOAGAIN():Void
-	{
-		if (isStoryMode)
-		{
-			if (curSong.toLowerCase() == 'glitch')
-			{
-				canPause = false;
-				FlxG.sound.music.volume = 0;
-				vocals.volume = 0;
-				var marcello:FlxSprite = new FlxSprite(dad.x - 170, dad.y);
-				marcello.flipX = true;
-				add(marcello);
-				dad.visible = false;
-				boyfriend.stunned = true;
-				marcello.frames = Paths.getSparrowAtlas('dave/cutscene');
-				marcello.animation.addByPrefix('throw_phone', 'bambi0', 24, false);
-				FlxG.sound.play(Paths.sound('break_phone'), 1, false, null, true);
-				boyfriend.playAnim('hit', true);
-				STUPDVARIABLETHATSHOULDNTBENEEDED = marcello;
-				new FlxTimer().start(5.5, THROWPHONEMARCELLO);
-			}
-			else if (curSong.toLowerCase() == 'maze')
-			{
-				canPause = false;
-				FlxG.sound.music.volume = 0;
-				vocals.volume = 0;
-				generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
-				boyfriend.stunned = true;
-				var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('maze/endDialogue')));
-				doof.scrollFactor.set();
-				doof.finishThing = endSong;
-				schoolIntro(doof, false);
-			}
-			else if (curSong.toLowerCase() == 'insanity')
-			{
-				canPause = false;
-				FlxG.sound.music.volume = 0;
-				vocals.volume = 0;
-				generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
-				boyfriend.stunned = true;
-				var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('insanity/endDialogue')));
-				doof.scrollFactor.set();
-				doof.finishThing = endSong;
-				schoolIntro(doof, false);
-			}
-			else
-			{
-				endSong();
-			}
-		}
-		else
-		{
-			endSong();
-		}
-	}
 
 	function THROWPHONEMARCELLO(e:FlxTimer = null):Void
 	{
 		STUPDVARIABLETHATSHOULDNTBENEEDED.animation.play("throw_phone");
-		new FlxTimer().start(5.5, endSongtimer);
-	}
-
-	function endSongtimer(e:FlxTimer = null):Void
-	{
-		endSong();
+		new FlxTimer().start(5.5, function(timer:FlxTimer)
+		{ 
+			FlxG.switchState(new FreeplayState());
+		});
 	}
 
 	function endSong():Void
@@ -2839,31 +2794,43 @@ class PlayState extends MusicBeatState
 
 			if (storyPlaylist.length <= 0)
 			{
-				if (curSong.toLowerCase() == 'polygonized')
+				switch (curSong.toLowerCase())
 				{
-					FlxG.save.data.tristanProgress = "unlocked";
-					if (health >= 0.1)
-					{
-						FlxG.save.data.unlockedcharacters[2] = true;
-						if (storyDifficulty == 3)
+					case 'polygonized':
+						FlxG.save.data.tristanProgress = "unlocked";
+						if (health >= 0.1)
 						{
-							FlxG.save.data.unlockedcharacters[5] = true;
+							FlxG.save.data.unlockedcharacters[2] = true;
+							if (storyDifficulty == 3)
+							{
+								FlxG.save.data.unlockedcharacters[5] = true;
+							}
+							FlxG.switchState(new EndingState('goodEnding', 'goodEnding'));
 						}
-						FlxG.switchState(new EndingState('goodEnding', 'goodEnding'));
-					}
-					else if (health < 0.1)
-					{
-						FlxG.save.data.unlockedcharacters[4] = true;
-						FlxG.switchState(new EndingState('vomit_ending', 'badEnding'));
-					}
-					else
-					{
-						FlxG.switchState(new EndingState('badEnding', 'badEnding'));
-					}
-				}
-				else
-				{
-					FlxG.switchState(new StoryMenuState());
+						else if (health < 0.1)
+						{
+							FlxG.save.data.unlockedcharacters[4] = true;
+							FlxG.switchState(new EndingState('vomit_ending', 'badEnding'));
+						}
+						else
+						{
+							FlxG.switchState(new EndingState('badEnding', 'badEnding'));
+						}
+					case 'maze':
+						canPause = false;
+						FlxG.sound.music.volume = 0;
+						vocals.volume = 0;
+						generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
+						boyfriend.stunned = true;
+						var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('maze/endDialogue')));
+						doof.scrollFactor.set();
+						doof.finishThing = function()
+						{
+							FlxG.switchState(new StoryMenuState());
+						};
+						schoolIntro(doof, false);
+					default:
+						FlxG.switchState(new StoryMenuState());
 				}
 				transIn = FlxTransitionableState.defaultTransIn;
 				transOut = FlxTransitionableState.defaultTransOut;
@@ -2882,56 +2849,82 @@ class PlayState extends MusicBeatState
 				FlxG.save.flush();
 			}
 			else
-			{
-				var difficulty:String = "";
-
-				if (storyDifficulty == 0)
-					difficulty = '-easy';
-
-				if (storyDifficulty == 2)
-					difficulty = '-hard';
-
-				if (storyDifficulty == 3)
-					difficulty = '-unnerf';
-
-				trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
-
-				if (SONG.song.toLowerCase() == 'eggnog')
+			{	
+				switch (SONG.song.toLowerCase())
 				{
-					var blackShit:FlxSprite = new FlxSprite(-FlxG.width * FlxG.camera.zoom,
-						-FlxG.height * FlxG.camera.zoom).makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
-					blackShit.scrollFactor.set();
-					add(blackShit);
-					camHUD.visible = false;
-
-					FlxG.sound.play(Paths.sound('Lights_Shut_off'));
-				}
-
-				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
-				prevCamFollow = camFollow;
-
-				PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
-				FlxG.sound.music.stop();
-				
-				switch (curSong.toLowerCase())
-				{
-					case 'corn-theft':
-						LoadingState.loadAndSwitchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()), false);
+					case 'insanity':
+						canPause = false;
+						FlxG.sound.music.volume = 0;
+						vocals.volume = 0;
+						generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
+						boyfriend.stunned = true;
+						var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('insanity/endDialogue')));
+						doof.scrollFactor.set();
+						doof.finishThing = nextSong;
+						schoolIntro(doof, false);
 					default:
-						LoadingState.loadAndSwitchState(new PlayState());
+						nextSong();
 				}
 			}
 		}
 		else
 		{
-			trace('WENT BACK TO FREEPLAY??');
-			FlxG.switchState(new FreeplayState());
+			switch (SONG.song.toLowerCase())
+			{
+				case 'glitch':
+					canPause = false;
+					FlxG.sound.music.volume = 0;
+					vocals.volume = 0;
+					var marcello:FlxSprite = new FlxSprite(dad.x - 170, dad.y);
+					marcello.flipX = true;
+					add(marcello);
+					dad.visible = false;
+					boyfriend.stunned = true;
+					marcello.frames = Paths.getSparrowAtlas('dave/cutscene');
+					marcello.animation.addByPrefix('throw_phone', 'bambi0', 24, false);
+					FlxG.sound.play(Paths.sound('break_phone'), 1, false, null, true);
+					boyfriend.playAnim('hit', true);
+					STUPDVARIABLETHATSHOULDNTBENEEDED = marcello;
+					new FlxTimer().start(5.5, THROWPHONEMARCELLO);
+				default:
+					FlxG.switchState(new FreeplayState());
+			}
+			
 		}
 	}
 
 	var endingSong:Bool = false;
 
+	function nextSong()
+	{
+		var difficulty:String = "";
+
+		if (storyDifficulty == 0)
+			difficulty = '-easy';
+
+		if (storyDifficulty == 2)
+			difficulty = '-hard';
+
+		if (storyDifficulty == 3)
+			difficulty = '-unnerf';
+
+		trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
+
+		FlxTransitionableState.skipNextTransIn = true;
+		FlxTransitionableState.skipNextTransOut = true;
+		prevCamFollow = camFollow;
+
+		PlayState.SONG = Song.loadFromJson(PlayState.storyPlaylist[0].toLowerCase() + difficulty, PlayState.storyPlaylist[0]);
+		FlxG.sound.music.stop();
+		
+		switch (curSong.toLowerCase())
+		{
+			case 'corn-theft':
+				LoadingState.loadAndSwitchState(new VideoState('assets/videos/mazeecutscenee.webm', new PlayState()), false);
+			default:
+				LoadingState.loadAndSwitchState(new PlayState());
+		}
+	}
 	private function popUpScore(strumtime:Float, notedata:Int):Void
 	{
 		var noteDiff:Float = Math.abs(strumtime - Conductor.songPosition);

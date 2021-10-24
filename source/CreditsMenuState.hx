@@ -32,7 +32,7 @@ import Discord.DiscordClient;
 using StringTools;
 /*
 hi cool lil committers looking at this code, 95% of this is my code and I'd appreciate if you didn't steal it without asking for my permission
--vs dave contributor T5mpler 
+-vs dave dev T5mpler 
 i have to put this here just in case you think of doing so
 */
 class CreditsMenuState extends MusicBeatState
@@ -86,27 +86,28 @@ class CreditsMenuState extends MusicBeatState
             new Social('twitter', 'https://twitter.com/am_erizur')
          ]
       ),
+      new Person("T5mpler", CreditsType.Dev, "Programmer of most of the features in 2.0",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
+            new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
+         ]
+      ),
       new Person("CyndaquilDAC", CreditsType.Dev, "Developer",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCTaq4jni33NoaI1TfMXCRcA'),
             new Social('twitter', 'https://twitter.com/CyndaquilDAC')
          ]
       ),
-      //contributors
-      new Person("T5mpler", CreditsType.Dev, "Programmer most of the features in 2.0",
+      new Person("Cleary", CreditsType.Dev, "Creator of the original concept for Vs Dave",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
-            new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
+            new Social('twitter', 'https://twitter.com/LemonLover699')
          ]
       ),
+      
+      //contributors
       new Person("Zmac", CreditsType.Contributor, "Made the 3D BG, helped with intro text, and helped getting the mod into EMFNF2",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
-         ]
-      ),
-      new Person("Stats45", CreditsType.Contributor, "Moral support",
-         [
-            new Social('youtube', 'https://www.youtube.com/channel/UClb4YjR8i74G-ue2nyiH2DQ')
          ]
       ),
       //beta testers
@@ -150,7 +151,8 @@ class CreditsMenuState extends MusicBeatState
       ),
       new Person("normal", CreditsType.BetaTester, "Beta Tester",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UC21TRNz6llg8a6-ur4dSBtw')
+            new Social('youtube', 'https://www.youtube.com/channel/UC21TRNz6llg8a6-ur4dSBtw'),
+            new Social('roblox', 'https://www.roblox.com/users/1368920745')
          ]
       ),
       new Person("Rendurse", CreditsType.BetaTester, "Beta Tester",

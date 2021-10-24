@@ -23,7 +23,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			case 'bf-pixel':
 				stageSuffix = '-pixel';
 			default:
-				daBf = 'bf';
+				daBf = 'bf-death';
 		}
 		if (char == "bf-pixel")
 		{
@@ -31,7 +31,7 @@ class GameOverSubstate extends MusicBeatSubstate
 		}
 		if (char == "bf-car")
 		{
-			char = "bf";
+			char = "bf-death";
 		}
 
 		super();
