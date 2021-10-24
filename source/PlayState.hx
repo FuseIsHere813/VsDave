@@ -951,7 +951,12 @@ class PlayState extends MusicBeatState
 				dad.x -= 150;
 				dad.y += 100;
 				camPos.set(dad.getGraphicMidpoint().x + 300, dad.getGraphicMidpoint().y);
-			case 'dave' | 'dave-old' | 'dave-annoyed':
+			case 'dave' | 'dave-annoyed':
+				{
+					dad.y += 160;
+					dad.x += 250;
+				}
+			case 'dave-old':
 				{
 					dad.y += 270;
 					dad.x += 150;
@@ -1925,19 +1930,19 @@ class PlayState extends MusicBeatState
 		//welcome to 3d sinning avenue
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()))
 		{
-			dad.y += (Math.sin(elapsedtime));
+			dad.y += (Math.sin(elapsedtime * 0.6));
 		}
 		if(funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()))
 		{
-			boyfriend.y += (Math.sin(elapsedtime));
+			boyfriend.y += (Math.sin(elapsedtime * 0.6));
 		}
-		if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
+		/*if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
 		{
-			dadmirror.y += (Math.sin(elapsedtime));
-		}
+			dadmirror.y += (Math.sin(elapsedtime * 0.6));
+		}*/
 		if(funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()))
 		{
-			gf.y += (Math.sin(elapsedtime));
+			gf.y += (Math.sin(elapsedtime * 0.6));
 		}
 
 		if (SONG.song.toLowerCase() == 'cheating') // fuck you
@@ -2047,24 +2052,17 @@ class PlayState extends MusicBeatState
 		{
 			switch (curStep)
 			{
-				case 660:
+				case 660 | 680:
 					FlxG.sound.play(Paths.sound('static'), 0.1);
 					dad.visible = false;
 					dadmirror.visible = true;
 					curbg.visible = true;
-				case 664:
+					iconP2.animation.play('dave-angey');
+				case 664 | 684:
 					dad.visible = true;
 					dadmirror.visible = false;
 					curbg.visible = false;
-				case 680:
-					FlxG.sound.play(Paths.sound('static'), 0.1);
-					dad.visible = false;
-					dadmirror.visible = true;
-					curbg.visible = true;
-				case 684:
-					dad.visible = true;
-					dadmirror.visible = false;
-					curbg.visible = false;
+					iconP2.animation.play(dad.curCharacter);
 				case 1176:
 					FlxG.sound.play(Paths.sound('static'), 0.1);
 					dad.visible = false;
@@ -2072,14 +2070,13 @@ class PlayState extends MusicBeatState
 					curbg.loadGraphic(Paths.image('dave/redsky'));
 					curbg.alpha = 1;
 					curbg.visible = true;
+					iconP2.animation.play('dave-angey');
 				case 1180:
 					dad.visible = true;
 					dadmirror.visible = false;
-
-					dad.frames = Paths.getSparrowAtlas('dave/HolyFubeepWhatJustHappened');
-					dad.animation.addByPrefix('holyFubeep', 'HOLYMOLYWHATJUSTHAPPENED', 24, true);
-					dad.animation.play('holyFubeep');
+					iconP2.animation.play(dad.curCharacter);
 					dad.canDance = false;
+					dad.animation.play('scared', true);
 			}
 		}
 
@@ -2602,7 +2599,8 @@ class PlayState extends MusicBeatState
 						health -= 0.075;
 						vocals.volume = 0;
 						if (theFunne)
-							noteMiss(daNote.noteData);
+							if(daNote.mustPress)
+								noteMiss(daNote.noteData);
 					}
 
 					daNote.active = false;
@@ -3426,7 +3424,10 @@ class PlayState extends MusicBeatState
 		// REDO THIS SYSTEM!
 		if (note != null)
 		{
-			noteMiss(note.noteData);
+			if(note.mustPress)
+			{
+				noteMiss(note.noteData);
+			}
 			return;
 		}
 		var upP = controls.UP_P;
@@ -3654,7 +3655,7 @@ class PlayState extends MusicBeatState
 						gf.canDance = false;
 						boyfriend.playAnim('hey', true);
 						gf.playAnim('cheer', true);
-						FlxTween.tween(dad, {alpha: 0}, 1);
+						FlxTween.tween(dad, {alpha: 0}, 2);
 				}
 			case 'polygonized':
 				switch(curStep)
@@ -3668,7 +3669,7 @@ class PlayState extends MusicBeatState
 						gf.canDance = false;
 						boyfriend.playAnim('hey', true);
 						gf.playAnim('cheer', true);
-						FlxTween.tween(dad, {alpha: 0}, 1);
+						FlxTween.tween(dad, {alpha: 0}, 2);
 				}
 			case 'glitch':
 				switch (curStep)

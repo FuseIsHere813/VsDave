@@ -156,21 +156,17 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/dave_sheet');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 12, false);
-				animation.addByPrefix('singUP', 'Dave Sing Up', 24, false);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 24, false);
-				animation.addByPrefix('singDOWN', 'Dave Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Dave Sing Left', 24, false);
+				animation.addByPrefix('idle', 'idleDance', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
 	
 				addOffset('idle');
-				addOffset("singUP", 40, 11);
-				addOffset("singRIGHT", -21, 4);
-				addOffset("singLEFT", 29, 10);
-				addOffset("singDOWN", 4, -28);
-				globaloffset[1] = 100;
-
-				setGraphicSize(Std.int(width * 1.1));
-				updateHitbox();
+				addOffset("singUP", 18, 12);
+				addOffset("singRIGHT", 5, -2);
+				addOffset("singLEFT", 29, 2);
+				addOffset("singDOWN", -5, 2);
 
 				playAnim('idle');
 			case 'dave-old':
@@ -198,21 +194,19 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 12, false);
-				animation.addByPrefix('singUP', 'Dave Sing Up', 24, false);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 24, false);
-				animation.addByPrefix('singDOWN', 'Dave Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Dave Sing Left', 24, false);
-		
-				addOffset('idle');
-				addOffset("singUP", 40, 11);
-				addOffset("singRIGHT", -21, 4);
-				addOffset("singLEFT", 29, 10);
-				addOffset("singDOWN", 4, -28);
-				globaloffset[1] = 100;
+				animation.addByPrefix('idle', 'idleDance', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('scared', 'Scaredy', 24, true);
 	
-				setGraphicSize(Std.int(width * 1.1));
-				updateHitbox();
+				addOffset('idle');
+				addOffset("singUP", 18, 12);
+				addOffset("singRIGHT", 5, -2);
+				addOffset("singLEFT", 29, 2);
+				addOffset("singDOWN", -5, 2);
+				addOffset("scared");
 	
 				playAnim('idle');
 			case 'dave-annoyed-3d':
@@ -606,6 +600,29 @@ class Character extends FlxSprite
 				nativelyPlayable = true;
 
 				flipX = true;
+
+			case 'marcello-dave':
+				var tex = Paths.getSparrowAtlas('dave/secret/Marcello_Dave_Assets');
+				frames = tex;
+				animation.addByPrefix('idle', 'totally dave idle dance', 24, false);
+				animation.addByPrefix('singUP', 'totally dave NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'totally dave NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'totally dave NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'totally dave NOTE DOWN0', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+
+				playAnim('idle');
+
+				nativelyPlayable = true;
+
+				flipX = true;
+
+				antialiasing = false;
 				
 			case 'bf-pixel':
 				frames = Paths.getSparrowAtlas('weeb/bfPixel');

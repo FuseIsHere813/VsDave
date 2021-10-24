@@ -60,8 +60,6 @@ class FreeplayState extends MusicBeatState
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD
 		0xFF00FFFF //SPLIT THE THONNNNN
-
-
     ];
 
 	private var iconArray:Array<HealthIcon> = [];
@@ -462,7 +460,7 @@ class FreeplayState extends MusicBeatState
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
-		FlxTween.color(bg, 0.1, bg.color, songColors[songs[curSelected].week]);
+		FlxTween.color(bg, 0.25, bg.color, songColors[songs[curSelected].week]);
 	}
 }
 

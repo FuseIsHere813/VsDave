@@ -246,7 +246,7 @@ class MusicPlayerState extends MusicBeatState
             }
             else
             {
-                FlxG.switchState(new MainMenuState());
+                FlxG.switchState(new ExtrasMenuState());
             }
         }
         if (accepted)
