@@ -12,7 +12,7 @@ import flixel.util.FlxColor;
 /**
 	*DEBUG MODE
  */
-class AnimationDebug extends FlxState
+class AnimationDebug extends MusicBeatState
 {
 	var bf:Boyfriend;
 	var dad:Character;
@@ -34,6 +34,8 @@ class AnimationDebug extends FlxState
 	override function create()
 	{
 		FlxG.sound.music.stop();
+
+		FlxG.mouse.visible = true;
 
 		var gridBG:FlxSprite = FlxGridOverlay.create(10, 10);
 		gridBG.scrollFactor.set(0.5, 0.5);

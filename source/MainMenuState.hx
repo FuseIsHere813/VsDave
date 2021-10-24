@@ -1,5 +1,6 @@
 package;
 
+import flixel.math.FlxRandom;
 import flixel.math.FlxPoint;
 import Controls.KeyboardScheme;
 import flixel.FlxG;
@@ -26,11 +27,7 @@ class MainMenuState extends MusicBeatState
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 
-	#if !switch
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'options', 'credits'];
-	#else
-	var optionShit:Array<String> = ['story mode', 'freeplay', 'ost', 'credits'];
-	#end
+	var optionShit:Array<String> = ['story mode', 'freeplay', 'extras', 'options'];
 
 	var newGaming:FlxText;
 	var newGaming2:FlxText;
@@ -39,6 +36,10 @@ class MainMenuState extends MusicBeatState
 	public static var firstStart:Bool = true;
 
 	public static var finishedFunnyMove:Bool = false;
+
+	public static var daRealEngineVer:String = 'Dave';
+
+	public static var engineVers:Array<String> = ['Dave', 'Bambi', 'Tristan'];
 
 	public static var kadeEngineVer:String = "DAVE";
 	public static var gameVer:String = "0.2.7.1";
@@ -78,6 +79,8 @@ class MainMenuState extends MusicBeatState
 		{
 			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false];
 		}
+
+		daRealEngineVer = engineVers[FlxG.random.int(0, 2)];
 		
 		var bg:FlxSprite = new FlxSprite(-80).loadGraphic(randomizeBG());
 		bg.scrollFactor.set();
@@ -133,7 +136,7 @@ class MainMenuState extends MusicBeatState
 
 		firstStart = false;
 
-		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer + " FNF - " + "Dave Engine", 12);
+		var versionShit:FlxText = new FlxText(5, FlxG.height - 18, 0, gameVer + " FNF - " + daRealEngineVer + " Engine", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
@@ -213,6 +216,8 @@ class MainMenuState extends MusicBeatState
 									trace("Freeplay Menu Selected");
 								case 'options':
 									FlxG.switchState(new OptionsMenu());
+								case 'extras':
+									FlxG.switchState(new ExtrasMenuState());
 								case 'ost':
 									FlxG.switchState(new MusicPlayerState());
 								case 'credits':
