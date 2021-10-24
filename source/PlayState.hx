@@ -1166,16 +1166,16 @@ class PlayState extends MusicBeatState
 		+ " "
 		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Legacy" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "Finale")
 		+ " - " + engineName + "Engine (KE 1.2)", 16);
-		kadeEngineWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
-		kadeEngineWatermark.borderSize = 1.5;
+		kadeEngineWatermark.borderSize = 1.25;
 		add(kadeEngineWatermark);
 		if (creditsText)
 		{
 			var creditsWatermark = new FlxText(4, healthBarBG.y + 50, 0, credits, 16);
-			creditsWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			creditsWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			creditsWatermark.scrollFactor.set();
-			creditsWatermark.borderSize = 1.5;
+			creditsWatermark.borderSize = 1.25;
 			add(creditsWatermark);
 			creditsWatermark.cameras = [camHUD];
 		}
