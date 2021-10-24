@@ -100,6 +100,19 @@ class StoryMenuState extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 
+	var songColors:Array<FlxColor> = [
+        0xFFca1f6f, // GF
+        0xFFc885e5, // DAD
+        0xFFf9a326, // SPOOKY
+        0xFFceec75, // PICO
+        0xFFec7aac, // MOM
+        0xFFffffff, // PARENTS-CHRISTMAS
+        0xFFffaa6f, // SENPAI
+		0xFF4965FF, // DAVE
+		0xFF00B515, // MISTER BAMBI RETARD
+		0xFF00FFFF //SPLIT THE THONNNNN
+    ];
+
 	override function create()
 	{
 		#if desktop
@@ -145,7 +158,8 @@ class StoryMenuState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
-		yellowBG = new FlxSprite(0, 56).makeGraphic(FlxG.width, 400, 0xFF0094FF);
+		yellowBG = new FlxSprite(0, 56).makeGraphic(FlxG.width * 2, 400, FlxColor.WHITE);
+		yellowBG.color = songColors[0];
 
 		imageBG = new FlxSprite(600, 1000).loadGraphic(Paths.image("blank", "shared"));
 		imageBG.antialiasing = true;
@@ -163,8 +177,6 @@ class StoryMenuState extends MusicBeatState
 
 		grpLocks = new FlxTypedGroup<FlxSprite>();
 		add(grpLocks);
-
-		trace("Line 70");
 
 		for (i in 0...weekData.length)
 		{
@@ -190,8 +202,6 @@ class StoryMenuState extends MusicBeatState
 				grpLocks.add(lock);
 			}
 		}
-
-		trace("Line 96");
 
 		for (char in 0...3)
 		{
@@ -229,8 +239,6 @@ class StoryMenuState extends MusicBeatState
 
 		difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
-
-		trace("Line 124");
 
 		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
 		leftArrow.frames = ui_tex;
@@ -273,8 +281,6 @@ class StoryMenuState extends MusicBeatState
 		add(txtWeekTitle);
 
 		updateText();
-
-		trace("Line 165");
 
 		super.create();
 
@@ -557,6 +563,8 @@ class StoryMenuState extends MusicBeatState
 				item.alpha = 0.6;
 			bullShit++;
 		}
+
+		FlxTween.color(yellowBG, 0.25, yellowBG.color, songColors[curWeek]);
 
 		FlxG.sound.play(Paths.sound('scrollMenu'));
 

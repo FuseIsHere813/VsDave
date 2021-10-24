@@ -6,7 +6,7 @@ import flixel.util.FlxTimer;
 /**
  * shut up idiot im not bbpanzu hes a gay
  */
-class EndingState extends FlxState
+class EndingState extends MusicBeatState
 {
 
 	var _ending:String;
@@ -33,14 +33,16 @@ class EndingState extends FlxState
 	{
 		super.update(elapsed);
 		
-		if (FlxG.keys.pressed.ENTER){
+		if (FlxG.keys.pressed.ENTER)
+		{
 			endIt();
 		}
 		
 	}
 	
 	
-	public function endIt(){
+	public function endIt()
+	{
 		trace("ENDING");
 		FlxG.switchState(new MainMenuState());
 		FlxG.sound.playMusic(Paths.music('freakyMenu'));

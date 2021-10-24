@@ -60,8 +60,6 @@ class FreeplayState extends MusicBeatState
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD
 		0xFF00FFFF //SPLIT THE THONNNNN
-
-
     ];
 
 	private var iconArray:Array<HealthIcon> = [];
@@ -143,13 +141,13 @@ class FreeplayState extends MusicBeatState
 			}
 			if(FlxG.save.data.unfairnessFound)
 			{
-				addWeek(['Unfairness'], 8, ['bambi-3d']);
+				addWeek(['Unfairness'], 8, ['bambi-unfair']);
 			}
 		}
 		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
 		{
-			addWeek(['Old-Insanity'], 7, ['dave-old']);
-			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Furiosity', 'Mealie'], 8, ['bambi-old', 'bambi-old', 'dave-angey', 'bambi-angey']);
+			addWeek(['Old-Insanity', 'Furiosity'], 7, ['dave-old', 'dave-angey']);
+			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Mealie'], 8, ['bambi', 'bambi', 'bambi-angey']);
 		}
 	}
 
@@ -462,7 +460,7 @@ class FreeplayState extends MusicBeatState
 				// item.setGraphicSize(Std.int(item.width));
 			}
 		}
-		FlxTween.color(bg, 0.1, bg.color, songColors[songs[curSelected].week]);
+		FlxTween.color(bg, 0.25, bg.color, songColors[songs[curSelected].week]);
 	}
 }
 

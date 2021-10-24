@@ -156,21 +156,17 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/dave_sheet');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 12, false);
-				animation.addByPrefix('singUP', 'Dave Sing Up', 24, false);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 24, false);
-				animation.addByPrefix('singDOWN', 'Dave Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Dave Sing Left', 24, false);
+				animation.addByPrefix('idle', 'idleDance', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
 	
 				addOffset('idle');
-				addOffset("singUP", 40, 11);
-				addOffset("singRIGHT", -21, 4);
-				addOffset("singLEFT", 29, 10);
-				addOffset("singDOWN", 4, -28);
-				globaloffset[1] = 100;
-
-				setGraphicSize(Std.int(width * 1.1));
-				updateHitbox();
+				addOffset("singUP", 18, 12);
+				addOffset("singRIGHT", 5, -2);
+				addOffset("singLEFT", 29, 2);
+				addOffset("singDOWN", -5, 2);
 
 				playAnim('idle');
 			case 'dave-old':
@@ -198,21 +194,19 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
 				frames = tex;
-				animation.addByPrefix('idle', 'Dave Idle', 12, false);
-				animation.addByPrefix('singUP', 'Dave Sing Up', 24, false);
-				animation.addByPrefix('singRIGHT', 'Dave Sing Right', 24, false);
-				animation.addByPrefix('singDOWN', 'Dave Sing Down', 24, false);
-				animation.addByPrefix('singLEFT', 'Dave Sing Left', 24, false);
-		
-				addOffset('idle');
-				addOffset("singUP", 40, 11);
-				addOffset("singRIGHT", -21, 4);
-				addOffset("singLEFT", 29, 10);
-				addOffset("singDOWN", 4, -28);
-				globaloffset[1] = 100;
+				animation.addByPrefix('idle', 'idleDance', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('scared', 'Scaredy', 24, true);
 	
-				setGraphicSize(Std.int(width * 1.1));
-				updateHitbox();
+				addOffset('idle');
+				addOffset("singUP", 18, 12);
+				addOffset("singRIGHT", 5, -2);
+				addOffset("singLEFT", 29, 2);
+				addOffset("singDOWN", -5, 2);
+				addOffset("scared");
 	
 				playAnim('idle');
 			case 'dave-annoyed-3d':
@@ -293,8 +287,30 @@ class Character extends FlxSprite
 				globaloffset[0] = 150;
 				globaloffset[1] = 450; //this is the y
 				setGraphicSize(Std.int(width / furiosityScale));
-			   updateHitbox();
-			   antialiasing = false;
+				updateHitbox();
+				antialiasing = false;
+		
+				playAnim('idle');
+			case 'bambi-unfair':
+				// BAMBI SHITE ANIMATION LOADING CODE
+				tex = Paths.getSparrowAtlas('bambi/unfair_bambi');
+				frames = tex;
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'singUP', 24, false);
+				animation.addByPrefix('singRIGHT', 'singRIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'singDOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'singLEFT', 24, false);
+		
+				addOffset('idle');
+				addOffset("singUP", 140, 70);
+				addOffset("singRIGHT", -180, -60);
+				addOffset("singLEFT", 250, 0);
+				addOffset("singDOWN", 150, 50);
+				globaloffset[0] = 150 * 1.3;
+				globaloffset[1] = 450 * 1.3; //this is the y
+				setGraphicSize(Std.int((width * 1.3) / furiosityScale));
+				updateHitbox();
+				antialiasing = false;
 		
 				playAnim('idle');
 			case 'spooky':
@@ -606,6 +622,29 @@ class Character extends FlxSprite
 				nativelyPlayable = true;
 
 				flipX = true;
+
+			case 'marcello-dave':
+				var tex = Paths.getSparrowAtlas('dave/secret/Marcello_Dave_Assets');
+				frames = tex;
+				animation.addByPrefix('idle', 'totally dave idle dance', 24, false);
+				animation.addByPrefix('singUP', 'totally dave NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'totally dave NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'totally dave NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'totally dave NOTE DOWN0', 24, false);
+
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
+
+				playAnim('idle');
+
+				nativelyPlayable = true;
+
+				flipX = true;
+
+				antialiasing = false;
 				
 			case 'bf-pixel':
 				frames = Paths.getSparrowAtlas('weeb/bfPixel');
@@ -995,8 +1034,6 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWNmiss', 'MARCELLO NOTE DOWN MISS', 24, false);
 				animation.addByPrefix('hey', 'MARCELLO HEY', 24, false);
 
-				animation.addByPrefix('firstDeath', "MARCELLO dies", 24, false);
-				animation.addByPrefix('deathLoop', "MARCELLO Dead Loop", 24, true);
 				animation.addByPrefix('dodge', "boyfriend dodge", 24, false);
 				animation.addByPrefix('scared', 'MARCELLO idle shaking', 24);
 				animation.addByPrefix('hit', 'MARCELLO hit', 24, false);
@@ -1011,8 +1048,6 @@ class Character extends FlxSprite
 				addOffset("singLEFTmiss", 12, -6);
 				addOffset("singDOWNmiss", -10, -50);
 				addOffset("hey", 3, 21);
-				addOffset('firstDeath', 37, 11);
-				addOffset('deathLoop', 37, 5);
 				addOffset('scared', -24, -10);
 
 				playAnim('idle');
@@ -1120,11 +1155,25 @@ class Character extends FlxSprite
 		{
 			if (isPlayer)
 			{
-				offset.set(daOffset[0] + globaloffset[0], daOffset[1] + globaloffset[1]);
+				if(!nativelyPlayable)
+				{
+					offset.set((daOffset[0] * -1) + globaloffset[0], daOffset[1] + globaloffset[1]);
+				}
+				else
+				{
+					offset.set(daOffset[0] + globaloffset[0], daOffset[1] + globaloffset[1]);
+				}
 			}
 			else
 			{
-				offset.set(daOffset[0], daOffset[1]);
+				if(nativelyPlayable)
+				{
+					offset.set((daOffset[0] * -1), daOffset[1]);
+				}
+				else
+				{
+					offset.set(daOffset[0], daOffset[1]);
+				}
 			}
 		}
 		else

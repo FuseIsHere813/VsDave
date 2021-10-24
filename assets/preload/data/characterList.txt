@@ -9,6 +9,7 @@ bambi-splitathon
 dave-annoyed
 tristan
 bambi-3d
+bambi-unfair
 dave-annoyed-3d
 tristan-golden
 bambi-angey
@@ -18,6 +19,7 @@ bambi-farmer-beta
 bambi-bevel
 dave-3d-standing-bruh-what
 what-lmao
+marcello-dave
 dad
 spooky
 pico

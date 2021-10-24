@@ -55,57 +55,61 @@ class CreditsMenuState extends MusicBeatState
    var peopleInCredits:Array<Person> = 
    [
       //devs
-     new Person("MoldyGH", CreditsType.Dev, "Creator and Main Developer of Vs. Dave & Bambi",
+     new Person("MoldyGH", CreditsType.Dev, "Director, Creator, Programmer, Musician, Main Developer",
         [
            new Social('youtube', 'https://www.youtube.com/channel/UCHIvkOUDfbMCv-BEIPGgpmA'), 
            new Social('twitter', 'https://twitter.com/moldy_gh'),
            new Social('soundcloud', 'https://soundcloud.com/moldygh')
          ]
       ),
-      new Person("MissingTextureMan101", CreditsType.Dev, "Secondary Developer of Vs. Dave & Bambi",
+      new Person("MissingTextureMan101", CreditsType.Dev, "Secondary Developer and Programmer",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ'),
             new Social('twitter', 'https://twitter.com/OfficialMTM101')
          ]
       ),
-      new Person("rapparep lol", CreditsType.Dev, "Main Artist of Vs. Dave & Bambi",
+      new Person("rapparep lol", CreditsType.Dev, "Main Artist",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCKfdkmcdFftv4pFWr0Bh45A'),
             new Social('twitter', 'https://twitter.com/rappareplol')
          ]
       ),
-      new Person("TheBuilderXD", CreditsType.Dev, "Gamebanana Page Manager, made Tristan sprites, and more",
+      new Person("TheBuilderXD", CreditsType.Dev, "Gamebanana Page Manager, Secondary Artist",
          [
             new Social('youtube', 'https://www.youtube.com/user/99percentMember'),
             new Social('twitter', 'https://twitter.com/TheBuilderXD')
          ]
       ),
-      new Person("Erizur", CreditsType.Dev, "Programmer, Made some assets",
-         [
-            new Social('youtube', 'https://www.youtube.com/channel/UCdCAaQzt9yOGfFM0gJDJ4bQ'),
-            new Social('twitter', 'https://twitter.com/am_erizur')
-         ]
-      ),
-      new Person("T5mpler", CreditsType.Dev, "Programmer of most of the features in 2.0",
-         [
-            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
-            new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
-         ]
-      ),
-      new Person("CyndaquilDAC", CreditsType.Dev, "Developer",
+      new Person("CyndaquilDAC", CreditsType.Dev, "Programmer, Menu Button Artist",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCTaq4jni33NoaI1TfMXCRcA'),
             new Social('twitter', 'https://twitter.com/CyndaquilDAC')
          ]
       ),
-      new Person("Cleary", CreditsType.Dev, "Creator of the original concept for Vs Dave",
+      new Person("Erizur", CreditsType.Dev, "Programmer, Week Icon Artist",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCdCAaQzt9yOGfFM0gJDJ4bQ'),
+            new Social('twitter', 'https://twitter.com/am_erizur')
+         ]
+      ),
+      new Person("T5mpler", CreditsType.Dev, "Programmer",
          [
             new Social('twitter', 'https://twitter.com/LemonLover699')
          ]
       ),
-      
+       new Person("Cleary", CreditsType.Dev, "Original artist, Censored songs, Moral support",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCddoqqR4JgTsv8PChblD1aQ'),
+            new Social('twitter', 'https://twitter.com/LemonLover699')
+         ]
+      ),
+      new Person("Stats45", CreditsType.Dev, "Minor programming, Moral support",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UClb4YjR8i74G-ue2nyiH2DQ')
+         ]
+      ),
       //contributors
-      new Person("Zmac", CreditsType.Contributor, "Made the 3D BG, helped with intro text, and helped getting the mod into EMFNF2",
+      new Person("Zmac", CreditsType.Contributor, "3D Background, Intro text help, EMFNF2 help",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
          ]
@@ -288,7 +292,7 @@ class CreditsMenuState extends MusicBeatState
             }
 				if (back)
 				{
-					FlxG.switchState(new MainMenuState());
+					FlxG.switchState(new ExtrasMenuState());
 				}
 				if (accept && !transitioning)
 				{
