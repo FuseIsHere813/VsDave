@@ -9,7 +9,7 @@ class GitarooPause extends MusicBeatState
 	var replayButton:FlxSprite;
 	var cancelButton:FlxSprite;
 
-	var suckMyBambis:Array<String> = ['bambi', 'bambi-new', 'bambi-splitathon', 'bambi-angey', 'bambi-old', 'bambi-bevel', 'bambi-farmer-beta', 'bambi-3d'];
+	var suckMyBambis:Array<String> = ['bambi', 'bambi-new', 'bambi-splitathon', 'bambi-angey', 'bambi-old', 'bambi-bevel', 'bambi-farmer-beta', 'bambi-3d', 'bambi-unfair'];
 
 	var replaySelect:Bool = false;
 

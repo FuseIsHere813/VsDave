@@ -287,8 +287,30 @@ class Character extends FlxSprite
 				globaloffset[0] = 150;
 				globaloffset[1] = 450; //this is the y
 				setGraphicSize(Std.int(width / furiosityScale));
-			   updateHitbox();
-			   antialiasing = false;
+				updateHitbox();
+				antialiasing = false;
+		
+				playAnim('idle');
+			case 'bambi-unfair':
+				// BAMBI SHITE ANIMATION LOADING CODE
+				tex = Paths.getSparrowAtlas('bambi/unfair_bambi');
+				frames = tex;
+				animation.addByPrefix('idle', 'idle', 24, false);
+				animation.addByPrefix('singUP', 'singUP', 24, false);
+				animation.addByPrefix('singRIGHT', 'singRIGHT', 24, false);
+				animation.addByPrefix('singDOWN', 'singDOWN', 24, false);
+				animation.addByPrefix('singLEFT', 'singLEFT', 24, false);
+		
+				addOffset('idle');
+				addOffset("singUP", 140, 70);
+				addOffset("singRIGHT", -180, -60);
+				addOffset("singLEFT", 250, 0);
+				addOffset("singDOWN", 150, 50);
+				globaloffset[0] = 150 * 1.3;
+				globaloffset[1] = 450 * 1.3; //this is the y
+				setGraphicSize(Std.int((width * 1.3) / furiosityScale));
+				updateHitbox();
+				antialiasing = false;
 		
 				playAnim('idle');
 			case 'spooky':
@@ -1133,11 +1155,25 @@ class Character extends FlxSprite
 		{
 			if (isPlayer)
 			{
-				offset.set(daOffset[0] + globaloffset[0], daOffset[1] + globaloffset[1]);
+				if(!nativelyPlayable)
+				{
+					offset.set((daOffset[0] * -1) + globaloffset[0], daOffset[1] + globaloffset[1]);
+				}
+				else
+				{
+					offset.set(daOffset[0] + globaloffset[0], daOffset[1] + globaloffset[1]);
+				}
 			}
 			else
 			{
-				offset.set(daOffset[0], daOffset[1]);
+				if(nativelyPlayable)
+				{
+					offset.set((daOffset[0] * -1), daOffset[1]);
+				}
+				else
+				{
+					offset.set(daOffset[0], daOffset[1]);
+				}
 			}
 		}
 		else

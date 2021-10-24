@@ -69,7 +69,10 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 
-	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night'];
+	var howManyPlayerNotes:Int = 0;
+	var howManyEnemyNotes:Int = 0;
+
+	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness'];
 
 	public var stupidx:Float = 0;
 	public var stupidy:Float = 0; // stupid velocities for cutscene
@@ -85,7 +88,7 @@ class PlayState extends MusicBeatState
 
 	var halloweenLevel:Bool = false;
 
-	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what'];
+	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair'];
 
 	var storyDifficultyText:String = "";
 	var iconRPC:String = "";
@@ -801,12 +804,19 @@ class PlayState extends MusicBeatState
 			stageFront.scrollFactor.set(1, 1);
 			stageFront.active = false;
 			add(stageFront);
-			// UsingNewCam = true;
+			UsingNewCam = true;
 		}
 		else if (SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'cheating' || SONG.song.toLowerCase() == 'unfairness')
 		{
 			defaultCamZoom = 0.9;
-			curStage = 'daveEvilHouse';
+			if(SONG.song.toLowerCase() == 'unfairness')
+			{
+				curStage = 'unfairness';
+			}
+			else
+			{
+				curStage = 'daveEvilHouse';
+			}
 			var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 			bg.active = true;
 
@@ -821,6 +831,7 @@ class PlayState extends MusicBeatState
 			}
 			add(bg);
 			// below code assumes shaders are always enabled which is bad
+			// i wouldnt consider this an eyesore though
 			var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
 			testshader.waveAmplitude = 0.1;
 			testshader.waveFrequency = 5;
@@ -972,6 +983,10 @@ class PlayState extends MusicBeatState
 					dad.y -= 200;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
+			case 'bambi-unfair':
+				{
+					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 50);
+				}
 			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
 				{
 					dad.y += 400;
@@ -1045,6 +1060,19 @@ class PlayState extends MusicBeatState
 				gf.x += 180;
 				gf.y += 300;
 		}
+
+		if(dad.curCharacter.toLowerCase() == 'bambi-unfair')
+		{
+			var bambertTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
+			add(bambertTrail);
+		}
+
+		if(boyfriend.curCharacter.toLowerCase() == 'bambi-unfair')
+		{
+			var bambertTrail = new FlxTrail(boyfriend, null, 4, 24, 0.3, 0.069);
+			add(bambertTrail);
+		}
+
 		if(darkLevels.contains(curStage))
 		{
 			dad.color = 0xFF878787;
@@ -1140,6 +1168,8 @@ class PlayState extends MusicBeatState
 				credits = 'Original Song made by Alexander Cooper 19!';
 			case 'unfairness':
 				credits = 'Ghost tapping is forced off! Screw you!';
+			case 'cheating':
+				credits = 'Suffer the chaos!';
 			default:
 				credits = '';
 		}
@@ -1930,19 +1960,19 @@ class PlayState extends MusicBeatState
 		//welcome to 3d sinning avenue
 		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()))
 		{
-			dad.y += (Math.sin(elapsedtime * 0.6));
+			dad.y += (Math.sin(elapsedtime) * 0.6);
 		}
 		if(funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()))
 		{
-			boyfriend.y += (Math.sin(elapsedtime * 0.6));
+			boyfriend.y += (Math.sin(elapsedtime) * 0.6);
 		}
 		/*if(funnyFloatyBoys.contains(dadmirror.curCharacter.toLowerCase()))
 		{
-			dadmirror.y += (Math.sin(elapsedtime * 0.6));
+			dadmirror.y += (Math.sin(elapsedtime) * 0.6);
 		}*/
 		if(funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()))
 		{
-			gf.y += (Math.sin(elapsedtime * 0.6));
+			gf.y += (Math.sin(elapsedtime) * 0.6);
 		}
 
 		if (SONG.song.toLowerCase() == 'cheating') // fuck you
@@ -1989,9 +2019,6 @@ class PlayState extends MusicBeatState
 			screenshader.shader.uampmul.value[0] -= (elapsed / 2);
 		}
 		screenshader.Enabled = shakeCam && eyesoreson;
-		#if !debug
-		perfectMode = false;
-		#end
 
 		if (FlxG.keys.justPressed.NINE)
 		{
@@ -2222,27 +2249,6 @@ class PlayState extends MusicBeatState
 			// Conductor.lastSongPos = FlxG.sound.music.time;
 		}
 
-		if (!UsingNewCam)
-		{
-			if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
-			{
-				if (curBeat % 4 == 0)
-				{
-					// trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
-				}
-
-				if (camFollow.x != dad.getMidpoint().x + 150 && !PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
-				{
-					ZoomCam(true);
-				}
-
-				if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection && camFollow.x != boyfriend.getMidpoint().x - 100)
-				{
-					ZoomCam(false);
-				}
-			}
-		}
-
 		if (camZooming)
 		{
 			FlxG.camera.zoom = FlxMath.lerp(defaultCamZoom, FlxG.camera.zoom, 0.95);
@@ -2275,52 +2281,12 @@ class PlayState extends MusicBeatState
 			switch (curBeat)
 			{
 				case 127:
-					playerStrums.forEach(function(spr:FlxSprite)
-					{
-						spr.y += Math.sin(elapsedtime) * Math.random();
-						spr.y -= Math.sin(elapsedtime) * 1.4;
-					});
-					dadStrums.forEach(function(spr:FlxSprite)
-					{
-						spr.y -= Math.sin(elapsedtime) * Math.random();
-						spr.y += Math.sin(elapsedtime) * 1.4;
-					});
 					camZooming = true;	
 				case 159:
-					playerStrums.forEach(function(spr:FlxSprite)
-					{
-						spr.y += Math.sin(elapsedtime) * Math.random();
-						spr.y -= Math.sin(elapsedtime) * 1.2;
-					});
-					dadStrums.forEach(function(spr:FlxSprite)
-					{
-						spr.y -= Math.sin(elapsedtime) * Math.random();
-						spr.y += Math.sin(elapsedtime) * 1.2;
-					});
 					camZooming = false;
 				case 191:
-					playerStrums.forEach(function(spr:FlxSprite)
-					{
-						spr.y += Math.sin(elapsedtime) * Math.random();
-						spr.y -= Math.sin(elapsedtime) * 1.4;
-					});
-					dadStrums.forEach(function(spr:FlxSprite)
-					{
-						spr.y -= Math.sin(elapsedtime) * Math.random();
-						spr.y += Math.sin(elapsedtime) * 1.4;
-					});
 					camZooming = true;
 				case 223:
-					playerStrums.forEach(function(spr:FlxSprite)
-					{
-						spr.y += Math.sin(elapsedtime) * Math.random();
-						spr.y -= Math.sin(elapsedtime) * 1.2;
-					});
-					dadStrums.forEach(function(spr:FlxSprite)
-					{
-						spr.y -= Math.sin(elapsedtime) * Math.random();
-						spr.y += Math.sin(elapsedtime) * 1.2;
-					});
 					camZooming = false;
 			}
 		}
@@ -2355,22 +2321,25 @@ class PlayState extends MusicBeatState
 
 			if (!shakeCam)
 			{
-				openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
-					.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
+				if(!perfectMode)
+				{
+					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
+						.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
 
-					#if desktop
-					DiscordClient.changePresence("GAME OVER -- "
-					+ SONG.song
-					+ " ("
-					+ storyDifficultyText
-					+ ") ",
-					"\nAcc: "
-					+ truncateFloat(accuracy, 2)
-					+ "% | Score: "
-					+ songScore
-					+ " | Misses: "
-					+ misses, iconRPC);
-					#end
+						#if desktop
+						DiscordClient.changePresence("GAME OVER -- "
+						+ SONG.song
+						+ " ("
+						+ storyDifficultyText
+						+ ") ",
+						"\nAcc: "
+						+ truncateFloat(accuracy, 2)
+						+ "% | Score: "
+						+ songScore
+						+ " | Misses: "
+						+ misses, iconRPC);
+						#end
+				}
 			}
 			else
 			{
@@ -2390,22 +2359,25 @@ class PlayState extends MusicBeatState
 				}
 				else
 				{
-					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
-						.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
+					if(!perfectMode)
+					{
+						openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
+							.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
 
-						#if desktop
-						DiscordClient.changePresence("GAME OVER -- "
-						+ SONG.song
-						+ " ("
-						+ storyDifficultyText
-						+ ") ",
-						"\nAcc: "
-						+ truncateFloat(accuracy, 2)
-						+ "% | Score: "
-						+ songScore
-						+ " | Misses: "
-						+ misses, iconRPC);
-						#end
+							#if desktop
+							DiscordClient.changePresence("GAME OVER -- "
+							+ SONG.song
+							+ " ("
+							+ storyDifficultyText
+							+ ") ",
+							"\nAcc: "
+							+ truncateFloat(accuracy, 2)
+							+ "% | Score: "
+							+ songScore
+							+ " | Misses: "
+							+ misses, iconRPC);
+							#end
+					}
 				}
 			}
 
@@ -2674,7 +2646,7 @@ class PlayState extends MusicBeatState
 				return;
 			}
 		}
-		if (camFollow.x != dad.getMidpoint().x + 150 && focusondad || camFollow.y != dad.getMidpoint().y - 100 && focusondad)
+		if (focusondad)
 		{
 			camFollow.setPosition(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
 			// camFollow.setPosition(lucky.getMidpoint().x - 120, lucky.getMidpoint().y + 210);
@@ -2689,7 +2661,7 @@ class PlayState extends MusicBeatState
 				case 'senpai-angry':
 					camFollow.y = dad.getMidpoint().y - 430;
 					camFollow.x = dad.getMidpoint().x - 100;
-				case 'dave-angey' | 'bambi-3d' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
+				case 'dave-angey' | 'bambi-3d' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what' | 'bambi-unfair':
 					camFollow.y = dad.getMidpoint().y;
 			}
 
@@ -2702,7 +2674,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (camFollow.x != boyfriend.getMidpoint().x - 100 && !focusondad || camFollow.y != boyfriend.getMidpoint().y - 100 && !focusondad)
+		if (!focusondad)
 		{
 			camFollow.setPosition(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
 
@@ -2729,7 +2701,7 @@ class PlayState extends MusicBeatState
 				case 'senpai-angry':
 					camFollow.y = boyfriend.getMidpoint().y - 430;
 					camFollow.x = boyfriend.getMidpoint().x - 100;
-				case 'dave-angey' | 'bambi-3d' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
+				case 'dave-angey' | 'bambi-3d' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what' | 'bambi-unfair':
 					camFollow.y = boyfriend.getMidpoint().y;
 			}
 
@@ -3654,8 +3626,10 @@ class PlayState extends MusicBeatState
 				{
 					case 1024 | 1312 | 1424 | 1552 | 1664:
 						shakeCam = true;
+						camZooming = true;	
 					case 1152 | 1408 | 1472 | 1600 | 2048 | 2176:
 						shakeCam = false;
+						camZooming = false;	
 					case 2432:
 						boyfriend.canDance = false;
 						gf.canDance = false;
@@ -3696,6 +3670,55 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+
+		/*if(generatedMusic)
+		{		
+			//MY version of new cam (swag) - CyndaquilDAC
+			howManyEnemyNotes = 0;
+			howManyPlayerNotes = 0;
+			for(note in SONG.notes[Math.floor(curStep / 16)].sectionNotes)
+			{
+				if(note.mustPress)
+				{
+					howManyPlayerNotes += 1;
+				}
+				else
+				{
+					howManyEnemyNotes += 1;
+				}
+			}
+		}*/
+		if (!UsingNewCam)
+		{
+			if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null)
+			{
+				if (curBeat % 4 == 0)
+				{
+					// trace(PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection);
+				}
+
+				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+				{
+					ZoomCam(true);
+				}
+
+				if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
+				{
+					ZoomCam(false);
+				}
+			}
+		}
+		/*if(UsingNewCam && generatedMusic)
+		{
+			if(howManyEnemyNotes > howManyPlayerNotes)
+			{
+				ZoomCam(true);
+			}
+			else
+			{
+				ZoomCam(false);
+			}
+		}*/
 
 		if (generatedMusic)
 		{
@@ -3805,6 +3828,7 @@ class PlayState extends MusicBeatState
 
 		if (curBeat % 8 == 7 && curSong == 'Bopeebo')
 		{
+			gf.playAnim('cheer', true);
 			boyfriend.playAnim('hey', true);
 		}
 
@@ -3813,9 +3837,6 @@ class PlayState extends MusicBeatState
 			dad.playAnim('cheer', true);
 			boyfriend.playAnim('hey', true);
 		}
-		// yeah ninjamuffin what the ass
-
-		// moldy be like
 
 		switch (curStage)
 		{

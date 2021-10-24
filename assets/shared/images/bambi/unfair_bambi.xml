@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="Unfairness.png">
+	<!-- Created with Adobe Animate version 21.0.7.42652 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="idle0000" x="0" y="0" width="690" height="716"/>
+	<SubTexture name="idle0001" x="694" y="0" width="690" height="716"/>
+	<SubTexture name="idle0002" x="1388" y="0" width="690" height="716"/>
+	<SubTexture name="idle0003" x="2082" y="0" width="690" height="716"/>
+	<SubTexture name="idle0004" x="2082" y="0" width="690" height="716"/>
+	<SubTexture name="singDOWN0000" x="2776" y="0" width="657" height="700"/>
+	<SubTexture name="singDOWN0001" x="3437" y="0" width="657" height="700"/>
+	<SubTexture name="singDOWN0002" x="3437" y="0" width="657" height="700"/>
+	<SubTexture name="singDOWN0003" x="0" y="720" width="657" height="700"/>
+	<SubTexture name="singDOWN0004" x="0" y="720" width="657" height="700"/>
+	<SubTexture name="singLEFT0000" x="661" y="720" width="667" height="698"/>
+	<SubTexture name="singLEFT0001" x="1332" y="720" width="667" height="698"/>
+	<SubTexture name="singLEFT0002" x="1332" y="720" width="667" height="698"/>
+	<SubTexture name="singLEFT0003" x="2003" y="720" width="667" height="698"/>
+	<SubTexture name="singLEFT0004" x="2003" y="720" width="667" height="698"/>
+	<SubTexture name="singRIGHT0000" x="2674" y="720" width="677" height="712"/>
+	<SubTexture name="singRIGHT0001" x="3355" y="720" width="677" height="712"/>
+	<SubTexture name="singRIGHT0002" x="3355" y="720" width="677" height="712"/>
+	<SubTexture name="singRIGHT0003" x="0" y="1436" width="677" height="712"/>
+	<SubTexture name="singRIGHT0004" x="0" y="1436" width="677" height="712"/>
+	<SubTexture name="singUP0000" x="681" y="1436" width="662" height="722"/>
+	<SubTexture name="singUP0001" x="1347" y="1436" width="662" height="722"/>
+	<SubTexture name="singUP0002" x="1347" y="1436" width="662" height="722"/>
+	<SubTexture name="singUP0003" x="2013" y="1436" width="662" height="722"/>
+	<SubTexture name="singUP0004" x="2013" y="1436" width="662" height="722"/>
+</TextureAtlas>
