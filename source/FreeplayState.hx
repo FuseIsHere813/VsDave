@@ -41,7 +41,7 @@ class FreeplayState extends MusicBeatState
 
 	private var CurrentSongIcon:FlxSprite;
 
-	private var AllPossibleSongs:Array<String> = ["Dave","Base","Joke","Extra"];
+	private var AllPossibleSongs:Array<String> = ["Base", "Dave" ,"Joke" ,"Extra"];
 
 	private var CurrentPack:Int = 0;
 
@@ -50,13 +50,7 @@ class FreeplayState extends MusicBeatState
 	var loadingPack:Bool = false;
 
 	var songColors:Array<FlxColor> = [
-        0xFFca1f6f, // GF
-        0xFFc885e5, // DAD
-        0xFFf9a326, // SPOOKY
-        0xFFceec75, // PICO
-        0xFFec7aac, // MOM
-        0xFFffffff, // PARENTS-CHRISTMAS
-        0xFFffaa6f, // SENPAI
+    	0xFFca1f6f, // GF
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD
 		0xFF00FFFF //SPLIT THE THONNNNN
@@ -66,14 +60,6 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
-
-		/* 
-			if (FlxG.sound.music != null)
-			{
-				if (!FlxG.sound.music.playing)
-					FlxG.sound.playMusic(Paths.music('freakyMenu'));
-			}
-		 */
 		#if desktop
 		DiscordClient.changePresence("In the Freeplay Menu", null);
 		#end
@@ -83,12 +69,6 @@ class FreeplayState extends MusicBeatState
 		#if debug
 		isDebug = true;
 		#end
-
-
-
-		// LOAD MUSIC
-
-		// LOAD CHARACTERS
 
 		bg.loadGraphic(MainMenuState.randomizeBG());
 		bg.color = 0xFF4965FF;
@@ -113,41 +93,28 @@ class FreeplayState extends MusicBeatState
 
 	public function LoadProperPack()
 	{
-		if (AllPossibleSongs[CurrentPack].toLowerCase() == 'base')
+		switch (AllPossibleSongs[CurrentPack].toLowerCase())
 		{
-			addWeek(['Tutorial'], 0, ['gf']);
-			addWeek(['Bopeebo', 'Fresh', 'Dadbattle'], 1, ['dad']);
-			addWeek(['Spookeez', 'South', 'Monster'], 2, ['spooky', 'spooky', 'monster']);
-			addWeek(['Pico', 'Philly', 'Blammed'], 3, ['pico']);
-
-			addWeek(['Satin-Panties', 'High', 'Milf'], 4, ['mom']);
-			addWeek(['Cocoa', 'Eggnog', 'Winter-Horrorland'], 5, ['parents-christmas', 'parents-christmas', 'monster-christmas']);
-			
-			addWeek(['Senpai', 'Roses', 'Thorns'], 6, ['senpai', 'senpai', 'spirit']);
-		}
-		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'dave')
-		{
-			addWeek(['House', 'Insanity', 'Polygonized'], 7, ['dave', 'dave', 'dave-angey']);
-			addWeek(['Bonus-Song'],7,['dave']);
-			addWeek(['Blocked','Corn-Theft','Maze',], 8, ['bambi']);
-			addWeek(['Splitathon'],9,['the-duo']);
-		}
-		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'joke')
-		{
-			addWeek(['Supernovae', 'Glitch'], 8, ['bambi-stupid']);
-			if (FlxG.save.data.cheatingFound)
-			{
-				addWeek(['Cheating'], 8, ['bambi-3d']);
-			}
-			if(FlxG.save.data.unfairnessFound)
-			{
-				addWeek(['Unfairness'], 8, ['bambi-unfair']);
-			}
-		}
-		else if (AllPossibleSongs[CurrentPack].toLowerCase() == 'extra')
-		{
-			addWeek(['Old-Insanity', 'Furiosity'], 7, ['dave-old', 'dave-angey']);
-			addWeek(['Old-Corn-Theft', 'Old-Maze', 'Mealie'], 8, ['bambi', 'bambi', 'bambi-angey']);
+			case 'base':
+				addWeek(['Tutorial'], 0, ['gf']);
+			case 'dave':
+				addWeek(['House', 'Insanity', 'Polygonized'], 1, ['dave', 'dave', 'dave-angey']);
+				addWeek(['Bonus-Song'], 1,['dave']);
+				addWeek(['Blocked','Corn-Theft','Maze',], 2, ['bambi']);
+				addWeek(['Splitathon'], 3,['the-duo']);
+			case 'joke':
+				addWeek(['Supernovae', 'Glitch'], 2, ['bambi-stupid']);
+				if (FlxG.save.data.cheatingFound)
+				{
+					addWeek(['Cheating'], 2, ['bambi-3d']);
+				}
+				if(FlxG.save.data.unfairnessFound)
+				{
+					addWeek(['Unfairness'], 2, ['bambi-unfair']);
+				}
+			case 'extra':
+				addWeek(['Old-Insanity', 'Furiosity'], 1, ['dave-old', 'dave-angey']);
+				addWeek(['Old-Corn-Theft', 'Old-Maze', 'Mealie'], 2, ['bambi', 'bambi', 'bambi-angey']);
 		}
 	}
 
@@ -357,7 +324,7 @@ class FreeplayState extends MusicBeatState
 	function changeDiff(change:Int = 0)
 	{
 		curDifficulty += change;
-		if (songs[curSelected].week != 7 || songs[curSelected].songName == 'Old-Insanity')
+		if (songs[curSelected].week != 1 || songs[curSelected].songName == 'Old-Insanity')
 		{
 		if (curDifficulty < 0)
 			curDifficulty = 2;
@@ -371,7 +338,7 @@ class FreeplayState extends MusicBeatState
 			if (curDifficulty > 3)
 				curDifficulty = 0;
 		}
-		if (songs[curSelected].week == 9)
+		if (songs[curSelected].week == 3)
 		{
 			curDifficulty = 1;
 		}
@@ -387,7 +354,7 @@ class FreeplayState extends MusicBeatState
 	{
 		switch (songs[curSelected].week)
 		{
-			case 9:
+			case 3:
 				diffText.text = 'FINALE' + " - " + curChar.toUpperCase();
 			default:
 				switch (curDifficulty)
@@ -413,14 +380,14 @@ class FreeplayState extends MusicBeatState
 			curSelected = songs.length - 1;
 		if (curSelected >= songs.length)
 			curSelected = 0;
-		if (songs[curSelected].week != 7 || songs[curSelected].songName == 'Old-Insanity')
+		if (songs[curSelected].week != 1 || songs[curSelected].songName == 'Old-Insanity')
 		{
 			if (curDifficulty < 0)
 				curDifficulty = 2;
 			if (curDifficulty > 2)
 				curDifficulty = 0;
 		}
-		if (songs[curSelected].week == 9)
+		if (songs[curSelected].week == 3)
 		{
 			curDifficulty = 1;
 		}

@@ -29,47 +29,39 @@ class HealthIcon extends FlxSprite
 
 		antialiasing = true;
 		animation.add('bf', [0, 1], 0, false, isPlayer);
-		animation.add('bf-car', [0, 1], 0, false, isPlayer);
 		animation.add('bf-christmas', [0, 1], 0, false, isPlayer);
-		animation.add('bf-pixel', [21, 21], 0, false, isPlayer);
-		animation.add('spooky', [2, 3], 0, false, isPlayer);
-		animation.add('pico', [4, 5], 0, false, isPlayer);
-		animation.add('mom', [6, 7], 0, false, isPlayer);
-		animation.add('mom-car', [6, 7], 0, false, isPlayer);
-		animation.add('tankman', [8, 9], 0, false, isPlayer);
-		animation.add('face', [10, 11], 0, false, isPlayer);
-		animation.add('dad', [12, 13], 0, false, isPlayer);
-		animation.add('senpai', [22, 22], 0, false, isPlayer);
-		animation.add('senpai-angry', [22, 22], 0, false, isPlayer);
-		animation.add('spirit', [23, 23], 0, false, isPlayer);
-		animation.add('bf-old', [14, 15], 0, false, isPlayer);
-		animation.add('gf', [16], 0, false, isPlayer);
-		animation.add('dave', [24, 25], 0, false, isPlayer);
-		animation.add('dave-annoyed', [24, 25], 0, false, isPlayer);
-		animation.add('dave-splitathon', [24, 25], 0, false, isPlayer);
-		animation.add('dave-angey', [26, 27], 0, false, isPlayer);
-		animation.add('dave-3d-standing-bruh-what', [44, 45], 0, false, isPlayer);
-		animation.add('dave-annoyed-3d', [54, 55], 0, false, isPlayer);
-		animation.add('bambi', [28, 29], 0, false, isPlayer);
-		animation.add('bambi-splitathon', [28, 29], 0, false, isPlayer);
-		animation.add('bambi-new', [28, 29], 0, false, isPlayer);
-		animation.add('bambi-farmer-beta', [28, 29], 0, false, isPlayer);
-		animation.add('the-duo', [32, 33], 0, false, isPlayer);
-		animation.add('bambi-stupid', [34, 35], 0, false, isPlayer);
-		animation.add('bambi-3d', [36, 37], 0, false, isPlayer);
-		animation.add('bambi-unfair', [56, 57], 0, false, isPlayer);
-		animation.add('bambi-old', [34, 35], 0, false, isPlayer);
-		animation.add('parents-christmas', [17], 0, false, isPlayer);
-		animation.add('monster', [19, 20], 0, false, isPlayer);
-		animation.add('monster-christmas', [19, 20], 0, false, isPlayer);
-		animation.add('tristan', [30, 31], 0, false, isPlayer);
-		animation.add('tristan-golden', [38, 39], 0, false, isPlayer);
-		animation.add('bambi-angey', [40, 41], 0, false, isPlayer);
-		animation.add('dave-old', [52, 53], 0, false, isPlayer);
-		animation.add('bambi-bevel', [46, 47], 0, false, isPlayer);
-		animation.add('what-lmao', [34, 35], 0, false, isPlayer);
-		animation.add('tristan-beta', [50, 51], 0, false, isPlayer);
-		animation.add('marcello-dave', [24, 25], 0, false, isPlayer);
+		animation.add('bf-pixel', [2, 2], 0, false, isPlayer);
+		animation.add('bf-old', [3, 4], 0, false, isPlayer);
+		animation.add('face', [5, 6], 0, false, isPlayer);
+		animation.add('gf', [7], 0, false, isPlayer);
+		animation.add('dave', [8, 9], 0, false, isPlayer);
+		animation.add('dave-annoyed', [8, 9], 0, false, isPlayer);
+		animation.add('dave-angey', [10, 11], 0, false, isPlayer);
+		animation.add('dave-splitathon', [8, 9], 0, false, isPlayer);
+		animation.add('dave-3d-standing-bruh-what', [28, 29], 0, false, isPlayer);
+		animation.add('dave-annoyed-3d', [38, 39], 0, false, isPlayer);
+		animation.add('dave-old', [36, 37], 0, false, isPlayer);
+		animation.add('marcello-dave', [8, 9], 0, false, isPlayer);
+
+		animation.add('bambi', [12, 13], 0, false, isPlayer);
+		animation.add('bambi-splitathon', [12, 13], 0, false, isPlayer);
+		animation.add('bambi-new', [12, 13], 0, false, isPlayer);
+		animation.add('bambi-farmer-beta', [12, 13], 0, false, isPlayer);
+
+		
+		animation.add('bambi-stupid', [18, 19], 0, false, isPlayer);
+		animation.add('bambi-3d', [20, 21], 0, false, isPlayer);
+		animation.add('bambi-unfair', [40, 41], 0, false, isPlayer);
+		animation.add('bambi-old', [18, 19], 0, false, isPlayer);
+		animation.add('bambi-angey', [24, 25], 0, false, isPlayer);
+		animation.add('bambi-bevel', [30, 31], 0, false, isPlayer);
+
+		animation.add('tristan', [14, 15], 0, false, isPlayer);
+		animation.add('tristan-golden', [22, 23], 0, false, isPlayer);
+		animation.add('tristan-beta', [34, 35], 0, false, isPlayer);
+
+		animation.add('the-duo', [16, 17], 0, false, isPlayer);
+		animation.add('what-lmao', [18, 19], 0, false, isPlayer);
 		animation.play(char);
 		if (noAaChars.contains(char))
 		{

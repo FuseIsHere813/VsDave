@@ -27,23 +27,17 @@ class StoryMenuState extends MusicBeatState
 
 	var weekData:Array<Dynamic> = [
 		['Tutorial'],
-		['Bopeebo', 'Fresh', 'Dadbattle'],
-		['Spookeez', 'South', "Monster"],
-		['Pico', 'Philly', "Blammed"],
-		['Satin-Panties', "High", "Milf"],
-		['Cocoa', 'Eggnog', 'Winter-Horrorland'],
-		['Senpai', 'Roses', 'Thorns'],
 		['House', 'Insanity', 'Polygonized'],
 		['Blocked', 'Corn-Theft', 'Maze'],
 		['Splitathon'],
 		['huh', 'huh', 'huh']
 	];
 
-	var actualWeeks:Array<Dynamic> = [0, 1, 2, 3, 4, 5, 6, 7, 10, 8, 9];
+	var actualWeeks:Array<Dynamic> = [0, 1, 4, 2, 3];
 
 	var curDifficulty:Int = 1;
 
-	var indexoften:Int = 7;
+	var indexoften:Int = 1;
 	
 	var tristanunlocked:Bool = false;
 
@@ -53,12 +47,6 @@ class StoryMenuState extends MusicBeatState
 
 	var weekCharacters:Array<Dynamic> = [
 		['dad', 'bf', 'gf'],
-		['dad', 'bf', 'gf'],
-		['spooky', 'bf', 'gf'],
-		['pico', 'bf', 'gf'],
-		['mom', 'bf', 'gf'],
-		['parents-christmas', 'bf', 'gf'],
-		['senpai', 'bf', 'gf'],
 		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty'],
@@ -67,12 +55,6 @@ class StoryMenuState extends MusicBeatState
 
 	var weekNames:Array<String> = [
 		"",
-		"Daddy Dearest",
-		"Spooky Month",
-		"PICO",
-		"MOMMY MUST MURDER",
-		"RED SNOW",
-		"hating simulator ft. moawling",
 		"Dave's Fun Rapping Battle!",
 		"Mr. Bambi's Fun Corn Maze!",
 		"The Finale",
@@ -102,12 +84,6 @@ class StoryMenuState extends MusicBeatState
 
 	var songColors:Array<FlxColor> = [
         0xFFca1f6f, // GF
-        0xFFc885e5, // DAD
-        0xFFf9a326, // SPOOKY
-        0xFFceec75, // PICO
-        0xFFec7aac, // MOM
-        0xFFffffff, // PARENTS-CHRISTMAS
-        0xFFffaa6f, // SENPAI
 		0xFF4965FF, // DAVE
 		0xFF00B515, // MISTER BAMBI RETARD
 		0xFF00FFFF //SPLIT THE THONNNNN
@@ -180,7 +156,7 @@ class StoryMenuState extends MusicBeatState
 
 		for (i in 0...weekData.length)
 		{
-			if (actualWeeks[i] == 10 && !tristanunlocked) continue;
+			if (actualWeeks[i] == 4 && !tristanunlocked) continue;
 				var weekThing:MenuItem = new MenuItem(0, yellowBG.y + yellowBG.height + 10, actualWeeks[i]);
 				weekThing.y += ((weekThing.height + 20) * actualWeeks[i]);
 				weekThing.targetY = actualWeeks[i];
@@ -402,21 +378,16 @@ class StoryMenuState extends MusicBeatState
 	{
 		if (weekUnlocked[curWeek])
 		{
-			if (FlxG.save.data.tristanProgress == "pending play" && (curWeek > 6 || curWeek == 0) && curWeek != 10)
+			if (FlxG.save.data.tristanProgress == "pending play" && curWeek == 0 && curWeek != 4)
 			{
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 				return;
 			}
-			if (stopspamming == false)
+			if (!stopspamming)
 			{
 				FlxG.sound.play(Paths.sound('confirmMenu'));
 
 				grpWeekText.members[curWeek].startFlashing();
-
-				if(curWeek != 7 && curWeek != 8 && curWeek != 9)
-				{
-					grpWeekCharacters.members[1].animation.play('bfConfirm');
-				}
 				stopspamming = true;
 			}
 
@@ -444,7 +415,7 @@ class StoryMenuState extends MusicBeatState
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				PlayState.characteroverride = "none";
-				PlayState.curmult = [1,1,1,1];
+				PlayState.curmult = [1, 1, 1, 1];
 				switch (PlayState.storyWeek)
 				{
 					default:
@@ -467,7 +438,7 @@ class StoryMenuState extends MusicBeatState
 		sprDifficulty.offset.x = 0;
 		switch (curWeek)
 		{
-			case 9:
+			case 3:
 				sprDifficulty.animation.play('finale');
 				sprDifficulty.offset.x = 45;
 			default:
@@ -492,7 +463,7 @@ class StoryMenuState extends MusicBeatState
 	function changeDifficulty(change:Int = 0):Void
 	{
 		curDifficulty += change;
-		if (curWeek == 7)
+		if (curWeek == 1)
 		{
 		if (curDifficulty < 0)
 			curDifficulty = 3;
@@ -506,7 +477,7 @@ class StoryMenuState extends MusicBeatState
 			if (curDifficulty > 2)
 				curDifficulty = 0;
 		}
-		if (curWeek == 9)
+		if (curWeek == 3)
 		{
 			curDifficulty = 1;
 		}
@@ -536,7 +507,7 @@ class StoryMenuState extends MusicBeatState
 			curIndex = 0;
 		if (curIndex < 0)
 			curIndex = weekData.length - 1;
-		if (actualWeeks[curIndex] == 10 && !tristanunlocked) curIndex += (change > 0 ? 1 : -1); //repeat it again
+		if (actualWeeks[curIndex] == 4 && !tristanunlocked) curIndex += (change > 0 ? 1 : -1); //repeat it again
 		curWeek = actualWeeks[curIndex];
 		if (curWeek != 7) //no trying to use unnerfed on non-week 7 songs
 		{
@@ -545,7 +516,7 @@ class StoryMenuState extends MusicBeatState
 			if (curDifficulty > 2)
 				curDifficulty = 0;
 		}
-		if (curWeek == 9)
+		if (curWeek == 3)
 		{
 			curDifficulty = 1;
 		}
@@ -579,13 +550,13 @@ class StoryMenuState extends MusicBeatState
 		var position:FlxPoint;
 		switch (curWeek)
 		{
-			case 7:
+			case 1:
 				path = Paths.image("dave/DaveHouse", "shared");
 				position = new FlxPoint(600, 55);
-			case 8:
+			case 2:
 				path = Paths.image("dave/bamboi", "shared");
 				position = new FlxPoint(600, 55);
-			case 9:
+			case 3:
 				path = Paths.image("dave/splitathon", "shared");
 				position = new FlxPoint(600, 55);
 			default:
