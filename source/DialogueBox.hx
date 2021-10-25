@@ -29,8 +29,6 @@ class DialogueBox extends FlxSpriteGroup
 	var dialogue:Alphabet;
 	var dialogueList:Array<String> = [];
 
-	var noAaPortraits:Array<String> = ['dialogue/3d_bamb', 'dialogue/unfairnessPortrait', 'dialogue/dave_furiosity'];
-
 	// SECOND DIALOGUE FOR THE PIXEL SHIT INSTEAD???
 	var swagDialogue:FlxTypeText;
 
@@ -65,7 +63,13 @@ class DialogueBox extends FlxSpriteGroup
 			case 'thorns':
 				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
-			case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
+			case 'house' | 'insanity' | 'splitathon':
+				FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'furiosity':
+				FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
+				FlxG.sound.music.fadeIn(1, 0, 0.8);
+			case 'polygonized':
 				FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'supernovae' | 'glitch':
@@ -80,7 +84,7 @@ class DialogueBox extends FlxSpriteGroup
 					FlxG.sound.playMusic(Paths.music('dooDooFeces'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
 				}
-			default:
+			case 'blocked' | 'corn-theft' | 'maze':
 				randomNumber = FlxG.random.int(0, 50);
 				if(randomNumber == 50)
 				{
@@ -114,10 +118,10 @@ class DialogueBox extends FlxSpriteGroup
 		}
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'senpai' | 'roses' | 'thorns':
-				box = new FlxSprite(-20, 45);
-			default:
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
 				box = new FlxSprite(-20, 400);
+			default:
+				box = new FlxSprite(-20, 45);
 		}
 
 		blackScreen = new FlxSprite(0, 0).makeGraphic(5000, 5000, FlxColor.BLACK);
@@ -150,7 +154,7 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward', 'week6'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
-			case 'house' | 'insanity' | 'supernovae' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon' | 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
@@ -179,7 +183,7 @@ class DialogueBox extends FlxSpriteGroup
 			case 'house' | 'insanity' | 'furiosity' | 'polygonized':
 				portraitLeftCharacter = 'dave';
 				
-			case 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon' | 'unfairness' | 'cheating':
+			case 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon':
 				portraitLeftCharacter = 'bambi';
 		}
 
@@ -210,12 +214,8 @@ class DialogueBox extends FlxSpriteGroup
 				portraitRight.setPosition(320, 200);
 				portraitRight.visible = true;
 				portraitLeft.antialiasing = false;
-			case 'supernovae' | 'glitch' | 'unfairness':
-			{
-				portraitLeft.setPosition(276.95, 150);
-				portraitLeft.visible = true;
-			}
-			default:
+
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon':
 				portraitLeft.setPosition(276.95, 170);
 				portraitLeft.visible = true;
 		}
@@ -237,15 +237,15 @@ class DialogueBox extends FlxSpriteGroup
 				handSelect.setGraphicSize(Std.int(handSelect.width * 6));
 				handSelect.updateHitbox();
 				add(handSelect);
-			case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
+			case 'furiosity' | 'polygonized':
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-				dropText.font = 'Comic Sans MS Bold';
+				dropText.font = Paths.font("barcode.ttf");
 				dropText.color = 0xFFFFFFFF;
 				add(dropText);
 			
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
+				swagDialogue.font = Paths.font("barcode.ttf");
 				swagDialogue.color = 0xFF000000;
-				swagDialogue.font = 'Comic Sans MS Bold';
 				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
 				add(swagDialogue);
 			default:
@@ -318,9 +318,12 @@ class DialogueBox extends FlxSpriteGroup
 				if (!isEnding)
 				{
 					isEnding = true;
-
-					FlxG.sound.music.fadeOut(2.2, 0);
-
+						
+					switch (PlayState.SONG.song.toLowerCase())
+					{
+						case 'senpai' | 'thorns' | 'house' | 'insanity' | 'furiosity' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon' | 'polygonized' | 'supernovae' | 'glitch':
+							FlxG.sound.music.fadeOut(2.2, 0);
+					}
 					switch (PlayState.SONG.song.toLowerCase())
 					{
 						case 'senpai' | 'thorns' | 'roses':
@@ -401,25 +404,15 @@ class DialogueBox extends FlxSpriteGroup
 			}
 			switch (curCharacter)
 			{
-				case 'dave' | 'bambi' | 'tristan' | 'insanityEndDave': //guys its the funny bambi character
-					if(PlayState.SONG.song.toLowerCase() == 'supernovae' || PlayState.SONG.song.toLowerCase() == 'glitch'  || PlayState.SONG.song.toLowerCase() == 'unfairness')
-					{
-						portraitLeft.setPosition(220, 170);
-					}
-					else
-					{
+				case 'dave' | 'bambi': //guys its the funny bambi character
 						portraitLeft.setPosition(220, 220);
-					}
 				case 'bf' | 'gf': //create boyfriend & genderbent boyfriend
 					portraitRight.setPosition(570, 220);
 			}
 			box.flipX = portraitLeft.visible;
 			portraitLeft.x -= 150;
 			//portraitRight.x += 100;
-			if(!noAaPortraits.contains(portrait.portraitPath))
-			{
-				portraitLeft.antialiasing = true;
-			}
+			portraitLeft.antialiasing = portrait.portraitPath != "dialogue/dave_furiosity";
 			portraitRight.antialiasing = true;
 			portraitLeft.animation.play('enter',true);
 			portraitRight.animation.play('enter',true);
@@ -433,47 +426,42 @@ class DialogueBox extends FlxSpriteGroup
 		{
 			case 'distort':
 				var shad:Shaders.PulseEffect = new Shaders.PulseEffect();
+				curshader = shad;
 				shad.waveAmplitude = 1;
 				shad.waveFrequency = 2;
 				shad.waveSpeed = 1;
 				shad.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000,100000);
 				shad.shader.uampmul.value[0] = 1;
-				curshader = shad;
-				if(FlxG.save.data.eyesores)
-					if (curCharacter != 'generic')
-					{
-						portraitLeft.shader = curshader.shader;
-						portraitRight.shader = curshader.shader;
-					}
-					box.shader = curshader.shader;
-			case 'clearshaders':
+				if (curCharacter != 'generic')
+				{
+					portraitLeft.shader = shad.shader;
+					portraitRight.shader = shad.shader;
+					box.shader = shad.shader;
+				}
+			case 'undistort':
 				if (curCharacter != 'generic')
 				{
 					portraitLeft.shader = null;
 					portraitRight.shader = null;
+					box.shader = null;
 				}
-				box.shader = null;
 			case 'distortbg':
 				var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
+				curshader = shad;
 				shad.waveAmplitude = 0.1;
 				shad.waveFrequency = 5;
 				shad.waveSpeed = 2;
-				curshader = shad;
 				if (curCharacter != 'generic')
 				{
-					portraitLeft.shader = curshader.shader;
-					portraitRight.shader = curshader.shader;
+					portraitLeft.shader = shad.shader;
+					portraitRight.shader = shad.shader;
 				}
-				box.shader = curshader.shader;
 			case 'setfont_normal':
 				dropText.font = 'Comic Sans MS Bold';
 				swagDialogue.font = 'Comic Sans MS Bold';
 			case 'setfont_code':
 				dropText.font = Paths.font("barcode.ttf");
 				swagDialogue.font = Paths.font("barcode.ttf");
-			case 'setfont_dings':
-				dropText.font = Paths.font("wingding.ttf");
-				swagDialogue.font = Paths.font("wingding.ttf");
 			case 'to_black':
 				FlxTween.tween(blackScreen, {alpha:1}, 0.25);
 		}
@@ -510,8 +498,12 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPrefix = 'dave splitathon portrait';
 				}
 			case 'insanityEndDave':
-				portrait.portraitPath = 'dialouge/dave_pre-furiosity';
-				portrait.portraitPrefix = 'dave pre-furiosity portrait';
+				switch (PlayState.SONG.song.toLowerCase())
+				{
+					default:
+						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
+						portrait.portraitPrefix = 'dave pre-furiosity portrait';
+				}
 			case 'bambi':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
@@ -530,12 +522,6 @@ class DialogueBox extends FlxSpriteGroup
 					case 'supernovae' | 'glitch':
 						portrait.portraitPath = 'dialogue/bambi_bevel';
 						portrait.portraitPrefix = 'bambienter';
-					case 'cheating':
-						portrait.portraitPath = 'dialogue/3d_bamb';
-						portrait.portraitPrefix = 'bambi 3d portrait';
-					case 'unfairness':
-						portrait.portraitPath = 'dialogue/unfairnessPortrait';
-						portrait.portraitPrefix = 'bambi unfairness portrait';
 					case 'splitathon':
 						portrait.portraitPath = 'dialogue/bambi_splitathon';
 						portrait.portraitPrefix = 'bambi splitathon portrait';
@@ -555,7 +541,7 @@ class DialogueBox extends FlxSpriteGroup
 					case 'blocked' | 'maze':
 						portrait.portraitPath = 'dialogue/bf_blocked_maze';
 						portrait.portraitPrefix = 'bf blocked & maze portrait';
-					case 'furiosity' | 'polygonized' | 'corn-theft' | 'supernovae' | 'glitch' | 'cheating' | 'unfairness':
+					case 'furiosity' | 'polygonized' | 'corn-theft':
 						portrait.portraitPath = 'dialogue/bf_furiosity_corntheft';
 						portrait.portraitPrefix = 'bf furiosity & corntheft portrait';
 					case 'house':
@@ -572,7 +558,7 @@ class DialogueBox extends FlxSpriteGroup
 					case 'blocked':
 						portrait.portraitPath = 'dialogue/gf_blocked';
 						portrait.portraitPrefix = 'gf blocked portrait';
-					case 'corn-theft' | 'cheating' | 'unfairness' | 'supernovae' | 'glitch':
+					case 'corn-theft':
 						portrait.portraitPath = 'dialogue/gf_corntheft';
 						portrait.portraitPrefix = 'gf corntheft portrait';
 					case 'maze':
@@ -584,8 +570,12 @@ class DialogueBox extends FlxSpriteGroup
 				}
 				portrait.left = false;
 			case 'tristan':
-				portrait.portraitPath = 'dialogue/tristanPortrait';
-				portrait.portraitPrefix = 'tristan portrait';
+				switch (PlayState.SONG.song.toLowerCase())
+				{
+					default:
+						portrait.portraitPath = 'dialogue/tristanPortrait';
+						portrait.portraitPrefix = 'tristan portrait';
+				}
 		}
 		return portrait;
 	}

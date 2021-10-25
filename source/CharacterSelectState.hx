@@ -138,10 +138,10 @@ class CharacterSelectState extends MusicBeatState
 		
 		characterText = new FlxText((FlxG.width / 9) - 50, (FlxG.height / 8) - 225, "Boyfriend");
 		characterText.font = 'Comic Sans MS Bold';
+		characterText.setFormat(Paths.font("comic.ttf"), 90, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		characterText.autoSize = false;
-		characterText.size = 90;
 		characterText.fieldWidth = 1080;
-		characterText.alignment = FlxTextAlign.CENTER;
+		characterText.borderSize = 7;
 		add(characterText);
 	}
 

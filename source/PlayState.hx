@@ -2173,6 +2173,8 @@ class PlayState extends MusicBeatState
 					var marcello:FlxSprite = new FlxSprite(dad.x - 170, dad.y);
 					marcello.flipX = true;
 					add(marcello);
+					marcello.antialiasing = true;
+					marcello.color = 0xFF878787;
 					dad.visible = false;
 					boyfriend.stunned = true;
 					marcello.frames = Paths.getSparrowAtlas('dave/cutscene');
