@@ -69,6 +69,8 @@ class PlayState extends MusicBeatState
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
 
+	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness'];
+
 	var howManyPlayerNotes:Int = 0;
 	var howManyEnemyNotes:Int = 0;
 
@@ -186,6 +188,10 @@ class PlayState extends MusicBeatState
 	public var splitathonExpressionAdded:Bool = false;
 
 	public var crazyBatch:String = "shutdown /r /t 0";
+
+	public var backgroundSprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
+	var normalDaveBG:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
+	var canFloat:Bool = true;
 
 	override public function create()
 	{
@@ -309,218 +315,15 @@ class PlayState extends MusicBeatState
 			case 'splitathon':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('splitathon/splitathonDialogue'));
 		}
-		switch (SONG.song.toLowerCase())
-		{
-			case 'house' | 'insanity' | 'supernovae' | 'old-insanity':
-				defaultCamZoom = 0.9;
-				curStage = 'daveHouse';
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				add(bg);
-	
-				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills'));
-				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
-				stageHills.updateHitbox();
-				stageHills.antialiasing = true;
-				stageHills.scrollFactor.set(0.8, 0.8);
-				stageHills.active = false;
-				add(stageHills);
-	
-				var gate:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/gate'));
-				gate.setGraphicSize(Std.int(gate.width * 1.2));
-				gate.updateHitbox();
-				gate.antialiasing = true;
-				gate.scrollFactor.set(0.8, 0.8);
-				gate.x += 25;
-				gate.active = false;
-				add(gate);
-	
-				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass'));
-				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
-				stageFront.updateHitbox();
-				stageFront.antialiasing = true;
-				stageFront.scrollFactor.set(1, 1);
-				stageFront.active = false;
-				add(stageFront);
-				UsingNewCam = true;
-				if (SONG.song.toLowerCase() == 'insanity')
-				{
-					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky_insanity'));
-					bg.alpha = 0.75;
-					bg.active = true;
-					bg.visible = false;
-					add(bg);
-					// below code assumes shaders are always enabled which is bad
-					var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-					testshader.waveAmplitude = 0.1;
-					testshader.waveFrequency = 5;
-					testshader.waveSpeed = 2;
-					bg.shader = testshader.shader;
-					curbg = bg;
-				}
-			case 'blocked' | 'corn-theft' | 'maze' | 'old-corn-theft' | 'old-maze' | 'mealie' | 'splitathon':
-				defaultCamZoom = 0.9;
-				switch (SONG.song.toLowerCase())
-				{
-					case 'splitathon' | 'mealie':
-						curStage = 'bambiFarmNight';
-					default:
-						curStage = 'bambiFarm';
-				}
-	
-				var skyType:String = curStage == 'bambiFarmNight' ? 'dave/sky_night' : 'dave/sky';
-	
-				var bg:FlxSprite = new FlxSprite(-700, 0).loadGraphic(Paths.image(skyType));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-	
-				var hills:FlxSprite = new FlxSprite(-250, 200).loadGraphic(Paths.image('bambi/orangey hills'));
-				hills.antialiasing = true;
-				hills.scrollFactor.set(0.9, 0.7);
-				hills.active = false;
-	
-				var farm:FlxSprite = new FlxSprite(150, 250).loadGraphic(Paths.image('bambi/funfarmhouse'));
-				farm.antialiasing = true;
-				farm.scrollFactor.set(1.1, 0.9);
-				farm.active = false;
-				
-				var foreground:FlxSprite = new FlxSprite(-400, 600).loadGraphic(Paths.image('bambi/grass lands'));
-				foreground.antialiasing = true;
-				foreground.active = false;
-				
-				var cornSet:FlxSprite = new FlxSprite(-350, 325).loadGraphic(Paths.image('bambi/Cornys'));
-				cornSet.antialiasing = true;
-				cornSet.active = false;
-				
-				var cornSet2:FlxSprite = new FlxSprite(1050, 325).loadGraphic(Paths.image('bambi/Cornys'));
-				cornSet2.antialiasing = true;
-				cornSet2.active = false;
-				
-				var fence:FlxSprite = new FlxSprite(-350, 450).loadGraphic(Paths.image('bambi/crazy fences'));
-				fence.antialiasing = true;
-				fence.active = false;
-	
-				var sign:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('bambi/Sign'));
-				sign.antialiasing = true;
-				sign.active = false;
 
-				var nightColor:FlxColor = 0xFF878787;
-				if (curStage == 'bambiFarmNight')
-				{
-					hills.color = nightColor;
-					farm.color = nightColor;
-					foreground.color = nightColor;
-					cornSet.color = nightColor;
-					cornSet2.color = nightColor;
-					fence.color = nightColor;
-					sign.color = nightColor;
-				}
-				add(bg);
-				add(hills);
-				add(farm);
-				add(foreground);
-				add(cornSet);
-				add(cornSet2);
-				add(fence);
-				add(sign);
-	
-				UsingNewCam = true;
-			case 'bonus-song' | 'glitch':
-				defaultCamZoom = 0.9;
-				curStage = 'daveHouse_night';
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				add(bg);
-	
-				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills_night'));
-				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
-				stageHills.updateHitbox();
-				stageHills.antialiasing = true;
-				stageHills.scrollFactor.set(0.8, 0.8);
-				stageHills.active = false;
-				add(stageHills);
-	
-				var gate:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/gate_night'));
-				gate.setGraphicSize(Std.int(gate.width * 1.2));
-				gate.updateHitbox();
-				gate.antialiasing = true;
-				gate.scrollFactor.set(0.8, 0.8);
-				gate.active = false;
-				add(gate);
-	
-				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass_night'));
-				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
-				stageFront.updateHitbox();
-				stageFront.antialiasing = true;
-				stageFront.scrollFactor.set(1, 1);
-				stageFront.active = false;
-				add(stageFront);
-				UsingNewCam = true;
-			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness':
-				defaultCamZoom = 0.9;
-				if(SONG.song.toLowerCase() == 'unfairness')
-				{
-					curStage = 'unfairness';
-				}
-				else
-				{
-					curStage = 'daveEvilHouse';
-				}
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
-				bg.active = true;
-	
-				switch (SONG.song.toLowerCase())
-				{
-					case 'cheating':
-						bg.loadGraphic(Paths.image('dave/cheater'));
-					case 'unfairness':
-						bg.loadGraphic(Paths.image('dave/scarybg'));
-					default:
-						bg.loadGraphic(Paths.image('dave/redsky'));
-				}
-				add(bg);
-				// below code assumes shaders are always enabled which is bad
-				// i wouldnt consider this an eyesore though
-				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-				testshader.waveAmplitude = 0.1;
-				testshader.waveFrequency = 5;
-				testshader.waveSpeed = 2;
-				bg.shader = testshader.shader;
-				curbg = bg;
-				if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'unfairness')
-				{
-					UsingNewCam = true;
-				}
-			default:
-				defaultCamZoom = 0.9;
-				curStage = 'stage';
-				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
-				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
-				bg.active = false;
-				add(bg);
-	
-				var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
-				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
-				stageFront.updateHitbox();
-				stageFront.antialiasing = true;
-				stageFront.scrollFactor.set(0.9, 0.9);
-				stageFront.active = false;
-				add(stageFront);
-	
-				var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
-				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-				stageCurtains.updateHitbox();
-				stageCurtains.antialiasing = true;
-				stageCurtains.scrollFactor.set(1.3, 1.3);
-				stageCurtains.active = false;
-	
-				add(stageCurtains);
+		backgroundSprites = createBackgroundSprites(SONG.song.toLowerCase());
+		if (SONG.song.toLowerCase() == 'polygonized')
+		{
+			normalDaveBG = createBackgroundSprites('house');
+			for (bgSprite in normalDaveBG)
+			{
+				bgSprite.alpha = 0;
+			}
 		}
 		var gfVersion:String = 'gf';
 
@@ -554,7 +357,13 @@ class PlayState extends MusicBeatState
 		}
 
 		dad = new Character(100, 100, SONG.player2);
-		dadmirror = new Character(100, 100, "dave-annoyed-3d");
+		switch (SONG.song.toLowerCase())
+		{
+			default:
+				dadmirror = new Character(100, 100, "dave-annoyed-3d");
+			
+		}
+		
 
 		var camPos:FlxPoint = new FlxPoint(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y);
 
@@ -644,6 +453,13 @@ class PlayState extends MusicBeatState
 		{
 			var bambertTrail = new FlxTrail(boyfriend, null, 4, 24, 0.3, 0.069);
 			add(bambertTrail);
+		}
+
+		if(darkLevels.contains(curStage))
+		{
+			dad.color = 0xFF878787;
+			gf.color = 0xFF878787;
+			boyfriend.color = 0xFF878787;
 		}
 
 		add(gf);
@@ -837,6 +653,257 @@ class PlayState extends MusicBeatState
 		}
 
 		super.create();
+	}
+	function createBackgroundSprites(song:String):FlxTypedGroup<FlxSprite>
+	{
+		var sprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
+		switch (song)
+		{
+			case 'house' | 'insanity' | 'supernovae' | 'old-insanity':
+				defaultCamZoom = 0.9;
+				curStage = 'daveHouse';
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+
+				sprites.add(bg);
+				add(bg);
+	
+				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills'));
+				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
+				stageHills.updateHitbox();
+				stageHills.antialiasing = true;
+				stageHills.scrollFactor.set(0.8, 0.8);
+				stageHills.active = false;
+				
+				sprites.add(stageHills);
+				add(stageHills);
+	
+				var gate:FlxSprite = new FlxSprite(-200, -125).loadGraphic(Paths.image('dave/gate'));
+				gate.setGraphicSize(Std.int(gate.width * 1.2));
+				gate.updateHitbox();
+				gate.antialiasing = true;
+				gate.scrollFactor.set(0.8, 0.8);
+				gate.active = false;
+
+				sprites.add(gate);
+				add(gate);
+	
+				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass'));
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
+				stageFront.updateHitbox();
+				stageFront.antialiasing = true;
+				stageFront.scrollFactor.set(1, 1);
+				stageFront.active = false;
+				
+				sprites.add(stageFront);
+				add(stageFront);
+
+				UsingNewCam = true;
+				if (SONG.song.toLowerCase() == 'insanity')
+				{
+					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky_insanity'));
+					bg.alpha = 0.75;
+					bg.active = true;
+					bg.visible = false;
+					add(bg);
+					// below code assumes shaders are always enabled which is bad
+					var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
+					testshader.waveAmplitude = 0.1;
+					testshader.waveFrequency = 5;
+					testshader.waveSpeed = 2;
+					bg.shader = testshader.shader;
+					curbg = bg;
+				}
+			case 'blocked' | 'corn-theft' | 'maze' | 'old-corn-theft' | 'old-maze' | 'mealie' | 'splitathon':
+				defaultCamZoom = 0.9;
+				switch (SONG.song.toLowerCase())
+				{
+					case 'splitathon' | 'mealie':
+						curStage = 'bambiFarmNight';
+					default:
+						curStage = 'bambiFarm';
+				}
+	
+				var skyType:String = curStage == 'bambiFarmNight' ? 'dave/sky_night' : 'dave/sky';
+	
+				var bg:FlxSprite = new FlxSprite(-700, 0).loadGraphic(Paths.image(skyType));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				sprites.add(bg);
+	
+				var hills:FlxSprite = new FlxSprite(-250, 200).loadGraphic(Paths.image('bambi/orangey hills'));
+				hills.antialiasing = true;
+				hills.scrollFactor.set(0.9, 0.7);
+				hills.active = false;
+				sprites.add(hills);
+	
+				var farm:FlxSprite = new FlxSprite(150, 250).loadGraphic(Paths.image('bambi/funfarmhouse'));
+				farm.antialiasing = true;
+				farm.scrollFactor.set(1.1, 0.9);
+				farm.active = false;
+				sprites.add(farm);
+				
+				var foreground:FlxSprite = new FlxSprite(-400, 600).loadGraphic(Paths.image('bambi/grass lands'));
+				foreground.antialiasing = true;
+				foreground.active = false;
+				sprites.add(foreground);
+				
+				var cornSet:FlxSprite = new FlxSprite(-350, 325).loadGraphic(Paths.image('bambi/Cornys'));
+				cornSet.antialiasing = true;
+				cornSet.active = false;
+				sprites.add(cornSet);
+				
+				var cornSet2:FlxSprite = new FlxSprite(1050, 325).loadGraphic(Paths.image('bambi/Cornys'));
+				cornSet2.antialiasing = true;
+				cornSet2.active = false;
+				sprites.add(cornSet2);
+				
+				var fence:FlxSprite = new FlxSprite(-350, 450).loadGraphic(Paths.image('bambi/crazy fences'));
+				fence.antialiasing = true;
+				fence.active = false;
+				sprites.add(fence);
+	
+				var sign:FlxSprite = new FlxSprite(0, 500).loadGraphic(Paths.image('bambi/Sign'));
+				sign.antialiasing = true;
+				sign.active = false;
+				sprites.add(sign);
+
+				var nightColor:FlxColor = 0xFF878787;
+				if (curStage == 'bambiFarmNight')
+				{
+					hills.color = nightColor;
+					farm.color = nightColor;
+					foreground.color = nightColor;
+					cornSet.color = nightColor;
+					cornSet2.color = nightColor;
+					fence.color = nightColor;
+					sign.color = nightColor;
+				}
+				
+				add(bg);
+				add(hills);
+				add(farm);
+				add(foreground);
+				add(cornSet);
+				add(cornSet2);
+				add(fence);
+				add(sign);
+	
+				UsingNewCam = true;
+			case 'bonus-song' | 'glitch':
+				defaultCamZoom = 0.9;
+				curStage = 'daveHouse_night';
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				
+				sprites.add(bg);
+				add(bg);
+	
+				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills_night'));
+				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
+				stageHills.updateHitbox();
+				stageHills.antialiasing = true;
+				stageHills.scrollFactor.set(0.8, 0.8);
+				stageHills.active = false;
+
+				sprites.add(stageHills);
+				add(stageHills);
+	
+				var gate:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/gate_night'));
+				gate.setGraphicSize(Std.int(gate.width * 1.2));
+				gate.updateHitbox();
+				gate.antialiasing = true;
+				gate.scrollFactor.set(0.8, 0.8);
+				gate.active = false;
+
+				sprites.add(gate);
+				add(gate);
+	
+				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass_night'));
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
+				stageFront.updateHitbox();
+				stageFront.antialiasing = true;
+				stageFront.scrollFactor.set(1, 1);
+				stageFront.active = false;
+
+				sprites.add(stageFront);
+				add(stageFront);
+
+				UsingNewCam = true;
+			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness':
+				defaultCamZoom = 0.9;
+				if(SONG.song.toLowerCase() == 'unfairness')
+				{
+					curStage = 'unfairness';
+				}
+				else
+				{
+					curStage = 'daveEvilHouse';
+				}
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
+				bg.active = true;
+	
+				switch (SONG.song.toLowerCase())
+				{
+					case 'cheating':
+						bg.loadGraphic(Paths.image('dave/cheater'));
+					case 'unfairness':
+						bg.loadGraphic(Paths.image('dave/scarybg'));
+					default:
+						bg.loadGraphic(Paths.image('dave/redsky'));
+				}
+				
+				sprites.add(bg);
+				add(bg);
+				// below code assumes shaders are always enabled which is bad
+				// i wouldnt consider this an eyesore though
+				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
+				testshader.waveAmplitude = 0.1;
+				testshader.waveFrequency = 5;
+				testshader.waveSpeed = 2;
+				bg.shader = testshader.shader;
+				curbg = bg;
+				if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'unfairness')
+				{
+					UsingNewCam = true;
+				}
+			default:
+				defaultCamZoom = 0.9;
+				curStage = 'stage';
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.9, 0.9);
+				bg.active = false;
+				
+				sprites.add(bg);
+				add(bg);
+	
+				var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+				stageFront.updateHitbox();
+				stageFront.antialiasing = true;
+				stageFront.scrollFactor.set(0.9, 0.9);
+				stageFront.active = false;
+
+				sprites.add(stageFront);
+				add(stageFront);
+	
+				var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+				stageCurtains.updateHitbox();
+				stageCurtains.antialiasing = true;
+				stageCurtains.scrollFactor.set(1.3, 1.3);
+				stageCurtains.active = false;
+	
+				sprites.add(stageCurtains);
+				add(stageCurtains);
+		}
+		return sprites;
 	}
 
 	function schoolIntro(?dialogueBox:DialogueBox, isStart:Bool = true):Void
@@ -1358,11 +1425,11 @@ class PlayState extends MusicBeatState
 		}
 
 		//welcome to 3d sinning avenue
-		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()))
+		if(funnyFloatyBoys.contains(dad.curCharacter.toLowerCase()) && canFloat)
 		{
 			dad.y += (Math.sin(elapsedtime) * 0.6);
 		}
-		if(funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()))
+		if(funnyFloatyBoys.contains(boyfriend.curCharacter.toLowerCase()) && canFloat)
 		{
 			boyfriend.y += (Math.sin(elapsedtime) * 0.6);
 		}
@@ -1370,7 +1437,7 @@ class PlayState extends MusicBeatState
 		{
 			dadmirror.y += (Math.sin(elapsedtime) * 0.6);
 		}*/
-		if(funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()))
+		if(funnyFloatyBoys.contains(gf.curCharacter.toLowerCase()) && canFloat)
 		{
 			gf.y += (Math.sin(elapsedtime) * 0.6);
 		}
@@ -1777,6 +1844,7 @@ class PlayState extends MusicBeatState
 								healthtolower = 0.005;
 							}
 					}
+
 					//'LEFT', 'DOWN', 'UP', 'RIGHT'
 					var fuckingDumbassBullshitFuckYou:String;
 					fuckingDumbassBullshitFuckYou = notestuffs[Math.round(Math.abs(daNote.noteData)) % 4];
@@ -2735,6 +2803,15 @@ class PlayState extends MusicBeatState
 			else
 				health += 0.004;
 
+			if (!darkLevels.contains(curStage))
+			{
+				boyfriend.color = FlxColor.WHITE;
+			}
+			else
+			{
+				boyfriend.color = 0xFF878787;
+			}
+
 			//'LEFT', 'DOWN', 'UP', 'RIGHT'
 			var fuckingDumbassBullshitFuckYou:String;
 			fuckingDumbassBullshitFuckYou = notestuffs[Math.round(Math.abs(note.noteData)) % 4];
@@ -2817,7 +2894,6 @@ class PlayState extends MusicBeatState
 						gf.canDance = false;
 						boyfriend.playAnim('hey', true);
 						gf.playAnim('cheer', true);
-						FlxTween.tween(dad, {alpha: 0}, 2);
 				}
 			case 'glitch':
 				switch (curStep)
@@ -2923,16 +2999,45 @@ class PlayState extends MusicBeatState
 			FlxG.camera.zoom += 0.015;
 			camHUD.zoom += 0.03;
 		}
-		if (curSong.toLowerCase() == 'furiosity')
+		switch (curSong.toLowerCase())
 		{
-			if ((curBeat >= 128 && curBeat < 160) || (curBeat >= 192 && curBeat < 224))
-			{
-				if (camZooming)
+			case 'furiosity':
+				if ((curBeat >= 128 && curBeat < 160) || (curBeat >= 192 && curBeat < 224))
 					{
-						FlxG.camera.zoom += 0.015;
-						camHUD.zoom += 0.03;
+						if (camZooming)
+							{
+								FlxG.camera.zoom += 0.015;
+								camHUD.zoom += 0.03;
+							}
 					}
-			}
+			case 'polygonized':
+				switch (curBeat)
+				{
+					case 608:
+						for (bgSprite in backgroundSprites)
+						{
+							FlxTween.tween(bgSprite, {alpha: 0}, 1);
+						}
+						for (bgSprite in normalDaveBG)
+						{
+							FlxTween.tween(bgSprite, {alpha: 1}, 1);
+						}
+						canFloat = false;
+						var position = dad.getPosition();
+						remove(dad);
+						dad = new Character(position.x, position.y, 'dave', false);
+						add(dad);
+						FlxTween.linearMotion(dad, dad.x, dad.y, dad.x, dad.y, dad.x, dad.y, 350, 260, 0.6);
+				}
+			case 'mealie':
+				switch (curBeat)
+				{
+					case 1776:
+						var position = dad.getPosition();
+						remove(dad);
+						dad = new Character(position.x, position.y, 'bambi-angey', false);
+						add(dad);
+				}
 		}
 		if (shakeCam)
 		{
@@ -2959,6 +3064,14 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
 		{
 			boyfriend.playAnim('idle');
+			if (darkLevels.contains(curStage))
+			{
+				boyfriend.color = 0xFF878787;
+			}
+			else
+			{
+				boyfriend.color = FlxColor.WHITE;
+			}
 		}
 
 		if (curBeat % 8 == 7 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf') // fixed your stupid fucking code ninjamuffin this is literally the easiest shit to fix like come on seriously why are you so dumb
