@@ -665,7 +665,7 @@ class PlayState extends MusicBeatState
 						curStage = 'bambiFarm';
 				}
 	
-				var skyType:String = SONG.song.toLowerCase() == 'splitathon' ? 'dave/sky_night' : 'dave/sky';
+				var skyType:String = curStage == 'bambiFarmNight' ? 'dave/sky_night' : 'dave/sky';
 	
 				var bg:FlxSprite = new FlxSprite(-700, 0).loadGraphic(Paths.image(skyType));
 				bg.antialiasing = true;
