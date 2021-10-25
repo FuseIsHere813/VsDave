@@ -6,7 +6,7 @@ import flixel.util.FlxTimer;
 /**
  * shut up idiot im not bbpanzu hes a gay
  */
-class EndingState extends FlxState
+class EndingState extends MusicBeatState
 {
 
 	var _ending:String;

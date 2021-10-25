@@ -10,6 +10,18 @@ class HealthIcon extends FlxSprite
 	 */
 	public var sprTracker:FlxSprite;
 
+	public var noAaChars:Array<String> = [
+		'dave-angey',
+		'dave-annoyed-3d',
+		'bambi-3d',
+		'senpai',
+		'senpai-angry',
+		'spirit',
+		'bf-pixel',
+		'gf-pixel',
+		'bambi-unfair'
+	];
+
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
@@ -36,8 +48,8 @@ class HealthIcon extends FlxSprite
 		animation.add('dave-annoyed', [24, 25], 0, false, isPlayer);
 		animation.add('dave-splitathon', [24, 25], 0, false, isPlayer);
 		animation.add('dave-angey', [26, 27], 0, false, isPlayer);
-		animation.add('dave-3d-standing-bruh-what', [26, 27], 0, false, isPlayer);
-		animation.add('dave-annoyed-3d', [26, 27], 0, false, isPlayer);
+		animation.add('dave-3d-standing-bruh-what', [44, 45], 0, false, isPlayer);
+		animation.add('dave-annoyed-3d', [54, 55], 0, false, isPlayer);
 		animation.add('bambi', [28, 29], 0, false, isPlayer);
 		animation.add('bambi-splitathon', [28, 29], 0, false, isPlayer);
 		animation.add('bambi-new', [28, 29], 0, false, isPlayer);
@@ -45,6 +57,7 @@ class HealthIcon extends FlxSprite
 		animation.add('the-duo', [32, 33], 0, false, isPlayer);
 		animation.add('bambi-stupid', [34, 35], 0, false, isPlayer);
 		animation.add('bambi-3d', [36, 37], 0, false, isPlayer);
+		animation.add('bambi-unfair', [56, 57], 0, false, isPlayer);
 		animation.add('bambi-old', [34, 35], 0, false, isPlayer);
 		animation.add('parents-christmas', [17], 0, false, isPlayer);
 		animation.add('monster', [19, 20], 0, false, isPlayer);
@@ -56,8 +69,9 @@ class HealthIcon extends FlxSprite
 		animation.add('bambi-bevel', [46, 47], 0, false, isPlayer);
 		animation.add('what-lmao', [34, 35], 0, false, isPlayer);
 		animation.add('tristan-beta', [50, 51], 0, false, isPlayer);
+		animation.add('marcello-dave', [24, 25], 0, false, isPlayer);
 		animation.play(char);
-		if (char == 'dave-angey' || char == 'bambi-3d' || char == 'senpai' || char == 'bf-pixel' || char == 'spirit' || char == 'senpai-angry')
+		if (noAaChars.contains(char))
 		{
 			antialiasing = false;
 		}

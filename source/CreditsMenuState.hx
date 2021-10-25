@@ -32,7 +32,7 @@ import Discord.DiscordClient;
 using StringTools;
 /*
 hi cool lil committers looking at this code, 95% of this is my code and I'd appreciate if you didn't steal it without asking for my permission
--vs dave contributor T5mpler 
+-vs dave dev T5mpler 
 i have to put this here just in case you think of doing so
 */
 class CreditsMenuState extends MusicBeatState
@@ -55,58 +55,63 @@ class CreditsMenuState extends MusicBeatState
    var peopleInCredits:Array<Person> = 
    [
       //devs
-     new Person("MoldyGH", CreditsType.Dev, "Creator and Main Developer of Vs. Dave & Bambi",
+     new Person("MoldyGH", CreditsType.Dev, "Director, Creator, Programmer, Musician, Main Developer",
         [
            new Social('youtube', 'https://www.youtube.com/channel/UCHIvkOUDfbMCv-BEIPGgpmA'), 
            new Social('twitter', 'https://twitter.com/moldy_gh'),
            new Social('soundcloud', 'https://soundcloud.com/moldygh')
          ]
       ),
-      new Person("MissingTextureMan101", CreditsType.Dev, "Secondary Developer of Vs. Dave & Bambi",
+      new Person("MissingTextureMan101", CreditsType.Dev, "Secondary Developer and Programmer",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCCJna2KG54d1604L2lhZINQ'),
             new Social('twitter', 'https://twitter.com/OfficialMTM101')
          ]
       ),
-      new Person("rapparep lol", CreditsType.Dev, "Main Artist of Vs. Dave & Bambi",
+      new Person("rapparep lol", CreditsType.Dev, "Main Artist",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCKfdkmcdFftv4pFWr0Bh45A'),
             new Social('twitter', 'https://twitter.com/rappareplol')
          ]
       ),
-      new Person("TheBuilderXD", CreditsType.Dev, "Gamebanana Page Manager, made Tristan sprites, and more",
+      new Person("TheBuilderXD", CreditsType.Dev, "Gamebanana Page Manager, Secondary Artist",
          [
             new Social('youtube', 'https://www.youtube.com/user/99percentMember'),
             new Social('twitter', 'https://twitter.com/TheBuilderXD')
          ]
       ),
-      new Person("Erizur", CreditsType.Dev, "Programmer, Made some assets",
-         [
-            new Social('youtube', 'https://www.youtube.com/channel/UCdCAaQzt9yOGfFM0gJDJ4bQ'),
-            new Social('twitter', 'https://twitter.com/am_erizur')
-         ]
-      ),
-      new Person("CyndaquilDAC", CreditsType.Dev, "Developer",
+      new Person("CyndaquilDAC", CreditsType.Dev, "Programmer, Menu Button Artist",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UCTaq4jni33NoaI1TfMXCRcA'),
             new Social('twitter', 'https://twitter.com/CyndaquilDAC')
          ]
       ),
-      //contributors
-      new Person("T5mpler", CreditsType.Dev, "Programmer, features in 2.0",
+      new Person("Erizur", CreditsType.Dev, "Programmer, Week Icon Artist",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
-            new Social('twitter', 'https://www.twitter.com/RealT5mpler'),
+            new Social('youtube', 'https://www.youtube.com/channel/UCdCAaQzt9yOGfFM0gJDJ4bQ'),
+            new Social('twitter', 'https://twitter.com/am_erizur')
          ]
       ),
-      new Person("Zmac", CreditsType.Contributor, "Made the 3D BG, helped with intro text, and helped getting the mod into EMFNF2",
+      new Person("T5mpler", CreditsType.Dev, "Programmer",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
+            new Social('twitter', 'https://twitter.com/LemonLover699')
          ]
       ),
-      new Person("Stats45", CreditsType.Contributor, "Moral support",
+       new Person("Cleary", CreditsType.Dev, "Original artist, Censored songs, Moral support",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCddoqqR4JgTsv8PChblD1aQ'),
+            new Social('twitter', 'https://twitter.com/LemonLover699')
+         ]
+      ),
+      new Person("Stats45", CreditsType.Dev, "Minor programming, Moral support",
          [
             new Social('youtube', 'https://www.youtube.com/channel/UClb4YjR8i74G-ue2nyiH2DQ')
+         ]
+      ),
+      //contributors
+      new Person("Zmac", CreditsType.Contributor, "3D Background, Intro text help, EMFNF2 help",
+         [
+            new Social('youtube', 'https://www.youtube.com/channel/UCl50Xru1nLBENuLiQBt6VRg')
          ]
       ),
       //beta testers
@@ -150,7 +155,8 @@ class CreditsMenuState extends MusicBeatState
       ),
       new Person("normal", CreditsType.BetaTester, "Beta Tester",
          [
-            new Social('youtube', 'https://www.youtube.com/channel/UC21TRNz6llg8a6-ur4dSBtw')
+            new Social('youtube', 'https://www.youtube.com/channel/UC21TRNz6llg8a6-ur4dSBtw'),
+            new Social('roblox', 'https://www.roblox.com/users/1368920745')
          ]
       ),
       new Person("Rendurse", CreditsType.BetaTester, "Beta Tester",
@@ -286,7 +292,7 @@ class CreditsMenuState extends MusicBeatState
             }
 				if (back)
 				{
-					FlxG.switchState(new MainMenuState());
+					FlxG.switchState(new ExtrasMenuState());
 				}
 				if (accept && !transitioning)
 				{
