@@ -6,13 +6,13 @@ using StringTools;
 
 class CoolUtil
 {
-	public static var difficultyArray:Array<String> = ['EASY', "NORMAL", "HARD","UNNERFED"];
+	public static var difficultyArray:Array<String> = ['EASY', "NORMAL", "HARD","LEGACY"];
 
 	public static function difficultyString():String
 	{
 		switch (PlayState.storyWeek)
 		{
-			case 9:
+			case 3:
 				return 'FINALE';
 			default:
 				return difficultyArray[PlayState.storyDifficulty];
