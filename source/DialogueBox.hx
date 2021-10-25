@@ -53,45 +53,48 @@ class DialogueBox extends FlxSpriteGroup
 
 	public static var randomNumber:Int;
 
-	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>)
+	public function new(talkingRight:Bool = true, ?dialogueList:Array<String>, allowAudio = true)
 	{
 		super();
 
-		switch (PlayState.SONG.song.toLowerCase())
+		if(allowAudio)
 		{
-			case 'senpai':
-				FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.8);
-			case 'thorns':
-				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.8);
-			case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
-				FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.8);
-			case 'supernovae' | 'glitch':
-				randomNumber = FlxG.random.int(0, 50);
-				if(randomNumber == 50)
-				{
-					FlxG.sound.playMusic(Paths.music('secret'), 0);
+			switch (PlayState.SONG.song.toLowerCase())
+			{
+				case 'senpai':
+					FlxG.sound.playMusic(Paths.music('Lunchbox'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
-				}
-				else
-				{
-					FlxG.sound.playMusic(Paths.music('dooDooFeces'), 0);
+				case 'thorns':
+					FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
-				}
-			default:
-				randomNumber = FlxG.random.int(0, 50);
-				if(randomNumber == 50)
-				{
-					FlxG.sound.playMusic(Paths.music('secret'), 0);
+				case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
+					FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
-				}
-				else
-				{
-					FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
-					FlxG.sound.music.fadeIn(1, 0, 0.8);
-				}
+				case 'supernovae' | 'glitch':
+					randomNumber = FlxG.random.int(0, 50);
+					if(randomNumber == 50)
+					{
+						FlxG.sound.playMusic(Paths.music('secret'), 0);
+						FlxG.sound.music.fadeIn(1, 0, 0.8);
+					}
+					else
+					{
+						FlxG.sound.playMusic(Paths.music('dooDooFeces'), 0);
+						FlxG.sound.music.fadeIn(1, 0, 0.8);
+					}
+				default:
+					randomNumber = FlxG.random.int(0, 50);
+					if(randomNumber == 50)
+					{
+						FlxG.sound.playMusic(Paths.music('secret'), 0);
+						FlxG.sound.music.fadeIn(1, 0, 0.8);
+					}
+					else
+					{
+						FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
+						FlxG.sound.music.fadeIn(1, 0, 0.8);
+					}
+			}
 		}
 
 		bgFade = new FlxSprite(-200, -200).makeGraphic(Std.int(FlxG.width * 1.3), Std.int(FlxG.height * 1.3), 0xFFB3DFd8);

@@ -1041,7 +1041,7 @@ class PlayState extends MusicBeatState
 			health = 2;
 		}
 
-		var doof:DialogueBox = new DialogueBox(false, dialogue);
+		var doof:DialogueBox = new DialogueBox(false, dialogue, true);
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
@@ -2732,7 +2732,7 @@ class PlayState extends MusicBeatState
 						vocals.volume = 0;
 						generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
 						boyfriend.stunned = true;
-						var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('maze/endDialogue')));
+						var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('maze/endDialogue')), true);
 						doof.scrollFactor.set();
 						doof.finishThing = function()
 						{
@@ -2768,7 +2768,7 @@ class PlayState extends MusicBeatState
 						vocals.volume = 0;
 						generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
 						boyfriend.stunned = true;
-						var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('insanity/endDialogue')));
+						var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('insanity/endDialogue')), false);
 						doof.scrollFactor.set();
 						doof.finishThing = nextSong;
 						schoolIntro(doof, false);
@@ -2788,6 +2788,8 @@ class PlayState extends MusicBeatState
 					var marcello:FlxSprite = new FlxSprite(dad.x - 170, dad.y);
 					marcello.flipX = true;
 					add(marcello);
+					marcello.antialiasing = true;
+					marcello.color = 0xFF878787;
 					dad.visible = false;
 					boyfriend.stunned = true;
 					marcello.frames = Paths.getSparrowAtlas('dave/cutscene');
