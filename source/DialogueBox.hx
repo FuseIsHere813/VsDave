@@ -321,7 +321,7 @@ class DialogueBox extends FlxSpriteGroup
 						
 					switch (PlayState.SONG.song.toLowerCase())
 					{
-						case 'senpai' | 'thorns' | 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'glitch' | 'blocked':
+						case 'senpai' | 'thorns' | 'house' | 'insanity' | 'furiosity' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon' | 'polygonized' | 'supernovae' | 'glitch':
 							FlxG.sound.music.fadeOut(2.2, 0);
 					}
 					switch (PlayState.SONG.song.toLowerCase())
