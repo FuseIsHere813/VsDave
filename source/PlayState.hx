@@ -88,6 +88,8 @@ class PlayState extends MusicBeatState
 
 	var halloweenLevel:Bool = false;
 
+	var focusOnDadGlobal:Bool = true;
+
 	var funnyFloatyBoys:Array<String> = ['dave-angey', 'bambi-3d', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what', 'bambi-unfair'];
 
 	var storyDifficultyText:String = "";
@@ -340,6 +342,10 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('blocked/retardedDialogue'));
 			case 'corn-theft':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('corn-theft/cornDialogue'));
+			case 'cheating':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('cheating/cheaterDialogue'));
+			case 'unfairness':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('unfairness/unfairDialogue'));
 			case 'maze':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('maze/mazeDialogue'));
 			case 'splitathon':
@@ -1257,7 +1263,7 @@ class PlayState extends MusicBeatState
 		// cameras = [FlxG.cameras.list[1]];
 		startingSong = true;
 
-		if (isStoryMode)
+		if (isStoryMode || FlxG.save.data.freeplayCuts)
 		{
 			switch (curSong.toLowerCase())
 			{
@@ -1289,25 +1295,7 @@ class PlayState extends MusicBeatState
 							});
 						});
 					});
-				case 'house':
-					schoolIntro(doof);
-				case 'insanity':
-					schoolIntro(doof);
-				case 'furiosity':
-					schoolIntro(doof);
-				case 'polygonized':
-					schoolIntro(doof);
-				case 'supernovae':
-					schoolIntro(doof);
-				case 'glitch':
-					schoolIntro(doof);
-				case 'blocked':
-					schoolIntro(doof);
-				case 'corn-theft':
-					schoolIntro(doof);
-				case 'maze':
-					schoolIntro(doof);
-				case 'splitathon':
+				case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon' | 'cheating' | 'unfairness':
 					schoolIntro(doof);
 				default:
 					startCountdown();
@@ -1483,6 +1471,7 @@ class PlayState extends MusicBeatState
 			{
 				case 0:
 					FlxG.sound.play(Paths.sound('intro3'), 0.6);
+					focusOnDadGlobal = false;
 					ZoomCam(false);
 				case 1:
 					var ready:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
@@ -1502,6 +1491,7 @@ class PlayState extends MusicBeatState
 						}
 					});
 					FlxG.sound.play(Paths.sound('intro2'), 0.6);
+					focusOnDadGlobal = true;
 					ZoomCam(true);
 				case 2:
 					var set:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
@@ -1520,6 +1510,7 @@ class PlayState extends MusicBeatState
 						}
 					});
 					FlxG.sound.play(Paths.sound('intro1'), 0.6);
+					focusOnDadGlobal = false;
 					ZoomCam(false);
 				case 3:
 					var go:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
@@ -1540,6 +1531,7 @@ class PlayState extends MusicBeatState
 						}
 					});
 					FlxG.sound.play(Paths.sound('introGo'), 0.6);
+					focusOnDadGlobal = true;
 					ZoomCam(true);
 				case 4:
 			}
@@ -1696,7 +1688,7 @@ class PlayState extends MusicBeatState
 			// FlxG.log.add(i);
 			var babyArrow:FlxSprite = new FlxSprite(0, strumLine.y);
 
-			if (((SONG.player2 == "dave-angey" || SONG.player2 == "bambi-3d") && player == 0) || (((SONG.player1 == "dave-angey" || SONG.player1 == "bambi-3d") || characteroverride == "dave-angey" || characteroverride == 'bambi-3d') && player == 1))
+			if (funnyFloatyBoys.contains(dad.curCharacter) && player == 0 || funnyFloatyBoys.contains(boyfriend.curCharacter) && player == 1)
 			{
 				babyArrow.frames = Paths.getSparrowAtlas('NOTE_assets_3D');
 				babyArrow.animation.addByPrefix('green', 'arrowUP');
@@ -2515,6 +2507,7 @@ class PlayState extends MusicBeatState
 					}
 					if (UsingNewCam)
 					{
+						focusOnDadGlobal = true;
 						ZoomCam(true);
 					}
 
@@ -3461,6 +3454,7 @@ class PlayState extends MusicBeatState
 			boyfriend.playAnim('sing' + fuckingDumbassBullshitFuckYou, true);
 			if (UsingNewCam)
 			{
+				focusOnDadGlobal = false;
 				ZoomCam(false);
 			}
 
@@ -3677,11 +3671,13 @@ class PlayState extends MusicBeatState
 
 				if (!PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 				{
+					focusOnDadGlobal = true;
 					ZoomCam(true);
 				}
 
 				if (PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection)
 				{
+					focusOnDadGlobal = false;
 					ZoomCam(false);
 				}
 			}
@@ -3690,10 +3686,12 @@ class PlayState extends MusicBeatState
 		{
 			if(howManyEnemyNotes > howManyPlayerNotes)
 			{
+				focusOnDadGlobal = true;
 				ZoomCam(true);
 			}
 			else
 			{
+				focusOnDadGlobal = false;
 				ZoomCam(false);
 			}
 		}*/
