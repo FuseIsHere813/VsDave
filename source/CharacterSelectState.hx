@@ -11,19 +11,13 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import flixel.math.FlxMath;
 import flixel.util.FlxStringUtil;
-
-/**
- ben don't use any dave mod specific code here this needs to be generic so you can re-use it in your own mods
- shut up
- idiot
- no u
- */
  /**
  hey you fun commiting people, 
  i don't know about the rest of the mod but since this is basically 99% my code 
  i do not give you guys permission to grab this specific code and re-use it in your own mods without asking me first.
  the secondary dev, ben
 */
+
 class CharacterInSelect
 {
 	public var names:Array<String>;
@@ -65,7 +59,8 @@ class CharacterSelectState extends MusicBeatState
 		new CharacterInSelect(['dave', 'dave-annoyed', 'dave-splitathon', 'dave-old'], [0.25, 0.25, 2, 2], ["Dave", "Dave (Insanity)", 'Dave (Splitathon)' , "Dave (Old)"]),
 		new CharacterInSelect(['bambi', 'bambi-new', 'bambi-splitathon', 'bambi-angey', 'bambi-old', 'bambi-bevel', 'bambi-farmer-beta'], [0, 0, 3, 0], ["Mr. Bambi", 'Mr. Bambi (Farmer)', 'Mr. Bambi (Splitathon)', 'Mr. Bambi (Angry)', 'Mr. Bambi (Joke)', 'Mr. Bambi (Bevel)', 'Mr. Bambi (Beta)']),
 		new CharacterInSelect(['dave-angey', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what'], [2, 2, 0.25, 0.25], ["3D Dave", "3D Dave (Insanity)", "3D Dave (Old)"]),
-		new CharacterInSelect(['tristan-golden'], [0.25, 0.25, 0.25, 2], ["Golden Tristan"])
+		new CharacterInSelect(['tristan-golden'], [0.25, 0.25, 0.25, 2], ["Golden Tristan"]),
+		new CharacterInSelect(['bambi-3d', 'bambi-unfair'], [2, 0.25, 0.25, 0.25], ["3D Bambi", 'Unfair Bambi']),
 	];
 	public function new() 
 	{
@@ -79,11 +74,11 @@ class CharacterSelectState extends MusicBeatState
 		currentSelectedCharacter = characters[current];
 		if (FlxG.save.data.unlockedcharacters == null)
 		{
-			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false,false];
+			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false,false,false];
 		}
 		if(isDebug)	
 		{
-			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true]; //unlock everyone
+			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true,true]; //unlock everyone
 		}
 
 		var end:FlxSprite = new FlxSprite(0, 0);
@@ -231,6 +226,10 @@ class CharacterSelectState extends MusicBeatState
 			{
 				current = characters.length - 1;
 			}
+			if(current == 1)
+			{
+				current = 0;
+			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
@@ -242,6 +241,10 @@ class CharacterSelectState extends MusicBeatState
 			if (current > characters.length - 1)
 			{
 				current = 0;
+			}
+			if(current == 1)
+			{
+				current = 2;
 			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
@@ -279,7 +282,7 @@ class CharacterSelectState extends MusicBeatState
 		char.y = FlxG.height / 2;
 		switch (char.curCharacter)
 		{
-			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
+			case 'dave-angey' | 'dave-3d-standing-bruh-what' | 'bambi-3d' | 'bambi-unfair':
 				char.y -= 225;
 		}
 		add(char);
@@ -293,11 +296,11 @@ class CharacterSelectState extends MusicBeatState
 
 	override function beatHit()
 	{
+		super.beatHit();
 		if (char != null && !selectedCharacter)
 		{
 			char.playAnim('idle');
 		}
-		super.beatHit();
 	}
 	
 	

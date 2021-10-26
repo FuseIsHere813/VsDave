@@ -498,12 +498,8 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPrefix = 'dave splitathon portrait';
 				}
 			case 'insanityEndDave':
-				switch (PlayState.SONG.song.toLowerCase())
-				{
-					default:
-						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
-						portrait.portraitPrefix = 'dave pre-furiosity portrait';
-				}
+				portrait.portraitPath = 'dialouge/dave_pre-furiosity';
+				portrait.portraitPrefix = 'dave pre-furiosity portrait';
 			case 'bambi':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
@@ -570,12 +566,8 @@ class DialogueBox extends FlxSpriteGroup
 				}
 				portrait.left = false;
 			case 'tristan':
-				switch (PlayState.SONG.song.toLowerCase())
-				{
-					default:
-						portrait.portraitPath = 'dialogue/tristanPortrait';
-						portrait.portraitPrefix = 'tristan portrait';
-				}
+				portrait.portraitPath = 'dialogue/tristanPortrait';
+				portrait.portraitPrefix = 'tristan portrait';
 		}
 		return portrait;
 	}
