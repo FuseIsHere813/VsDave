@@ -70,6 +70,7 @@ class PlayState extends MusicBeatState
 	public static var sicks:Int = 0;
 
 	public var darkLevels:Array<String> = ['bambiFarmNight', 'daveHouse_night', 'unfairness'];
+	public var sunsetLevels:Array<String> = ['bambiFarmSunset', 'daveHouse_Sunset'];
 
 	var howManyPlayerNotes:Int = 0;
 	var howManyEnemyNotes:Int = 0;
@@ -109,6 +110,8 @@ class PlayState extends MusicBeatState
 	private var curSection:Int = 0;
 
 	private var camFollow:FlxObject;
+
+	public var sunsetColor:FlxColor = FlxColor.fromRGB(255, 143, 178);
 
 	private static var prevCamFollow:FlxObject;
 
@@ -443,23 +446,18 @@ class PlayState extends MusicBeatState
 			boyfriend = new Boyfriend(770, 450, formoverride);
 		}
 
-		if(dad.curCharacter.toLowerCase() == 'bambi-unfair')
-		{
-			var bambertTrail = new FlxTrail(dad, null, 4, 24, 0.3, 0.069);
-			add(bambertTrail);
-		}
-
-		if(boyfriend.curCharacter.toLowerCase() == 'bambi-unfair')
-		{
-			var bambertTrail = new FlxTrail(boyfriend, null, 4, 24, 0.3, 0.069);
-			add(bambertTrail);
-		}
-
 		if(darkLevels.contains(curStage))
 		{
 			dad.color = 0xFF878787;
 			gf.color = 0xFF878787;
 			boyfriend.color = 0xFF878787;
+		}
+
+		if(sunsetLevels.contains(curStage))
+		{
+			dad.color = sunsetColor;
+			gf.color = sunsetColor;
+			boyfriend.color = sunsetColor;
 		}
 
 		add(gf);
@@ -545,9 +543,9 @@ class PlayState extends MusicBeatState
 			case 'mealie':
 				credits = 'Original Song made by Alexander Cooper 19!';
 			case 'unfairness':
-				credits = "Ghost tapping is forced off! No, I don't you lmao";
+				credits = "Ghost tapping is forced off! Suffer!";
 			case 'cheating':
-				credits = 'Suffer the chaos!';
+				credits = 'Suffer!';
 			default:
 				credits = '';
 		}
@@ -1708,7 +1706,7 @@ class PlayState extends MusicBeatState
 			switch (curBeat)
 			{
 				case 127:
-					camZooming = true;	
+					camZooming = true;
 				case 159:
 					camZooming = false;
 				case 191:
@@ -2954,10 +2952,10 @@ class PlayState extends MusicBeatState
 				{
 					case 1024 | 1312 | 1424 | 1552 | 1664:
 						shakeCam = true;
-						camZooming = true;	
+						camZooming = true;
 					case 1152 | 1408 | 1472 | 1600 | 2048 | 2176:
 						shakeCam = false;
-						camZooming = false;	
+						camZooming = false;
 					case 2432:
 						boyfriend.canDance = false;
 						gf.canDance = false;
@@ -2969,8 +2967,10 @@ class PlayState extends MusicBeatState
 				{
 					case 480 | 681 | 1390 | 1445 | 1515 | 1542 | 1598 | 1655:
 						shakeCam = true;
+						camZooming = true;
 					case 512 | 688 | 1420 | 1464 | 1540 | 1558 | 1608 | 1745:
 						shakeCam = false;
+						camZooming = false;
 				}
 		}
 		#if desktop
