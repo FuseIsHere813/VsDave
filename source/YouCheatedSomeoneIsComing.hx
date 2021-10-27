@@ -33,7 +33,11 @@ class YouCheatedSomeoneIsComing extends MusicBeatState
 		
 		if (FlxG.keys.pressed.ENTER)
 		{
+			#if release
 			endIt();
+			#else
+			FlxG.switchState(new SusState());
+			#end
 		}
 		
 	}
