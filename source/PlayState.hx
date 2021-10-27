@@ -287,6 +287,8 @@ class PlayState extends MusicBeatState
 				trace("Hi, song genie here. You're playing " + SONG.song + ", right?");
 			case 3:
 				eatShit("this song doesnt have dialogue idiot. if you want this retarded trace function to call itself then why dont you play a song with ACTUAL dialogue? jesus fuck");
+			case 4:
+				trace("suck my balls");
 		}
 
 		switch (SONG.song.toLowerCase())
@@ -320,7 +322,7 @@ class PlayState extends MusicBeatState
 		}
 
 		backgroundSprites = createBackgroundSprites(SONG.song.toLowerCase());
-		if (SONG.song.toLowerCase() == 'polygonized')
+		if (SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'furiosity')
 		{
 			normalDaveBG = createBackgroundSprites('house');
 			for (bgSprite in normalDaveBG)
@@ -363,7 +365,7 @@ class PlayState extends MusicBeatState
 		switch (SONG.song.toLowerCase())
 		{
 			default:
-				dadmirror = new Character(100, 100, "dave-annoyed-3d");
+				dadmirror = new Character(100, 100, "dave-angey");
 			
 		}
 		
@@ -432,8 +434,9 @@ class PlayState extends MusicBeatState
 				dad.x += 100;
 		}
 
-		dadmirror.y -= 50;
-		dadmirror.x -= 130;
+
+		dadmirror.y += 0;
+		dadmirror.x += 150;
 
 		dadmirror.visible = false;
 
@@ -662,7 +665,7 @@ class PlayState extends MusicBeatState
 				curStage = 'daveHouse';
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky'));
 				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
+				bg.scrollFactor.set(0.75, 0.75);
 				bg.active = false;
 
 				sprites.add(bg);
@@ -682,7 +685,7 @@ class PlayState extends MusicBeatState
 				gate.setGraphicSize(Std.int(gate.width * 1.2));
 				gate.updateHitbox();
 				gate.antialiasing = true;
-				gate.scrollFactor.set(0.8, 0.8);
+				gate.scrollFactor.set(0.9, 0.9);
 				gate.active = false;
 
 				sprites.add(gate);
@@ -692,7 +695,6 @@ class PlayState extends MusicBeatState
 				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
 				stageFront.updateHitbox();
 				stageFront.antialiasing = true;
-				stageFront.scrollFactor.set(1, 1);
 				stageFront.active = false;
 				
 				sprites.add(stageFront);
@@ -720,11 +722,17 @@ class PlayState extends MusicBeatState
 				{
 					case 'splitathon' | 'mealie':
 						curStage = 'bambiFarmNight';
+					case 'maze':
+						curStage = 'bambiFarmSunset';
 					default:
 						curStage = 'bambiFarm';
 				}
 	
 				var skyType:String = curStage == 'bambiFarmNight' ? 'dave/sky_night' : 'dave/sky';
+				if(curStage == 'bambiFarmSunset')
+				{
+					skyType = 'dave/sky_sunset';
+				}
 	
 				var bg:FlxSprite = new FlxSprite(-700, 0).loadGraphic(Paths.image(skyType));
 				bg.antialiasing = true;
@@ -780,6 +788,16 @@ class PlayState extends MusicBeatState
 					fence.color = nightColor;
 					sign.color = nightColor;
 				}
+				if (curStage == 'bambiFarmSunset')
+				{
+					hills.color = sunsetColor;
+					farm.color = sunsetColor;
+					foreground.color = sunsetColor;
+					cornSet.color = sunsetColor;
+					cornSet2.color = sunsetColor;
+					fence.color = sunsetColor;
+					sign.color = sunsetColor;
+				}
 				
 				add(bg);
 				add(hills);
@@ -791,12 +809,12 @@ class PlayState extends MusicBeatState
 				add(sign);
 	
 				UsingNewCam = true;
-			case 'bonus-song' | 'glitch':
+			case 'bonus-song' | 'glitch' | 'secret':
 				defaultCamZoom = 0.9;
 				curStage = 'daveHouse_night';
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
 				bg.antialiasing = true;
-				bg.scrollFactor.set(0.9, 0.9);
+				bg.scrollFactor.set(0.75, 0.75);
 				bg.active = false;
 				
 				sprites.add(bg);
@@ -816,7 +834,7 @@ class PlayState extends MusicBeatState
 				gate.setGraphicSize(Std.int(gate.width * 1.2));
 				gate.updateHitbox();
 				gate.antialiasing = true;
-				gate.scrollFactor.set(0.8, 0.8);
+				gate.scrollFactor.set(0.9, 0.9);
 				gate.active = false;
 
 				sprites.add(gate);
@@ -826,7 +844,6 @@ class PlayState extends MusicBeatState
 				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
 				stageFront.updateHitbox();
 				stageFront.antialiasing = true;
-				stageFront.scrollFactor.set(1, 1);
 				stageFront.active = false;
 
 				sprites.add(stageFront);
@@ -835,14 +852,6 @@ class PlayState extends MusicBeatState
 				UsingNewCam = true;
 			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness':
 				defaultCamZoom = 0.9;
-				if(SONG.song.toLowerCase() == 'unfairness')
-				{
-					curStage = 'unfairness';
-				}
-				else
-				{
-					curStage = 'daveEvilHouse';
-				}
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.active = true;
 	
@@ -850,10 +859,13 @@ class PlayState extends MusicBeatState
 				{
 					case 'cheating':
 						bg.loadGraphic(Paths.image('dave/cheater'));
+						curStage = 'unfairness';
 					case 'unfairness':
 						bg.loadGraphic(Paths.image('dave/scarybg'));
+						curStage = 'cheating';
 					default:
 						bg.loadGraphic(Paths.image('dave/redsky'));
+						curStage = 'daveEvilHouse';
 				}
 				
 				sprites.add(bg);
@@ -955,7 +967,7 @@ class PlayState extends MusicBeatState
 		{
 			dad.dance();
 			gf.dance();
-			boyfriend.playAnim('idle');
+			boyfriend.playAnim('idle', true);
 
 			var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 			introAssets.set('default', ['ready', "set", "go"]);
@@ -1497,6 +1509,7 @@ class PlayState extends MusicBeatState
 				iconP1.animation.play('bf-old');
 			}
 		}
+
 		switch (SONG.song.toLowerCase())
 		{
 			case 'splitathon':
@@ -2002,6 +2015,8 @@ class PlayState extends MusicBeatState
 				}
 			});
 		}
+
+		ZoomCam(focusOnDadGlobal);
 
 		if (!inCutscene)
 			keyShit();
@@ -2856,13 +2871,17 @@ class PlayState extends MusicBeatState
 			else
 				health += 0.004;
 
-			if (!darkLevels.contains(curStage))
+			if (darkLevels.contains(curStage))
 			{
-				boyfriend.color = FlxColor.WHITE;
+				boyfriend.color = 0xFF878787;
+			}
+			else if(sunsetLevels.contains(curStage))
+			{
+				boyfriend.color = sunsetColor;
 			}
 			else
 			{
-				boyfriend.color = 0xFF878787;
+				boyfriend.color = FlxColor.WHITE;
 			}
 
 			//'LEFT', 'DOWN', 'UP', 'RIGHT'
@@ -3134,10 +3153,14 @@ class PlayState extends MusicBeatState
 
 		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
 		{
-			boyfriend.playAnim('idle');
+			boyfriend.playAnim('idle', true);
 			if (darkLevels.contains(curStage))
 			{
 				boyfriend.color = 0xFF878787;
+			}
+			else if(sunsetLevels.contains(curStage))
+			{
+				boyfriend.color = sunsetColor;
 			}
 			else
 			{

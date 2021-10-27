@@ -46,7 +46,7 @@ class StoryMenuState extends MusicBeatState
 	public static var weekUnlocked:Array<Bool> = [true, true, true, true, true, true, true, true, true, true, true];
 
 	var weekCharacters:Array<Dynamic> = [
-		['dad', 'bf', 'gf'],
+		['empty', 'bf', 'gf'],
 		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty'],
 		['empty', 'empty', 'empty'],
@@ -54,7 +54,7 @@ class StoryMenuState extends MusicBeatState
 	];
 
 	var weekNames:Array<String> = [
-		"",
+		"Tutorial",
 		"Dave's Fun Rapping Battle!",
 		"Mr. Bambi's Fun Corn Maze!",
 		"The Finale",
@@ -187,24 +187,11 @@ class StoryMenuState extends MusicBeatState
 	
 				switch (weekCharacterThing.character)
 				{
-					case 'dad':
-						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.5));
-						weekCharacterThing.updateHitbox();
-	
 					case 'bf':
 						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.9));
 						weekCharacterThing.updateHitbox();
 						weekCharacterThing.x -= 80;
 					case 'gf':
-						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.5));
-						weekCharacterThing.updateHitbox();
-						
-					case 'pico':
-						weekCharacterThing.flipX = true;
-					case 'parents-christmas':
-						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.9));
-						weekCharacterThing.updateHitbox();
-					case 'dave':
 						weekCharacterThing.setGraphicSize(Std.int(weekCharacterThing.width * 0.5));
 						weekCharacterThing.updateHitbox();
 				}
@@ -241,8 +228,6 @@ class StoryMenuState extends MusicBeatState
 		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
 		rightArrow.animation.play('idle');
 		difficultySelectors.add(rightArrow);
-
-		trace("Line 150");
 
 		add(yellowBG);
 		add(grpWeekCharacters);
@@ -420,7 +405,7 @@ class StoryMenuState extends MusicBeatState
 				{
 					default:
 						LoadingState.loadAndSwitchState(new PlayState(), true);
-					case 7:
+					case 1:
 						FlxG.sound.music.stop();
 						LoadingState.loadAndSwitchState(new VideoState('assets/videos/daveCutscene.webm', new PlayState()), true);
 				}

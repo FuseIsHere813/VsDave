@@ -151,7 +151,7 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward', 'week6'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
-			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'cheating' | 'unfairness' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
@@ -180,7 +180,7 @@ class DialogueBox extends FlxSpriteGroup
 			case 'house' | 'insanity' | 'furiosity' | 'polygonized':
 				portraitLeftCharacter = 'dave';
 				
-			case 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon':
+			case 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon' | 'cheating' | 'unfairness':
 				portraitLeftCharacter = 'bambi';
 		}
 
@@ -317,7 +317,7 @@ class DialogueBox extends FlxSpriteGroup
 					isEnding = true;
 						
 					FlxG.sound.music.fadeOut(2.2, 0);
-					
+
 					switch (PlayState.SONG.song.toLowerCase())
 					{
 						case 'senpai' | 'thorns' | 'roses':

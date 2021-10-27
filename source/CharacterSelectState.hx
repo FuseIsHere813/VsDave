@@ -58,7 +58,7 @@ class CharacterSelectState extends MusicBeatState
 		new CharacterInSelect(['tristan', 'tristan-beta'], [2, 0.5, 0.5, 0.5], ["Tristan", 'Tristan (Beta)']),
 		new CharacterInSelect(['dave', 'dave-annoyed', 'dave-splitathon', 'dave-old'], [0.25, 0.25, 2, 2], ["Dave", "Dave (Insanity)", 'Dave (Splitathon)' , "Dave (Old)"]),
 		new CharacterInSelect(['bambi', 'bambi-new', 'bambi-splitathon', 'bambi-angey', 'bambi-old', 'bambi-bevel', 'bambi-farmer-beta'], [0, 0, 3, 0], ["Mr. Bambi", 'Mr. Bambi (Farmer)', 'Mr. Bambi (Splitathon)', 'Mr. Bambi (Angry)', 'Mr. Bambi (Joke)', 'Mr. Bambi (Bevel)', 'Mr. Bambi (Beta)']),
-		new CharacterInSelect(['dave-angey', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what'], [2, 2, 0.25, 0.25], ["3D Dave", "3D Dave (Insanity)", "3D Dave (Old)"]),
+		new CharacterInSelect(['dave-angey', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what'], [2, 2, 0.25, 0.25], ["3D Dave", "3D Dave (1.0)", "3D Dave (Old)"]),
 		new CharacterInSelect(['tristan-golden'], [0.25, 0.25, 0.25, 2], ["Golden Tristan"]),
 		new CharacterInSelect(['bambi-3d', 'bambi-unfair'], [0, 3, 0, 0], ["3D Bambi", 'Unfair Bambi']),
 	];
@@ -282,8 +282,10 @@ class CharacterSelectState extends MusicBeatState
 		char.y = FlxG.height / 2;
 		switch (char.curCharacter)
 		{
-			case 'dave-angey' | 'dave-3d-standing-bruh-what' | 'bambi-3d' | 'bambi-unfair':
+			case 'dave-angey' | 'dave-3d-standing-bruh-what':
 				char.y -= 225;
+			case 'bambi-3d' | 'bambi-unfair':
+				char.y -= 200;
 		}
 		add(char);
 		if (!FlxG.save.data.unlockedcharacters[current])

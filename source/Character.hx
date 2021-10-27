@@ -164,19 +164,19 @@ class Character extends FlxSprite
 				// DAVE SHITE ANIMATION LOADING CODE
 				tex = Paths.getSparrowAtlas('dave/Dave_insanity_lol');
 				frames = tex;
-				animation.addByPrefix('idle', 'idleDance', 24, false);
+				animation.addByPrefix('idle', 'Idle', 24, false);
 				animation.addByPrefix('singUP', 'Up', 24, false);
 				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 				animation.addByPrefix('singDOWN', 'Down', 24, false);
 				animation.addByPrefix('singLEFT', 'Left', 24, false);
-				animation.addByPrefix('scared', 'Scaredy', 24, true);
+				animation.addByPrefix('scared', 'Scared', 24, true);
 	
 				addOffset('idle');
-				addOffset("singUP", 18, 12);
-				addOffset("singRIGHT", 5, -2);
-				addOffset("singLEFT", 29, 2);
-				addOffset("singDOWN", -5, 2);
-				addOffset("scared");
+				addOffset("singUP", 3, 18);
+				addOffset("singRIGHT", 16, -18);
+				addOffset("singLEFT", 85, -12);
+				addOffset("singDOWN", 0, -34);
+				addOffset("scared", 0, -2);
 	
 				playAnim('idle');
 			case 'dave-annoyed-3d':

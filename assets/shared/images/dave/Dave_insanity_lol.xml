@@ -1,31 +1,31 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="Insanity.png">
+<TextureAtlas imagePath="Insanitydavev2342134.png">
 	<!-- Created with Adobe Animate version 21.0.7.42652 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="Down0000" x="0" y="0" width="332" height="585"/>
-	<SubTexture name="Down0001" x="336" y="0" width="332" height="585"/>
-	<SubTexture name="Down0002" x="672" y="0" width="332" height="585"/>
-	<SubTexture name="Down0003" x="1008" y="0" width="332" height="585"/>
-	<SubTexture name="Left0000" x="1344" y="0" width="402" height="586"/>
-	<SubTexture name="Left0001" x="1750" y="0" width="402" height="586"/>
-	<SubTexture name="Left0002" x="2156" y="0" width="402" height="586"/>
-	<SubTexture name="Left0003" x="2562" y="0" width="402" height="586"/>
-	<SubTexture name="Right0000" x="2968" y="0" width="339" height="581"/>
-	<SubTexture name="Right0001" x="3311" y="0" width="339" height="581"/>
-	<SubTexture name="Right0002" x="3654" y="0" width="339" height="581"/>
-	<SubTexture name="Right0003" x="0" y="590" width="339" height="581"/>
-	<SubTexture name="Scaredy0000" x="343" y="590" width="341" height="583"/>
-	<SubTexture name="Scaredy0001" x="688" y="590" width="341" height="583"/>
-	<SubTexture name="Scaredy0002" x="1033" y="590" width="341" height="583"/>
-	<SubTexture name="Up0000" x="1378" y="590" width="431" height="597"/>
-	<SubTexture name="Up0001" x="1813" y="590" width="431" height="597"/>
-	<SubTexture name="Up0002" x="2248" y="590" width="431" height="597"/>
-	<SubTexture name="Up0003" x="2683" y="590" width="431" height="597"/>
-	<SubTexture name="idleDance0000" x="3118" y="590" width="351" height="582"/>
-	<SubTexture name="idleDance0001" x="3473" y="590" width="351" height="582"/>
-	<SubTexture name="idleDance0002" x="0" y="1191" width="351" height="582"/>
-	<SubTexture name="idleDance0003" x="355" y="1191" width="351" height="582"/>
-	<SubTexture name="idleDance0004" x="355" y="1191" width="351" height="582"/>
-	<SubTexture name="idleDance0005" x="710" y="1191" width="351" height="582"/>
-	<SubTexture name="idleDance0006" x="710" y="1191" width="351" height="582"/>
+	<SubTexture name="Down0000" x="0" y="0" width="353" height="551"/>
+	<SubTexture name="Down0001" x="357" y="0" width="353" height="551"/>
+	<SubTexture name="Down0002" x="714" y="0" width="353" height="551"/>
+	<SubTexture name="Down0003" x="1071" y="0" width="353" height="551"/>
+	<SubTexture name="Idle0000" x="1428" y="0" width="326" height="585"/>
+	<SubTexture name="Idle0001" x="1758" y="0" width="326" height="585"/>
+	<SubTexture name="Idle0002" x="2088" y="0" width="326" height="585"/>
+	<SubTexture name="Idle0003" x="2418" y="0" width="326" height="585"/>
+	<SubTexture name="Idle0004" x="2418" y="0" width="326" height="585"/>
+	<SubTexture name="Idle0005" x="2748" y="0" width="326" height="585"/>
+	<SubTexture name="Idle0006" x="2748" y="0" width="326" height="585"/>
+	<SubTexture name="Left0000" x="3078" y="0" width="389" height="573"/>
+	<SubTexture name="Left0001" x="3471" y="0" width="389" height="573"/>
+	<SubTexture name="Left0002" x="0" y="589" width="389" height="573"/>
+	<SubTexture name="Left0003" x="393" y="589" width="389" height="573"/>
+	<SubTexture name="Right0000" x="786" y="589" width="431" height="570"/>
+	<SubTexture name="Right0001" x="1221" y="589" width="431" height="570"/>
+	<SubTexture name="Right0002" x="1656" y="589" width="431" height="570"/>
+	<SubTexture name="Right0003" x="2091" y="589" width="431" height="570"/>
+	<SubTexture name="Scared0000" x="2526" y="589" width="342" height="582"/>
+	<SubTexture name="Scared0001" x="2872" y="589" width="342" height="582"/>
+	<SubTexture name="Scared0002" x="3218" y="589" width="342" height="582"/>
+	<SubTexture name="Up0000" x="3564" y="589" width="324" height="604"/>
+	<SubTexture name="Up0001" x="0" y="1197" width="324" height="604"/>
+	<SubTexture name="Up0002" x="328" y="1197" width="324" height="604"/>
+	<SubTexture name="Up0003" x="656" y="1197" width="324" height="604"/>
 </TextureAtlas>
