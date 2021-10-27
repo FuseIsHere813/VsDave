@@ -66,10 +66,7 @@ class DialogueBox extends FlxSpriteGroup
 			case 'house' | 'insanity' | 'splitathon':
 				FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
-			case 'furiosity':
-				FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
-				FlxG.sound.music.fadeIn(1, 0, 0.8);
-			case 'polygonized':
+			case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
 				FlxG.sound.playMusic(Paths.music('scaryAmbience'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'supernovae' | 'glitch':
@@ -215,7 +212,7 @@ class DialogueBox extends FlxSpriteGroup
 				portraitRight.visible = true;
 				portraitLeft.antialiasing = false;
 
-			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon':
+			default:
 				portraitLeft.setPosition(276.95, 170);
 				portraitLeft.visible = true;
 		}
@@ -237,7 +234,7 @@ class DialogueBox extends FlxSpriteGroup
 				handSelect.setGraphicSize(Std.int(handSelect.width * 6));
 				handSelect.updateHitbox();
 				add(handSelect);
-			case 'furiosity' | 'polygonized':
+			case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
 				dropText.font = Paths.font("barcode.ttf");
 				dropText.color = 0xFFFFFFFF;
@@ -319,11 +316,8 @@ class DialogueBox extends FlxSpriteGroup
 				{
 					isEnding = true;
 						
-					switch (PlayState.SONG.song.toLowerCase())
-					{
-						case 'senpai' | 'thorns' | 'house' | 'insanity' | 'furiosity' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon' | 'polygonized' | 'supernovae' | 'glitch':
-							FlxG.sound.music.fadeOut(2.2, 0);
-					}
+					FlxG.sound.music.fadeOut(2.2, 0);
+					
 					switch (PlayState.SONG.song.toLowerCase())
 					{
 						case 'senpai' | 'thorns' | 'roses':
