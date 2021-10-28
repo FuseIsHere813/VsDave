@@ -1,5 +1,6 @@
 package;
 
+import flixel.tweens.misc.ColorTween;
 import flixel.math.FlxRandom;
 import openfl.net.FileFilter;
 import openfl.filters.BitmapFilter;
@@ -82,7 +83,7 @@ class PlayState extends MusicBeatState
 	public static var curmult:Array<Float> = [1, 1, 1, 1];
 
 	public var curbg:FlxSprite;
-	public var screenshader:Shaders.PulseEffect = new PulseEffect();
+	public static var screenshader:Shaders.PulseEffect = new PulseEffect();
 	public var UsingNewCam:Bool = false;
 
 	public var elapsedtime:Float = 0;
@@ -96,12 +97,16 @@ class PlayState extends MusicBeatState
 	var detailsText:String = "";
 	var detailsPausedText:String = "";
 
+	var boyfriendOldIcon:String = 'bf-old';
+
 	private var vocals:FlxSound;
 
 	private var dad:Character;
 	private var dadmirror:Character;
 	private var gf:Character;
 	private var boyfriend:Boyfriend;
+
+	private var daveExpressionSplitathon:Character;
 
 	private var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
@@ -196,6 +201,8 @@ class PlayState extends MusicBeatState
 	var normalDaveBG:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
 	var canFloat:Bool = true;
 
+	var nightColor:FlxColor = 0xFF878787;
+
 	override public function create()
 	{
 		theFunne = FlxG.save.data.newInput;
@@ -217,7 +224,7 @@ class PlayState extends MusicBeatState
 		{
 			case 'dave' | 'dave-old':
 				iconRPC = 'icon_dave';
-			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
+			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao' | 'bambi-farmer-beta':
 				iconRPC = 'icon_bambi';
 			default:
 				iconRPC = 'icon_none';
@@ -385,7 +392,7 @@ class PlayState extends MusicBeatState
 			case "tristan" | 'tristan-beta':
 				dad.y += 325;
 				dad.x += 100;
-			case 'dave' | 'dave-annoyed':
+			case 'dave' | 'dave-annoyed' | 'dave-splitathon':
 				{
 					dad.y += 160;
 					dad.x += 250;
@@ -419,11 +426,6 @@ class PlayState extends MusicBeatState
 					dad.y += 450;
 					dad.x += 200;
 				}
-			case 'dave-splitathon':
-				{
-					dad.x += 100;
-					dad.y += 300;
-				}
 			case 'bambi-splitathon':
 				{
 					dad.x += 175;
@@ -449,11 +451,50 @@ class PlayState extends MusicBeatState
 			boyfriend = new Boyfriend(770, 450, formoverride);
 		}
 
+		switch (boyfriend.curCharacter)
+		{
+			case "tristan" | 'tristan-beta':
+				boyfriend.y = 100 + 325;
+				boyfriendOldIcon = 'tristan-beta';
+			case 'dave' | 'dave-annoyed' | 'dave-splitathon':
+				boyfriend.y = 100 + 160;
+				boyfriendOldIcon = 'dave-old';
+			case 'dave-old':
+				boyfriend.y = 100 + 270;
+				boyfriendOldIcon = 'dave';
+			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
+				boyfriend.y = 100;
+				switch(boyfriend.curCharacter)
+				{
+					case 'dave-angey':
+						boyfriendOldIcon = 'dave-annoyed-3d';
+					case 'dave-annoyed-3d':
+						boyfriendOldIcon = 'dave-3d-standing-bruh-what';
+					case 'dave-3d-standing-bruh-what':
+						boyfriendOldIcon = 'dave-angey';
+				}
+			case 'bambi-3d' | 'bambi-unfair':
+				boyfriend.y = 100 - 200;
+				boyfriendOldIcon = 'bambi-new';
+			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
+				boyfriend.y = 100 + 400;
+				boyfriendOldIcon = 'bambi-old';
+			case 'bambi-new' | 'bambi-farmer-beta':
+				boyfriend.y = 100 + 450;
+				boyfriendOldIcon = 'bambi-old';
+			case 'bambi-splitathon':
+				boyfriend.y = 100 + 400;
+				boyfriendOldIcon = 'bambi-old';
+			case 'bambi-angey':
+				boyfriend.y = 100 + 450;
+				boyfriendOldIcon = 'bambi-old';
+		}
+
 		if(darkLevels.contains(curStage))
 		{
-			dad.color = 0xFF878787;
-			gf.color = 0xFF878787;
-			boyfriend.color = 0xFF878787;
+			dad.color = nightColor;
+			gf.color = nightColor;
+			boyfriend.color = nightColor;
 		}
 
 		if(sunsetLevels.contains(curStage))
@@ -469,10 +510,12 @@ class PlayState extends MusicBeatState
 		add(dadmirror);
 		add(boyfriend);
 
+		#if debug
 		if(SONG.song.toLowerCase() == "unfairness")
 		{
 			health = 2;
 		}
+		#end
 
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
 		// doof.x += 70;
@@ -495,11 +538,7 @@ class PlayState extends MusicBeatState
 
 		dadStrums = new FlxTypedGroup<FlxSprite>();
 
-		// startCountdown();
-
 		generateSong(SONG.song);
-
-		// add(strumLine);
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 
@@ -533,7 +572,6 @@ class PlayState extends MusicBeatState
 			'health', 0, 2);
 		healthBar.scrollFactor.set();
 		healthBar.createFilledBar(0xFFFF0000, 0xFF66FF33);
-		// healthBar
 		add(healthBar);
 
 		var credits:String;
@@ -546,9 +584,9 @@ class PlayState extends MusicBeatState
 			case 'mealie':
 				credits = 'Original Song made by Alexander Cooper 19!';
 			case 'unfairness':
-				credits = "Ghost tapping is forced off! Suffer!";
+				credits = "Ghost tapping is forced off! Screw you!";
 			case 'cheating':
-				credits = 'Suffer!';
+				credits = 'Screw you!';
 			default:
 				credits = '';
 		}
@@ -591,9 +629,6 @@ class PlayState extends MusicBeatState
 		switch (curSong.toLowerCase())
 		{
 			case 'splitathon':
-				preload('splitathon/uhhWhatNow');
-				preload('splitathon/Why');
-				preload('splitathon/Yeah');
 				preload('splitathon/Bambi_WaitWhatNow');
 				preload('splitathon/Bambi_ChillingWithTheCorn');
 			case 'insanity':
@@ -718,11 +753,12 @@ class PlayState extends MusicBeatState
 				}
 			case 'blocked' | 'corn-theft' | 'maze' | 'old-corn-theft' | 'old-maze' | 'mealie' | 'splitathon':
 				defaultCamZoom = 0.9;
+
 				switch (SONG.song.toLowerCase())
 				{
 					case 'splitathon' | 'mealie':
 						curStage = 'bambiFarmNight';
-					case 'maze':
+					case 'maze' | 'old-maze':
 						curStage = 'bambiFarmSunset';
 					default:
 						curStage = 'bambiFarm';
@@ -777,7 +813,6 @@ class PlayState extends MusicBeatState
 				sign.active = false;
 				sprites.add(sign);
 
-				var nightColor:FlxColor = 0xFF878787;
 				if (curStage == 'bambiFarmNight')
 				{
 					hills.color = nightColor;
@@ -788,6 +823,7 @@ class PlayState extends MusicBeatState
 					fence.color = nightColor;
 					sign.color = nightColor;
 				}
+
 				if (curStage == 'bambiFarmSunset')
 				{
 					hills.color = sunsetColor;
@@ -1499,14 +1535,14 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.justPressed.NINE)
 		{
-			if (iconP1.animation.curAnim.name == 'bf-old')
+			if (iconP1.animation.curAnim.name == boyfriendOldIcon)
 			{
 				var isBF:Bool = formoverride == 'bf' || formoverride == 'none';
 				iconP1.animation.play(isBF ? SONG.player1 : formoverride);
 			}
 			else
 			{
-				iconP1.animation.play('bf-old');
+				iconP1.animation.play(boyfriendOldIcon);
 			}
 		}
 
@@ -1516,10 +1552,11 @@ class PlayState extends MusicBeatState
 				switch (curStep)
 				{
 					case 4736:
-						splitathonExpression('lookup', 225, 400);
+						dad.canDance = false;
+						dad.playAnim('scared', true);
 					case 4800:
 						FlxG.camera.flash(FlxColor.WHITE, 1);
-						splitathonExpression('backup', -100, 400);
+						splitterThonDave('what');
 						addSplitathonChar("bambi-splitathon");
 						if (BAMBICUTSCENEICONHURHURHUR == null)
 						{
@@ -1538,7 +1575,7 @@ class PlayState extends MusicBeatState
 						iconP2.animation.play("dave", true);
 					case 6080:
 						FlxG.camera.flash(FlxColor.WHITE, 1);
-						splitathonExpression('end', -100, 400);
+						splitterThonDave('happy');
 						addSplitathonChar("bambi-splitathon");
 						iconP2.animation.play("bambi", true);
 					case 8384:
@@ -2873,7 +2910,7 @@ class PlayState extends MusicBeatState
 
 			if (darkLevels.contains(curStage))
 			{
-				boyfriend.color = 0xFF878787;
+				boyfriend.color = nightColor;
 			}
 			else if(sunsetLevels.contains(curStage))
 			{
@@ -2964,6 +3001,9 @@ class PlayState extends MusicBeatState
 						remove(dad);
 						dad = new Character(position.x, position.y, 'dave', false);
 						add(dad);
+						FlxTween.color(dad, 0.6, dad.color, nightColor);
+						FlxTween.color(boyfriend, 0.6, boyfriend.color, nightColor);
+						FlxTween.color(gf, 0.6, gf.color, nightColor);
 						FlxTween.linearMotion(dad, dad.x, dad.y, 350, 260, 0.6, true);
 				}
 			case 'polygonized':
@@ -3116,6 +3156,9 @@ class PlayState extends MusicBeatState
 						remove(dad);
 						dad = new Character(position.x, position.y, 'dave', false);
 						add(dad);
+						FlxTween.color(dad, 0.6, dad.color, nightColor);
+						FlxTween.color(boyfriend, 0.6, boyfriend.color, nightColor);
+						FlxTween.color(gf, 0.6, gf.color, nightColor);
 						FlxTween.linearMotion(dad, dad.x, dad.y, 350, 260, 0.6, true);
 				}
 			case 'mealie':
@@ -3126,6 +3169,7 @@ class PlayState extends MusicBeatState
 						FlxG.camera.flash(FlxColor.WHITE, 0.25);
 						remove(dad);
 						dad = new Character(position.x, position.y, 'bambi-angey', false);
+						dad.color = nightColor;
 						add(dad);
 				}
 		}
@@ -3151,12 +3195,12 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing"))
+		if (!boyfriend.animation.curAnim.name.startsWith("sing") && boyfriend.canDance)
 		{
 			boyfriend.playAnim('idle', true);
 			if (darkLevels.contains(curStage))
 			{
-				boyfriend.color = 0xFF878787;
+				boyfriend.color = nightColor;
 			}
 			else if(sunsetLevels.contains(curStage))
 			{
@@ -3193,13 +3237,13 @@ class PlayState extends MusicBeatState
 		remove(dad);
 		dad = new Character(100, 100, char);
 		add(dad);
-		dad.color = 0xFF878787;
+		dad.color = nightColor;
 		switch (dad.curCharacter)
 		{
 			case 'dave-splitathon':
 				{
-					dad.x += 100;
-					dad.y += 300;
+					dad.y += 160;
+					dad.x += 250;
 				}
 			case 'bambi-splitathon':
 				{
@@ -3210,13 +3254,32 @@ class PlayState extends MusicBeatState
 		boyfriend.stunned = false;
 	}
 
+	//this is cuz splitathon dave expressions are now baked INTO the sprites! so cool! bonuses of this include:
+	// - Not having to cache every expression
+	// - Being able to reuse them for other things (ie. lookup for scared)
+	public function splitterThonDave(expression:String):Void
+	{
+		boyfriend.stunned = true; //hopefully this stun stuff should prevent BF from randomly missing a note
+		//stupid bullshit cuz i dont wanna bother with removing thing erighkjrehjgt
+		thing.x = -9000;
+		thing.y = -9000;
+		if(daveExpressionSplitathon != null)
+			remove(daveExpressionSplitathon);
+		daveExpressionSplitathon = new Character(-100, 260, 'dave-splitathon');
+		add(daveExpressionSplitathon);
+		daveExpressionSplitathon.color = nightColor;
+		daveExpressionSplitathon.canDance = false;
+		daveExpressionSplitathon.playAnim(expression, true);
+		boyfriend.stunned = false;
+	}
+
 	public function preload(graphic:String) //preload assets
 	{
-		var newthing:FlxSprite = new FlxSprite(1000,-1000).loadGraphic(Paths.image(graphic));
 		if (boyfriend != null)
 		{
 			boyfriend.stunned = true;
 		}
+		var newthing:FlxSprite = new FlxSprite(9000,-9000).loadGraphic(Paths.image(graphic));
 		add(newthing);
 		remove(newthing);
 		if (boyfriend != null)
@@ -3235,25 +3298,13 @@ class PlayState extends MusicBeatState
 				camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 150);
 			}
 			boyfriend.stunned = true;
-			thing.color = 0xFF878787;
+			thing.color = nightColor;
 			thing.x = x;
 			thing.y = y;
 			remove(dad);
 
 			switch (expression)
 			{
-				case 'lookup':
-					thing.frames = Paths.getSparrowAtlas('splitathon/uhhWhatNow');
-					thing.animation.addByPrefix('uhhSoWhatDoWeDoNow', 'Well', 24);
-					thing.animation.play('uhhSoWhatDoWeDoNow');
-				case 'backup':
-					thing.frames = Paths.getSparrowAtlas('splitathon/Why');
-					thing.animation.addByPrefix('whyMustYouDoThisToMeBambiWHYYYYY', 'What??????', 24);
-					thing.animation.play('whyMustYouDoThisToMeBambiWHYYYYY');
-				case 'end':
-					thing.frames = Paths.getSparrowAtlas('splitathon/Yeah');
-					thing.animation.addByPrefix('yeahhhBambiiiiTakeHimDown', 'YEAH!', 24);
-					thing.animation.play('yeahhhBambiiiiTakeHimDown');
 				case 'bambi-what':
 					thing.frames = Paths.getSparrowAtlas('splitathon/Bambi_WaitWhatNow');
 					thing.animation.addByPrefix('uhhhImConfusedWhatsHappening', 'what', 24);

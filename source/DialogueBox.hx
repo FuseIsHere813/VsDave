@@ -36,6 +36,8 @@ class DialogueBox extends FlxSpriteGroup
 
 	public var finishThing:Void->Void;
 
+	public var noAa:Array<String> = ["dialogue/dave_furiosity", ""];
+
 	var portraitLeft:FlxSprite;
 	var portraitRight:FlxSprite;
 
@@ -115,10 +117,10 @@ class DialogueBox extends FlxSpriteGroup
 		}
 		switch (PlayState.SONG.song.toLowerCase())
 		{
-			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
-				box = new FlxSprite(-20, 400);
-			default:
+			case 'senpai' | 'roses' | 'thorns':
 				box = new FlxSprite(-20, 45);
+			default:
+				box = new FlxSprite(-20, 400);
 		}
 
 		blackScreen = new FlxSprite(0, 0).makeGraphic(5000, 5000, FlxColor.BLACK);
@@ -236,12 +238,12 @@ class DialogueBox extends FlxSpriteGroup
 				add(handSelect);
 			case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
 				dropText = new FlxText(242, 502, Std.int(FlxG.width * 0.6), "", 32);
-				dropText.font = Paths.font("barcode.ttf");
+				dropText.font = 'Comic Sans MS Bold';
 				dropText.color = 0xFFFFFFFF;
 				add(dropText);
 			
 				swagDialogue = new FlxTypeText(240, 500, Std.int(FlxG.width * 0.6), "", 32);
-				swagDialogue.font = Paths.font("barcode.ttf");
+				swagDialogue.font = 'Comic Sans MS Bold';
 				swagDialogue.color = 0xFF000000;
 				swagDialogue.sounds = [FlxG.sound.load(Paths.sound('pixelText'), 0.6)];
 				add(swagDialogue);
@@ -398,7 +400,7 @@ class DialogueBox extends FlxSpriteGroup
 			}
 			switch (curCharacter)
 			{
-				case 'dave' | 'bambi': //guys its the funny bambi character
+				case 'dave' | 'bambi' | 'tristan' | 'insanityEndDave': //guys its the funny bambi character
 						portraitLeft.setPosition(220, 220);
 				case 'bf' | 'gf': //create boyfriend & genderbent boyfriend
 					portraitRight.setPosition(570, 220);
@@ -419,26 +421,16 @@ class DialogueBox extends FlxSpriteGroup
 		switch (curMod)
 		{
 			case 'distort':
-				var shad:Shaders.PulseEffect = new Shaders.PulseEffect();
+				/*var shad:Shaders.PulseEffect = new Shaders.PulseEffect();
 				curshader = shad;
 				shad.waveAmplitude = 1;
 				shad.waveFrequency = 2;
 				shad.waveSpeed = 1;
 				shad.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000,100000);
-				shad.shader.uampmul.value[0] = 1;
-				if (curCharacter != 'generic')
-				{
-					portraitLeft.shader = shad.shader;
-					portraitRight.shader = shad.shader;
-					box.shader = shad.shader;
-				}
+				shad.shader.uampmul.value[0] = 1;*/
+				PlayState.screenshader.Enabled = true;
 			case 'undistort':
-				if (curCharacter != 'generic')
-				{
-					portraitLeft.shader = null;
-					portraitRight.shader = null;
-					box.shader = null;
-				}
+				PlayState.screenshader.Enabled = false;
 			case 'distortbg':
 				var shad:Shaders.DistortBGEffect = new Shaders.DistortBGEffect();
 				curshader = shad;
@@ -515,6 +507,12 @@ class DialogueBox extends FlxSpriteGroup
 					case 'splitathon':
 						portrait.portraitPath = 'dialogue/bambi_splitathon';
 						portrait.portraitPrefix = 'bambi splitathon portrait';
+					case 'cheating':
+						portrait.portraitPath = 'dialogue/3d_bamb';
+						portrait.portraitPrefix = 'bambi 3d portrait';
+					case 'unfairness':
+						portrait.portraitPath = 'dialogue/3d_bamb';
+						portrait.portraitPrefix = 'bambi 3d portrait';
 				}
 			case 'senpai':
 				portrait.portraitPath = 'weeb/senpaiPortrait';
@@ -531,7 +529,7 @@ class DialogueBox extends FlxSpriteGroup
 					case 'blocked' | 'maze':
 						portrait.portraitPath = 'dialogue/bf_blocked_maze';
 						portrait.portraitPrefix = 'bf blocked & maze portrait';
-					case 'furiosity' | 'polygonized' | 'corn-theft':
+					case 'furiosity' | 'polygonized' | 'corn-theft' | 'cheating' | 'unfairness' | 'supernovae' | 'glitch':
 						portrait.portraitPath = 'dialogue/bf_furiosity_corntheft';
 						portrait.portraitPrefix = 'bf furiosity & corntheft portrait';
 					case 'house':
@@ -548,7 +546,7 @@ class DialogueBox extends FlxSpriteGroup
 					case 'blocked':
 						portrait.portraitPath = 'dialogue/gf_blocked';
 						portrait.portraitPrefix = 'gf blocked portrait';
-					case 'corn-theft':
+					case 'corn-theft' | 'cheating' | 'unfairness':
 						portrait.portraitPath = 'dialogue/gf_corntheft';
 						portrait.portraitPrefix = 'gf corntheft portrait';
 					case 'maze':

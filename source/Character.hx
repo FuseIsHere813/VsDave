@@ -188,10 +188,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singLEFT', 'DaveAngry Sing Note LEFT', 24, false);
 		
 				addOffset('idle');
-				addOffset("singUP", 0, 0);
-				addOffset("singRIGHT", 0, 0);
-				addOffset("singLEFT", 0, 0);
-				addOffset("singDOWN", 0, 0);
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
 				globaloffset[0] = 150;
 				globaloffset[1] = 450; //this is the y
 				furiosityScale = 1.5;
@@ -228,11 +228,11 @@ class Character extends FlxSprite
 				animation.addByPrefix('singDOWN', 'DOWN', 24, false);
 				animation.addByPrefix('singLEFT', 'LEFT', 24, false);
 		
-				addOffset('idle', 7, 0);
-				addOffset("singUP", 26, -4);
-				addOffset("singRIGHT", 33, 13);
-				addOffset("singLEFT", 59, -9);
-				addOffset("singDOWN", 10, -13);
+				addOffset('idle');
+				addOffset("singUP");
+				addOffset("singRIGHT");
+				addOffset("singLEFT");
+				addOffset("singDOWN");
 				setGraphicSize(Std.int(width * furiosityScale),Std.int(height * furiosityScale));
 				updateHitbox();
 				antialiasing = false;
@@ -623,27 +623,33 @@ class Character extends FlxSprite
 
 			case 'dave-splitathon':
 				frames = Paths.getSparrowAtlas('splitathon/Splitathon_Dave');
-				animation.addByPrefix('idle', 'Idle', 24, false);
-				animation.addByPrefix('singDOWN', 'Down', 24, false);
-				animation.addByPrefix('singUP', 'Up', 24, false);
-				animation.addByPrefix('singLEFT', 'Left', 24, false);
-				animation.addByPrefix('singRIGHT', 'Right', 24, false);
+				animation.addByPrefix('idle', 'SplitIdle', 24, false);
+				animation.addByPrefix('singDOWN', 'SplitDown', 24, false);
+				animation.addByPrefix('singUP', 'SplitUp', 24, false);
+				animation.addByPrefix('singLEFT', 'SplitLeft', 24, false);
+				animation.addByPrefix('singRIGHT', 'SplitRight', 24, false);
+				animation.addByPrefix('scared', 'Nervous', 24, true);
+				animation.addByPrefix('what', 'Mad', 24, true);
+				animation.addByPrefix('happy', 'Happy', 24, true);
 
 				addOffset('idle');
-				addOffset("singUP", 0, -1);
-				addOffset("singRIGHT", -16, -1);
-				addOffset("singLEFT", -4, -1);
-				addOffset("singDOWN", 43, -2);
+				addOffset("singUP", -12, 20);
+				addOffset("singRIGHT", -40, -13);
+				addOffset("singLEFT", 32, 8);
+				addOffset("singDOWN", 3, -21);
+				addOffset("scared", -15, 11);
+				addOffset("what", -3, 1);
+				addOffset("happy", -3, 1);
 
 				playAnim('idle');
 				
 			case 'bambi-splitathon':
 				frames = Paths.getSparrowAtlas('splitathon/Splitathon_Bambi');
-				animation.addByPrefix('idle', 'Idle', 18, false);
-				animation.addByPrefix('singDOWN', 'Down', 27, false);
-				animation.addByPrefix('singUP', 'Up', 27, false);
-				animation.addByPrefix('singLEFT', 'Left', 27, false);
-				animation.addByPrefix('singRIGHT', 'Right', 27, false);
+				animation.addByPrefix('idle', 'Idle', 24, false);
+				animation.addByPrefix('singDOWN', 'Down', 24, false);
+				animation.addByPrefix('singUP', 'Up', 24, false);
+				animation.addByPrefix('singLEFT', 'Left', 24, false);
+				animation.addByPrefix('singRIGHT', 'Right', 24, false);
 							
 				addOffset('idle');
 				addOffset("singUP", -24, 15);
