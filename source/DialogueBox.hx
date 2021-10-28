@@ -511,8 +511,8 @@ class DialogueBox extends FlxSpriteGroup
 						portrait.portraitPath = 'dialogue/3d_bamb';
 						portrait.portraitPrefix = 'bambi 3d portrait';
 					case 'unfairness':
-						portrait.portraitPath = 'dialogue/3d_bamb';
-						portrait.portraitPrefix = 'bambi 3d portrait';
+						portrait.portraitPath = 'dialogue/unfairnessPortrait';
+						portrait.portraitPrefix = 'bambi unfairness portrait';
 				}
 			case 'senpai':
 				portrait.portraitPath = 'weeb/senpaiPortrait';
