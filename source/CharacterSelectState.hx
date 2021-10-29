@@ -39,6 +39,12 @@ class CharacterSelectState extends MusicBeatState
 	public var notemodtext:FlxText;
 	public var characterText:FlxText;
 
+	public var funnyIconMan:HealthIcon;
+
+	var strummies:FlxTypedGroup<FlxSprite>;
+
+	var notestuffs:Array<String> = ['LEFT', 'DOWN', 'UP', 'RIGHT'];
+
 	public var isDebug:Bool = false; //CHANGE THIS TO FALSE BEFORE YOU COMMIT RETARDS
 
 	public var PressedTheFunny:Bool = false;
@@ -121,14 +127,20 @@ class CharacterSelectState extends MusicBeatState
 		//create character
 		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, "bf");
 		char.screenCenter();
-		char.y = FlxG.height / 2;
+		char.y = 450;
 		add(char);
+
+		strummies = new FlxTypedGroup<FlxSprite>();
+		add(strummies);
 	
 		generateStaticArrows();
 		
 		notemodtext = new FlxText((FlxG.width / 3.5) + 80, 40, 0, "1.00x       1.00x        1.00x       1.00x", 30);
 		notemodtext.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE,FlxColor.BLACK);
 		notemodtext.scrollFactor.set();
+		notemodtext.alpha = 0;
+		notemodtext.y -= 10;
+		FlxTween.tween(notemodtext, {y: notemodtext.y + 10, notemodtext: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * 0)});
 		add(notemodtext);
 		
 		characterText = new FlxText((FlxG.width / 9) - 50, (FlxG.height / 8) - 225, "Boyfriend");
@@ -137,11 +149,18 @@ class CharacterSelectState extends MusicBeatState
 		characterText.autoSize = false;
 		characterText.fieldWidth = 1080;
 		characterText.borderSize = 7;
+		characterText.screenCenter(X);
 		add(characterText);
+
+		funnyIconMan = new HealthIcon('bf', true);
+		funnyIconMan.sprTracker = characterText;
+		funnyIconMan.visible = false;
+		add(funnyIconMan);
 	}
 
 	private function generateStaticArrows():Void
 	{
+		
 		for (i in 0...4)
 		{
 			// FlxG.log.add(i);
@@ -183,7 +202,10 @@ class CharacterSelectState extends MusicBeatState
 			babyArrow.animation.play('static');
 			babyArrow.x += 50;
 			babyArrow.x += ((FlxG.width / 3.5));
-			add(babyArrow);
+			babyArrow.y -= 10;
+			babyArrow.alpha = 0;
+			FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+			strummies.add(babyArrow);
 		}
 	}
 	override public function update(elapsed:Float):Void 
@@ -196,10 +218,42 @@ class CharacterSelectState extends MusicBeatState
 			LoadingState.loadAndSwitchState(new FreeplayState());
 		}
 
-		if (FlxG.keys.justPressed.ENTER)
+		if(controls.LEFT_P && !PressedTheFunny)
+		{
+			if(!char.nativelyPlayable)
+			{
+				char.playAnim('singRIGHT', true);
+			}
+			else
+			{
+				char.playAnim('singLEFT', true);
+			}
+
+		}
+		if(controls.RIGHT_P && !PressedTheFunny)
+		{
+			if(!char.nativelyPlayable)
+			{
+				char.playAnim('singLEFT', true);
+			}
+			else
+			{
+				char.playAnim('singRIGHT', true);
+			}
+		}
+		if(controls.UP_P && !PressedTheFunny)
+		{
+			char.playAnim('singUP', true);
+		}
+		if(controls.DOWN_P && !PressedTheFunny)
+		{
+			char.playAnim('singDOWN', true);
+		}
+		if (controls.ACCEPT)
 		{
 			if (!FlxG.save.data.unlockedcharacters[current])
 			{
+				FlxG.camera.shake(0.05, 0.1);
 				FlxG.sound.play(Paths.sound('badnoise1'), 0.9);
 				return;
 			}
@@ -274,25 +328,45 @@ class CharacterSelectState extends MusicBeatState
 
 	public function UpdateBF()
 	{
+		funnyIconMan.color = FlxColor.WHITE;
 		currentSelectedCharacter = characters[current];
 		characterText.text = currentSelectedCharacter.polishedNames[curForm];
 		char.destroy();
 		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, currentSelectedCharacter.names[curForm]);
 		char.screenCenter();
-		char.y = FlxG.height / 2;
+		char.y = 450;
+
 		switch (char.curCharacter)
 		{
-			case 'dave-angey' | 'dave-3d-standing-bruh-what':
-				char.y -= 225;
+			case "tristan" | 'tristan-beta' | 'tristan-golden':
+				char.y = 100 + 325;
+			case 'dave' | 'dave-annoyed' | 'dave-splitathon':
+				char.y = 100 + 160;
+			case 'dave-old':
+				char.y = 100 + 270;
+			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
+				char.y = 100;
 			case 'bambi-3d' | 'bambi-unfair':
-				char.y -= 200;
+				char.y = 100 + 250;
+			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
+				char.y = 100 + 400;
+			case 'bambi-new' | 'bambi-farmer-beta':
+				char.y = 100 + 450;
+			case 'bambi-splitathon':
+				char.y = 100 + 400;
+			case 'bambi-angey':
+				char.y = 100 + 450;
 		}
 		add(char);
+		funnyIconMan.animation.play(char.curCharacter);
 		if (!FlxG.save.data.unlockedcharacters[current])
 		{
 			char.color = FlxColor.BLACK;
+			funnyIconMan.color = FlxColor.BLACK;
+			funnyIconMan.animation.curAnim.curFrame = 1;
 			characterText.text = '???';
 		}
+		characterText.screenCenter(X);
 		notemodtext.text = FlxStringUtil.formatMoney(currentSelectedCharacter.noteMs[0]) + "x       " + FlxStringUtil.formatMoney(currentSelectedCharacter.noteMs[3]) + "x        " + FlxStringUtil.formatMoney(currentSelectedCharacter.noteMs[2]) + "x       " + FlxStringUtil.formatMoney(currentSelectedCharacter.noteMs[1]) + "x";
 	}
 

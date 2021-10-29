@@ -410,11 +410,12 @@ class PlayState extends MusicBeatState
 				}
 			case 'bambi-3d':
 				{
-					dad.y -= 200;
+					dad.y += 250;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
 			case 'bambi-unfair':
 				{
+					dad.y += 300;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 50);
 				}
 			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
@@ -453,7 +454,7 @@ class PlayState extends MusicBeatState
 
 		switch (boyfriend.curCharacter)
 		{
-			case "tristan" | 'tristan-beta':
+			case "tristan" | 'tristan-beta' | 'tristan-golden':
 				boyfriend.y = 100 + 325;
 				boyfriendOldIcon = 'tristan-beta';
 			case 'dave' | 'dave-annoyed' | 'dave-splitathon':
@@ -471,11 +472,14 @@ class PlayState extends MusicBeatState
 					case 'dave-annoyed-3d':
 						boyfriendOldIcon = 'dave-3d-standing-bruh-what';
 					case 'dave-3d-standing-bruh-what':
-						boyfriendOldIcon = 'dave-angey';
+						boyfriendOldIcon = 'dave-old';
 				}
-			case 'bambi-3d' | 'bambi-unfair':
-				boyfriend.y = 100 - 200;
-				boyfriendOldIcon = 'bambi-new';
+			case 'bambi-3d':
+				boyfriend.y = 100 + 250;
+				boyfriendOldIcon = 'bambi-old';
+			case 'bambi-unfair':
+				boyfriend.y = 100 + 300;
+				boyfriendOldIcon = 'bambi-old';
 			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
 				boyfriend.y = 100 + 400;
 				boyfriendOldIcon = 'bambi-old';
