@@ -60,11 +60,11 @@ class CharacterSelectState extends MusicBeatState
 	public var characters:Array<CharacterInSelect> = 
 	[
 		new CharacterInSelect(['bf', 'bf-pixel', 'bf-christmas'], [1, 1, 1, 1], ["Boyfriend", "Pixel Boyfriend", "Christmas Boyfriend"]),
-		new CharacterInSelect(['bf-pixel'], [1, 1, 1, 1], ["Pixel Boyfriend"]),
+		new CharacterInSelect(['what-lmao', 'marcello-dave'], [0, 0, 0, 0], ["IF YOU SEE THIS CHRACTER, REPORT IT TO THE DEVS!", "IF YOU SEE THIS CHRACTER, REPORT IT TO THE DEVS!"]),
 		new CharacterInSelect(['tristan', 'tristan-beta'], [2, 0.5, 0.5, 0.5], ["Tristan", 'Tristan (Beta)']),
-		new CharacterInSelect(['dave', 'dave-annoyed', 'dave-splitathon', 'dave-old'], [0.25, 0.25, 2, 2], ["Dave", "Dave (Insanity)", 'Dave (Splitathon)' , "Dave (Old)"]),
-		new CharacterInSelect(['bambi', 'bambi-new', 'bambi-splitathon', 'bambi-angey', 'bambi-old', 'bambi-bevel', 'bambi-farmer-beta'], [0, 0, 3, 0], ["Mr. Bambi", 'Mr. Bambi (Farmer)', 'Mr. Bambi (Splitathon)', 'Mr. Bambi (Angry)', 'Mr. Bambi (Joke)', 'Mr. Bambi (Bevel)', 'Mr. Bambi (Beta)']),
-		new CharacterInSelect(['dave-angey', 'dave-annoyed-3d', 'dave-3d-standing-bruh-what'], [2, 2, 0.25, 0.25], ["3D Dave", "3D Dave (1.0)", "3D Dave (Old)"]),
+		new CharacterInSelect(['dave', 'dave-annoyed', 'dave-splitathon'], [0.25, 0.25, 2, 2], ["Dave", "Dave (Insanity)", 'Dave (Splitathon)']),
+		new CharacterInSelect(['bambi', 'bambi-new', 'bambi-splitathon', 'bambi-angey', 'bambi-old', 'bambi-bevel'], [0, 0, 3, 0], ["Mr. Bambi", 'Mr. Bambi (Farmer)', 'Mr. Bambi (Splitathon)', 'Mr. Bambi (Angry)', 'Mr. Bambi (Joke)', 'Mr. Bambi (Bevel)']),
+		new CharacterInSelect(['dave-angey'], [2, 2, 0.25, 0.25], ["3D Dave"]),
 		new CharacterInSelect(['tristan-golden'], [0.25, 0.25, 0.25, 2], ["Golden Tristan"]),
 		new CharacterInSelect(['bambi-3d', 'bambi-unfair'], [0, 3, 0, 0], ["3D Bambi", 'Unfair Bambi']),
 	];
@@ -90,7 +90,7 @@ class CharacterSelectState extends MusicBeatState
 		var end:FlxSprite = new FlxSprite(0, 0);
 		FlxG.sound.playMusic(Paths.music("goodEnding"),1,true);
 		add(end);
-		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
+		//FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
 		//create stage
 		var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
 		bg.antialiasing = true;
@@ -351,8 +351,10 @@ class CharacterSelectState extends MusicBeatState
 				char.y = 100 + 270;
 			case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 				char.y = 100;
-			case 'bambi-3d' | 'bambi-unfair':
-				char.y = 100 + 250;
+			case 'bambi-3d':
+				char.y = 100 + 350;
+			case 'bambi-unfair':
+				char.y = 100 + 575;
 			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
 				char.y = 100 + 400;
 			case 'bambi-new' | 'bambi-farmer-beta':

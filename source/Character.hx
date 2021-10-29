@@ -842,7 +842,7 @@ class Character extends FlxSprite
 	private var danced:Bool = false;
 
 	/**
-	 * FOR GF DANCING SHIT
+	 * FOR DANCING SHIT
 	 */
 	public function dance()
 	{
@@ -856,12 +856,12 @@ class Character extends FlxSprite
 						danced = !danced;
 
 						if (danced)
-							playAnim('danceRight');
+							playAnim('danceRight', true);
 						else
-							playAnim('danceLeft');
+							playAnim('danceLeft', true);
 					}
 				default:
-					playAnim('idle');
+					playAnim('idle', true);
 			}
 		}
 	}
