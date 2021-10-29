@@ -1915,8 +1915,8 @@ class PlayState extends MusicBeatState
 					}
 					if(dad.curCharacter == 'bambi-unfair' || dad.curCharacter == 'bambi-3d')
 					{
-						FlxG.camera.shake(0.0075, Conductor.stepCrochet);
-						camHUD.shake(0.0045, Conductor.stepCrochet);
+						FlxG.camera.shake(0.0075, 0.1);
+						camHUD.shake(0.0045, 0.1);
 					}
 					dad.playAnim('sing' + fuckingDumbassBullshitFuckYou + altAnim, true);
 					dadmirror.playAnim('sing' + fuckingDumbassBullshitFuckYou + altAnim, true);
@@ -2148,6 +2148,8 @@ class PlayState extends MusicBeatState
 			{
 				case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 					camFollow.y = boyfriend.getMidpoint().y;
+				case 'bambi-3d' | 'bambi-unfair':
+					camFollow.y = boyfriend.getMidpoint().y - 250;
 			}
 
 			if (SONG.song.toLowerCase() == 'tutorial')
@@ -2943,8 +2945,8 @@ class PlayState extends MusicBeatState
 			}
 			if(boyfriend.curCharacter == 'bambi-unfair' || boyfriend.curCharacter == 'bambi-3d')
 			{
-				FlxG.camera.shake(0.0075, Conductor.stepCrochet);
-				camHUD.shake(0.0045, Conductor.stepCrochet);
+				FlxG.camera.shake(0.0075, 0.1);
+				camHUD.shake(0.0045, 0.1);
 			}
 			boyfriend.playAnim('sing' + fuckingDumbassBullshitFuckYou, true);
 			if (UsingNewCam)
