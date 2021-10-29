@@ -36,7 +36,7 @@ class DialogueBox extends FlxSpriteGroup
 
 	public var finishThing:Void->Void;
 
-	public var noAa:Array<String> = ["dialogue/dave_furiosity", ""];
+	public var noAa:Array<String> = ["dialogue/dave_furiosity", "dialogue/3d_bamb", "dialogue/unfairnessPortrait"];
 
 	var portraitLeft:FlxSprite;
 	var portraitRight:FlxSprite;
@@ -408,7 +408,7 @@ class DialogueBox extends FlxSpriteGroup
 			box.flipX = portraitLeft.visible;
 			portraitLeft.x -= 150;
 			//portraitRight.x += 100;
-			portraitLeft.antialiasing = portrait.portraitPath != "dialogue/dave_furiosity";
+			portraitLeft.antialiasing = !noAa.contains(portrait.portraitPath);
 			portraitRight.antialiasing = true;
 			portraitLeft.animation.play('enter',true);
 			portraitRight.animation.play('enter',true);
