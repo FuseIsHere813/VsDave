@@ -140,7 +140,7 @@ class CharacterSelectState extends MusicBeatState
 		notemodtext.scrollFactor.set();
 		notemodtext.alpha = 0;
 		notemodtext.y -= 10;
-		FlxTween.tween(notemodtext, {y: notemodtext.y + 10, notemodtext: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * 0)});
+		FlxTween.tween(notemodtext, {y: notemodtext.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * 0)});
 		add(notemodtext);
 		
 		characterText = new FlxText((FlxG.width / 9) - 50, (FlxG.height / 8) - 225, "Boyfriend");
@@ -157,7 +157,7 @@ class CharacterSelectState extends MusicBeatState
 		funnyIconMan.visible = false;
 		add(funnyIconMan);
 
-		var tutorialThing:FlxSprite = new FlxSprite(50, 50).loadGraphic(Paths.image('charSelectGuide'));
+		var tutorialThing:FlxSprite = new FlxSprite(5, 5).loadGraphic(Paths.image('charSelectGuide'));
 		tutorialThing.setGraphicSize(Std.int(tutorialThing.width * 1.5));
 		tutorialThing.antialiasing = true;
 		add(tutorialThing);
