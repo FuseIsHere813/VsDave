@@ -3255,6 +3255,10 @@ class PlayState extends MusicBeatState
 	{
 		if (SONG.song.toLowerCase() == 'splitathon')
 		{
+			if(daveExpressionSplitathon != null)
+			{
+				remove(daveExpressionSplitathon);
+			}
 			if (expression != 'lookup')
 			{
 				camFollow.setPosition(dad.getGraphicMidpoint().x + 100, boyfriend.getGraphicMidpoint().y + 150);
