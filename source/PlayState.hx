@@ -1924,72 +1924,29 @@ class PlayState extends MusicBeatState
 
 					if (SONG.song.toLowerCase() != 'senpai' && SONG.song.toLowerCase() != 'roses' && SONG.song.toLowerCase() != 'thorns')
 					{
-						dadStrums.forEach(function(spr:FlxSprite)
-						{
-							switch (spr.ID)
+						dadStrums.forEach(function(sprite:FlxSprite)
 							{
-								case 2:
-									if ((Math.abs(daNote.noteData) == 2) && spr.animation.curAnim.name != 'confirm')
+								if (Math.abs(Math.round(Math.abs(daNote.noteData)) % 4) == sprite.ID)
+								{
+									sprite.animation.play('confirm', true);
+									if (sprite.animation.curAnim.name == 'confirm' && !curStage.startsWith('school'))
 									{
-										if (spr.animation.curAnim.name != 'confirm')
-										{
-											spr.animation.play('confirm', true);
-										}
-										else
-										{
-											spr.animation.reset();
-										}
-										spr.centerOffsets();
-										spr.offset.x -= 13;
-										spr.offset.y -= 13;
+										sprite.centerOffsets();
+										sprite.offset.x -= 13;
+										sprite.offset.y -= 13;
 									}
-								case 3:
-									if ((Math.abs(daNote.noteData) == 3) && spr.animation.curAnim.name != 'confirm')
+									else
 									{
-										if (spr.animation.curAnim.name != 'confirm')
-										{
-											spr.animation.play('confirm', true);
-										}
-										else
-										{
-											spr.animation.reset();
-										}
-										spr.centerOffsets();
-										spr.offset.x -= 13;
-										spr.offset.y -= 13;
+										sprite.centerOffsets();
 									}
-								case 1:
-									if ((Math.abs(daNote.noteData) == 1) && spr.animation.curAnim.name != 'confirm')
+									sprite.animation.finishCallback = function(name:String)
 									{
-										if (spr.animation.curAnim.name != 'confirm')
-										{
-											spr.animation.play('confirm', true);
-										}
-										else
-										{
-											spr.animation.reset();
-										}
-										spr.centerOffsets();
-										spr.offset.x -= 13;
-										spr.offset.y -= 13;
+										sprite.animation.play('static',true);
+										sprite.centerOffsets();
 									}
-								case 0:
-									if ((Math.abs(daNote.noteData) == 0) && spr.animation.curAnim.name != 'confirm')
-									{
-										if (spr.animation.curAnim.name != 'confirm')
-										{
-											spr.animation.play('confirm', true);
-										}
-										else
-										{
-											spr.animation.reset();
-										}
-										spr.centerOffsets();
-										spr.offset.x -= 13;
-										spr.offset.y -= 13;
-									}
-							}
-						});
+		
+								}
+							});
 					}
 					if (UsingNewCam)
 					{
@@ -3099,15 +3056,6 @@ class PlayState extends MusicBeatState
 			notes.sort(FlxSort.byY, FlxSort.DESCENDING);
 		}
 
-		dadStrums.forEach(function(spr:FlxSprite)
-		{
-			if (spr.animation.curAnim.curFrame == (spr.animation.curAnim.numFrames - 1))
-			{
-				spr.animation.play('static', false);
-				spr.centerOffsets();
-			}
-		});
-
 		if (SONG.notes[Math.floor(curStep / 16)] != null)
 		{
 			if (SONG.notes[Math.floor(curStep / 16)].changeBPM)
@@ -3212,7 +3160,7 @@ class PlayState extends MusicBeatState
 
 		if (!boyfriend.animation.curAnim.name.startsWith("sing") && boyfriend.canDance)
 		{
-			boyfriend.playAnim('idle', true);
+			boyfriend.playAnim('idle');
 			if (darkLevels.contains(curStage))
 			{
 				boyfriend.color = nightColor;
