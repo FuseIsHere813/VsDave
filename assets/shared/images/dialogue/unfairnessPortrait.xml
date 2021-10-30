@@ -2,9 +2,9 @@
 <TextureAtlas imagePath="unfairnessPortrait.png">
 	<!-- Created with Adobe Animate version 21.0.1.37179 -->
 	<!-- http://www.adobe.com/products/animate.html -->
-	<SubTexture name="bambi unfairness portrait0000" x="637" y="580" width="600" height="560" pivotX="62.8" pivotY="62.25" frameX="-62" frameY="0" frameWidth="662" frameHeight="564"/>
-	<SubTexture name="bambi unfairness portrait0001" x="10" y="10" width="617" height="560" frameX="-34" frameY="-1" frameWidth="662" frameHeight="564"/>
-	<SubTexture name="bambi unfairness portrait0002" x="637" y="10" width="617" height="560" frameX="-22" frameY="-2" frameWidth="662" frameHeight="564"/>
-	<SubTexture name="bambi unfairness portrait0003" x="1264" y="10" width="617" height="560" frameX="-11" frameY="-3" frameWidth="662" frameHeight="564"/>
-	<SubTexture name="bambi unfairness portrait0004" x="10" y="580" width="617" height="560" frameX="0" frameY="-4" frameWidth="662" frameHeight="564"/>
+	<SubTexture name="bambi unfairness portrait0000" x="10" y="10" width="480" height="270" pivotX="0" pivotY="0" frameX="0" frameY="0" frameWidth="580" frameHeight="270"/>
+	<SubTexture name="bambi unfairness portrait0001" x="500" y="10" width="480" height="270" frameX="-25" frameY="0" frameWidth="580" frameHeight="270"/>
+	<SubTexture name="bambi unfairness portrait0002" x="10" y="290" width="480" height="270" frameX="-50" frameY="0" frameWidth="580" frameHeight="270"/>
+	<SubTexture name="bambi unfairness portrait0003" x="500" y="290" width="480" height="270" frameX="-75" frameY="0" frameWidth="580" frameHeight="270"/>
+	<SubTexture name="bambi unfairness portrait0004" x="10" y="570" width="480" height="270" frameX="-100" frameY="0" frameWidth="580" frameHeight="270"/>
 </TextureAtlas>
