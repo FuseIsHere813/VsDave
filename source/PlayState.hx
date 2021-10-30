@@ -1959,7 +1959,7 @@ class PlayState extends MusicBeatState
 						case 'cheating':
 							health -= healthtolower;
 						case 'unfairness':
-							health -= healthtolower;
+							health -= (healthtolower / 6);
 					}
 					// boyfriend.playAnim('hit',true);
 					dad.holdTimer = 0;
