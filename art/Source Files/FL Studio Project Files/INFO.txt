@@ -1,7 +1,6 @@
 Furiosity is missing due to me losing it, sorry
 For Bambi's vocals just open Slicex and add break_phone.ogg from the Dave files
 Bambi's samples for Splitathon are included in the Samples folder, simply open Fruity Slicer (not slicex) and drag them in
-Bambi Finale (Cheating)'s audio files "markdm" and "marcello for 9 mins" won't be uploaded for now until found.
 
 Plugins required to load these songs properly:
 Boyfriend DirectWave Instrument: https://drive.google.com/file/d/1Zzrk9QplR9zu3mCDbfIy-IVKAIF5g6rS/view?usp=sharing
