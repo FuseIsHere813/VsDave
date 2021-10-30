@@ -18,6 +18,7 @@ class Note extends FlxSprite
 	public var strumTime:Float = 0;
 
 	public var mustPress:Bool = false;
+	public var finishedGenerating:Bool = false;
 	public var noteData:Int = 0;
 	public var canBeHit:Bool = false;
 	public var tooLate:Bool = false;
@@ -28,7 +29,6 @@ class Note extends FlxSprite
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
 
-    public var noteStyle:String = "normal";
 
 	public var noteScore:Float = 1;
 
@@ -52,7 +52,6 @@ class Note extends FlxSprite
 	{
 		super();
 
-		this.noteStyle = noteStyle;
 		if (prevNote == null)
 			prevNote = this;
 
@@ -338,6 +337,7 @@ class Note extends FlxSprite
 		{
 			if (alpha > 0.3)
 				alpha = 0.3;
+			
 		}
 	}
 }

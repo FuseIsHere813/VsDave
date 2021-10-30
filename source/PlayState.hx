@@ -282,6 +282,8 @@ class PlayState extends MusicBeatState
 		Conductor.mapBPMChanges(SONG);
 		Conductor.changeBPM(SONG.bpm);
 
+		theFunne = theFunne && SONG.song.toLowerCase() != 'unfairness';
+
 		var crazyNumber:Int;
 		crazyNumber = FlxG.random.int(0, 3);
 		switch (crazyNumber)
@@ -1222,6 +1224,7 @@ class PlayState extends MusicBeatState
 				else
 				{
 				}
+
 			}
 			daBeats += 1;
 		}
@@ -1859,6 +1862,7 @@ class PlayState extends MusicBeatState
 			{
 				var dunceNote:Note = unspawnNotes[0];
 				notes.add(dunceNote);
+				dunceNote.finishedGenerating = true;
 
 				var index:Int = unspawnNotes.indexOf(dunceNote);
 				unspawnNotes.splice(index, 1);
@@ -1958,8 +1962,11 @@ class PlayState extends MusicBeatState
 					{
 						case 'cheating':
 							health -= healthtolower;
+							trace("cheating");
+							
 						case 'unfairness':
 							health -= (healthtolower / 6);
+							trace("unfairness");
 					}
 					// boyfriend.playAnim('hit',true);
 					dad.holdTimer = 0;
@@ -1991,7 +1998,9 @@ class PlayState extends MusicBeatState
 				// WIP interpolation shit? Need to fix the pause issue
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));
 
-				if (daNote.y < -daNote.height && !FlxG.save.data.downscroll || daNote.y >= strumLine.y + 106 && FlxG.save.data.downscroll)
+				var strumliney = daNote.MyStrum != null ? daNote.MyStrum.y : strumLine.y;
+
+				if (daNote.y < -daNote.height && !FlxG.save.data.downscroll || daNote.y >= strumliney + 106 && FlxG.save.data.downscroll)
 				{
 					if (daNote.isSustainNote && daNote.wasGoodHit)
 					{
@@ -2001,10 +2010,11 @@ class PlayState extends MusicBeatState
 					}
 					else
 					{
-						health -= 0.075;
-						vocals.volume = 0;
-						if(daNote.mustPress)
+						if(daNote.mustPress && daNote.finishedGenerating)
 							noteMiss(daNote.noteData);
+							health -= 0.075;
+							trace("miss note");
+							vocals.volume = 0;
 					}
 
 					daNote.active = false;
@@ -2599,7 +2609,7 @@ class PlayState extends MusicBeatState
 
 			notes.forEachAlive(function(daNote:Note)
 			{
-				if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.isSustainNote)
+				if (daNote.canBeHit && daNote.mustPress && !daNote.tooLate && !daNote.wasGoodHit && !daNote.isSustainNote && daNote.finishedGenerating)
 				{
 					possibleNotes.push(daNote);
 				}
@@ -2654,7 +2664,7 @@ class PlayState extends MusicBeatState
 					daNote.destroy();
 				}
 			}
-			else if (!theFunne || SONG.song.toLowerCase() == 'unfairness')
+			else if (!theFunne)
 			{
 				badNoteCheck(null);
 			}
@@ -2746,6 +2756,7 @@ class PlayState extends MusicBeatState
 		if (!boyfriend.stunned)
 		{
 			health -= 0.04;
+			trace("note miss");
 			if (combo > 5 && gf.animOffsets.exists('sad'))
 			{
 				gf.playAnim('sad');
@@ -2804,7 +2815,7 @@ class PlayState extends MusicBeatState
 		// REDO THIS SYSTEM!
 		if (note != null)
 		{
-			if(note.mustPress)
+			if(note.mustPress && note.finishedGenerating)
 			{
 				noteMiss(note.noteData);
 			}
@@ -2842,7 +2853,7 @@ class PlayState extends MusicBeatState
 		{
 			goodNoteHit(note);
 		}
-		else if (!theFunne || SONG.song.toLowerCase() == 'unfairness')
+		else if (!theFunne)
 		{
 			badNoteCheck(note);
 		}
@@ -2852,10 +2863,6 @@ class PlayState extends MusicBeatState
 	{
 		if (!note.wasGoodHit)
 		{
-			if(note.noteStyle == 'phone')
-				{
-					health -= 0.8;
-				}
 			if (!note.isSustainNote)
 			{
 				popUpScore(note.strumTime, note.noteData);
@@ -2869,10 +2876,10 @@ class PlayState extends MusicBeatState
 			else
 				totalNotesHit += 1;
 
-			if (note.noteData >= 0)
-				health += 0.023;
-			else
+			if (note.isSustainNote)
 				health += 0.004;
+			else
+				health += 0.023;
 
 			if (darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized")
 			{
