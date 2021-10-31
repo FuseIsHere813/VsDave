@@ -51,6 +51,8 @@ class OptionsMenu extends MusicBeatState
 		for (i in 0...controlsStrings.length)
 		{
 				var controlLabel:Alphabet = new Alphabet(0, (70 * i) + 30, controlsStrings[i], true, false);
+				controlLabel.screenCenter(X);
+				controlLabel.itemType = 'Vertical';
 				controlLabel.isMenuItem = true;
 				controlLabel.targetY = i;
 				grpControls.add(controlLabel);
@@ -100,6 +102,8 @@ class OptionsMenu extends MusicBeatState
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.dfjk ? 'DFJK' : 'WASD'), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected;
+						ctrl.screenCenter(X);
+						ctrl.itemType = 'Vertical';
 						grpControls.add(ctrl);
 						if (FlxG.save.data.dfjk)
 							controls.setKeyboardScheme(KeyboardScheme.Solo, true);
@@ -111,36 +115,48 @@ class OptionsMenu extends MusicBeatState
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.newInput ? "Ghost Tapping" : "No Ghost Tapping"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 1;
+						ctrl.screenCenter(X);
+						ctrl.itemType = 'Vertical';
 						grpControls.add(ctrl);
 					case 2:
 						FlxG.save.data.downscroll = !FlxG.save.data.downscroll;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.downscroll ? 'Downscroll' : 'Upscroll'), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 2;
+						ctrl.screenCenter(X);
+						ctrl.itemType = 'Vertical';
 						grpControls.add(ctrl);
 					case 3:
 						FlxG.save.data.accuracyDisplay = !FlxG.save.data.accuracyDisplay;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, "Accuracy " + (FlxG.save.data.accuracyDisplay ? "off" : "on"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 3;
+						ctrl.screenCenter(X);
+						ctrl.itemType = 'Vertical';
 						grpControls.add(ctrl);
 					case 4:
 						FlxG.save.data.eyesores = !FlxG.save.data.eyesores;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.eyesores ? 'Eyesores Enabled' : 'Eyesores Disabled'), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 4;
+						ctrl.screenCenter(X);
+						ctrl.itemType = 'Vertical';
 						grpControls.add(ctrl);
 					case 5:
 						FlxG.save.data.donoteclick = !FlxG.save.data.donoteclick;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.donoteclick ? "Hitsounds On" : "Hitsounds Off"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 5;
+						ctrl.screenCenter(X);
+						ctrl.itemType = 'Vertical';
 						grpControls.add(ctrl);
 					case 6:
 						FlxG.save.data.freeplayCuts = !FlxG.save.data.freeplayCuts;
 						var ctrl:Alphabet = new Alphabet(0, (70 * curSelected) + 30, (FlxG.save.data.freeplayCuts ? "Freeplay Cutscenes On" : "Freeplay Cutscenes Off"), true, false);
 						ctrl.isMenuItem = true;
 						ctrl.targetY = curSelected - 6;
+						ctrl.screenCenter(X);
+						ctrl.itemType = 'Vertical';
 						grpControls.add(ctrl);
 						
 				}

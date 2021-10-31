@@ -34,8 +34,9 @@ class CharacterInSelect
 class CharacterSelectState extends MusicBeatState
 {
 	public var char:Boyfriend;
-	public var current:Int;
-	public var curForm:Int;
+	public var current:Int = 0;
+	public var currentReal:Int = 0;
+	public var curForm:Int = 0;
 	public var notemodtext:FlxText;
 	public var characterText:FlxText;
 
@@ -50,6 +51,9 @@ class CharacterSelectState extends MusicBeatState
 	public var PressedTheFunny:Bool = false;
 
 	var selectedCharacter:Bool = false;
+
+	private var camHUD:FlxCamera;
+	private var camGame:FlxCamera;
 
 	var currentSelectedCharacter:CharacterInSelect;
 
@@ -67,6 +71,7 @@ class CharacterSelectState extends MusicBeatState
 		new CharacterInSelect(['dave-angey'], [2, 2, 0.25, 0.25], ["3D Dave"]),
 		new CharacterInSelect(['tristan-golden'], [0.25, 0.25, 0.25, 2], ["Golden Tristan"]),
 		new CharacterInSelect(['bambi-3d', 'bambi-unfair'], [0, 3, 0, 0], ["3D Bambi", 'Unfair Bambi']),
+		//currentReal order should be 0, 1 (skipped anyways), 3, 4, 2, 5, 7, 6
 	];
 	public function new() 
 	{
@@ -76,22 +81,30 @@ class CharacterSelectState extends MusicBeatState
 	override public function create():Void 
 	{
 		super.create();
+
 		Conductor.changeBPM(110);
-		currentSelectedCharacter = characters[current];
+
+		camGame = new FlxCamera();
+		camHUD = new FlxCamera();
+		camHUD.bgColor.alpha = 0;
+		FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(camHUD);
+		FlxCamera.defaultCameras = [camGame];
+
+		currentSelectedCharacter = characters[currentReal];
+
 		if (FlxG.save.data.unlockedcharacters == null)
 		{
 			FlxG.save.data.unlockedcharacters = [true,true,false,false,false,false,false,false];
 		}
+
 		if(isDebug)	
 		{
 			FlxG.save.data.unlockedcharacters = [true,true,true,true,true,true,true,true]; //unlock everyone
 		}
 
-		var end:FlxSprite = new FlxSprite(0, 0);
 		FlxG.sound.playMusic(Paths.music("goodEnding"),1,true);
-		add(end);
-		//FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
-		//create stage
+
 		var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
 		bg.antialiasing = true;
 		bg.scrollFactor.set(0.9, 0.9);
@@ -123,14 +136,15 @@ class CharacterSelectState extends MusicBeatState
 		add(stageFront);
 
 		FlxG.camera.zoom = 0.75;
+		camHUD.zoom = 0.75;
 
-		//create character
 		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, "bf");
 		char.screenCenter();
 		char.y = 450;
 		add(char);
 
 		strummies = new FlxTypedGroup<FlxSprite>();
+		strummies.cameras = [camHUD];
 		add(strummies);
 	
 		generateStaticArrows();
@@ -141,6 +155,7 @@ class CharacterSelectState extends MusicBeatState
 		notemodtext.alpha = 0;
 		notemodtext.y -= 10;
 		FlxTween.tween(notemodtext, {y: notemodtext.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * 0)});
+		notemodtext.cameras = [camHUD];
 		add(notemodtext);
 		
 		characterText = new FlxText((FlxG.width / 9) - 50, (FlxG.height / 8) - 225, "Boyfriend");
@@ -150,17 +165,22 @@ class CharacterSelectState extends MusicBeatState
 		characterText.fieldWidth = 1080;
 		characterText.borderSize = 7;
 		characterText.screenCenter(X);
+		characterText.cameras = [camHUD];
 		add(characterText);
 
 		funnyIconMan = new HealthIcon('bf', true);
 		funnyIconMan.sprTracker = characterText;
+		funnyIconMan.cameras = [camHUD];
 		funnyIconMan.visible = false;
 		add(funnyIconMan);
 
-		var tutorialThing:FlxSprite = new FlxSprite(-100, -100).loadGraphic(Paths.image('charSelectGuide'));
+		var tutorialThing:FlxSprite = new FlxSprite(-130, -90).loadGraphic(Paths.image('charSelectGuide'));
 		tutorialThing.setGraphicSize(Std.int(tutorialThing.width * 1.5));
 		tutorialThing.antialiasing = true;
+		tutorialThing.cameras = [camHUD];
 		add(tutorialThing);
+
+		
 	}
 
 	private function generateStaticArrows():Void
@@ -210,6 +230,7 @@ class CharacterSelectState extends MusicBeatState
 			babyArrow.y -= 10;
 			babyArrow.alpha = 0;
 			FlxTween.tween(babyArrow, {y: babyArrow.y + 10, alpha: 1}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+			babyArrow.cameras = [camHUD];
 			strummies.add(babyArrow);
 		}
 	}
@@ -256,7 +277,7 @@ class CharacterSelectState extends MusicBeatState
 		}
 		if (controls.ACCEPT)
 		{
-			if (!FlxG.save.data.unlockedcharacters[current])
+			if (!FlxG.save.data.unlockedcharacters[currentReal])
 			{
 				FlxG.camera.shake(0.05, 0.1);
 				FlxG.sound.play(Paths.sound('badnoise1'), 0.9);
@@ -279,6 +300,7 @@ class CharacterSelectState extends MusicBeatState
 		}
 		if (FlxG.keys.justPressed.LEFT && !selectedCharacter)
 		{
+			//currentReal order should be 0, 1 (skipped anyways), 3, 4, 2, 5, 7, 6
 			curForm = 0;
 			current--;
 			if (current < 0)
@@ -289,12 +311,28 @@ class CharacterSelectState extends MusicBeatState
 			{
 				current = 0;
 			}
+			switch(current)
+			{
+				case 2:
+					currentReal = 3;
+				case 3:
+					currentReal = 4;
+				case 4:
+					currentReal = 2;
+				case 6:
+					currentReal = 7;
+				case 7:
+					currentReal = 6;
+				default:
+					currentReal = current;
+			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
 
 		if (FlxG.keys.justPressed.RIGHT && !selectedCharacter)
 		{
+			//currentReal order should be 0, 1 (skipped anyways), 3, 4, 2, 5, 7, 6
 			curForm = 0;
 			current++;
 			if (current > characters.length - 1)
@@ -305,6 +343,21 @@ class CharacterSelectState extends MusicBeatState
 			{
 				current = 2;
 			}
+			switch(current)
+			{
+				case 2:
+					currentReal = 3;
+				case 3:
+					currentReal = 4;
+				case 4:
+					currentReal = 2;
+				case 6:
+					currentReal = 7;
+				case 7:
+					currentReal = 6;
+				default:
+					currentReal = current;
+			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
@@ -313,7 +366,7 @@ class CharacterSelectState extends MusicBeatState
 			curForm--;
 			if (curForm < 0)
 			{
-				curForm = characters[current].names.length - 1;
+				curForm = characters[currentReal].names.length - 1;
 			}
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
@@ -322,7 +375,7 @@ class CharacterSelectState extends MusicBeatState
 		if (FlxG.keys.justPressed.UP && !selectedCharacter)
 		{
 			curForm++;
-			if (curForm > characters[current].names.length - 1)
+			if (curForm > characters[currentReal].names.length - 1)
 			{
 				curForm = 0;
 			}
@@ -334,7 +387,7 @@ class CharacterSelectState extends MusicBeatState
 	public function UpdateBF()
 	{
 		funnyIconMan.color = FlxColor.WHITE;
-		currentSelectedCharacter = characters[current];
+		currentSelectedCharacter = characters[currentReal];
 		characterText.text = currentSelectedCharacter.polishedNames[curForm];
 		char.destroy();
 		char = new Boyfriend(FlxG.width / 2, FlxG.height / 2, currentSelectedCharacter.names[curForm]);

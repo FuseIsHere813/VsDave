@@ -82,7 +82,7 @@ class FreeplayState extends MusicBeatState
 		CurrentSongIcon.antialiasing = true;
 
 		NameAlpha = new Alphabet(40,(FlxG.height / 2) - 282,AllPossibleSongs[CurrentPack],true,false);
-		NameAlpha.x = (FlxG.width / 2) - 162;
+		NameAlpha.screenCenter(X);
 		Highscore.load();
 		add(NameAlpha);
 
@@ -125,6 +125,7 @@ class FreeplayState extends MusicBeatState
 		{
 			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
 			songText.isMenuItem = true;
+			songText.itemType = 'D-Shape';
 			songText.targetY = i;
 			grpSongs.add(songText);
 
@@ -137,21 +138,28 @@ class FreeplayState extends MusicBeatState
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		scoreText.y = -200;
 
 		var scoreBG:FlxSprite = new FlxSprite(scoreText.x - 6, 0).makeGraphic(Std.int(FlxG.width * 0.35), 66, 0xFF000000);
 		scoreBG.alpha = 0.6;
+		scoreBG.y = -200;
 		add(scoreBG);
 
 		diffText = new FlxText(scoreText.x, scoreText.y + 36, 0, "", 24);
 		diffText.font = scoreText.font;
+		diffText.y = -200;
+
 		add(diffText);
 
 		add(scoreText);
 
+		FlxTween.tween(scoreBG,{y: 0},0.5,{ease: FlxEase.expoInOut});
+		FlxTween.tween(scoreText,{y: 5},0.5,{ease: FlxEase.expoInOut});
+		FlxTween.tween(diffText,{y: 40},0.5,{ease: FlxEase.expoInOut});
+
 		changeSelection();
 		changeDiff();
 
-		var swag:Alphabet = new Alphabet(1, 0, "swag");
 	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String)
@@ -172,7 +180,7 @@ class FreeplayState extends MusicBeatState
 		}
 		NameAlpha.destroy();
 		NameAlpha = new Alphabet(40,(FlxG.height / 2) - 282,AllPossibleSongs[CurrentPack],true,false);
-		NameAlpha.x = (FlxG.width / 2) - 164;
+		NameAlpha.screenCenter(X);
 		add(NameAlpha);
 		CurrentSongIcon.loadGraphic(Paths.image('week_icons_' + (AllPossibleSongs[CurrentPack].toLowerCase())));
 	}
