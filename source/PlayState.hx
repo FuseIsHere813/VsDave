@@ -395,7 +395,7 @@ class PlayState extends MusicBeatState
 					camPos.x += 600;
 					tweenCamIn();
 				}
-			case "tristan" | 'tristan-beta':
+			case "tristan" | 'tristan-beta' | 'tristan-golden':
 				dad.y += 325;
 				dad.x += 100;
 			case 'dave' | 'dave-annoyed' | 'dave-splitathon':
@@ -416,12 +416,12 @@ class PlayState extends MusicBeatState
 				}
 			case 'bambi-3d':
 				{
-					dad.y += 100;
+					dad.y += 35;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 150);
 				}
 			case 'bambi-unfair':
 				{
-					dad.y += 100;
+					dad.y += 90;
 					camPos.set(dad.getGraphicMidpoint().x, dad.getGraphicMidpoint().y + 50);
 				}
 			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
