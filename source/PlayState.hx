@@ -3177,7 +3177,7 @@ class PlayState extends MusicBeatState
 						FlxTween.linearMotion(dad, dad.x, dad.y, 350, 260, 0.6, true);
 				}
 			case 'mealie':
-				switch (curBeat)
+				switch (curStep)
 				{
 					case 1776:
 						var position = dad.getPosition();
