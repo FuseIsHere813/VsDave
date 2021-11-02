@@ -4,7 +4,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ubuntu-latest, macos-10.15]
     steps:
       - uses: krdlab/setup-haxe@v1
         with:
