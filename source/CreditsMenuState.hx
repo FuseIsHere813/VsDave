@@ -94,8 +94,8 @@ class CreditsMenuState extends MusicBeatState
       ),
       new Person("T5mpler", CreditsType.Dev, "Programmer",
          [
-	    new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
-	    new Social('twitter', 'https://twitter.com/RealT5mpler')
+            new Social('youtube', 'https://www.youtube.com/channel/UCgNoOsE_NDjH6ac4umyADrw'),
+            new Social('twitter', 'https://twitter.com/RealT5mpler')
          ]
       ),
        new Person("Cleary", CreditsType.Dev, "Original artist, Censored songs, Moral support",
