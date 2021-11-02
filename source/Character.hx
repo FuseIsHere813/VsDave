@@ -598,10 +598,10 @@ class Character extends FlxSprite
 				animation.addByPrefix('singRIGHT', 'right', 24, false);
 
 				addOffset('idle');
-				addOffset("singDOWN", -5, -43);
-				addOffset("singRIGHT", -12, -3);
-				addOffset("singUP", 35, 3);
-				addOffset("singLEFT", 0, -7);
+				addOffset("singUP", 36, -5);
+				addOffset("singRIGHT", -45, -11);
+				addOffset("singLEFT", -10, -9);
+				addOffset("singDOWN", -12, -48);
 
 				playAnim('idle');
 
@@ -861,7 +861,7 @@ class Character extends FlxSprite
 							playAnim('danceLeft', true);
 					}
 				default:
-					playAnim('idle', true);
+					playAnim('idle');
 			}
 		}
 	}
