@@ -1679,10 +1679,6 @@ class PlayState extends MusicBeatState
 						{
 							throwThatBitchInThere('bambi', 'dave');
 						}
-					case 4850:
-						//bullshit
-						hasTriggeredDumbshit = false;
-						updatevels = false;
 					case 5824:
 						FlxG.camera.flash(FlxColor.WHITE, 1);
 						splitathonExpression('bambi-what', -100, 550);
@@ -1707,6 +1703,10 @@ class PlayState extends MusicBeatState
 						{
 							throwThatBitchInThere('dave', 'bambi');
 						}
+					case 4850 | 5835 | 6090 | 8400:
+						//bullshit
+						hasTriggeredDumbshit = false;
+						updatevels = false;
 				}
 			case 'insanity':
 				switch (curStep)

@@ -306,8 +306,8 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(stepperSpeed);
 		tab_group_song.add(oneSectionSongCheckbox);
 
-		UI_box.addGroup(tab_group_song);
 		UI_box.addGroup(tab_group_assets);
+		UI_box.addGroup(tab_group_song);
 
 		UI_box.scrollFactor.set();
 
