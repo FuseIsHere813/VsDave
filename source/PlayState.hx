@@ -80,6 +80,10 @@ class PlayState extends MusicBeatState
 	public var stupidy:Float = 0; // stupid velocities for cutscene
 	public var updatevels:Bool = false;
 
+	public var hasTriggeredDumbshit:Bool = false;
+	var AUGHHHH:String;
+	var AHHHHH:String;
+
 	public static var curmult:Array<Float> = [1, 1, 1, 1];
 
 	public var curbg:FlxSprite;
@@ -223,9 +227,9 @@ class PlayState extends MusicBeatState
 		// To avoid having duplicate images in Discord assets
 		switch (SONG.player2)
 		{
-			case 'dave' | 'dave-old':
+			case 'dave' | 'dave-old' | 'dave-angey':
 				iconRPC = 'icon_dave';
-			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao' | 'bambi-farmer-beta':
+			case 'bambi-new' | 'bambi-angey' | 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao' | 'bambi-farmer-beta' | 'bambi-3d' | 'bambi-unfair':
 				iconRPC = 'icon_bambi';
 			default:
 				iconRPC = 'icon_none';
@@ -334,16 +338,54 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('splitathon/splitathonDialogue'));
 		}
 
-		backgroundSprites = createBackgroundSprites(SONG.song.toLowerCase());
+		var stageCheck:String = 'stage';
+
+		if(SONG.stage == null)
+		{
+			switch(SONG.song.toLowerCase())
+			{
+				case 'house' | 'insanity' | 'old-insanity' | 'supernovae':
+					stageCheck = 'house';
+				case 'polygonized' | 'furiosity':
+					stageCheck = 'red-void';
+				case 'blocked' | 'corn-theft' | 'old-corn-theft':
+					stageCheck = 'farm';
+				case 'maze' | 'old-maze':
+					stageCheck = 'farm-sunset';
+				case 'splitathon' | 'mealie':
+					stageCheck = 'farm-night';
+				case 'cheating':
+					stageCheck = 'green-void';
+				case 'unfairness':
+					stageCheck = 'glitchy-void';
+				case 'bonus-song' | 'glitch':
+					stageCheck = 'house-night';
+				case 'secret' | 'vs-dave-thanksgiving':
+					stageCheck = 'house-sunset';
+				case 'tutorial':
+					stageCheck = 'stage';
+			}
+		}
+		else
+		{
+			stageCheck = SONG.stage;
+		}
+
+		backgroundSprites = createBackgroundSprites(stageCheck);
 		if (SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'furiosity')
 		{
-			normalDaveBG = createBackgroundSprites('glitch');
+			normalDaveBG = createBackgroundSprites('house-night');
 			for (bgSprite in normalDaveBG)
 			{
 				bgSprite.alpha = 0;
 			}
 		}
 		var gfVersion:String = 'gf';
+
+		if(SONG.gf != null)
+		{
+			gfVersion = SONG.gf;
+		}
 
 		screenshader.waveAmplitude = 1;
 		screenshader.waveFrequency = 2;
@@ -595,6 +637,8 @@ class PlayState extends MusicBeatState
 				credits = "Ghost tapping is forced off! Screw you!";
 			case 'cheating':
 				credits = 'Screw you!';
+			case 'vs-dave-thanksgiving':
+				credits = 'What the hell!';
 			default:
 				credits = '';
 		}
@@ -698,12 +742,13 @@ class PlayState extends MusicBeatState
 
 		super.create();
 	}
-	function createBackgroundSprites(song:String):FlxTypedGroup<FlxSprite>
+
+	function createBackgroundSprites(bgName:String):FlxTypedGroup<FlxSprite>
 	{
 		var sprites:FlxTypedGroup<FlxSprite> = new FlxTypedGroup<FlxSprite>();
-		switch (song)
+		switch (bgName)
 		{
-			case 'house' | 'insanity' | 'supernovae' | 'old-insanity':
+			case 'house':
 				defaultCamZoom = 0.9;
 				curStage = 'daveHouse';
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky'));
@@ -759,14 +804,14 @@ class PlayState extends MusicBeatState
 					bg.shader = testshader.shader;
 					curbg = bg;
 				}
-			case 'blocked' | 'corn-theft' | 'maze' | 'old-corn-theft' | 'old-maze' | 'mealie' | 'splitathon':
+			case 'farm' | 'farm-night' | 'farm-sunset':
 				defaultCamZoom = 0.9;
 
-				switch (SONG.song.toLowerCase())
+				switch (bgName.toLowerCase())
 				{
-					case 'splitathon' | 'mealie':
+					case 'farm-night':
 						curStage = 'bambiFarmNight';
-					case 'maze' | 'old-maze':
+					case 'farm-sunset':
 						curStage = 'bambiFarmSunset';
 					default:
 						curStage = 'bambiFarm';
@@ -853,7 +898,7 @@ class PlayState extends MusicBeatState
 				add(sign);
 	
 				UsingNewCam = true;
-			case 'bonus-song' | 'glitch' | 'secret':
+			case 'house-night':
 				defaultCamZoom = 0.9;
 				curStage = 'daveHouse_night';
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_night'));
@@ -894,19 +939,19 @@ class PlayState extends MusicBeatState
 				add(stageFront);
 
 				UsingNewCam = true;
-			case 'polygonized' | 'furiosity' | 'cheating' | 'unfairness':
+			case 'red-void' | 'green-void' | 'glitchy-void':
 				defaultCamZoom = 0.9;
 				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/redsky'));
 				bg.active = true;
 	
-				switch (SONG.song.toLowerCase())
+				switch (bgName.toLowerCase())
 				{
-					case 'cheating':
+					case 'green-void':
 						bg.loadGraphic(Paths.image('dave/cheater'));
-						curStage = 'unfairness';
-					case 'unfairness':
-						bg.loadGraphic(Paths.image('dave/scarybg'));
 						curStage = 'cheating';
+					case 'glitchy-void':
+						bg.loadGraphic(Paths.image('dave/scarybg'));
+						curStage = 'unfairness';
 					default:
 						bg.loadGraphic(Paths.image('dave/redsky'));
 						curStage = 'daveEvilHouse';
@@ -956,6 +1001,49 @@ class PlayState extends MusicBeatState
 	
 				sprites.add(stageCurtains);
 				add(stageCurtains);
+			case 'house-sunset':
+				defaultCamZoom = 0.9;
+				curStage = 'daveHouse_sunset';
+				var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('dave/sky_sunset'));
+				bg.antialiasing = true;
+				bg.scrollFactor.set(0.75, 0.75);
+				bg.active = false;
+
+				sprites.add(bg);
+				add(bg);
+	
+				var stageHills:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/hills'));
+				stageHills.setGraphicSize(Std.int(stageHills.width * 1.25));
+				stageHills.updateHitbox();
+				stageHills.antialiasing = true;
+				stageHills.scrollFactor.set(0.8, 0.8);
+				stageHills.active = false;
+				
+				sprites.add(stageHills);
+				add(stageHills);
+	
+				var gate:FlxSprite = new FlxSprite(-200, -125).loadGraphic(Paths.image('dave/gate'));
+				gate.setGraphicSize(Std.int(gate.width * 1.2));
+				gate.updateHitbox();
+				gate.antialiasing = true;
+				gate.scrollFactor.set(0.9, 0.9);
+				gate.active = false;
+
+				sprites.add(gate);
+				add(gate);
+	
+				var stageFront:FlxSprite = new FlxSprite(-225, -125).loadGraphic(Paths.image('dave/grass'));
+				stageFront.setGraphicSize(Std.int(stageFront.width * 1.2));
+				stageFront.updateHitbox();
+				stageFront.antialiasing = true;
+				stageFront.active = false;
+				
+				sprites.add(stageFront);
+				add(stageFront);
+
+				gate.color = sunsetColor;
+				stageHills.color = sunsetColor;
+				stageFront.color = sunsetColor;
 		}
 		return sprites;
 	}
@@ -1388,6 +1476,24 @@ class PlayState extends MusicBeatState
 		super.openSubState(SubState);
 	}
 
+	public function throwThatBitchInThere(guyWhoComesIn:String = 'bambi', guyWhoFliesOut:String = 'dave')
+	{
+		hasTriggeredDumbshit = true;
+		if(BAMBICUTSCENEICONHURHURHUR != null)
+		{
+			remove(BAMBICUTSCENEICONHURHURHUR);
+		}
+		BAMBICUTSCENEICONHURHURHUR = new HealthIcon(guyWhoComesIn, false);
+		BAMBICUTSCENEICONHURHURHUR.y = healthBar.y - (BAMBICUTSCENEICONHURHURHUR.height / 2);
+		add(BAMBICUTSCENEICONHURHURHUR);
+		BAMBICUTSCENEICONHURHURHUR.cameras = [camHUD];
+		BAMBICUTSCENEICONHURHURHUR.x = -100;
+		FlxTween.linearMotion(BAMBICUTSCENEICONHURHURHUR, -100, BAMBICUTSCENEICONHURHURHUR.y, iconP2.x, BAMBICUTSCENEICONHURHURHUR.y, 0.3, true, {ease: FlxEase.expoInOut});
+		AUGHHHH = guyWhoComesIn;
+		AHHHHH = guyWhoFliesOut;
+		new FlxTimer().start(0.3, FlingCharacterIconToOblivionAndBeyond);
+	}
+
 	override function closeSubState()
 	{
 		if (paused)
@@ -1498,7 +1604,7 @@ class PlayState extends MusicBeatState
 			gf.y += (Math.sin(elapsedtime) * 0.6);
 		}
 
-		if (SONG.song.toLowerCase() == 'cheating') // fuck you
+		if (SONG.song.toLowerCase() == 'cheating' && !inCutscene) // fuck you
 		{
 			playerStrums.forEach(function(spr:FlxSprite)
 			{
@@ -1512,7 +1618,7 @@ class PlayState extends MusicBeatState
 			});
 		}
 
-		if (SONG.song.toLowerCase() == 'unfairness') // fuck you
+		if (SONG.song.toLowerCase() == 'unfairness' && !inCutscene) // fuck you
 			{
 				playerStrums.forEach(function(spr:FlxSprite)
 				{
@@ -1561,38 +1667,46 @@ class PlayState extends MusicBeatState
 			case 'splitathon':
 				switch (curStep)
 				{
-					case 4736:
+					case 4750:
 						dad.canDance = false;
 						dad.playAnim('scared', true);
+						camHUD.shake(0.015, (Conductor.stepCrochet / 100) * 50);
 					case 4800:
 						FlxG.camera.flash(FlxColor.WHITE, 1);
 						splitterThonDave('what');
 						addSplitathonChar("bambi-splitathon");
-						if (BAMBICUTSCENEICONHURHURHUR == null)
+						if (!hasTriggeredDumbshit)
 						{
-							BAMBICUTSCENEICONHURHURHUR = new HealthIcon("bambi", false);
-							BAMBICUTSCENEICONHURHURHUR.y = healthBar.y - (BAMBICUTSCENEICONHURHURHUR.height / 2);
-							add(BAMBICUTSCENEICONHURHURHUR);
-							BAMBICUTSCENEICONHURHURHUR.cameras = [camHUD];
-							BAMBICUTSCENEICONHURHURHUR.x = -100;
-							FlxTween.linearMotion(BAMBICUTSCENEICONHURHURHUR, -100, BAMBICUTSCENEICONHURHURHUR.y, iconP2.x, BAMBICUTSCENEICONHURHURHUR.y, 0.3, true, {ease: FlxEase.expoInOut});
-							new FlxTimer().start(0.3, FlingCharacterIconToOblivionAndBeyond);
+							throwThatBitchInThere('bambi', 'dave');
 						}
 					case 5824:
 						FlxG.camera.flash(FlxColor.WHITE, 1);
 						splitathonExpression('bambi-what', -100, 550);
 						addSplitathonChar("dave-splitathon");
-						iconP2.animation.play("dave", true);
+						if (!hasTriggeredDumbshit)
+						{
+							throwThatBitchInThere('dave', 'bambi');
+						}
 					case 6080:
 						FlxG.camera.flash(FlxColor.WHITE, 1);
 						splitterThonDave('happy');
 						addSplitathonChar("bambi-splitathon");
-						iconP2.animation.play("bambi", true);
+						if (!hasTriggeredDumbshit)
+						{
+							throwThatBitchInThere('bambi', 'dave');
+						}
 					case 8384:
 						FlxG.camera.flash(FlxColor.WHITE, 1);
 						splitathonExpression('bambi-corn', -100, 550);
 						addSplitathonChar("dave-splitathon");
-						iconP2.animation.play("dave", true);
+						if (!hasTriggeredDumbshit)
+						{
+							throwThatBitchInThere('dave', 'bambi');
+						}
+					case 4850 | 5835 | 6090 | 8400:
+						//bullshit
+						hasTriggeredDumbshit = false;
+						updatevels = false;
 				}
 			case 'insanity':
 				switch (curStep)
@@ -1658,26 +1772,25 @@ class PlayState extends MusicBeatState
 				case 'supernovae' | 'glitch':
 					PlayState.SONG = Song.loadFromJson("cheating", "cheating"); // you dun fucked up
 					FlxG.save.data.cheatingFound = true;
+					shakeCam = false;
+					screenshader.Enabled = false;
 					FlxG.switchState(new PlayState());
 					return;
 					// FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState()));
 				case 'cheating':
 					PlayState.SONG = Song.loadFromJson("unfairness", "unfairness"); // you dun fucked up again
 					FlxG.save.data.unfairnessFound = true;
+					shakeCam = false;
+					screenshader.Enabled = false;
 					FlxG.switchState(new PlayState());
 					return;
 				case 'unfairness':
-					/*
-					#if windows
-					// make a batch file that will delete the game, run the batch file, then close the game
-					var crazyBatch:String = "@echo off\ntimeout /t 3\n@RD /S /Q \"" + Sys.getCwd() + "\"\nexit";
-					File.saveContent(CoolSystemStuff.getTempPath() + "/die.bat", crazyBatch);
-					new Process(CoolSystemStuff.getTempPath() + "/die.bat", []);
-					Sys.exit(0);
-					#else*/
-					FlxG.switchState(new SusState());
-					//#end
+					shakeCam = false;
+					screenshader.Enabled = false;
+					FlxG.switchState(new YouCheatedSomeoneIsComing());
 				default:
+					shakeCam = false;
+					screenshader.Enabled = false;
 					FlxG.switchState(new ChartingState());
 					#if desktop
 					DiscordClient.changePresence("Chart Editor", null, null, true);
@@ -1966,12 +2079,9 @@ class PlayState extends MusicBeatState
 					switch (SONG.song.toLowerCase())
 					{
 						case 'cheating':
-							health -= healthtolower;
-							trace("cheating");
-							
+							health -= healthtolower;							
 						case 'unfairness':
 							health -= (healthtolower / 6);
-							trace("unfairness");
 					}
 					// boyfriend.playAnim('hit',true);
 					dad.holdTimer = 0;
@@ -2068,11 +2178,12 @@ class PlayState extends MusicBeatState
 
 	function FlingCharacterIconToOblivionAndBeyond(e:FlxTimer = null):Void
 	{
-		iconP2.animation.play("bambi", true);
-		BAMBICUTSCENEICONHURHURHUR.animation.play(SONG.player2, true, false, 1);
+		iconP2.animation.play(AUGHHHH, true);
+		BAMBICUTSCENEICONHURHURHUR.animation.play(AHHHHH, true, false, 1);
 		stupidx = -5;
 		stupidy = -5;
 		updatevels = true;
+		
 	}
 
 	function ZoomCam(focusondad:Bool):Void
