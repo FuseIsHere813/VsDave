@@ -861,7 +861,7 @@ class Character extends FlxSprite
 							playAnim('danceLeft', true);
 					}
 				default:
-					playAnim('idle');
+					playAnim('idle', true);
 			}
 		}
 	}

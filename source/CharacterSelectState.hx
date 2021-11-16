@@ -439,9 +439,9 @@ class CharacterSelectState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		if (char != null && !selectedCharacter)
+		if (char != null && !selectedCharacter && curBeat % 2 == 0)
 		{
-			char.playAnim('idle');
+			char.playAnim('idle', true);
 		}
 	}
 	

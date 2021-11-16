@@ -391,6 +391,7 @@ class PlayState extends MusicBeatState
 		screenshader.waveFrequency = 2;
 		screenshader.waveSpeed = 1;
 		screenshader.shader.uTime.value[0] = new flixel.math.FlxRandom().float(-100000, 100000);
+
 		var charoffsetx:Float = 0;
 		var charoffsety:Float = 0;
 		if (formoverride == "bf-pixel"
@@ -578,7 +579,7 @@ class PlayState extends MusicBeatState
 		strumLine = new FlxSprite(0, 50).makeGraphic(FlxG.width, 10);
 		strumLine.scrollFactor.set();
 
-		if (FlxG.save.data.downscroll)
+		if (FlxG.save.data.downscroll || SONG.song.toLowerCase() == "unfairness")
 			strumLine.y = FlxG.height - 165;
 
 		strumLineNotes = new FlxTypedGroup<FlxSprite>();
@@ -612,7 +613,7 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 
 		healthBarBG = new FlxSprite(0, FlxG.height * 0.9).loadGraphic(Paths.image('healthBar'));
-		if (FlxG.save.data.downscroll)
+		if (FlxG.save.data.downscroll || SONG.song.toLowerCase() == "unfairness")
 			healthBarBG.y = 50;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -2098,10 +2099,7 @@ class PlayState extends MusicBeatState
 					case 'unfairness':
 						if (daNote.MyStrum != null)
 						{
-							if (FlxG.save.data.downscroll)
-								daNote.y = (daNote.MyStrum.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
-							else
-								daNote.y = (daNote.MyStrum.y - (Conductor.songPosition - daNote.strumTime) * (0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
+							daNote.y = (daNote.MyStrum.y - (Conductor.songPosition - daNote.strumTime) * (-0.45 * FlxMath.roundDecimal(SONG.speed * daNote.LocalScrollSpeed, 2)));
 						}
 					default:
 						if (FlxG.save.data.downscroll)
@@ -2115,7 +2113,7 @@ class PlayState extends MusicBeatState
 
 				var strumliney = daNote.MyStrum != null ? daNote.MyStrum.y : strumLine.y;
 
-				if (daNote.y < -daNote.height && !FlxG.save.data.downscroll || daNote.y >= strumliney + 106 && FlxG.save.data.downscroll)
+				if (daNote.y >= strumliney + 106 && (FlxG.save.data.downscroll || SONG.song.toLowerCase() == "unfairness") || daNote.y < -daNote.height && (!FlxG.save.data.downscroll && SONG.song.toLowerCase() != "unfairness"))
 				{
 					if (daNote.isSustainNote && daNote.wasGoodHit)
 					{
@@ -3237,7 +3235,7 @@ class PlayState extends MusicBeatState
 					dad.dance();
 					dadmirror.dance();
 				default:
-					if (dad.holdTimer <= 0)
+					if (dad.holdTimer <= 0 && curBeat % 2 == 0)
 					{
 						dad.dance();
 						dadmirror.dance();
@@ -3321,21 +3319,24 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if (!boyfriend.animation.curAnim.name.startsWith("sing") && boyfriend.canDance)
+		if(curBeat % 2 == 0)
 		{
-			boyfriend.playAnim('idle');
-			if (darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized" && SONG.song.toLowerCase() != "furiosity")
-			{
-				boyfriend.color = nightColor;
-			}
-			else if(sunsetLevels.contains(curStage))
-			{
-				boyfriend.color = sunsetColor;
-			}
-			else
-			{
-				boyfriend.color = FlxColor.WHITE;
-			}
+			if (!boyfriend.animation.curAnim.name.startsWith("sing") && boyfriend.canDance)
+				{
+					boyfriend.playAnim('idle', true);
+					if (darkLevels.contains(curStage) && SONG.song.toLowerCase() != "polygonized" && SONG.song.toLowerCase() != "furiosity")
+					{
+						boyfriend.color = nightColor;
+					}
+					else if(sunsetLevels.contains(curStage))
+					{
+						boyfriend.color = sunsetColor;
+					}
+					else
+					{
+						boyfriend.color = FlxColor.WHITE;
+					}
+				}
 		}
 
 		if (curBeat % 8 == 7 && SONG.song == 'Tutorial' && dad.curCharacter == 'gf') // fixed your stupid fucking code ninjamuffin this is literally the easiest shit to fix like come on seriously why are you so dumb
