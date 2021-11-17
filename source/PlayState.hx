@@ -293,7 +293,7 @@ class PlayState extends MusicBeatState
 		theFunne = theFunne && SONG.song.toLowerCase() != 'unfairness';
 
 		var crazyNumber:Int;
-		crazyNumber = FlxG.random.int(0, 3);
+		crazyNumber = FlxG.random.int(0, 5);
 		switch (crazyNumber)
 		{
 			case 0:
@@ -306,15 +306,17 @@ class PlayState extends MusicBeatState
 				eatShit("this song doesnt have dialogue idiot. if you want this retarded trace function to call itself then why dont you play a song with ACTUAL dialogue? jesus fuck");
 			case 4:
 				trace("suck my balls");
+			case 5:
+				trace('i hate sick');
 		}
 
 		switch (SONG.song.toLowerCase())
 		{
 			case 'tutorial':
-				dialogue = ["Hey, you're pretty cute.", 'Use the arrow keys to keep up \nwith me singing.'];
-			case 'house':
+				dialogue = [":gf:Hey, you're pretty cute.", ':gf:Use the arrow keys to keep up \nwith me singing.'];
+			case 'house' | 'old-house':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('house/houseDialogue'));
-			case 'insanity':
+			case 'insanity' | 'old-insanity':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('insanity/insanityDialogue'));
 			case 'furiosity':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('furiosity/furiosityDialogue'));
@@ -324,18 +326,20 @@ class PlayState extends MusicBeatState
 				dialogue = CoolUtil.coolTextFile(Paths.txt('supernovae/supernovaeDialogue'));
 			case 'glitch':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('glitch/glitchDialogue'));
-			case 'blocked':
+			case 'blocked' | 'old-blocked':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('blocked/retardedDialogue'));
-			case 'corn-theft':
+			case 'corn-theft' | 'old-corn-theft':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('corn-theft/cornDialogue'));
 			case 'cheating':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('cheating/cheaterDialogue'));
 			case 'unfairness':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('unfairness/unfairDialogue'));
-			case 'maze':
+			case 'maze' | 'old-maze' | 'beta-maze':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('maze/mazeDialogue'));
-			case 'splitathon':
+			case 'splitathon' | 'old-splitathon':
 				dialogue = CoolUtil.coolTextFile(Paths.txt('splitathon/splitathonDialogue'));
+			case 'vs-dave-thanksgiving':
+				dialogue = CoolUtil.coolTextFile(Paths.txt('vs-dave-thanksgiving/lmaoDialogue'));
 		}
 
 		var stageCheck:String = 'stage';
@@ -344,21 +348,21 @@ class PlayState extends MusicBeatState
 		{
 			switch(SONG.song.toLowerCase())
 			{
-				case 'house' | 'insanity' | 'old-insanity' | 'supernovae':
+				case 'house' | 'insanity' | 'old-insanity' | 'supernovae' | 'old-house':
 					stageCheck = 'house';
 				case 'polygonized' | 'furiosity':
 					stageCheck = 'red-void';
-				case 'blocked' | 'corn-theft' | 'old-corn-theft':
+				case 'blocked' | 'corn-theft' | 'old-corn-theft' | 'old-maze' | 'beta-maze':
 					stageCheck = 'farm';
-				case 'maze' | 'old-maze':
+				case 'maze':
 					stageCheck = 'farm-sunset';
-				case 'splitathon' | 'mealie':
+				case 'splitathon' | 'mealie' | 'old-splitathon':
 					stageCheck = 'farm-night';
 				case 'cheating':
 					stageCheck = 'green-void';
 				case 'unfairness':
 					stageCheck = 'glitchy-void';
-				case 'bonus-song' | 'glitch':
+				case 'bonus-song' | 'glitch' | 'old-blocked':
 					stageCheck = 'house-night';
 				case 'secret' | 'vs-dave-thanksgiving':
 					stageCheck = 'house-sunset';
@@ -1665,13 +1669,13 @@ class PlayState extends MusicBeatState
 
 		switch (SONG.song.toLowerCase())
 		{
-			case 'splitathon':
+			case 'splitathon' | 'old-splitathon':
 				switch (curStep)
 				{
 					case 4750:
 						dad.canDance = false;
 						dad.playAnim('scared', true);
-						camHUD.shake(0.015, (Conductor.stepCrochet / 100) * 50);
+						camHUD.shake(0.015, (Conductor.stepCrochet / 1000) * 50);
 					case 4800:
 						FlxG.camera.flash(FlxColor.WHITE, 1);
 						splitterThonDave('what');
@@ -1704,7 +1708,7 @@ class PlayState extends MusicBeatState
 						{
 							throwThatBitchInThere('dave', 'bambi');
 						}
-					case 4850 | 5835 | 6090 | 8400:
+					case 5823 | 6079 | 8383 | 8750:
 						//bullshit
 						hasTriggeredDumbshit = false;
 						updatevels = false;
@@ -1770,7 +1774,7 @@ class PlayState extends MusicBeatState
 		{
 			switch (curSong.toLowerCase())
 			{
-				case 'supernovae' | 'glitch':
+				case 'supernovae' | 'glitch' | 'vs-dave-thanksgiving':
 					PlayState.SONG = Song.loadFromJson("cheating", "cheating"); // you dun fucked up
 					FlxG.save.data.cheatingFound = true;
 					shakeCam = false;
@@ -1945,6 +1949,10 @@ class PlayState extends MusicBeatState
 							FlxG.openURL("https://www.youtube.com/watch?v=eTJOdgDzD64");
 							System.exit(0);
 						default:
+							if(shakeCam)
+							{
+								FlxG.save.data.unlockedcharacters[7] = true;
+							}
 							FlxG.switchState(new EndingState('rtxx_ending', 'badEnding'));
 					}
 				}
@@ -1952,6 +1960,10 @@ class PlayState extends MusicBeatState
 				{
 					if(!perfectMode)
 					{
+						if(shakeCam)
+						{
+							FlxG.save.data.unlockedcharacters[7] = true;
+						}
 						openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
 							.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
 
@@ -2324,7 +2336,7 @@ class PlayState extends MusicBeatState
 						{
 							FlxG.switchState(new EndingState('badEnding', 'badEnding'));
 						}
-					case 'maze':
+					case 'maze' | 'old-maze' | 'beta-maze':
 						canPause = false;
 						FlxG.sound.music.volume = 0;
 						vocals.volume = 0;
@@ -2338,7 +2350,7 @@ class PlayState extends MusicBeatState
 						};
 						doof.cameras = [camDialogue];
 						schoolIntro(doof, false);
-					case 'splitathon':
+					case 'splitathon' | 'old-splitathon':
 						canPause = false;
 						FlxG.sound.music.volume = 0;
 						vocals.volume = 0;
@@ -2375,7 +2387,7 @@ class PlayState extends MusicBeatState
 			{	
 				switch (SONG.song.toLowerCase())
 				{
-					case 'insanity':
+					case 'insanity' | 'old-insanity':
 						canPause = false;
 						FlxG.sound.music.volume = 0;
 						vocals.volume = 0;
@@ -2386,7 +2398,7 @@ class PlayState extends MusicBeatState
 						doof.finishThing = nextSong;
 						doof.cameras = [camDialogue];
 						schoolIntro(doof, false);
-					case 'splitathon':
+					case 'splitathon' | 'old-splitathon':
 						canPause = false;
 						FlxG.sound.music.volume = 0;
 						vocals.volume = 0;
@@ -2443,7 +2455,7 @@ class PlayState extends MusicBeatState
 						boyfriend.playAnim('hit', true);
 						STUPDVARIABLETHATSHOULDNTBENEEDED = marcello;
 						new FlxTimer().start(5.5, THROWPHONEMARCELLO);
-					case 'insanity':
+					case 'insanity' | 'old-insanity':
 						canPause = false;
 						FlxG.sound.music.volume = 0;
 						vocals.volume = 0;
@@ -2454,7 +2466,7 @@ class PlayState extends MusicBeatState
 						doof.finishThing = ughWhyDoesThisHaveToFuckingExist;
 						doof.cameras = [camDialogue];
 						schoolIntro(doof, false);
-					case 'maze':
+					case 'maze' | 'old-maze' | 'beta-maze':
 						canPause = false;
 						FlxG.sound.music.volume = 0;
 						vocals.volume = 0;
@@ -2465,7 +2477,7 @@ class PlayState extends MusicBeatState
 						doof.finishThing = ughWhyDoesThisHaveToFuckingExist;
 						doof.cameras = [camDialogue];
 						schoolIntro(doof, false);
-					case 'splitathon':
+					case 'splitathon' | 'old-splitathon':
 						canPause = false;
 						FlxG.sound.music.volume = 0;
 						vocals.volume = 0;

@@ -65,7 +65,7 @@ class DialogueBox extends FlxSpriteGroup
 			case 'thorns':
 				FlxG.sound.playMusic(Paths.music('LunchboxScary'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
-			case 'house' | 'insanity' | 'splitathon':
+			case 'house' | 'insanity' | 'splitathon' | 'old-house' | 'old-insanity' | 'old-splitathon':
 				FlxG.sound.playMusic(Paths.music('DaveDialogue'), 0);
 				FlxG.sound.music.fadeIn(1, 0, 0.8);
 			case 'furiosity' | 'polygonized' | 'cheating' | 'unfairness':
@@ -83,7 +83,7 @@ class DialogueBox extends FlxSpriteGroup
 					FlxG.sound.playMusic(Paths.music('dooDooFeces'), 0);
 					FlxG.sound.music.fadeIn(1, 0, 0.8);
 				}
-			case 'blocked' | 'corn-theft' | 'maze':
+			case 'blocked' | 'corn-theft' | 'maze' | 'old-blocked' | 'old-corn-theft' | 'old-maze' | 'beta-maze':
 				randomNumber = FlxG.random.int(0, 50);
 				if(randomNumber == 50)
 				{
@@ -153,7 +153,7 @@ class DialogueBox extends FlxSpriteGroup
 				var face:FlxSprite = new FlxSprite(320, 170).loadGraphic(Paths.image('weeb/spiritFaceForward', 'week6'));
 				face.setGraphicSize(Std.int(face.width * 6));
 				add(face);
-			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'cheating' | 'unfairness' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon':
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'supernovae' | 'cheating' | 'unfairness' | 'glitch' | 'blocked' | 'corn-theft' | 'maze' | 'splitathon' | 'old-house' | 'old-insanity' | 'old-blocked' | 'old-corn-theft' | 'old-maze' | 'beta-maze' | 'old-splitathon':
 				hasDialog = true;
 				box.frames = Paths.getSparrowAtlas('speech_bubble_talking');
 				box.setGraphicSize(Std.int(box.width / textBoxSizeFix));
@@ -179,10 +179,10 @@ class DialogueBox extends FlxSpriteGroup
 				portraitLeftCharacter = 'senpai';
 				portraitRightCharacter = 'bfPixel';
 				
-			case 'house' | 'insanity' | 'furiosity' | 'polygonized':
+			case 'house' | 'insanity' | 'furiosity' | 'polygonized' | 'old-house' | 'old-insanity':
 				portraitLeftCharacter = 'dave';
 				
-			case 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon' | 'cheating' | 'unfairness':
+			case 'blocked' | 'corn-theft' | 'maze' | 'supernovae' | 'glitch' | 'splitathon' | 'cheating' | 'unfairness' | 'old-blocked' | 'old-maze' | 'old-corn-theft' | 'beta-maze' | 'old-splitathon':
 				portraitLeftCharacter = 'bambi';
 		}
 
@@ -460,48 +460,53 @@ class DialogueBox extends FlxSpriteGroup
 			case 'dave':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
-					case 'house':
-						portrait.portraitPath = 'dialogue/dave_house';
-						portrait.portraitPrefix = 'dave house portrait';
-
 					case 'insanity':
 						portrait.portraitPath = 'dialogue/dave_insanity';
 						portrait.portraitPrefix = 'dave insanity portrait';
-
-					case 'pre-furiosity':
-						portrait.portraitPath = 'dialouge/dave_pre-furiosity';
-						portrait.portraitPrefix = 'dave pre-furiosity portrait';
 
 					case 'furiosity' | 'polygonized':
 						portrait.portraitPath = 'dialogue/dave_furiosity';
 						portrait.portraitPrefix = 'dave furiosity portrait';
 
-					case 'blocked' | 'corn-theft' | 'maze':
+					case 'blocked' | 'corn-theft' | 'maze' | 'beta-maze':
 						portrait.portraitPath = 'dialogue/dave_bambiweek';
 						portrait.portraitPrefix = 'dave bambi week portrait';
+					
 					case 'splitathon':
 						portrait.portraitPath = 'dialogue/dave_splitathon';
 						portrait.portraitPrefix = 'dave splitathon portrait';
+
+					case 'old-house' | 'old-insanity' | 'old-blocked' | 'old-corn-theft' | 'old-maze' | 'old-splitathon' | 'supernovae' | 'glitch' | 'vs-dave-thanksgiving':
+						portrait.portraitPath = 'dialogue/old_dave_portrait';
+						portrait.portraitPrefix = 'dave Portrait ';
+
+					default:
+						portrait.portraitPath = 'dialogue/dave_house';
+						portrait.portraitPrefix = 'dave house portrait';
 				}
 			case 'insanityEndDave':
-				portrait.portraitPath = 'dialouge/dave_pre-furiosity';
-				portrait.portraitPrefix = 'dave pre-furiosity portrait';
+				switch(PlayState.SONG.song.toLowerCase())
+				{
+					case 'old-insanity':
+						portrait.portraitPath = 'dialogue/old_dave_portrait';
+						portrait.portraitPrefix = 'dave Portrait ';
+					default:
+						portrait.portraitPath = 'dialogue/dave_pre-furiosity';
+						portrait.portraitPrefix = 'dave pre-furiosity portrait';
+				}
 			case 'bambi':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
-					case 'blocked':
-						portrait.portraitPath = 'dialogue/bambi_blocked';
-						portrait.portraitPrefix = 'bambi blocked portrait';
-					case 'old-corn-theft' | 'old-maze':
+					case 'old-blocked' | 'old-corn-theft' | 'old-maze' | 'old-splitathon':
 						portrait.portraitPath = 'dialogue/oldFarmBambiPortrait';
 						portrait.portraitPrefix = 'bambienter';
 					case 'corn-theft':
 						portrait.portraitPath = 'dialogue/bambi_corntheft';
 						portrait.portraitPrefix = 'bambi corntheft portrait';
-					case 'maze':
+					case 'maze' | 'beta-maze':
 						portrait.portraitPath = 'dialogue/bambi_maze';
 						portrait.portraitPrefix = 'bambi maze portrait';
-					case 'supernovae' | 'glitch':
+					case 'supernovae' | 'glitch' | 'vs-dave-thanksgiving':
 						portrait.portraitPath = 'dialogue/bambi_bevel';
 						portrait.portraitPrefix = 'bambienter';
 					case 'splitathon':
@@ -513,6 +518,9 @@ class DialogueBox extends FlxSpriteGroup
 					case 'unfairness':
 						portrait.portraitPath = 'dialogue/unfairnessPortrait';
 						portrait.portraitPrefix = 'bambi unfairness portrait';
+					default:
+						portrait.portraitPath = 'dialogue/bambi_blocked';
+						portrait.portraitPrefix = 'bambi blocked portrait';
 				}
 			case 'senpai':
 				portrait.portraitPath = 'weeb/senpaiPortrait';
@@ -526,33 +534,33 @@ class DialogueBox extends FlxSpriteGroup
 			case 'bf':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
-					case 'blocked' | 'maze':
+					case 'blocked' | 'maze' | 'old-blocked' | 'old-maze' | 'beta-maze':
 						portrait.portraitPath = 'dialogue/bf_blocked_maze';
 						portrait.portraitPrefix = 'bf blocked & maze portrait';
-					case 'furiosity' | 'polygonized' | 'corn-theft' | 'cheating' | 'unfairness' | 'supernovae' | 'glitch':
+					case 'furiosity' | 'polygonized' | 'corn-theft' | 'cheating' | 'unfairness' | 'supernovae' | 'glitch' | 'old-corn-theft' | 'vs-dave-thanksgiving':
 						portrait.portraitPath = 'dialogue/bf_furiosity_corntheft';
 						portrait.portraitPrefix = 'bf furiosity & corntheft portrait';
-					case 'house':
-						portrait.portraitPath = 'dialogue/bf_house';
-						portrait.portraitPrefix = 'bf house portrait';
-					case 'insanity' | 'splitathon':
+					case 'insanity' | 'splitathon' | 'old-insanity' | 'old-splitathon':
 						portrait.portraitPath = 'dialogue/bf_insanity_splitathon';
 						portrait.portraitPrefix = 'bf insanity & splitathon portrait';
+					default:
+						portrait.portraitPath = 'dialogue/bf_house';
+						portrait.portraitPrefix = 'bf house portrait';
 				}
 				portrait.left = false;
 			case 'gf':
 				switch (PlayState.SONG.song.toLowerCase())
 				{
-					case 'blocked':
+					case 'blocked' | 'old-blocked':
 						portrait.portraitPath = 'dialogue/gf_blocked';
 						portrait.portraitPrefix = 'gf blocked portrait';
-					case 'corn-theft' | 'cheating' | 'unfairness':
+					case 'corn-theft' | 'cheating' | 'unfairness' | 'old-corn-theft':
 						portrait.portraitPath = 'dialogue/gf_corntheft';
 						portrait.portraitPrefix = 'gf corntheft portrait';
-					case 'maze':
+					case 'maze' | 'old-maze' | 'beta-maze':
 						portrait.portraitPath = 'dialogue/gf_maze';
 						portrait.portraitPrefix = 'gf maze portrait';
-					case 'splitathon':
+					default:
 						portrait.portraitPath = 'dialogue/gf_splitathon';
 						portrait.portraitPrefix = 'gf splitathon portrait';
 				}

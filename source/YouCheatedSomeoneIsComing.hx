@@ -24,7 +24,7 @@ class YouCheatedSomeoneIsComing extends MusicBeatState
 		if(FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		FlxG.sound.playMusic(Paths.music('badEnding'),1,true);
-		var spooky:FlxSprite = new FlxSprite(0, 0).loadGraphic('dave/cheater_lol');
+		var spooky:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('dave/cheater_lol'));
         spooky.screenCenter();
         add(spooky);
 	}
