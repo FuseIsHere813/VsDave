@@ -407,20 +407,25 @@ class CharacterSelectState extends MusicBeatState
 				char.y = 100;
 			case 'bambi-3d':
 				char.y = 100 + 350;
+				char.x += 100;
 			case 'bambi-unfair':
 				char.y = 100 + 575;
+				char.x += 100;
 			case 'bambi' | 'bambi-old' | 'bambi-bevel' | 'what-lmao':
 				char.y = 100 + 400;
+				char.y -= 75;
 			case 'bambi-new' | 'bambi-farmer-beta':
 				char.y = 100 + 450;
+				char.y -= 75;
 			case 'bambi-splitathon':
 				char.y = 100 + 400;
 			case 'bambi-angey':
 				char.y = 100 + 450;
+				char.y -= 75;
 		}
 		add(char);
 		funnyIconMan.animation.play(char.curCharacter);
-		if (!FlxG.save.data.unlockedcharacters[current])
+		if (!FlxG.save.data.unlockedcharacters[currentReal])
 		{
 			char.color = FlxColor.BLACK;
 			funnyIconMan.color = FlxColor.BLACK;
@@ -439,9 +444,9 @@ class CharacterSelectState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		if (char != null && !selectedCharacter)
+		if (char != null && !selectedCharacter && curBeat % 2 == 0)
 		{
-			char.playAnim('idle');
+			char.playAnim('idle', true);
 		}
 	}
 	

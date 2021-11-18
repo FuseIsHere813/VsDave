@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="bambiSplitathon.png">
+	<!-- Created with Adobe Animate version 21.0.1.37179 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="d 0000" x="0" y="0" width="298" height="394"/>
+	<SubTexture name="d 0001" x="298" y="0" width="298" height="394"/>
+	<SubTexture name="d 0002" x="596" y="0" width="298" height="394"/>
+	<SubTexture name="i 0000" x="894" y="0" width="298" height="394"/>
+	<SubTexture name="i 0001" x="1192" y="0" width="298" height="394"/>
+	<SubTexture name="i 0002" x="1490" y="0" width="298" height="394"/>
+	<SubTexture name="i 0003" x="0" y="394" width="298" height="394"/>
+	<SubTexture name="i 0004" x="298" y="394" width="298" height="394"/>
+	<SubTexture name="i 0005" x="1192" y="394" width="298" height="394"/>
+	<SubTexture name="i 0006" x="596" y="394" width="298" height="394"/>
+	<SubTexture name="i 0007" x="894" y="394" width="298" height="394"/>
+	<SubTexture name="i 0008" x="596" y="394" width="298" height="394"/>
+	<SubTexture name="i 0009" x="1192" y="394" width="298" height="394"/>
+	<SubTexture name="i 0010" x="298" y="394" width="298" height="394"/>
+	<SubTexture name="i 0011" x="0" y="394" width="298" height="394"/>
+	<SubTexture name="i 0012" x="1490" y="0" width="298" height="394"/>
+	<SubTexture name="i 0013" x="1192" y="0" width="298" height="394"/>
+	<SubTexture name="l 0000" x="1490" y="394" width="298" height="394"/>
+	<SubTexture name="l 0001" x="0" y="788" width="298" height="394"/>
+	<SubTexture name="l 0002" x="298" y="788" width="298" height="394"/>
+	<SubTexture name="r 0000" x="596" y="788" width="298" height="394"/>
+	<SubTexture name="r 0001" x="894" y="788" width="298" height="394"/>
+	<SubTexture name="r 0002" x="1192" y="788" width="298" height="394"/>
+	<SubTexture name="u 0000" x="1490" y="788" width="298" height="394"/>
+	<SubTexture name="u 0001" x="0" y="1182" width="298" height="394"/>
+	<SubTexture name="u 0002" x="298" y="1182" width="298" height="394"/>
+</TextureAtlas>
