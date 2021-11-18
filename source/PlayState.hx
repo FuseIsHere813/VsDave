@@ -668,7 +668,7 @@ class PlayState extends MusicBeatState
 		var kadeEngineWatermark = new FlxText(4, textYPos, 0,
 		SONG.song
 		+ " "
-		+ (curSong.toLowerCase() != 'splitathon' ? (storyDifficulty == 3 ? "Legacy" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "Finale")
+		+ (!curSong.toLowerCase().endsWith('splitathon') ? (storyDifficulty == 3 ? "Legacy" : storyDifficulty == 2 ? "Hard" : storyDifficulty == 1 ? "Normal" : "Easy") : "Finale")
 		+ " - " + engineName + "Engine (KE 1.2)", 16);
 		kadeEngineWatermark.setFormat(Paths.font("comic.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		kadeEngineWatermark.scrollFactor.set();
@@ -685,7 +685,7 @@ class PlayState extends MusicBeatState
 		}
 		switch (curSong.toLowerCase())
 		{
-			case 'splitathon':
+			case 'splitathon' | 'old-splitathon':
 				preload('splitathon/Bambi_WaitWhatNow');
 				preload('splitathon/Bambi_ChillingWithTheCorn');
 			case 'insanity':
@@ -2321,7 +2321,7 @@ class PlayState extends MusicBeatState
 						if (health >= 0.1)
 						{
 							FlxG.save.data.unlockedcharacters[2] = true;
-							if (storyDifficulty == 3)
+							if (storyDifficulty == 2)
 							{
 								FlxG.save.data.unlockedcharacters[5] = true;
 							}
@@ -2518,7 +2518,7 @@ class PlayState extends MusicBeatState
 			difficulty = '-hard';
 
 		if (storyDifficulty == 3)
-			difficulty = '-unnerf';
+			difficulty = '-hard';
 
 		trace(PlayState.storyPlaylist[0].toLowerCase() + difficulty);
 

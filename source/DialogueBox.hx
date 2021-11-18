@@ -554,7 +554,7 @@ class DialogueBox extends FlxSpriteGroup
 					case 'blocked' | 'old-blocked':
 						portrait.portraitPath = 'dialogue/gf_blocked';
 						portrait.portraitPrefix = 'gf blocked portrait';
-					case 'corn-theft' | 'cheating' | 'unfairness' | 'old-corn-theft':
+					case 'corn-theft' | 'cheating' | 'unfairness' | 'old-corn-theft' | 'vs-dave-thanksgiving':
 						portrait.portraitPath = 'dialogue/gf_corntheft';
 						portrait.portraitPrefix = 'gf corntheft portrait';
 					case 'maze' | 'old-maze' | 'beta-maze':
