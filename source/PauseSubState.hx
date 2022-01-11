@@ -79,7 +79,7 @@ class PauseSubState extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
-		if (pauseMusic.volume < 0.5)
+		if (pauseMusic.volume < 0.75)
 			pauseMusic.volume += 0.01 * elapsed;
 
 		super.update(elapsed);
@@ -108,6 +108,8 @@ class PauseSubState extends MusicBeatSubstate
 				case "Restart Song":
 					FlxG.resetState();
 				case "Exit to menu":
+					PlayState.screenshader.shader.uampmul.value[0] = 0;
+					PlayState.screenshader.Enabled = false;
 					PlayState.characteroverride = 'none';
 					PlayState.formoverride = 'none';
 					FlxG.switchState(new MainMenuState());

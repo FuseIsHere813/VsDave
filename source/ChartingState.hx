@@ -117,6 +117,8 @@ class ChartingState extends MusicBeatState
 				needsVoices: true,
 				player1: 'bf',
 				player2: 'dad',
+				stage: 'stage',
+				gf: 'gf',
 				speed: 1,
 				validScore: false
 			};
@@ -237,21 +239,40 @@ class ChartingState extends MusicBeatState
 		stepperBPM.name = 'song_bpm';
 
 		var characters:Array<String> = CoolUtil.coolTextFile(Paths.txt('characterList'));
+		var gfVersions:Array<String> = CoolUtil.coolTextFile(Paths.txt('gfList'));
+		var stages:Array<String> = CoolUtil.coolTextFile(Paths.txt('stageList'));
 
 		var player1DropDown = new FlxUIDropDownMenu(10, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
 		{
 			_song.player1 = characters[Std.parseInt(character)];
 		});
 		player1DropDown.selectedLabel = _song.player1;
-		player1DropDown.dropDirection = FlxUIDropDownMenuDropDirection.Down;
+
+		var player1Label = new FlxText(10, 80, 64, 'Player 1');
 
 		var player2DropDown = new FlxUIDropDownMenu(140, 100, FlxUIDropDownMenu.makeStrIdLabelArray(characters, true), function(character:String)
 		{
 			_song.player2 = characters[Std.parseInt(character)];
 		});
-
 		player2DropDown.selectedLabel = _song.player2;
-		player2DropDown.dropDirection = FlxUIDropDownMenuDropDirection.Down;
+
+		var player2Label = new FlxText(140, 80, 64, 'Player 2');
+
+		var gfVersionDropDown = new FlxUIDropDownMenu(10, 200, FlxUIDropDownMenu.makeStrIdLabelArray(gfVersions, true), function(gfVersion:String)
+		{
+			_song.gf = gfVersions[Std.parseInt(gfVersion)];
+		});
+		gfVersionDropDown.selectedLabel = _song.gf;
+
+		var gfVersionLabel = new FlxText(10, 180, 64, 'Girlfriend');
+
+		var stageDropDown = new FlxUIDropDownMenu(140, 200, FlxUIDropDownMenu.makeStrIdLabelArray(stages, true), function(stage:String)
+		{
+			_song.stage = stages[Std.parseInt(stage)];
+		});
+		stageDropDown.selectedLabel = _song.stage;
+
+		var stageLabel = new FlxText(140, 180, 64, 'Stage');
 
 		var oneSectionSongCheckbox = new FlxUICheckBox(10, 400, null, null, "1 Section Song", 100);
 		oneSectionSongCheckbox.checked = false;
@@ -259,6 +280,17 @@ class ChartingState extends MusicBeatState
 		{
 			oneSectionSong = !oneSectionSong;
 		};
+
+		var tab_group_assets = new FlxUI(null, UI_box);
+		tab_group_assets.name = "Assets";
+		tab_group_assets.add(gfVersionDropDown);
+		tab_group_assets.add(gfVersionLabel);
+		tab_group_assets.add(stageDropDown);
+		tab_group_assets.add(stageLabel);
+		tab_group_assets.add(player1DropDown);
+		tab_group_assets.add(player2DropDown);
+		tab_group_assets.add(player1Label);
+		tab_group_assets.add(player2Label);
 
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
@@ -272,11 +304,11 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(loadAutosaveBtn);
 		tab_group_song.add(stepperBPM);
 		tab_group_song.add(stepperSpeed);
-		tab_group_song.add(player1DropDown);
-		tab_group_song.add(player2DropDown);
 		tab_group_song.add(oneSectionSongCheckbox);
 
+		UI_box.addGroup(tab_group_assets);
 		UI_box.addGroup(tab_group_song);
+
 		UI_box.scrollFactor.set();
 
 		FlxG.camera.follow(strumLine);
@@ -1121,14 +1153,14 @@ class ChartingState extends MusicBeatState
 
 	function loadJson(song:String):Void
 	{
-		if (song.toLowerCase() == 'supernovae' || song.toLowerCase() == 'glitch' || song.toLowerCase() == 'cheating')
+		if (song.toLowerCase() == 'supernovae' || song.toLowerCase() == 'glitch' || song.toLowerCase() == 'vs-dave-thanksgiving')
 		{
 			FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState())); //YOU THINK YOU ARE SO CLEVER DON'T YOU? HAHA FUCK YOU
 		}
-		/*else if (song.toLowerCase() == 'unfairness')
+		else if (song.toLowerCase() == 'unfairness' || song.toLowerCase() == 'cheating')
 		{
 			FlxG.switchState(new YouCheatedSomeoneIsComing()); //YOU THINK YOU ARE SO CLEVER DON'T YOU? HAHA FUCK YOU
-		}*/
+		}
 		PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
 		FlxG.resetState();
 	}

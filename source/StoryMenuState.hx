@@ -251,7 +251,7 @@ class StoryMenuState extends MusicBeatState
 			FlxG.camera.shake(0.02,5.1);
 			FlxG.camera.fade(FlxColor.WHITE,5.05,false,FadeOut);
 			FlxG.sound.play(Paths.sound('doom'));
-			changeWeek(7);
+			changeWeek(1);
 			imageBG.destroy();
 			imageBG = new FlxSprite(600, 200).loadGraphic(Paths.image("blank", "shared"));
 			imageBG.antialiasing = true;
@@ -432,15 +432,19 @@ class StoryMenuState extends MusicBeatState
 					case 0:
 						sprDifficulty.animation.play('easy');
 						sprDifficulty.offset.x = 20;
+						sprDifficulty.offset.y = 0;
 					case 1:
 						sprDifficulty.animation.play('normal');
 						sprDifficulty.offset.x = 70;
+						sprDifficulty.offset.y = 0;
 					case 2:
 						sprDifficulty.animation.play('hard');
 						sprDifficulty.offset.x = 20;
+						sprDifficulty.offset.y = 0;
 					case 3:
 						sprDifficulty.animation.play('unnerfed');
 						sprDifficulty.offset.x = 70;
+						sprDifficulty.offset.y = 20;
 				}
 		}
 	}
@@ -469,7 +473,8 @@ class StoryMenuState extends MusicBeatState
 
 		updateDifficultySprite();
 
-		sprDifficulty.alpha = 0;
+		if(curWeek != 3)
+			sprDifficulty.alpha = 0;
 
 		// USING THESE WEIRD VALUES SO THAT IT DOESNT FLOAT UP
 		sprDifficulty.y = leftArrow.y - 15;
@@ -479,7 +484,8 @@ class StoryMenuState extends MusicBeatState
 		intendedScore = Highscore.getWeekScore(curWeek, curDifficulty);
 		#end
 
-		FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 0.07);
+		if(curWeek != 3)
+			FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 0.07);
 	}
 
 	var lerpScore:Int = 0;
@@ -494,7 +500,7 @@ class StoryMenuState extends MusicBeatState
 			curIndex = weekData.length - 1;
 		if (actualWeeks[curIndex] == 4 && !tristanunlocked) curIndex += (change > 0 ? 1 : -1); //repeat it again
 		curWeek = actualWeeks[curIndex];
-		if (curWeek != 7) //no trying to use unnerfed on non-week 7 songs
+		if (curWeek != 1) //no trying to use unnerfed on non-week 7 songs
 		{
 			if (curDifficulty < 0)
 				curDifficulty = 2;
@@ -504,6 +510,13 @@ class StoryMenuState extends MusicBeatState
 		if (curWeek == 3)
 		{
 			curDifficulty = 1;
+			leftArrow.visible = false;
+			rightArrow.visible = false;
+		}
+		else
+		{
+			leftArrow.visible = true;
+			rightArrow.visible = true;
 		}
 
 		updateDifficultySprite();
