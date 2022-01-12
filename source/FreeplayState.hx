@@ -110,11 +110,11 @@ class FreeplayState extends MusicBeatState
 					addWeek(['Unfairness'], 2, ['bambi-unfair']);
 			case 'extra':
 				addWeek(['Mealie'], 2, ['bambi-loser']);
-				addWeek(['Furiosity', 'Old-Insanity'], 1, ['dave-angey', 'dave-old']);
-				addWeek(['Old-Corn-Theft', 'Old-Maze'], 2, ['bambi-farmer-beta', 'bambi-farmer-beta']);
+				addWeek(['Furiosity', 'Old-House', 'Old-Insanity'], 1, ['dave-angey', 'dave-old', 'dave-old']);
+				addWeek(['Old-Blocked', 'Old-Corn-Theft', 'Old-Maze', 'Beta-Maze'], 2, ['bambi-farmer-beta', 'bambi-farmer-beta', 'bambi-farmer-beta', 'bambi-farmer-beta']);
+				addWeek(['Old-Splitathon'], 3, ['the-duo']);
 		}
 	}
-
 
 	public function GoToActualFreeplay()
 	{
@@ -296,20 +296,12 @@ class FreeplayState extends MusicBeatState
 	function changeDiff(change:Int = 0)
 	{
 		curDifficulty += change;
-		if (songs[curSelected].week != 1 && songs[curSelected].songName.toLowerCase() != 'blocked' || songs[curSelected].songName == 'Old-Insanity')
-		{
+
 		if (curDifficulty < 0)
 			curDifficulty = 2;
 		if (curDifficulty > 2)
 			curDifficulty = 0;
-		}
-		else
-		{
-			if (curDifficulty < 0)
-				curDifficulty = 3;
-			if (curDifficulty > 3)
-				curDifficulty = 0;
-		}
+
 		if (songs[curSelected].week == 3)
 		{
 			curDifficulty = 1;
@@ -359,14 +351,11 @@ class FreeplayState extends MusicBeatState
 		if (curSelected >= songs.length)
 			curSelected = 0;
 
-		if (songs[curSelected].week != 1 || songs[curSelected].songName == 'Old-Insanity')
-		{
-			if (curDifficulty < 0)
-				curDifficulty = 2;
+		if (curDifficulty < 0)
+			curDifficulty = 2;
 
-			if (curDifficulty > 2)
-				curDifficulty = 0;
-		}
+		if (curDifficulty > 2)
+			curDifficulty = 0;
 
 		if (songs[curSelected].week == 3)
 		{
