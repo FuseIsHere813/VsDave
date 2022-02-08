@@ -49,8 +49,8 @@ class TitleState extends MusicBeatState
 	{
 		
 		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "\\assets\\replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "\\assets\\replays");
+		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets//replays"))
+			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
 		#end
 
 		fun = FlxG.random.int(0, 999);
