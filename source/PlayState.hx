@@ -2021,7 +2021,7 @@ class PlayState extends MusicBeatState
 						camZooming = true;
 
 					var altAnim:String = "";
-					var healthtolower:Float = 0.02;
+					var healthtolower:Float = 0.01;
 
 					if (SONG.notes[Math.floor(curStep / 16)] != null)
 					{
