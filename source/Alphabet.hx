@@ -1,7 +1,6 @@
 package;
 
 import cpp.Lib;
-import Shaders.InvertShader;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
