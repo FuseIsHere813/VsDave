@@ -46,7 +46,7 @@ import flash.system.System;
 import Discord.DiscordClient;
 #end
 
-#if sys 
+#if windows
 import sys.io.File;
 import sys.io.Process;
 #end
@@ -86,7 +86,6 @@ class PlayState extends MusicBeatState
 	public static var curmult:Array<Float> = [1, 1, 1, 1];
 
 	public var curbg:FlxSprite;
-	public static var screenshader:Shaders.PulseEffect = new PulseEffect();
 	public var UsingNewCam:Bool = false;
 
 	public var elapsedtime:Float = 0;
@@ -796,11 +795,6 @@ class PlayState extends MusicBeatState
 					bg.visible = false;
 					add(bg);
 					// below code assumes shaders are always enabled which is bad
-					var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-					testshader.waveAmplitude = 0.1;
-					testshader.waveFrequency = 5;
-					testshader.waveSpeed = 2;
-					bg.shader = testshader.shader;
 					curbg = bg;
 				}
 			case 'farm' | 'farm-night' | 'farm-sunset':
@@ -960,11 +954,6 @@ class PlayState extends MusicBeatState
 				add(bg);
 				// below code assumes shaders are always enabled which is bad
 				// i wouldnt consider this an eyesore though
-				var testshader:Shaders.GlitchEffect = new Shaders.GlitchEffect();
-				testshader.waveAmplitude = 0.1;
-				testshader.waveFrequency = 5;
-				testshader.waveSpeed = 2;
-				bg.shader = testshader.shader;
 				curbg = bg;
 				if (SONG.song.toLowerCase() == 'furiosity' || SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'unfairness')
 				{
@@ -1580,8 +1569,6 @@ class PlayState extends MusicBeatState
 		{
 			if (curbg.active) // only the furiosity background is active
 			{
-				var shad = cast(curbg.shader, Shaders.GlitchShader);
-				shad.uTime.value[0] += elapsed;
 			}
 		}
 
@@ -1630,23 +1617,6 @@ class PlayState extends MusicBeatState
 					spr.y = ((FlxG.height / 2) - (spr.height / 2)) + (Math.cos((elapsedtime + (spr.ID)) * 2) * 300);
 				});
 			}
-			
-		FlxG.camera.setFilters([new ShaderFilter(screenshader.shader)]); // this is very stupid but doesn't effect memory all that much so
-		if (shakeCam && eyesoreson)
-		{
-			// var shad = cast(FlxG.camera.screen.shader,Shaders.PulseShader);
-			FlxG.camera.shake(0.015, 0.015);
-		}
-		screenshader.shader.uTime.value[0] += elapsed;
-		if (shakeCam && eyesoreson)
-		{
-			screenshader.shader.uampmul.value[0] = 1;
-		}
-		else
-		{
-			screenshader.shader.uampmul.value[0] -= (elapsed / 2);
-		}
-		screenshader.Enabled = shakeCam && eyesoreson;
 
 		if (FlxG.keys.justPressed.NINE)
 		{
@@ -1772,7 +1742,6 @@ class PlayState extends MusicBeatState
 					PlayState.SONG = Song.loadFromJson("cheating", "cheating"); // you dun fucked up
 					FlxG.save.data.cheatingFound = true;
 					shakeCam = false;
-					screenshader.Enabled = false;
 					FlxG.switchState(new PlayState());
 					return;
 					// FlxG.switchState(new VideoState('assets/videos/fortnite/fortniteballs.webm', new CrasherState()));
@@ -1780,16 +1749,13 @@ class PlayState extends MusicBeatState
 					PlayState.SONG = Song.loadFromJson("unfairness", "unfairness"); // you dun fucked up again
 					FlxG.save.data.unfairnessFound = true;
 					shakeCam = false;
-					screenshader.Enabled = false;
 					FlxG.switchState(new PlayState());
 					return;
 				case 'unfairness':
 					shakeCam = false;
-					screenshader.Enabled = false;
 					FlxG.switchState(new YouCheatedSomeoneIsComing());
 				default:
 					shakeCam = false;
-					screenshader.Enabled = false;
 					FlxG.switchState(new ChartingState());
 					#if desktop
 					DiscordClient.changePresence("Chart Editor", null, null, true);
@@ -1902,8 +1868,6 @@ class PlayState extends MusicBeatState
 				vocals.stop();
 				FlxG.sound.music.stop();
 	
-				screenshader.shader.uampmul.value[0] = 0;
-				screenshader.Enabled = false;
 			}
 
 			if(shakeCam)
@@ -1918,19 +1882,19 @@ class PlayState extends MusicBeatState
 					openSubState(new GameOverSubstate(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition()
 						.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
 
-						#if desktop
-						DiscordClient.changePresence("GAME OVER -- "
-						+ SONG.song
-						+ " ("
-						+ storyDifficultyText
-						+ ") ",
-						"\nAcc: "
-						+ truncateFloat(accuracy, 2)
-						+ "% | Score: "
-						+ songScore
-						+ " | Misses: "
-						+ misses, iconRPC);
-						#end
+							#if desktop
+							DiscordClient.changePresence("OVER -- "
+							+ SONG.song
+							+ " ("
+							+ storyDifficultyText
+							+ ") ",
+							"\nCool shit: "
+							+ truncateFloat(accuracy, 2)
+							+ "% | the score for the song: "
+							+ songScore
+							+ " | LOL YOU MISSED DUMBASS: "
+							+ misses, iconRPC);
+							#end
 				}
 			}
 			else
@@ -1962,16 +1926,16 @@ class PlayState extends MusicBeatState
 							.y, formoverride == "bf" || formoverride == "none" ? SONG.player1 : formoverride));
 
 							#if desktop
-							DiscordClient.changePresence("GAME OVER -- "
+							DiscordClient.changePresence("OVER -- "
 							+ SONG.song
 							+ " ("
 							+ storyDifficultyText
 							+ ") ",
-							"\nAcc: "
+							"\nCool shit: "
 							+ truncateFloat(accuracy, 2)
-							+ "% | Score: "
+							+ "% | the score for the song: "
 							+ songScore
-							+ " | Misses: "
+							+ " | LOL YOU MISSED DUMBASS: "
 							+ misses, iconRPC);
 							#end
 					}
