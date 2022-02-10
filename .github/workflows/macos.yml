@@ -14,39 +14,50 @@ jobs:
     
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - uses: krdlab/setup-haxe@v1
+
+      - uses: krdlab/setup-haxe@master
         with:
-          haxe-version: 4.1.5
+          haxe-version: 4.2.0
+      # Runs a set of commands using the runners shell
       # Runs a set of commands using the runners shell
       - name: script run line haha
         run: |
-          mkdir "%HAXELIB_ROOT%"
-          haxelib setup "%HAXELIB_ROOT%"
-          haxelib install lime 7.9.0
+          haxelib setup ~/haxelib
+          haxelib install hxcpp > /dev/null
+          haxelib install lime
           haxelib install openfl
-          haxelib install flixel
+          haxelib --never install flixel
           haxelib run lime setup flixel
           haxelib run lime setup
           haxelib install flixel-tools
-          haxelib install flixel-addons
           haxelib install flixel-ui
-          haxelib install hscript
-          haxelib install newgrounds
           haxelib install flixel-addons
-          haxelib git faxe https://github.com/uhrobots/faxe
-          haxelib git polymod https://github.com/MasterEric/polymod.git
+          haxelib install tjson
+          haxelib install hxjsonast
+          haxelib install hscript
+          haxelib git hscript-ex https://github.com/ianharrigan/hscript-ex
           haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git flixel https://github.com/BushsHaxs/flixel
+          haxelib install hxcpp-debug-server
           haxelib git extension-webm https://github.com/KadeDev/extension-webm
-          haxelib run lime rebuild extension-webm macos
-          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
+          haxelib run lime rebuild extension-webm mac
+          haxelib git polymod https://github.com/ThatDisabledKid/polymod
+          haxelib install newgrounds
+          haxelib git faxe https://github.com/uhrobots/faxe
+          haxelib git linc_luajit https://github.com/ThatDisabledKid/linc_luajit
+          haxelib install actuate                                                                                             
           haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
-          haxelib install actuate 
           haxelib list
+      - name: Building
+        run: |
           haxelib run lime build mac
+        
+      - name: Create Version Tag
+        run: echo "${{github.run_id}}" > VERSION
           
-      - uses: actions/upload-artifact@v2
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v2.2.4
         with:
-          name: Mac Build
+          name: MacPort
           path: export/release/macos/bin
