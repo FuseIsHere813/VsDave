@@ -1,7 +1,6 @@
 package;
 
-import flixel.system.FlxAssets.FlxShader;
-
+import shaderhelpers.FlxFixedShader;
 
 
 
@@ -149,7 +148,7 @@ class InvertColorsEffect
 
 }
 
-class GlitchShader extends FlxShader
+class GlitchShader extends FlxFixedShader
 {
     @:glFragmentSource('
     #pragma header
@@ -198,7 +197,7 @@ class GlitchShader extends FlxShader
     }
 }
 
-class InvertShader extends FlxShader
+class InvertShader extends FlxFixedShader
 {
     @:glFragmentSource('
     #pragma header
@@ -223,7 +222,7 @@ class InvertShader extends FlxShader
 
 
 
-class DistortBGShader extends FlxShader
+class DistortBGShader extends FlxFixedShader
 {
     @:glFragmentSource('
     #pragma header
@@ -278,7 +277,7 @@ class DistortBGShader extends FlxShader
 }
 
 
-class PulseShader extends FlxShader
+class PulseShader extends FlxFixedShader
 {
     @:glFragmentSource('
     #pragma header
