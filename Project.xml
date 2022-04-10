@@ -84,17 +84,13 @@
 	<haxelib name="hscript" />
 
 	<haxelib name="actuate" />
-<haxelib name="extension-webm" if="desktop" />
-
+        <haxelib name="extension-webm" if="desktop" />
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 	<haxelib name="newgrounds"/>
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="polymod"/>
-	#if desktop
 	<haxelib name="discord_rpc" if="desktop"/>
-	#end
-	<setenv name="next" />
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
 
 	<!-- <haxelib name="markdown" /> -->
