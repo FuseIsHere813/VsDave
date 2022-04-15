@@ -53,12 +53,6 @@ class TitleState extends MusicBeatState
 			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
 		#end
 
-		fun = FlxG.random.int(0, 999);
-		if(fun == 1)
-		{
-			LoadingState.loadAndSwitchState(new SusState());
-		}
-
 		PlayerSettings.init();
 
 		curWacky = FlxG.random.getObject(getIntroTextShit());
