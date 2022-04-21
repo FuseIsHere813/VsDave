@@ -51,8 +51,10 @@ class TitleState extends MusicBeatState
 		#if sys
 		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays"))
 			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
-		#end
-
+		#end 
+			
+                FlxG.mouse.visible = false; 
+		
 		fun = FlxG.random.int(0, 999);
 		if(fun == 1)
 		{
@@ -187,8 +189,6 @@ class TitleState extends MusicBeatState
 		ngSpr.antialiasing = true;
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
-
-		FlxG.mouse.visible = false;
 
 		if (initialized)
 			skipIntro();
