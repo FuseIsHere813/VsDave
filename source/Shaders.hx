@@ -2,10 +2,10 @@ package;
 
 import flixel.system.FlxAssets.FlxShader;
 
+using StringTools;
 
 
-
-class GlitchEffect
+class GlitchEffect extends Effect 
 {
     public var shader(default,null):GlitchShader = new GlitchShader();
 
@@ -47,7 +47,7 @@ class GlitchEffect
 
 }
 
-class DistortBGEffect
+class DistortBGEffect extends Effect
 {
     public var shader(default,null):DistortBGShader = new DistortBGShader();
 
@@ -90,7 +90,7 @@ class DistortBGEffect
 }
 
 
-class PulseEffect
+class PulseEffect extends Effect
 {
     public var shader(default,null):PulseShader = new PulseShader();
 
@@ -143,7 +143,7 @@ class PulseEffect
 }
 
 
-class InvertColorsEffect
+class InvertColorsEffect extends Effect
 {
     public var shader(default,null):InvertShader = new InvertShader();
 
@@ -330,4 +330,11 @@ class PulseShader extends FlxShader
     {
        super();
     }
+}
+//thx bbpanzu for this effect function
+class Effect {
+	public function setValue(shader:FlxShader, variable:String, value:Float){
+		Reflect.setProperty(Reflect.getProperty(shader, 'variable'), 'value', [value]);
+	}
+	
 }
