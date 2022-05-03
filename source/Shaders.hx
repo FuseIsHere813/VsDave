@@ -46,113 +46,12 @@ class GlitchEffect extends Effect
     }
 
 }
-
-class DistortBGEffect extends Effect
-{
-    public var shader(default,null):DistortBGShader = new DistortBGShader();
-
-    public var waveSpeed(default, set):Float = 0;
-	public var waveFrequency(default, set):Float = 0;
-	public var waveAmplitude(default, set):Float = 0;
-
-	public function new():Void
-	{
-		shader.uTime.value = [0];
-	}
-
-    public function update(elapsed:Float):Void
-    {
-        shader.uTime.value[0] += elapsed;
-    }
-
-
-    function set_waveSpeed(v:Float):Float
-    {
-        waveSpeed = v;
-        shader.uSpeed.value = [waveSpeed];
-        return v;
-    }
-    
-    function set_waveFrequency(v:Float):Float
-    {
-        waveFrequency = v;
-        shader.uFrequency.value = [waveFrequency];
-        return v;
-    }
-    
-    function set_waveAmplitude(v:Float):Float
-    {
-        waveAmplitude = v;
-        shader.uWaveAmplitude.value = [waveAmplitude];
-        return v;
-    }
-
-}
-
-
-class PulseEffect extends Effect
-{
-    public var shader(default,null):PulseShader = new PulseShader();
-
-    public var waveSpeed(default, set):Float = 0;
-	public var waveFrequency(default, set):Float = 0;
-	public var waveAmplitude(default, set):Float = 0;
-    public var Enabled(default, set):Bool = false;
-
-	public function new():Void
-	{
-		shader.uTime.value = [0];
-        shader.uampmul.value = [0];
-        shader.uEnabled.value = [false];
-	}
-
-    public function update(elapsed:Float):Void
-    {
-        shader.uTime.value[0] += elapsed;
-    }
-
-
-    function set_waveSpeed(v:Float):Float
-    {
-        waveSpeed = v;
-        shader.uSpeed.value = [waveSpeed];
-        return v;
-    }
-
-    function set_Enabled(v:Bool):Bool
-    {
-        Enabled = v;
-        shader.uEnabled.value = [Enabled];
-        return v;
-    }
-    
-    function set_waveFrequency(v:Float):Float
-    {
-        waveFrequency = v;
-        shader.uFrequency.value = [waveFrequency];
-        return v;
-    }
-    
-    function set_waveAmplitude(v:Float):Float
-    {
-        waveAmplitude = v;
-        shader.uWaveAmplitude.value = [waveAmplitude];
-        return v;
-    }
-
-}
-
-
-class InvertColorsEffect extends Effect
-{
-    public var shader(default,null):InvertShader = new InvertShader();
-
-}
-
+ 
 class GlitchShader extends FlxShader
 {
     @:glFragmentSource('
-    #pragma header
+    #pragma header 
+
     //uniform float tx, ty; // x,y waves phase
 
     //modified version of the wave shader to create weird garbled corruption like messes
@@ -196,32 +95,49 @@ class GlitchShader extends FlxShader
     {
        super();
     }
-}
+} 
 
-class InvertShader extends FlxShader
+class DistortBGEffect extends Effect
 {
-    @:glFragmentSource('
-    #pragma header
+    public var shader(default,null):DistortBGShader = new DistortBGShader();
+
+    public var waveSpeed(default, set):Float = 0;
+	public var waveFrequency(default, set):Float = 0;
+	public var waveAmplitude(default, set):Float = 0;
+
+	public function new():Void
+	{
+		shader.uTime.value = [0];
+	}
+
+    public function update(elapsed:Float):Void
+    {
+        shader.uTime.value[0] += elapsed;
+    }
+
+
+    function set_waveSpeed(v:Float):Float
+    {
+        waveSpeed = v;
+        shader.uSpeed.value = [waveSpeed];
+        return v;
+    }
     
-
-    vec4 sineWave(vec4 pt)
+    function set_waveFrequency(v:Float):Float
     {
-        return vec4(1.0 - pt.x, 1.0 - pt.y, 1.0 - pt.z, pt.w);
+        waveFrequency = v;
+        shader.uFrequency.value = [waveFrequency];
+        return v;
+    }
+    
+    function set_waveAmplitude(v:Float):Float
+    {
+        waveAmplitude = v;
+        shader.uWaveAmplitude.value = [waveAmplitude];
+        return v;
     }
 
-    void main()
-    {
-        vec2 uv = openfl_TextureCoordv;
-        gl_FragColor = sineWave(texture2D(bitmap, uv));
-    }')
-
-    public function new()
-    {
-       super();
-    }
 }
-
-
 
 class DistortBGShader extends FlxShader
 {
@@ -277,6 +193,57 @@ class DistortBGShader extends FlxShader
     }
 }
 
+class PulseEffect extends Effect
+{
+    public var shader(default,null):PulseShader = new PulseShader();
+
+    public var waveSpeed(default, set):Float = 0;
+	public var waveFrequency(default, set):Float = 0;
+	public var waveAmplitude(default, set):Float = 0;
+    public var Enabled(default, set):Bool = false;
+
+	public function new():Void
+	{
+		shader.uTime.value = [0];
+        shader.uampmul.value = [0];
+        shader.uEnabled.value = [false];
+	}
+
+    public function update(elapsed:Float):Void
+    {
+        shader.uTime.value[0] += elapsed;
+    }
+
+
+    function set_waveSpeed(v:Float):Float
+    {
+        waveSpeed = v;
+        shader.uSpeed.value = [waveSpeed];
+        return v;
+    }
+
+    function set_Enabled(v:Bool):Bool
+    {
+        Enabled = v;
+        shader.uEnabled.value = [Enabled];
+        return v;
+    }
+    
+    function set_waveFrequency(v:Float):Float
+    {
+        waveFrequency = v;
+        shader.uFrequency.value = [waveFrequency];
+        return v;
+    }
+    
+    function set_waveAmplitude(v:Float):Float
+    {
+        waveAmplitude = v;
+        shader.uWaveAmplitude.value = [waveAmplitude];
+        return v;
+    }
+
+}
 
 class PulseShader extends FlxShader
 {
@@ -330,7 +297,36 @@ class PulseShader extends FlxShader
     {
        super();
     }
+} 
+
+class InvertColorsEffect extends Effect
+{
+    public var shader(default,null):InvertShader = new InvertShader();
+
 }
+
+class InvertShader extends FlxShader
+{
+    @:glFragmentSource('
+    #pragma header
+
+    vec4 sineWave(vec4 pt)
+    {
+        return vec4(1.0 - pt.x, 1.0 - pt.y, 1.0 - pt.z, pt.w);
+    }
+
+    void main()
+    {
+        vec2 uv = openfl_TextureCoordv;
+        gl_FragColor = sineWave(texture2D(bitmap, uv));
+    }')
+
+    public function new()
+    {
+       super();
+    }
+}
+
 //thx bbpanzu for this effect function
 class Effect {
 	public function setValue(shader:FlxShader, variable:String, value:Float){
