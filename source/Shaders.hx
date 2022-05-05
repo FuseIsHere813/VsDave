@@ -1,9 +1,17 @@
 package;
 
 import flixel.system.FlxAssets.FlxShader;
-
+import openfl.display.BitmapData;
+import openfl.display.ShaderInput;
+import openfl.utils.Assets;
+import flixel.FlxG;
+import openfl.Lib;
+import flixel.math.FlxPoint;
+//thx andromeda engine for da ports 
 using StringTools;
-
+typedef ShaderEffect = {
+  var shader:Dynamic;
+}
 
 class GlitchEffect extends Effect 
 {
