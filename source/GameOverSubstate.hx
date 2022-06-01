@@ -6,6 +6,9 @@ import flixel.FlxSubState;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+#if android
+import android.Hardware;
+#end
 
 class GameOverSubstate extends MusicBeatSubstate
 {
@@ -53,6 +56,11 @@ class GameOverSubstate extends MusicBeatSubstate
 		add(camFollow);
 
 		FlxG.sound.play(Paths.sound('fnf_loss_sfx' + stageSuffix));
+
+		#if android
+		Hardware.vibrate(500);
+		#end
+
 		Conductor.changeBPM(100);
 
 		// FlxG.camera.followLerp = 1;
