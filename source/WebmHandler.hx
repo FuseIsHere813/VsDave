@@ -20,13 +20,13 @@ class WebmHandler
 	{
 		if (vPath != null && vPath.length > 0)
 		{
-			vidPath = lime.system.System.applicationStorageDirectory + vPath;
+			vidPath = vPath;
 		}
 	}
 	
 	public function makePlayer():Void
 	{
-		io = new WebmIoFile(vidPath);
+		io = new WebmIoFile(StorageAssets.getPath(vidPath));
 		webm = new WebmPlayer();
 		webm.fuck(io, false);
 		webm.addEventListener(WebmEvent.PLAY, function(e) {
@@ -47,7 +47,7 @@ class WebmHandler
 	
 	public function updatePlayer():Void
 	{
-		io = new WebmIoFile(vidPath);
+		io = new WebmIoFile(StorageAssets.getPath(vidPath));
 		webm.fuck(io, false);
 	}
 	
