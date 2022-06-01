@@ -54,17 +54,17 @@ class CreditsMenuState extends MusicBeatState
    var hasSocialMedia:Bool = true;
    var peopleInCredits:Array<Person> = 
    [
-      //android porter
-     new Person("Saw (M.A. Jigsaw)", CreditsType.Android Porter, "Coder of the android port",
-        [
+      //AndroidPorter
+      new Person("Saw (M.A. Jigsaw)", CreditsType.AndroidPorter, "Coder of the android port",
+         [
            new Social('youtube', 'https://www.youtube.com/channel/UC2Sk7vtPzOvbVzdVTWrribQ'), 
            new Social('twitter', 'https://twitter.com/jigsaw1_ma'),
            new Social('discord', 'M.A Jigsaw#9479')
          ]
       ),
       //devs
-     new Person("MoldyGH", CreditsType.Dev, "Director, Creator, Programmer, Musician, Main Developer",
-        [
+      new Person("MoldyGH", CreditsType.Dev, "Director, Creator, Programmer, Musician, Main Developer",
+         [
            new Social('youtube', 'https://www.youtube.com/channel/UCHIvkOUDfbMCv-BEIPGgpmA'), 
            new Social('twitter', 'https://twitter.com/moldy_gh'),
            new Social('soundcloud', 'https://soundcloud.com/moldygh')
@@ -226,7 +226,7 @@ class CreditsMenuState extends MusicBeatState
       {
          switch (person.creditsType)
          {
-            case Android Porter: androidporter.push(person);
+            case AndroidPorter: androidporter.push(person);
             case Dev: developers.push(person);
             case BetaTester: betaTesters.push(person);
             case Contributor: contributors.push(person);
@@ -241,8 +241,8 @@ class CreditsMenuState extends MusicBeatState
             var textString:String = '';
             switch (currentPerson.creditsType)
             {
-               case Android Porter:
-                  textString = 'Android Porter';
+               case AndroidPorter:
+                  textString = 'AndroidPorter';
                case Dev:
                   textString = 'Developers';
                case Contributor:
@@ -647,7 +647,7 @@ class SocialButton
 }
 enum CreditsType
 {
-   Android Porter; Dev; BetaTester; Contributor;
+   AndroidPorter; Dev; BetaTester; Contributor;
 }
 enum State
 {
