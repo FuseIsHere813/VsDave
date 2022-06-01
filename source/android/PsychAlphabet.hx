@@ -7,7 +7,6 @@ import flixel.group.FlxSpriteGroup;
 import flixel.math.FlxMath;
 import flixel.util.FlxTimer;
 import flixel.system.FlxSound;
-import flash.media.Sound;
 
 using StringTools;
 
@@ -198,7 +197,7 @@ class PsychAlphabet extends FlxSpriteGroup
 	var xPos:Float = 0;
 	public var curRow:Int = 0;
 	var dialogueSound:FlxSound = null;
-	private static var soundDialog:Sound = null;
+	private static var soundDialog:String = null;
 	var consecutiveSpaces:Int = 0;
 	public static function setDialogueSound(name:String = '')
 	{

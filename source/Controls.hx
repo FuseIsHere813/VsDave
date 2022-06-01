@@ -289,7 +289,7 @@ class Controls extends FlxActionSet
 		inline forEachBound(Control.RIGHT, (action, state) -> addbutton(action, hitbox.buttonRight, state));	
 	}
 	
-	public function setVirtualPadUI(virtualPad:FlxVirtualPad, DPad:FlxDPadMode, Action:FlxActionMode)
+	public function setVirtualPad(virtualPad:FlxVirtualPad, DPad:FlxDPadMode, Action:FlxActionMode)
 	{
 		switch (DPad)
 		{

@@ -118,7 +118,7 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 				case "Restart Song":
 					FlxG.resetState();
-				case "Secret"
+				case "Secret":
 					switch (PlayState.SONG.song.toLowerCase())
 					{
 						case 'supernovae' | 'glitch' | 'vs-dave-thanksgiving':
