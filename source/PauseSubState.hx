@@ -29,7 +29,7 @@ class PauseSubState extends MusicBeatSubstate
 		switch (PlayState.SONG.song.toLowerCase())//lazy to put a condition -saw
 		{
 			case 'supernovae' | 'glitch' | 'vs-dave-thanksgiving' | 'cheating' | 'unfairness':
-				menuItemsOG.insert(2, 'Secret');
+				menuItems.insert(2, 'Secret');
 		}
 
 		pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast'), true, true);
