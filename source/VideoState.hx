@@ -38,7 +38,7 @@ class VideoState extends MusicBeatState
 		super();
 		
 		leSource = source;
-		transFunction = toTrans;
+		transClass = toTrans;
 
 		if (frameSkipLimit != -1 && GlobalVideo.isWebm)
 		{
