@@ -33,12 +33,19 @@ class VideoState extends MusicBeatState
 	public var doShit:Bool = false;
 	public var pauseText:String = "Press P To Pause/Unpause";
 
-	public function new(source:String, toTrans:FlxState)
+	public function new(source:String, toTrans:Void->Void, frameSkipLimit:Int = -1, autopause:Bool = false)
 	{
 		super();
 		
+		autoPause = autopause;
+		
 		leSource = source;
-		transClass = toTrans;
+		transFunction = toTrans;
+
+		if (frameSkipLimit != -1 && GlobalVideo.isWebm)
+		{
+			GlobalVideo.getWebm().webm.SKIP_STEP_LIMIT = frameSkipLimit;	
+		}
 	}
 	
 	override function create()
