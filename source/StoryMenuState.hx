@@ -243,8 +243,6 @@ class StoryMenuState extends MusicBeatState
 
 		updateText();
 
-		super.create();
-
 		if (dofunnytristan)
 		{
 			FlxG.sound.music.fadeOut(1,0);
@@ -259,6 +257,13 @@ class StoryMenuState extends MusicBeatState
 			imageBG.active = false;
 			add(imageBG);
 		}
+
+		#if android
+		addVirtualPad(FULL, A_B);
+		addPadCamera();
+		#end
+
+		super.create();
 	}
 
 	function FadeOut()

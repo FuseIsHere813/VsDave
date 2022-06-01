@@ -719,6 +719,10 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.cameras = [camHUD];
 		doof.cameras = [camDialogue];
 
+		#if android
+		addAndroidControls();
+		#end
+
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -1090,6 +1094,10 @@ class PlayState extends MusicBeatState
 	function startCountdown():Void
 	{
 		inCutscene = false;
+
+		#if android
+		androidc.visible = true;
+		#end
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
@@ -1754,7 +1762,8 @@ class PlayState extends MusicBeatState
 		{
 			scoreTxt.text = "Score:" + songScore + " | Misses:" + misses + " | Accuracy:" + truncateFloat(accuracy, 2) + "% ";
 		}
-		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+
+		if (FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -2265,6 +2274,11 @@ class PlayState extends MusicBeatState
 	function endSong():Void
 	{
 		inCutscene = false;
+
+		#if android
+		androidc.visible = false;
+		#end
+
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
@@ -2375,7 +2389,6 @@ class PlayState extends MusicBeatState
 
 				if (SONG.validScore)
 				{
-					NGio.unlockMedal(60961);
 					Highscore.saveWeekScore(storyWeek, campaignScore,
 						storyDifficulty, characteroverride == "none" || characteroverride == "bf" ? "bf" : characteroverride);
 				}

@@ -20,7 +20,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import io.newgrounds.NG;
 import lime.app.Application;
 import openfl.Assets;
 #if desktop
@@ -47,13 +46,11 @@ class TitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		
-		#if sys
-		if (!sys.FileSystem.exists(Sys.getCwd() + "/assets/replays"))
-			sys.FileSystem.createDirectory(Sys.getCwd() + "/assets/replays");
-		#end 
-			
-                FlxG.mouse.visible = false; 
+		#if android
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
+
+		FlxG.mouse.visible = false; 
 		
 		fun = FlxG.random.int(0, 999);
 		if(fun == 1)
@@ -253,14 +250,6 @@ class TitleState extends MusicBeatState
 
 		if (pressedEnter && !transitioning && skippedIntro)
 		{
-			#if !switch
-			NGio.unlockMedal(60960);
-
-			// If it's Friday according to da clock
-			if (Date.now().getDay() == 5)
-				NGio.unlockMedal(61034);
-			#end
-
 			titleText.animation.play('press');
 
 			FlxG.camera.flash(FlxColor.WHITE, 1);
@@ -271,9 +260,7 @@ class TitleState extends MusicBeatState
 
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
-
 				FlxG.switchState(OutdatedSubState.leftState ? new MainMenuState() : new OutdatedSubState());
-
 			});
 			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
 		}

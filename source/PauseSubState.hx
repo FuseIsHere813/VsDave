@@ -26,6 +26,12 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		super();
 
+		switch (PlayState.SONG.song.toLowerCase())//lazy to put a condition -saw
+		{
+			case 'supernovae' | 'glitch' | 'vs-dave-thanksgiving' | 'cheating' | 'unfairness':
+				menuItemsOG.insert(2, 'Secret');
+		}
+
 		pauseMusic = new FlxSound().loadEmbedded(Paths.music('breakfast'), true, true);
 		pauseMusic.volume = 0;
 		pauseMusic.play(false, FlxG.random.int(0, Std.int(pauseMusic.length / 2)));
@@ -75,6 +81,11 @@ class PauseSubState extends MusicBeatSubstate
 		changeSelection();
 
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
+
+		#if android
+		addVirtualPad(UP_DOWN, A);
+		addPadCamera();
+		#end
 	}
 
 	override function update(elapsed:Float)
@@ -107,6 +118,28 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 				case "Restart Song":
 					FlxG.resetState();
+				case "Secret"
+					switch (PlayState.SONG.song.toLowerCase())
+					{
+						case 'supernovae' | 'glitch' | 'vs-dave-thanksgiving':
+							PlayState.screenshader.shader.uampmul.value[0] = 0;
+							PlayState.screenshader.Enabled = false;
+							PlayState.SONG = Song.loadFromJson("cheating", "cheating"); // you dun fucked up
+							FlxG.save.data.cheatingFound = true;
+							FlxG.switchState(new PlayState());
+							return;
+						case 'cheating':
+							PlayState.screenshader.shader.uampmul.value[0] = 0;
+							PlayState.screenshader.Enabled = false;
+							PlayState.SONG = Song.loadFromJson("unfairness", "unfairness"); // you dun fucked up again
+							FlxG.save.data.unfairnessFound = true;
+							FlxG.switchState(new PlayState());
+							return;
+						case 'unfairness':
+							PlayState.screenshader.shader.uampmul.value[0] = 0;
+							PlayState.screenshader.Enabled = false;
+							FlxG.switchState(new YouCheatedSomeoneIsComing());
+					}
 				case "Exit to menu":
 					PlayState.screenshader.shader.uampmul.value[0] = 0;
 					PlayState.screenshader.Enabled = false;

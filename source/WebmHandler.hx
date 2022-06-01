@@ -2,27 +2,25 @@ package;
 
 import flixel.FlxG;
 import openfl.display.Sprite;
-#if desktop
+#if cpp
 import webm.*;
 #end
 
 class WebmHandler
 {
-	#if desktop
+	#if cpp
 	public var webm:WebmPlayer;
 	public var vidPath:String = "";
 	public var io:WebmIo;
 	public var initialized:Bool = false;
 	
-	public function new()
-	{
-	}
+	public function new() {}
 	
 	public function source(?vPath:String):Void
 	{
 		if (vPath != null && vPath.length > 0)
 		{
-			vidPath = vPath;
+			vidPath = lime.system.System.applicationStorageDirectory + vPath;
 		}
 	}
 	
@@ -158,12 +156,6 @@ class WebmHandler
 	public function show():Void
 	{
 		webm.visible = true;
-	}
-	#else
-	public var webm:Sprite;
-	public function new()
-	{
-	trace("THIS IS ANDROID! or some shit...");
 	}
 	#end
 }

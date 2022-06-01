@@ -88,6 +88,10 @@ class FreeplayState extends MusicBeatState
 
 		add(CurrentSongIcon);
 
+		#if android
+		addVirtualPad(LEFT_RIGHT, A_B);
+		#end
+
 		super.create();
 	}
 
@@ -224,6 +228,10 @@ class FreeplayState extends MusicBeatState
 			if (controls.ACCEPT && !loadingPack)
 			{
 				loadingPack = true;
+				#if android
+				removeVirtualPad();
+				addVirtualPad(FULL, A_B);
+				#end
 				LoadProperPack();
 				FlxTween.tween(CurrentSongIcon, {alpha: 0}, 0.3);
 				FlxTween.tween(NameAlpha, {alpha: 0}, 0.3);

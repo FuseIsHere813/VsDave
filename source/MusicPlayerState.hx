@@ -115,6 +115,10 @@ class MusicPlayerState extends MusicBeatState
 
         HideBar();
 
+        #if android
+        addVirtualPad(FULL, A_B);
+        #end
+
         super.create();
     }
 

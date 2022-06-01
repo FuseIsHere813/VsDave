@@ -54,6 +54,14 @@ class CreditsMenuState extends MusicBeatState
    var hasSocialMedia:Bool = true;
    var peopleInCredits:Array<Person> = 
    [
+      //android porter
+     new Person("Saw (M.A. Jigsaw)", CreditsType.Android Porter, "Coder of the android port",
+        [
+           new Social('youtube', 'https://www.youtube.com/channel/UC2Sk7vtPzOvbVzdVTWrribQ'), 
+           new Social('twitter', 'https://twitter.com/jigsaw1_ma'),
+           new Social('discord', 'M.A Jigsaw#9479')
+         ]
+      ),
       //devs
      new Person("MoldyGH", CreditsType.Dev, "Director, Creator, Programmer, Musician, Main Developer",
         [
@@ -209,6 +217,7 @@ class CreditsMenuState extends MusicBeatState
       bg.scrollFactor.set();
 		add(bg);
       
+      var androidporter:Array<Person> = new Array<Person>();
       var developers:Array<Person> = new Array<Person>();
       var betaTesters:Array<Person> = new Array<Person>();
       var contributors:Array<Person> = new Array<Person>();
@@ -217,6 +226,7 @@ class CreditsMenuState extends MusicBeatState
       {
          switch (person.creditsType)
          {
+            case Android Porter: androidporter.push(person);
             case Dev: developers.push(person);
             case BetaTester: betaTesters.push(person);
             case Contributor: contributors.push(person);
@@ -226,11 +236,13 @@ class CreditsMenuState extends MusicBeatState
       for (i in 0...peopleInCredits.length)
       {
          var currentPerson = peopleInCredits[i];
-         if (currentPerson == developers[0] || currentPerson == contributors[0] || currentPerson == betaTesters[0])
+         if (currentPerson == androidporter[0] || currentPerson == developers[0] || currentPerson == contributors[0] || currentPerson == betaTesters[0])
          {
             var textString:String = '';
             switch (currentPerson.creditsType)
             {
+               case Android Porter:
+                  textString = 'Android Porter';
                case Dev:
                   textString = 'Developers';
                case Contributor:
@@ -275,6 +287,10 @@ class CreditsMenuState extends MusicBeatState
          var scaledY = FlxMath.remapToRange(creditsText.selectionId, 0, 1, 0, 1.3);
          creditsText.text.y = scaledY * 75 + (FlxG.height * 0.5);
       }
+
+      #if android
+      addVirtualPad(UP_DOWN, A_B);
+      #end
 
 		super.create();
 	}
@@ -631,7 +647,7 @@ class SocialButton
 }
 enum CreditsType
 {
-   Dev; BetaTester; Contributor;
+   Android Porter; Dev; BetaTester; Contributor;
 }
 enum State
 {
