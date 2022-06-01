@@ -33,11 +33,9 @@ class VideoState extends MusicBeatState
 	public var doShit:Bool = false;
 	public var pauseText:String = "Press P To Pause/Unpause";
 
-	public function new(source:String, toTrans:Void->Void, frameSkipLimit:Int = -1, autopause:Bool = false)
+	public function new(source:String, toTrans:FlxState, frameSkipLimit:Int = -1)
 	{
 		super();
-		
-		autoPause = autopause;
 		
 		leSource = source;
 		transFunction = toTrans;
