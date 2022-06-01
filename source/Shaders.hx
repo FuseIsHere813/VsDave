@@ -1,18 +1,5 @@
 package;
 
-import flixel.system.FlxAssets.FlxShader;
-import openfl.display.BitmapData;
-import openfl.display.ShaderInput;
-import openfl.utils.Assets;
-import flixel.FlxG;
-import openfl.Lib;
-import flixel.math.FlxPoint;
-//thx andromeda engine for da ports 
-using StringTools;
-typedef ShaderEffect = {
-  var shader:Dynamic;
-}
-
 class GlitchEffect extends Effect 
 {
     public var shader(default,null):GlitchShader = new GlitchShader();
@@ -336,9 +323,10 @@ class InvertShader extends FlxShader
 }
 
 //thx bbpanzu for this effect function
-class Effect {
-	public function setValue(shader:FlxShader, variable:String, value:Float){
+class Effect 
+{
+	public function setValue(shader:FlxShader, variable:String, value:Float)
+    {
 		Reflect.setProperty(Reflect.getProperty(shader, 'variable'), 'value', [value]);
 	}
-	
 }
