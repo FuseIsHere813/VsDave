@@ -60,6 +60,9 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
+		Paths.clearStoredMemory();
+		Paths.clearUnusedMemory();
+
 		#if desktop
 		DiscordClient.changePresence("In the Freeplay Menu", null);
 		#end
@@ -164,9 +167,6 @@ class FreeplayState extends MusicBeatState
 		changeSelection();
 		changeDiff();
 
-		#if android
-		addVirtualPad(FULL, A_B);
-		#end
 	}
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String)
@@ -233,6 +233,7 @@ class FreeplayState extends MusicBeatState
 				loadingPack = true;
 				#if android
 				removeVirtualPad();
+				addVirtualPad(FULL, A_B);
 				#end
 				LoadProperPack();
 				FlxTween.tween(CurrentSongIcon, {alpha: 0}, 0.3);
@@ -246,11 +247,11 @@ class FreeplayState extends MusicBeatState
 					loadingPack = false;
 				});
 			}
-
 			if (controls.BACK)
 			{
 				FlxG.switchState(new MainMenuState());
-			}
+			}	
+		
 			return;
 		}
 

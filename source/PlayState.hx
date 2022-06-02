@@ -210,6 +210,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+		Paths.clearStoredMemory();
+
 		theFunne = FlxG.save.data.newInput;
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
@@ -683,15 +685,6 @@ class PlayState extends MusicBeatState
 			add(creditsWatermark);
 			creditsWatermark.cameras = [camHUD];
 		}
-		switch (curSong.toLowerCase())
-		{
-			case 'splitathon' | 'old-splitathon':
-				preload('splitathon/Bambi_WaitWhatNow');
-				preload('splitathon/Bambi_ChillingWithTheCorn');
-			case 'insanity':
-				preload('dave/redsky');
-				preload('dave/redsky_insanity');
-		}
 
 		scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 150, healthBarBG.y + 40, 0, "", 20);
 		if (!FlxG.save.data.accuracyDisplay)
@@ -750,6 +743,18 @@ class PlayState extends MusicBeatState
 		}
 
 		super.create();
+
+		Paths.clearUnusedMemory();
+
+		switch (curSong.toLowerCase())
+		{
+			case 'splitathon' | 'old-splitathon':
+				preload('splitathon/Bambi_WaitWhatNow');
+				preload('splitathon/Bambi_ChillingWithTheCorn');
+			case 'insanity':
+				preload('dave/redsky');
+				preload('dave/redsky_insanity');
+		}
 	}
 
 	function createBackgroundSprites(bgName:String):FlxTypedGroup<FlxSprite>
