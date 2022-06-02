@@ -23,13 +23,13 @@ class OutdatedSubState extends MusicBeatState
 		if (FlxG.save.data.begin_thing)
 		{
 			txt = new FlxText(0, 0, FlxG.width,
-				"Hello! \nThis mod utilizes shaders that may be of disturbance to some. \nIf you wish to disable these, \nturn off the Eyesores option in the options menu. \n Also, Supernovae and Glitch are not meant to be taken seriously and are not composed by me. \n Supernovae is by ArchWk, and Glitch is by The Boneyard. \nPress A to continue.",
+				"Hello! \n Be carefull with you phone touch while you play this mod. \nYou can broke the touch if you touch too fast \nThis mod utilizes shaders that may be of disturbance to some. \nIf you wish to disable these, \nturn off the Eyesores option in the options menu. \n Also, Supernovae and Glitch are not meant to be taken seriously and are not composed by me. \n Supernovae is by ArchWk, and Glitch is by The Boneyard. \nPress A to continue.",
 				32);
 		}
 		else
 		{
 			txt = new FlxText(0, 0, FlxG.width,
-				"Hello! \nThis mod utilizes shaders that may be of disturbance to some. \nIf you wish to disable these, \npress B, otherwise press A. You can change this in options. \n Also, Supernovae and Glitch are not meant to be taken seriously and are not composed by me. \n Supernovae is by ArchWk, and Glitch is by The Boneyard.",
+				"Hello! \n Be carefull with you phone touch while you play this mod. \nYou can broke the touch if you touch too fast \nThis mod utilizes shaders that may be of disturbance to some. \nIf you wish to disable these, \npress B, otherwise press A. You can change this in options. \n Also, Supernovae and Glitch are not meant to be taken seriously and are not composed by me. \n Supernovae is by ArchWk, and Glitch is by The Boneyard.",
 				32);
 		}
 		#else
