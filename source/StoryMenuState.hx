@@ -1,5 +1,6 @@
 package;
 
+import flixel.graphics.FlxGraphic;
 import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import openfl.ui.Keyboard;
@@ -544,25 +545,25 @@ class StoryMenuState extends MusicBeatState
 
 	function imageBgCheck()
 	{
-		var path:String;
+		var bg:FlxGraphic;
 		var position:FlxPoint;
 		switch (curWeek)
 		{
 			case 1:
-				path = Paths.image("dave/DaveHouse", "shared");
+				bg = Paths.image("dave/DaveHouse", "shared");
 				position = new FlxPoint(600, 55);
 			case 2:
-				path = Paths.image("dave/bamboi", "shared");
+				bg = Paths.image("dave/bamboi", "shared");
 				position = new FlxPoint(600, 55);
 			case 3:
-				path = Paths.image("dave/splitathon", "shared");
+				bg = Paths.image("dave/splitathon", "shared");
 				position = new FlxPoint(600, 55);
 			default:
-				path = Paths.image("blank", "shared");
+				bg = Paths.image("blank", "shared");
 				position = new FlxPoint(600, 200);
 		}
 		imageBG.destroy();
-		imageBG = new FlxSprite(position.x, position.y).loadGraphic(path);
+		imageBG = new FlxSprite(position.x, position.y).loadGraphic(bg);
 		imageBG.antialiasing = true;
 		imageBG.screenCenter(X);
 		imageBG.active = false;
