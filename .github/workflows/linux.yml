@@ -22,6 +22,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: script run line haha
         run: |
+          sudo apt-get install gcc-multilib
           mkdir "%HAXELIB_ROOT%"
           haxelib setup "%HAXELIB_ROOT%"
           haxelib install lime 7.9.0
