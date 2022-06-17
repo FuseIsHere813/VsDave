@@ -1,6 +1,7 @@
 package;
-
-import cpp.Lib;
+#if cpp 
+import cpp.Lib; 
+#end 
 import Shaders.InvertShader;
 import flixel.FlxG;
 import flixel.FlxSprite;
