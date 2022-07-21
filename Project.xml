@@ -82,13 +82,13 @@
 	<!--In case you want to use the addons package-->
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
-
 	<haxelib name="actuate" />
         <haxelib name="extension-webm" if="desktop" />
 	<!--In case you want to use the ui package-->
 	<haxelib name="flixel-ui" />
 	<haxelib name="newgrounds"/>
-	<haxelib name="faxe" if='switch'/>
+	<haxelib name="faxe" if='switch'/> 
+	<haxelib name="HxShaders"/>
 	<haxelib name="polymod"/>
 	<haxelib name="discord_rpc" if="desktop"/>
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
