@@ -94,18 +94,6 @@ jobs:
         with:
           name: VSDave for Linux
           path: export/release/linux/bin
-  superlinter:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-    steps:
-      - uses: krdlab/setup-haxe@v1
-        with:
-          haxe-version: 4.0.5
-      - run: |
-          haxe -version
-          haxelib install hxnodejs
   html5:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
@@ -148,8 +136,8 @@ jobs:
           
       - uses: actions/upload-artifact@v2
         with:
-          name: VSDave for Linux
-          path: export/release/linux/bin
+          name: VSDave for HTML5
+          path: export/release/html5/bin
   superlinter:
     runs-on: ${{ matrix.os }}
     strategy:
