@@ -106,3 +106,59 @@ jobs:
       - run: |
           haxe -version
           haxelib install hxnodejs
+  html5:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+      - uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.1.5
+      # Runs a set of commands using the runners shell
+      - name: script run line haha
+        run: |
+          sudo apt-get install gcc-multilib g++-multilib libstdc++-10-dev-armhf-cross
+          sudo apt-get upgrade
+          mkdir "%HAXELIB_ROOT%"
+          haxelib setup "%HAXELIB_ROOT%"
+          haxelib install lime 7.9.0
+          haxelib install openfl
+          haxelib install flixel
+          haxelib run lime setup flixel
+          haxelib run lime setup
+          haxelib install flixel-tools
+          haxelib install flixel-addons
+          haxelib install flixel-ui
+          haxelib install hscript
+          haxelib install newgrounds
+          haxelib install flixel-addons
+          haxelib git faxe https://github.com/uhrobots/faxe
+          haxelib git polymod https://github.com/MasterEric/polymod.git
+          haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc
+          haxelib git extension-webm https://github.com/KadeDev/extension-webm
+          haxelib run lime rebuild extension-webm linux
+          haxelib git linc_luajit https://github.com/nebulazorua/linc_luajit.git
+          haxelib git hxvm-luajit https://github.com/nebulazorua/hxvm-luajit
+          haxelib install actuate 
+          haxelib list
+          haxelib run lime build html5
+          
+      - uses: actions/upload-artifact@v2
+        with:
+          name: VSDave for Linux
+          path: export/release/linux/bin
+  superlinter:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    steps:
+      - uses: krdlab/setup-haxe@v1
+        with:
+          haxe-version: 4.0.5
+      - run: |
+          haxe -version
+          haxelib install hxnodejs
